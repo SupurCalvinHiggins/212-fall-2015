@@ -20,8 +20,8 @@ can adjust the lab to address common difficulties and help you get back on track
 ## Grading
 
 Full credit for this lab requires **attendance**, **collaboration with your group**, and **active participation**. 
-Gradescope might provide a score, but this is not your lab grade. It’s feedback for you (and for us) about your 
-progress.
+Gradescope will provide a score, but this is not your lab grade. It’s feedback for you (and for us) about your 
+progress. If you aren't happy with your score, please reach out to a staff member for assistance!
 
 You may leave early once you have completed all exercises. If you need to leave early for another reason, please talk 
 to a staff member.
@@ -42,25 +42,50 @@ If you are unsure or are missing any of these features, please ask a group or st
 
 ### Unittests
 
-This lab (and future labs) includes autograder test cases. You can run them locally to check your progress before 
-submitting.
+This lab (and future labs) includes autograder test cases, also called unit tests. Unit tests are small programs that 
+automatically check whether your code works correctly. They test individual parts of your program (like a function or 
+class) to make sure each piece behaves as expected.
 
-To compile the provided code, download `catch.hpp` from the lab folder on GitHub and include it in your project.
+The tests in this lab use **Catch2**, a C++ testing framework. To use it, download `catch.hpp` from the lab folder on 
+GitHub and place it in the same directory as your program files.
+
+You can run the tests locally to check your progress before submitting. Even after the Gradescope assignment has closed,
+you can continue to work on the lab and still receive feedback by running the tests.
+
+When you build and run the test executable, Catch2 will report which tests pass and which fail. If a test fails, it will
+tell you exactly which part of your code needs fixing.
 
 ### Building Code with CLion
 
 When working in CLion, create a new project for each lab or assignment.
 
-For each project, you might need to build multiple programs. CLion uses `CMake` an industry standard tool to manage 
-builds. To build and debug multiple programs in CLion, you will need to edit the `CMakeLists.txt` file. See 
-[here](https://www.jetbrains.com/help/clion/quick-cmake-tutorial.html) for a tutorial.
+For each project, you might need to build multiple programs. CLion uses **CMake**, an industry standard tool for
+managing builds. To build and debug multiple programs in CLion, you will need to edit the `CMakeLists.txt` file. 
+
+For example, if this lab includes two programs, `step.cpp` and `debug.cpp`, your `CMakeLists.txt` could look like this:
+
+```cmake
+cmake_minimum_required(VERSION 3.10)
+project(csc212-lab-01)
+
+set(CMAKE_CXX_STANDARD 17)
+
+add_executable(step step.cpp)
+add_executable(debug debug.cpp)
+```
+
+After editing `CMakeLists.txt`, click **"Reload CMake Project"** in CLion so the changes take effect.
+
+Once reloaded, you can build and run either `step` or `debug` by selecting the desired target from CLion's run/debug 
+configuration dropdown.
+
+For additional guidance, see the [CLion CMake tutorial](https://www.jetbrains.com/help/clion/quick-cmake-tutorial.html).
 
 # Debugger
 
-If you haven't used a debugger before, please watch [this video](https://www.youtube.com/watch?v=5wGsRdumueU).
+If you haven't used a debugger before, watch [this video](https://www.youtube.com/watch?v=5wGsRdumueU) to get an introduction.
 
-Copy the following program into a new file `step.cpp`.
-
+1. Create a new file called `step.cpp` and copy the following program into it:
 ```cpp
 #include <iostream>
 
@@ -103,16 +128,16 @@ int main() {
     return 0;                                   // !!!
 }
 ```
-
-Set a breakpoint on `main` and step through the program. Before moving on, ensure you can reach every line of
-code marked with `// !!!`. Step-over and step-into will be useful.
+2. Set a breakpoint on the first line of `main`.
+3. Start the debugger. It should pause on the first line of `main`.
+4. Step through the program using step-over and step-into, making sure you can reach every line marked with `// !!!`.
 
 > [!IMPORTANT]
 > You do not need to submit anything to Gradescope for this exercise.
 
 ## Debugging Unittests 
 
-Copy the following program into a new file `debug.cpp`.
+1. Create a new file called `debug.cpp` and copy the following program into it:
 
 ```cpp
 #define CATCH_CONFIG_MAIN
@@ -134,18 +159,18 @@ TEST_CASE("sum_of_squares computes correctly") {
     REQUIRE(sum_of_squares(5) == 54);
 }
 ```
-
-This program uses the testing framework to verify the correctness of the `sum_of_squares` program. Currently, the 
-program contains two bugs. Run the program with the debugger to find the two bugs, and fix them. The program should
-compile and run without errors.
+1. This program uses the Catch2 testing framework to verify the correctness of the `sum_of_squares` function. Currently, 
+it contains two bugs.
+2. Use a debugger to find the two bugs.
+3. Once you locate the bugs, fix them and re-run all tests to make sure they pass. The program should compile and run 
+without errors.
 
 > [!IMPORTANT]
 > You should submit `debug.cpp` to Gradescope.
 
 # Pointers
 
-Copy the following program into a new file `pointers.cpp`.
-
+1. Create a new file called `pointers.cpp` and copy the following program into it:
 ```cpp
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
@@ -189,16 +214,15 @@ TEST_CASE("get_pointer_address returns correct address") {
     REQUIRE((int*)addr == p);
 }
 ```
-
-Complete the TODOs. The program should compile and run without errors.
+2. Complete the TODOs in each function.
+3. Make sure the program compiles and runs without errors, and that all tests pass.
 
 > [!IMPORTANT]
 > You should submit `pointers.cpp` to Gradescope.
 
 # C-Style Arrays
 
-Copy the following program into a new file `cstyle_arrays.cpp`.
-
+1. Create a new file called `cstyle_arrays.cpp` and copy the following program into it:
 ```cpp
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
@@ -250,16 +274,15 @@ TEST_CASE("print_string prints nothing for empty string") {
     REQUIRE(oss.str().empty());
 }
 ```
-
-Complete the TODOs. The program should compile and run without errors.
+2. Complete the TODOs in each function.
+3. Make sure the program compiles and runs without errors, and that all tests pass.
 
 > [!IMPORTANT]
 > You should submit `cstyle_arrays.cpp` to Gradescope.
 
 ##  Modifying C-Style Arrays
 
-Copy the following program into a new file `reverse.cpp`.
-
+1. Create a new file called `reverse.cpp` and copy the following program into it:
 ```cpp
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
@@ -302,27 +325,26 @@ TEST_CASE("reverse_array leaves empty array unchanged") {
     REQUIRE(true);
 }
 ```
-
-Complete the TODOs. The program should compile and run without errors.
+2. Complete the TODOs in each function.
+3. Make sure the program compiles and runs without errors, and that all tests pass.
 
 > [!IMPORTANT]
 > You should submit `reverse.cpp` to Gradescope.
 
 # Dynamic Memory Allocation
 
-*Dynamic memory allocation* is a powerful feature in C++ that allows you to allocate memory at execution time.  This is 
-useful, for example,  when you don't know the size of the data you need to store until the program is running.  A 
-critical aspect of memory management in C++ revolves around manual memory deallocation. When a programmer allocates 
-memory using the `new` operator, they assume direct responsibility for subsequently freeing that memory through the 
-corresponding `delete` operator. The significance of this responsibility cannot be overstated. Failure to properly 
-deallocate memory leads to *memory leaks*, where allocated memory remains unavailable for reuse by the program, 
-potentially causing system performance degradation over time.
+**Dynamic memory allocation** in C++ allows you to allocate memory at runtime, which is useful when you don’t know the 
+size of the data until the program is running. A key aspect of memory management in C++ is manual deallocation: whenever
+you allocate memory with `new`, you are responsible for freeing it with `delete`. Failing to do so creates 
+**memory leaks**, where allocated memory remains unavailable and can degrade system performance over time.
 
-In C++, you can use the `new` operator to allocate memory for a single variable or an array of variables, and you can 
-use the `delete` operator to free the memory when you are done with it.
+In C++, you can:
+- Use `new` to allocate memory for a single variable.
+- Use `new[]` to allocate memory for an array of variables.
+- Use `delete` to free memory allocated for a single variable.
+- Use `delete[]` to free memory allocated for an array.
 
-Copy the following program into a new file `allocate.cpp`.
-
+1. Create a new file called `allocate.cpp` and copy the following program into it:
 ```cpp
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
@@ -370,20 +392,17 @@ TEST_CASE("allocate_many allocates an array of n integers") {
     deallocate_many(arr);
 }
 ```
-
-Complete the TODOs. The program should compile and run without errors.
+2. Complete the TODOs in each function.
+3. Make sure the program compiles and runs without errors, and that all tests pass.
 
 > [!IMPORTANT]
 > You should submit `allocate.cpp` to Gradescope.
 
-*Double pointers* are pointers that point to other pointers.  They are useful when you need to store the address of a 
-pointer, or when you need to create an array of pointers.  They follow the same idea as regular pointers, i.e., they are
-pointer variables that store memory addresses, in this case, the memory addresses of other pointers.
+**Double pointers** are pointers that point to other pointers. They are useful when you need to store the address of a 
+pointer or when you want to create an array of pointers. Like regular pointers, double pointers store memory addresses, 
+namely, the addresses of other pointers.
 
-Now, consider the following program that manipulate an array of pointers to integers. 
-
-Copy the following program into a new file `permute.cpp`.
-
+1. Create a new file called `permute.cpp` and copy the following program into it:
 ```cpp
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
@@ -438,8 +457,8 @@ TEST_CASE("permute_pointers on empty array does nothing") {
     SUCCEED("No crash on empty array");
 }
 ```
-
-Complete the TODOs. The program should compile and run without errors.
+2. Complete the TODOs in each function.
+3. Make sure the program compiles and runs without errors, and that all tests pass.
 
 > [!IMPORTANT]
 > You should submit `permute.cpp` to Gradescope.
@@ -448,6 +467,13 @@ Complete the TODOs. The program should compile and run without errors.
 
 ## Array
 
+In this exercise, you will implement a **fixed-size dynamic array** in C++. This data structure efficiently models 
+fixed-length sequences with two main operations:
+- `get(idx)` returns the value at index `idx`
+- `set(idx, value)` sets the value at index `idx` to `value`
+These operations are similar to `std::array`. In a future lab, we will add automatic resizing like `std::vector`. 
+
+1. Create a new file called `array.cpp` and copy the following program into it:
 ```cpp
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
@@ -532,9 +558,24 @@ TEST_CASE("Array size remains constant after set") {
     REQUIRE(arr.size() == 4);
 }
 ```
+2. Complete the TODOs in each function.
+3. Make sure the program compiles and runs without errors, and that all tests pass.
+
+> [!IMPORTANT]
+> You should submit `array.cpp` to Gradescope.
 
 ## Matrix
 
+In this exercise, you will implement a **fixed-size dynamic matrix** in C++. A matrix is a two-dimensional fixed-length 
+sequence that allows you to organize data in rows and columns. This data structure is widely used in scientific 
+computing, graphics, simulations, and machine learning, where operations on grids or tables of numbers are common.
+
+The matrix supports three main operations:
+- `get(row, col)` returns the value at the specified row and column
+- `set(row, col, value)` sets the value at the specified row and column
+- `permute_dims(dim0, dim1)` which can swap the rows and columns 
+
+1. Create a new file called `matrix.cpp` and copy the following program into it:
 ```cpp
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
@@ -664,9 +705,25 @@ TEST_CASE("Matrix throws on get/set out-of-bounds") {
     REQUIRE_THROWS_AS(mat.set(0, 3, 1), std::out_of_range);
 }
 ```
+2. Complete the TODOs in each function.
+3. Make sure the program compiles and runs without errors, and that all tests pass.
+
+> [!IMPORTANT]
+> You should submit `matrix.cpp` to Gradescope.
 
 ## Tensor
 
+In this exercise, you will implement a **fixed-size dynamic tensor** in C++. A tensor is a multi-dimensional 
+fixed-length sequence that generalizes arrays and matrices to three or more dimensions. Tensors are widely used in 
+scientific computing, graphics, simulations, and machine learning, where operations on multi-dimensional data are 
+common.
+
+The tensor supports three main operations:
+- `get(indices)` returns the value at the specified indices
+- `set(indices, value)` sets the value at the specified indices
+- `permute_dims(dims)` swaps the order of the dimensions
+
+1. Create a new file called `tensor.cpp` and copy the following program into it:
 ```cpp
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
@@ -869,7 +926,8 @@ TEST_CASE("Tensor 4D permute_dims") {
                     REQUIRE(t.get(Array({l,k,i,j})) == val++);
 }
 ```
+2. Complete the TODOs in each function.
+3. Make sure the program compiles and runs without errors, and that all tests pass.
 
-# Submission
-
-After you have completed all the exercises, submit your `solutions-lab.txt` file to [Gradescope](https://gradescope.com).  Your code should be well-formatted and easy to read.  Make sure to test your code thoroughly before submitting it.  You must be present in the lab to receive the attendance credit.  No remote submissions will be accepted.  If you have any questions, please ask the instructor or the TA for help.
+> [!IMPORTANT]
+> You should submit `tensor.cpp` to Gradescope.
