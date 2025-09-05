@@ -8,14 +8,51 @@ private:
     // TODO: You can use `int*`, `void*` or `Tensor*` as the type of `m_data`. Use whichever option you prefer.
     int* m_data;
     std::vector<int> m_shape;
+    std::vector<int> m_perm;
+    std::vector<int> m_inv_perm;
+
+    std::vector<int> permute(std::vector<int> v, std::vector<int> perm) {
+        std::vector<int> pv(v.size());
+        for (int i = 0; i < v.size(); ++i) {
+            pv[i] = v[perm[i]];
+        }
+        return pv;
+    }
+
+    int& at(const std::vector<int>& idx) {
+        int j = 0;
+        int stride = 1;
+        for (int i = idx.size() - 1; i >= 0; --i) {
+            j += idx[i] * stride;
+            stride *= m_shape[i];
+        }
+        return m_data[j];
+    }
 
 public:
     Tensor(std::vector<int> shape, int default_value) {
         // TODO: Initialize the member variables of the `Tensor` object.
+        int size = 1;
+        for (int i = 0; i < shape.size(); ++i) {
+            size *= shape[i];
+        }
+        m_data = new int[size];
+
+        for (int i = 0; i < size; ++i) {
+            m_data[i] = default_value;
+        }
+
+        m_shape = shape;
+        for (int i = 0; i < shape.size(); ++i) {
+            m_perm.push_back(i);
+            m_inv_perm.push_back(i);
+        }
+
     }
 
     ~Tensor() {
         // TODO: Deallocate any dynamically allocated memory.
+        delete[] m_data;
     }
 
     // C++ magic. Feel free to ignore these two lines, or ask a staff member if you are curious.
@@ -26,12 +63,34 @@ public:
         // TODO: Return the element at index `(idx[0], idx[1], ...)` in the tensor. If any component of `idx` is
         // out-of-bounds, throw an `std::out_of_range` exception. If `idx` is the wrong length, throw an
         // `std::invalid_argument` exception.
+        if (idx.size() != m_shape.size()) {
+            throw std::invalid_argument("incorrect dimension count");
+        }
+        idx = permute(idx, m_inv_perm);
+        for (int i = 0; i < m_shape.size(); ++i) {
+            if (idx[i] < 0 || idx[i] >= m_shape[i]) {
+                throw std::out_of_range("index out-of-bounds");
+            }
+        }
+
+        return at(idx);
     }
 
     void set(std::vector<int> idx, int value) {
         // TODO: Set the element at index `(idx[0], idx[1], ...)` in the tensor to `value`. If any component of `idx` is
         // out-of-bounds, throw an `std::out_of_range` exception. If `idx` is the wrong length, throw an
         // `std::invalid_argument` exception.
+        if (idx.size() != m_shape.size()) {
+            throw std::invalid_argument("incorrect dimension count");
+        }
+        idx = permute(idx, m_inv_perm);
+        for (int i = 0; i < m_shape.size(); ++i) {
+            if (idx[i] < 0 || idx[i] >= m_shape[i]) {
+                throw std::out_of_range("index out-of-bounds");
+            }
+        }
+
+        at(idx) = value;
     }
 
     void permute_dims(std::vector<int> dims) {
@@ -39,10 +98,29 @@ public:
         // tensor after the permutation, then we should have
         // `A[idx[0], idx[1], ...] = B[idx[dims[0]], idx[dims[1]], ...]`. If the permutation is invalid, throw an
         // `std::invalid_argument` exception.
+        std::vector<int> count(m_shape.size());
+        for (int i = 0; i < dims.size(); ++i) {
+            if (dims[i] < 0 || dims[i] >= m_shape.size()) {
+                throw std::invalid_argument("permutation dimension out-of-bounds");
+            }
+            count[dims[i]] += 1;
+        }
+
+        for (int i = 0; i < count.size(); ++i) {
+            if (count[i] != 1) {
+                throw std::invalid_argument("missing or repeated dimension");
+            }
+        }
+
+        m_perm = permute(m_perm, dims);
+        for (int i = 0; i < m_inv_perm.size(); ++i) {
+            m_inv_perm[m_perm[i]] = i;
+        }
     }
 
     std::vector<int> shape() {
         // TODO: Return the shape of the tensor.
+        return permute(m_shape, m_perm);
     }
 };
 
