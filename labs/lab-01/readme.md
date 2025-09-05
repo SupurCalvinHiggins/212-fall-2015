@@ -197,7 +197,7 @@ Complete the TODOs. The program should compile and run without errors.
 
 # C-Style Arrays
 
-Copy the following program into a new file `arrays.cpp`.
+Copy the following program into a new file `cstyle_arrays.cpp`.
 
 ```cpp
 #define CATCH_CONFIG_MAIN
@@ -254,7 +254,7 @@ TEST_CASE("print_string prints nothing for empty string") {
 Complete the TODOs. The program should compile and run without errors.
 
 > [!IMPORTANT]
-> You should submit `arrays.cpp` to Gradescope.
+> You should submit `cstyle_arrays.cpp` to Gradescope.
 
 ##  Modifying C-Style Arrays
 
