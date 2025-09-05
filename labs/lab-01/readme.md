@@ -1,4 +1,4 @@
-# Lab 1 (01/28/2025)
+# Lab 1 - C++ Review and The Debugger
 
 # Overview
 
