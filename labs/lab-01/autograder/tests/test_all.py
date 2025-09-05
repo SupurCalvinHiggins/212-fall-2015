@@ -2,7 +2,7 @@ from pathlib import Path
 import unittest
 import subprocess
 from dataclasses import dataclass
-from typing import Iterable, Any
+from typing import Iterable, Any, Optional
 from gradescope_utils.autograder_utils.decorators import weight
 
 
@@ -14,7 +14,7 @@ class CommandOutput:
     timeout: bool
 
 
-def run(cmd: Iterable[Any], timeout: int = 5) -> CommandOutput:
+def run(cmd: Iterable[Any], timeout: Optional[int] = 5) -> CommandOutput:
     cmd = " ".join(str(x) for x in cmd)
     try:
         proc = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=timeout)
@@ -24,9 +24,9 @@ def run(cmd: Iterable[Any], timeout: int = 5) -> CommandOutput:
 
 
 def build(cpp_path: Path, executable_path: Path) -> CommandOutput:
-    gcc_flags = ["-std=c++17", "-g", "-O2", "-Wall", "-Wextra", "-Wpedantic", "-Werror", "-fsanitize=address,undefined", "-fstack-protector-strong", "-D_GLIBCXX_DEBUG"]
+    gcc_flags = ["-std=c++17", "-g", "-O0", "-Wall", "-Wextra", "-Wpedantic", "-Werror", "-fsanitize=address,undefined", "-fstack-protector-strong", "-D_GLIBCXX_DEBUG"]
     cmd = ["g++", *gcc_flags, "-o", executable_path.as_posix(), cpp_path.as_posix()]
-    return run(cmd)
+    return run(cmd, timeout=None)
 
 
 class TestAll(unittest.TestCase):
@@ -38,49 +38,69 @@ class TestAll(unittest.TestCase):
 
         if not cpp_path.is_file():
             self.fail(
-                "\n"
-                + "ERROR".center(80, "*")
-                + f"\n{cpp_path} does not exist"
+                "\n".join(
+                    [
+                        "",
+                        "ERROR".center(80, "*"),
+                        f"\n{cpp_path} does not exist",
+                    ]
+                )
             )
 
         output = build(cpp_path, executable_path)
 
         if output.timeout:
             self.fail(
-                "\n"
-                + "ERROR".center(80, "*")
-                + f"\nTime limit exceeded when compiling {cpp_name}"
+                "\n".join(
+                    [
+                        "",
+                        "ERROR".center(80, "*"),
+                        f"\nTime limit exceeded when compiling {cpp_name}",
+                    ]
+                )
             )
 
         if output.exit_code != 0:
             self.fail(
-                "\n"
-                + "ERROR".center(80, "*")
-                + f"\nCompilation of {cpp_name} failed with exit code {output.exit_code}"
-                + "STDOUT".center(80, "*")
-                + output.stdout
-                + "STDERR".center(80, "*")
-                + output.stderr
+                "\n".join(
+                    [
+                        "",
+                        "ERROR".center(80, "*"),
+                        f"Compilation of {cpp_name} failed with exit code {output.exit_code}",
+                        "STDOUT".center(80, "*"),
+                        output.stdout,
+                        "STDERR".center(80, "*"),
+                        output.stderr
+                    ]
+                )
             )
 
         output = run([executable_path.absolute().as_posix()])
 
         if output.timeout:
             self.fail(
-                "\n"
-                + "ERROR".center(80, "*")
-                + f"\nTime limit exceeded when running {executable_name}"
+                "\n".join(
+                    [
+                        "",
+                        "ERROR".center(80, "*"),
+                        f"\nTime limit exceeded when running {executable_name}",
+                    ]
+                )
             )
 
         if output.exit_code != 0:
             self.fail(
-                "\n"
-                + "ERROR".center(80, "*")
-                + f"\nRunning {executable_name} failed with exit code {output.exit_code}"
-                + "STDOUT".center(80, "*")
-                + output.stdout
-                + "STDERR".center(80, "*")
-                + output.stderr
+                "\n".join(
+                    [
+                        "",
+                        "ERROR".center(80, "*"),
+                        f"Running {executable_name} failed with exit code {output.exit_code}",
+                        "STDOUT".center(80, "*"),
+                        output.stdout,
+                        "STDERR".center(80, "*"),
+                        output.stderr
+                    ]
+                )
             )
 
     @weight(20)

@@ -95,7 +95,7 @@ private:
 
 public:
     Counter(int start) {
-        total = start                           // !!!
+        total = start;                          // !!!
     }
 
     void add_up_to(int n) {
@@ -211,7 +211,7 @@ TEST_CASE("get_pointer_address returns correct address") {
     
     uintptr_t addr = get_pointer_address(p);
     
-    REQUIRE((int*)addr == p);
+    REQUIRE(reinterpret_cast<int*>(addr) == p);
 }
 ```
 2. Complete the TODOs in each function.
@@ -248,7 +248,7 @@ TEST_CASE("print_array prints integers separated by spaces") {
 }
 
 TEST_CASE("print_array prints nothing for empty array") {
-    int arr[] = {};
+    int arr[] = {0};
     std::ostringstream oss;
 
     print_array(arr, 0, oss);
@@ -318,7 +318,7 @@ TEST_CASE("reverse_array leaves single-element array unchanged") {
 }
 
 TEST_CASE("reverse_array leaves empty array unchanged") {
-    int arr[] = {};
+    int arr[] = {0};
     reverse_array(arr, 0);
 
     // Nothing to check except that it compiles and runs without error
@@ -583,9 +583,7 @@ The matrix supports three main operations:
 
 class Matrix {
 private:
-    // TODO: You can use `int**`, `int*`, `Array*` or `Array` as the type of `m_data`. Use whichever option you prefer.
-    // NOTE: If you use `Array*` or `Array`, note that `Array` does not support the `=` operator, so you will need to 
-    // use `get` and `set` to copy elements to and from `Array`.
+    // TODO: You can use `int**` or `int*` as the type of `m_data`. Use whichever option you prefer.
     int** m_data;
     int m_rows;
     int m_cols;
@@ -593,7 +591,7 @@ private:
 public:
     Matrix(int rows, int cols, int default_value) {
         // TODO: Initialize the member variables of the `Matrix` object. After dynamically allocating `m_data`, fill it 
-        with `default_value`.
+        // with `default_value`.
     }
     
     ~Matrix() {
@@ -728,17 +726,17 @@ The tensor supports three main operations:
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 #include <stdexcept>
+#include <vector>
 
 class Tensor {
 private:
     // TODO: You can use `int*`, `void*` or `Tensor*` as the type of `m_data`. Use whichever option you prefer.
     int* m_data;
-    Array m_shape;
+    std::vector<int> m_shape;
 
 public:
-    Tensor(Array shape, int default_value) {
-        // TODO: Initialize the member variables of the `Tensor` object. After dynamically allocating `m_data`, fill it 
-        // with `default_value`.
+    Tensor(std::vector<int> shape, int default_value) {
+        // TODO: Initialize the member variables of the `Tensor` object.
     }
     
     ~Tensor() {
@@ -749,140 +747,160 @@ public:
     Tensor(const Tensor&) = delete;
     Tensor& operator=(const Tensor&) = delete;
     
-    int get(Array idx) {
+    int get(std::vector<int> idx) {
         // TODO: Return the element at index `(idx[0], idx[1], ...)` in the tensor. If any component of `idx` is 
-        // out-of-bounds, throw an `std::out_of_range` exception.
+        // out-of-bounds, throw an `std::out_of_range` exception. If `idx` is the wrong length, throw an 
+        // `std::invalid_argument` exception.
     }
     
-    void set(Array idx, int value) {
+    void set(std::vector<int> idx, int value) {
         // TODO: Set the element at index `(idx[0], idx[1], ...)` in the tensor to `value`. If any component of `idx` is 
-        // out-of-bounds, throw an `std::out_of_range` exception.
+        // out-of-bounds, throw an `std::out_of_range` exception. If `idx` is the wrong length, throw an 
+        // `std::invalid_argument` exception.
     }
     
-    void permute_dims(Array dims) {
-        // TODO: Permute the order of the tensor dimensions. If `B` is the matrix before the permutation and `A` is the 
-        // matrix after the permutation, then we should have 
-        // `A[idx[0], idx[1], ...] = B[idx[dims[0]], idx[dims[1]], ...]`. This is the same as transposing the matrix. In
-        // all other cases, throw an `std::invalid_argument` exception.
+    void permute_dims(std::vector<int> dims) {
+        // TODO: Permute the order of the tensor dimensions. If `B` is the tensor before the permutation and `A` is the 
+        // tensor after the permutation, then we should have 
+        // `A[idx[0], idx[1], ...] = B[idx[dims[0]], idx[dims[1]], ...]`. If the permutation is invalid, throw an 
+        // `std::invalid_argument` exception.
+    }
+    
+    std::vector<int> shape() {
+        // TODO: Return the shape of the tensor.
     }
 };
 
 TEST_CASE("Tensor initializes with default value") {
-    Array shape({2, 3}); // shape = [2,3]
+    std::vector<int> shape = {2, 3};
     Tensor t(shape, 7);
 
-    for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 3; j++) {
-            Array idx({i,j});
-            REQUIRE(t.get(idx) == 7);
-        }
-    }
+    for (int i = 0; i < 2; i++)
+        for (int j = 0; j < 3; j++)
+            REQUIRE(t.get({i, j}) == 7);
 }
 
 TEST_CASE("Tensor set and get work correctly") {
-    Array shape({2,2});
+    std::vector<int> shape = {2, 2};
     Tensor t(shape, 0);
 
-    t.set(Array({0,0}), 10);
-    t.set(Array({1,1}), 20);
+    t.set({0, 0}, 10);
+    t.set({1, 1}, 20);
 
-    REQUIRE(t.get(Array({0,0})) == 10);
-    REQUIRE(t.get(Array({1,1})) == 20);
-    REQUIRE(t.get(Array({0,1})) == 0);
-    REQUIRE(t.get(Array({1,0})) == 0);
+    REQUIRE(t.get({0, 0}) == 10);
+    REQUIRE(t.get({1, 1}) == 20);
+    REQUIRE(t.get({0, 1}) == 0);
+    REQUIRE(t.get({1, 0}) == 0);
 }
 
 TEST_CASE("Tensor throws on get out-of-bounds") {
-    Array shape({2,2});
+    std::vector<int> shape = {2, 2};
     Tensor t(shape, 0);
 
-    REQUIRE_THROWS_AS(t.get(Array({-1,0})), std::out_of_range);
-    REQUIRE_THROWS_AS(t.get(Array({0,-1})), std::out_of_range);
-    REQUIRE_THROWS_AS(t.get(Array({2,0})), std::out_of_range);
-    REQUIRE_THROWS_AS(t.get(Array({0,2})), std::out_of_range);
+    REQUIRE_THROWS_AS(t.get({-1, 0}), std::out_of_range);
+    REQUIRE_THROWS_AS(t.get({0, -1}), std::out_of_range);
+    REQUIRE_THROWS_AS(t.get({2, 0}), std::out_of_range);
+    REQUIRE_THROWS_AS(t.get({0, 2}), std::out_of_range);
+}
+
+TEST_CASE("Tensor throws on get with wrong index length") {
+    std::vector<int> shape = {2, 2};
+    Tensor t(shape, 0);
+
+    REQUIRE_THROWS_AS(t.get({0}), std::invalid_argument);
+    REQUIRE_THROWS_AS(t.get({0, 1, 2}), std::invalid_argument);
 }
 
 TEST_CASE("Tensor throws on set out-of-bounds") {
-    Array shape({2,2});
+    std::vector<int> shape = {2, 2};
     Tensor t(shape, 0);
 
-    REQUIRE_THROWS_AS(t.set(Array({-1,0}), 1), std::out_of_range);
-    REQUIRE_THROWS_AS(t.set(Array({0,-1}), 1), std::out_of_range);
-    REQUIRE_THROWS_AS(t.set(Array({2,0}), 1), std::out_of_range);
-    REQUIRE_THROWS_AS(t.set(Array({0,2}), 1), std::out_of_range);
+    REQUIRE_THROWS_AS(t.set({-1, 0}, 1), std::out_of_range);
+    REQUIRE_THROWS_AS(t.set({0, -1}, 1), std::out_of_range);
+    REQUIRE_THROWS_AS(t.set({2, 0}, 1), std::out_of_range);
+    REQUIRE_THROWS_AS(t.set({0, 2}, 1), std::out_of_range);
+}
+
+TEST_CASE("Tensor throws on set with wrong index length") {
+    std::vector<int> shape = {2, 2};
+    Tensor t(shape, 0);
+
+    REQUIRE_THROWS_AS(t.set({0}, 1), std::invalid_argument);
+    REQUIRE_THROWS_AS(t.set({0, 1, 2}, 1), std::invalid_argument);
 }
 
 TEST_CASE("Tensor permute_dims swaps 2D matrix") {
-    Array shape({2,3});
+    std::vector<int> shape = {2, 3};
     Tensor t(shape, 0);
 
     int val = 1;
     for (int i = 0; i < 2; i++)
         for (int j = 0; j < 3; j++)
-            t.set(Array({i,j}), val++);
+            t.set({i, j}, val++);
 
-    t.permute_dims(Array({1,0})); // transpose
+    t.permute_dims({1, 0}); // transpose
 
-    REQUIRE(t.shape().get(0) == 3);
-    REQUIRE(t.shape().get(1) == 2);
+    std::vector<int> s = t.shape();
+    REQUIRE(s[0] == 3);
+    REQUIRE(s[1] == 2);
 
     val = 1;
     for (int i = 0; i < 2; i++)
         for (int j = 0; j < 3; j++)
-            REQUIRE(t.get(Array({j,i})) == val++);
+            REQUIRE(t.get({j, i}) == val++);
 }
 
 TEST_CASE("Tensor permute_dims invalid permutation throws") {
-    Array shape({2,2});
+    std::vector<int> shape = {2, 2};
     Tensor t(shape, 0);
 
-    REQUIRE_THROWS_AS(t.permute_dims(Array({0,0})), std::invalid_argument);
-    REQUIRE_THROWS_AS(t.permute_dims(Array({1,1})), std::invalid_argument);
-    REQUIRE_THROWS_AS(t.permute_dims(Array({0,1,2})), std::invalid_argument);
+    REQUIRE_THROWS_AS(t.permute_dims({0, 0}), std::invalid_argument);
+    REQUIRE_THROWS_AS(t.permute_dims({1, 1}), std::invalid_argument);
+    REQUIRE_THROWS_AS(t.permute_dims({0, 1, 2}), std::invalid_argument);
 }
 
 TEST_CASE("Tensor 3D get/set works correctly") {
-    Array shape({2, 3, 4});
+    std::vector<int> shape = {2, 3, 4};
     Tensor t(shape, 0);
 
     int val = 1;
     for (int i = 0; i < 2; i++)
         for (int j = 0; j < 3; j++)
             for (int k = 0; k < 4; k++)
-                t.set(Array({i,j,k}), val++);
+                t.set({i, j, k}, val++);
 
     val = 1;
     for (int i = 0; i < 2; i++)
         for (int j = 0; j < 3; j++)
             for (int k = 0; k < 4; k++)
-                REQUIRE(t.get(Array({i,j,k})) == val++);
+                REQUIRE(t.get({i, j, k}) == val++);
 }
 
 TEST_CASE("Tensor 3D permute_dims") {
-    Array shape({2,3,4});
+    std::vector<int> shape = {2, 3, 4};
     Tensor t(shape, 0);
 
     int val = 1;
     for (int i = 0; i < 2; i++)
         for (int j = 0; j < 3; j++)
             for (int k = 0; k < 4; k++)
-                t.set(Array({i,j,k}), val++);
+                t.set({i, j, k}, val++);
 
-    t.permute_dims(Array({2,0,1})); // new shape should be {4,2,3}
-    Array s = t.shape();
-    REQUIRE(s.get(0) == 4);
-    REQUIRE(s.get(1) == 2);
-    REQUIRE(s.get(2) == 3);
+    t.permute_dims({2, 0, 1}); // new shape should be {4,2,3}
+    std::vector<int> s = t.shape();
+    REQUIRE(s[0] == 4);
+    REQUIRE(s[1] == 2);
+    REQUIRE(s[2] == 3);
 
     val = 1;
     for (int i = 0; i < 2; i++)
         for (int j = 0; j < 3; j++)
             for (int k = 0; k < 4; k++)
-                REQUIRE(t.get(Array({k,i,j})) == val++);
+                REQUIRE(t.get({k, i, j}) == val++);
 }
 
 TEST_CASE("Tensor 4D get/set works correctly") {
-    Array shape({2, 2, 3, 2});
+    std::vector<int> shape = {2, 2, 3, 2};
     Tensor t(shape, 0);
 
     int val = 1;
@@ -890,18 +908,18 @@ TEST_CASE("Tensor 4D get/set works correctly") {
         for (int j = 0; j < 2; j++)
             for (int k = 0; k < 3; k++)
                 for (int l = 0; l < 2; l++)
-                    t.set(Array({i,j,k,l}), val++);
+                    t.set({i, j, k, l}, val++);
 
     val = 1;
     for (int i = 0; i < 2; i++)
         for (int j = 0; j < 2; j++)
             for (int k = 0; k < 3; k++)
                 for (int l = 0; l < 2; l++)
-                    REQUIRE(t.get(Array({i,j,k,l})) == val++);
+                    REQUIRE(t.get({i, j, k, l}) == val++);
 }
 
 TEST_CASE("Tensor 4D permute_dims") {
-    Array shape({2, 2, 3, 2});
+    std::vector<int> shape = {2, 2, 3, 2};
     Tensor t(shape, 0);
 
     int val = 1;
@@ -909,21 +927,21 @@ TEST_CASE("Tensor 4D permute_dims") {
         for (int j = 0; j < 2; j++)
             for (int k = 0; k < 3; k++)
                 for (int l = 0; l < 2; l++)
-                    t.set(Array({i,j,k,l}), val++);
+                    t.set({i, j, k, l}, val++);
 
-    t.permute_dims(Array({3,2,0,1})); // new shape should be {2,3,2,2}
-    Array s = t.shape();
-    REQUIRE(s.get(0) == 2);
-    REQUIRE(s.get(1) == 3);
-    REQUIRE(s.get(2) == 2);
-    REQUIRE(s.get(3) == 2);
+    t.permute_dims({3, 2, 0, 1}); // new shape should be {2,3,2,2}
+    std::vector<int> s = t.shape();
+    REQUIRE(s[0] == 2);
+    REQUIRE(s[1] == 3);
+    REQUIRE(s[2] == 2);
+    REQUIRE(s[3] == 2);
 
     val = 1;
     for (int i = 0; i < 2; i++)
         for (int j = 0; j < 2; j++)
             for (int k = 0; k < 3; k++)
                 for (int l = 0; l < 2; l++)
-                    REQUIRE(t.get(Array({l,k,i,j})) == val++);
+                    REQUIRE(t.get({l, k, i, j}) == val++);
 }
 ```
 2. Complete the TODOs in each function.
