@@ -38,7 +38,8 @@ class TestAll(unittest.TestCase):
 
         if not cpp_path.is_file():
             self.fail(
-                "ERROR".center(80, "*")
+                "\n"
+                + "ERROR".center(80, "*")
                 + f"\n{cpp_path} does not exist"
             )
 
@@ -46,13 +47,15 @@ class TestAll(unittest.TestCase):
 
         if output.timeout:
             self.fail(
-                "ERROR".center(80, "*")
+                "\n"
+                + "ERROR".center(80, "*")
                 + f"\nTime limit exceeded when compiling {cpp_name}"
             )
 
         if output.exit_code != 0:
             self.fail(
-                "ERROR".center(80, "*")
+                "\n"
+                + "ERROR".center(80, "*")
                 + f"\nCompilation of {cpp_name} failed with exit code {output.exit_code}"
                 + "STDOUT".center(80, "*")
                 + output.stdout
@@ -64,13 +67,15 @@ class TestAll(unittest.TestCase):
 
         if output.timeout:
             self.fail(
-                "ERROR".center(80, "*")
+                "\n"
+                + "ERROR".center(80, "*")
                 + f"\nTime limit exceeded when running {executable_name}"
             )
 
         if output.exit_code != 0:
             self.fail(
-                "ERROR".center(80, "*")
+                "\n"
+                + "ERROR".center(80, "*")
                 + f"\nRunning {executable_name} failed with exit code {output.exit_code}"
                 + "STDOUT".center(80, "*")
                 + output.stdout
