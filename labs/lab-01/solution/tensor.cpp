@@ -13,7 +13,7 @@ private:
 
     std::vector<int> permute(std::vector<int> v, std::vector<int> perm) {
         std::vector<int> pv(v.size());
-        for (int i = 0; i < v.size(); ++i) {
+        for (size_t i = 0; i < v.size(); ++i) {
             pv[i] = v[perm[i]];
         }
         return pv;
@@ -22,7 +22,7 @@ private:
     int& at(const std::vector<int>& idx) {
         int j = 0;
         int stride = 1;
-        for (int i = idx.size() - 1; i >= 0; --i) {
+        for (size_t i = idx.size() - 1; i < idx.size(); --i) {
             j += idx[i] * stride;
             stride *= m_shape[i];
         }
@@ -33,7 +33,7 @@ public:
     Tensor(std::vector<int> shape, int default_value) {
         // TODO: Initialize the member variables of the `Tensor` object.
         int size = 1;
-        for (int i = 0; i < shape.size(); ++i) {
+        for (size_t i = 0; i < shape.size(); ++i) {
             size *= shape[i];
         }
         m_data = new int[size];
@@ -43,7 +43,7 @@ public:
         }
 
         m_shape = shape;
-        for (int i = 0; i < shape.size(); ++i) {
+        for (int i = 0; i < static_cast<int>(shape.size()); ++i) {
             m_perm.push_back(i);
             m_inv_perm.push_back(i);
         }
@@ -67,7 +67,7 @@ public:
             throw std::invalid_argument("incorrect dimension count");
         }
         idx = permute(idx, m_inv_perm);
-        for (int i = 0; i < m_shape.size(); ++i) {
+        for (size_t i = 0; i < m_shape.size(); ++i) {
             if (idx[i] < 0 || idx[i] >= m_shape[i]) {
                 throw std::out_of_range("index out-of-bounds");
             }
@@ -84,7 +84,7 @@ public:
             throw std::invalid_argument("incorrect dimension count");
         }
         idx = permute(idx, m_inv_perm);
-        for (int i = 0; i < m_shape.size(); ++i) {
+        for (size_t i = 0; i < m_shape.size(); ++i) {
             if (idx[i] < 0 || idx[i] >= m_shape[i]) {
                 throw std::out_of_range("index out-of-bounds");
             }
@@ -99,21 +99,21 @@ public:
         // `A[idx[0], idx[1], ...] = B[idx[dims[0]], idx[dims[1]], ...]`. If the permutation is invalid, throw an
         // `std::invalid_argument` exception.
         std::vector<int> count(m_shape.size());
-        for (int i = 0; i < dims.size(); ++i) {
-            if (dims[i] < 0 || dims[i] >= m_shape.size()) {
+        for (size_t i = 0; i < dims.size(); ++i) {
+            if (dims[i] < 0 || static_cast<size_t>(dims[i]) >= m_shape.size()) {
                 throw std::invalid_argument("permutation dimension out-of-bounds");
             }
             count[dims[i]] += 1;
         }
 
-        for (int i = 0; i < count.size(); ++i) {
+        for (size_t i = 0; i < count.size(); ++i) {
             if (count[i] != 1) {
                 throw std::invalid_argument("missing or repeated dimension");
             }
         }
 
         m_perm = permute(m_perm, dims);
-        for (int i = 0; i < m_inv_perm.size(); ++i) {
+        for (size_t i = 0; i < m_inv_perm.size(); ++i) {
             m_inv_perm[m_perm[i]] = i;
         }
     }
