@@ -103,11 +103,7 @@ class TestAll(unittest.TestCase):
                 )
             )
 
-    @weight(20)
-    def test_debug(self):
-        self.assert_cpp_ok("debug.cpp")
-
-    @weight(20)
+    @weight(10)
     def test_pointers(self):
         self.assert_cpp_ok("pointers.cpp")
 
@@ -119,18 +115,22 @@ class TestAll(unittest.TestCase):
     def test_reverse(self):
         self.assert_cpp_ok("reverse.cpp")
 
-    @weight(10)
+    @weight(15)
     def test_permute(self):
         self.assert_cpp_ok("permute.cpp")
 
-    @weight(10)
+    @weight(15)
+    def test_allocate(self):
+        self.assert_cpp_ok("allocate.cpp")
+
+    @weight(15)
     def test_array(self):
         self.assert_cpp_ok("array.cpp")
 
-    @weight(5)
+    @weight(30)
     def test_matrix(self):
         self.assert_cpp_ok("matrix.cpp")
 
-    @weight(5)
+    @weight(100)
     def test_tensor(self):
         self.assert_cpp_ok("tensor.cpp")
