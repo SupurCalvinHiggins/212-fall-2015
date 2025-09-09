@@ -20,11 +20,24 @@ can adjust the lab to address common difficulties and help you get back on track
 ## Grading
 
 Full credit for this lab requires **attendance**, **collaboration with your group**, and **active participation**. 
-Gradescope will provide a score, but this is not your lab grade. It’s feedback for you (and for us) about your 
-progress. If you aren't happy with your score, please reach out to a staff member for assistance!
+Gradescope will provide a score out of 100, but this is not your lab grade. It’s feedback for you (and for us) about 
+your progress. If you aren't happy with your score, please reach out to a staff member for assistance!
 
-You may leave early once you have completed all exercises. If you need to leave early for another reason, please talk 
-to a staff member.
+> [!IMPORTANT]
+> Complete the exercises you believe will be most valuable for your learning first! If you already know how to complete
+> an exercise, or you have no idea how to start, feel free to skip it. If you aren't sure, attempt the exercises in 
+> order. We do not expect anyone to finish all exercises, but please try to surprise us!
+
+You may leave early if you can demonstrate you have met the learning objectives to a staff member. For example, if you 
+have completed the debugging activity `debug.cpp` (meeting objective 4), the tensor data structure `tensor.cpp` 
+(meeting objectives 1, 2 and 3), and can clearly explain your code, a staff member may allow you to leave early. If you 
+need to leave early for another reason, please talk to a staff member.
+
+### Code that Works Locally but Fails in Gradescope
+
+Gradescope runs your code with additional strict checks for compiler warnings, errors, and runtime memory violations. If
+your code works locally, but fails on Gradescope, your code doesn't always work. You should try to fix the errors shown 
+in the Gradescope output.
 
 ## Setup
 
@@ -32,7 +45,9 @@ We assume you have an IDE with a working
 1. Compiler (ideally `g++`)
 2. Debugger
 3. Formatter 
-If you are unsure or are missing any of these features, please ask a group or staff member for help.
+
+If you are unsure or are missing any of these features, please ask a group or staff member for help. We will check in
+during the lab to confirm your IDE supports all these features.
 
 > [!WARNING]
 > For this lab, avoid using large language models (LLMs) like Copilot and ChatGPT when solving the programming 
@@ -81,94 +96,13 @@ configuration dropdown.
 
 For additional guidance, see the [CLion CMake tutorial](https://www.jetbrains.com/help/clion/quick-cmake-tutorial.html).
 
-# Debugger
+# Debugging
 
-If you haven't used a debugger before, watch [this video](https://www.youtube.com/watch?v=5wGsRdumueU) to get an introduction.
-
-1. Create a new file called `step.cpp` and copy the following program into it:
-```cpp
-#include <iostream>
-
-class Counter {
-private:
-    int total;
-
-public:
-    Counter(int start) {
-        total = start;                          // !!!
-    }
-
-    void add_up_to(int n) {
-        for (int i = 1; i <= n; i++) {          // !!!
-            total += i;                         // !!!
-        }
-    }
-
-    int get_total() {
-        return total;                           // !!!
-    }
-};
-
-int adjust(int value) {
-    if (value % 2 == 0) {                       // !!!
-        return value / 2;                   
-    } else {                                    // !!!
-        return value * 3 + 1;                   // !!!
-    }
-}
-
-int main() {
-    Counter c(5);                               // !!!
-
-    c.add_up_to(3);                             // !!!
-
-    int result = adjust(c.get_total());         // !!!
-
-    std::cout << "Result: " << result << "\n";  // !!!
-    return 0;                                   // !!!
-}
-```
-2. Set a breakpoint on the first line of `main`.
-3. Start the debugger. It should pause on the first line of `main`.
-4. Step through the program using step-over and step-into, making sure you can reach every line marked with `// !!!`.
-
-> [!IMPORTANT]
-> You do not need to submit anything to Gradescope for this exercise.
-
-## Debugging Unittests 
-
-1. Create a new file called `debug.cpp` and copy the following program into it:
-
-```cpp
-#define CATCH_CONFIG_MAIN
-#include "catch.hpp"
-
-int sum_of_squares(int n) {
-    int total = 0;
-    for (int i = 1; i < n; i++) {
-        total += i * i;
-    }
-    return total;
-}
-
-TEST_CASE("sum_of_squares computes correctly") {
-    REQUIRE(sum_of_squares(1) == 1);
-    REQUIRE(sum_of_squares(2) == 5);
-    REQUIRE(sum_of_squares(3) == 14);
-    REQUIRE(sum_of_squares(0) == 0);
-    REQUIRE(sum_of_squares(5) == 54);
-}
-```
-1. This program uses the Catch2 testing framework to verify the correctness of the `sum_of_squares` function. Currently, 
-it contains two bugs.
-2. Use a debugger to find the two bugs.
-3. Once you locate the bugs, fix them and re-run all tests to make sure they pass. The program should compile and run 
-without errors.
-
-> [!IMPORTANT]
-> You should submit `debug.cpp` to Gradescope.
+See [these instructions and exercises](debug.md) on debugging.
 
 # Pointers
+
+### Exercise `pointers.cpp`
 
 1. Create a new file called `pointers.cpp` and copy the following program into it:
 ```cpp
@@ -221,6 +155,8 @@ TEST_CASE("get_pointer_address returns correct address") {
 > You should submit `pointers.cpp` to Gradescope.
 
 # C-Style Arrays
+
+### Exercise `cstyle_arrays.cpp`
 
 1. Create a new file called `cstyle_arrays.cpp` and copy the following program into it:
 ```cpp
@@ -282,6 +218,8 @@ TEST_CASE("print_string prints nothing for empty string") {
 
 ##  Modifying C-Style Arrays
 
+### Exercise `reverse.cpp`
+
 1. Create a new file called `reverse.cpp` and copy the following program into it:
 ```cpp
 #define CATCH_CONFIG_MAIN
@@ -331,75 +269,12 @@ TEST_CASE("reverse_array leaves empty array unchanged") {
 > [!IMPORTANT]
 > You should submit `reverse.cpp` to Gradescope.
 
-# Dynamic Memory Allocation
+## Arrays of Pointers
 
-**Dynamic memory allocation** in C++ allows you to allocate memory at runtime, which is useful when you don’t know the 
-size of the data until the program is running. A key aspect of memory management in C++ is manual deallocation: whenever
-you allocate memory with `new`, you are responsible for freeing it with `delete`. Failing to do so creates 
-**memory leaks**, where allocated memory remains unavailable and can degrade system performance over time.
+### Exercise `permute.cpp`
 
-In C++, you can:
-- Use `new` to allocate memory for a single variable.
-- Use `new[]` to allocate memory for an array of variables.
-- Use `delete` to free memory allocated for a single variable.
-- Use `delete[]` to free memory allocated for an array.
-
-1. Create a new file called `allocate.cpp` and copy the following program into it:
-```cpp
-#define CATCH_CONFIG_MAIN
-#include "catch.hpp"
-
-int* allocate_one() {
-    // TODO: Allocate a single integer with the `new` operator.
-}
-
-void deallocate_one(int* pointer) {
-    // TODO: Allocate a single integer with the `delete` operator.
-}
-
-int* allocate_many(int n) {
-    // TODO: Allocate an array of `n` integers with the `new[]` operator.
-}
-
-void deallocate_many(int* pointer) {
-    // TODO: Deallocate an array of integers with the `delete[]` operator.
-}
-
-TEST_CASE("allocate_one allocates an integer") {
-    int* p = allocate_one();
-
-    REQUIRE(p != nullptr);
-
-    *p = 42;
-    REQUIRE(*p == 42);
-
-    deallocate_one(p);
-}
-
-TEST_CASE("allocate_many allocates an array of n integers") {
-    int n = 5;
-    int* arr = allocate_many(n);
-
-    REQUIRE(arr != nullptr);
-
-    for (int i = 0; i < n; i++) {
-        arr[i] = i * 10;
-    }
-    for (int i = 0; i < n; i++) {
-        REQUIRE(arr[i] == i * 10);
-    }
-
-    deallocate_many(arr);
-}
-```
-2. Complete the TODOs in each function.
-3. Make sure the program compiles and runs without errors, and that all tests pass.
-
-> [!IMPORTANT]
-> You should submit `allocate.cpp` to Gradescope.
-
-**Double pointers** are pointers that point to other pointers. They are useful when you need to store the address of a 
-pointer or when you want to create an array of pointers. Like regular pointers, double pointers store memory addresses, 
+**Double pointers** are pointers that point to other pointers. They are useful when you need to store the address of a
+pointer or when you want to create an array of pointers. Like regular pointers, double pointers store memory addresses,
 namely, the addresses of other pointers.
 
 1. Create a new file called `permute.cpp` and copy the following program into it:
@@ -463,9 +338,82 @@ TEST_CASE("permute_pointers on empty array does nothing") {
 > [!IMPORTANT]
 > You should submit `permute.cpp` to Gradescope.
 
+# Dynamic Memory Allocation
+
+**Dynamic memory allocation** in C++ allows you to allocate memory at runtime, which is useful when you don’t know the 
+size of the data until the program is running. A key aspect of memory management in C++ is manual deallocation: whenever
+you allocate memory with `new`, you are responsible for freeing it with `delete`. Failing to do so creates 
+**memory leaks**, where allocated memory remains unavailable and can degrade system performance over time.
+
+In C++, you can:
+- Use `new` to allocate memory for a single variable.
+- Use `new[]` to allocate memory for an array of variables.
+- Use `delete` to free memory allocated for a single variable.
+- Use `delete[]` to free memory allocated for an array.
+
+## Allocation and Deallocation
+
+### Exercise `allocate.cpp`
+
+1. Create a new file called `allocate.cpp` and copy the following program into it:
+```cpp
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
+
+int* allocate_one() {
+    // TODO: Allocate a single integer with the `new` operator.
+}
+
+void deallocate_one(int* pointer) {
+    // TODO: Allocate a single integer with the `delete` operator.
+}
+
+int* allocate_many(int n) {
+    // TODO: Allocate an array of `n` integers with the `new[]` operator.
+}
+
+void deallocate_many(int* pointer) {
+    // TODO: Deallocate an array of integers with the `delete[]` operator.
+}
+
+TEST_CASE("allocate_one allocates an integer") {
+    int* p = allocate_one();
+
+    REQUIRE(p != nullptr);
+
+    *p = 42;
+    REQUIRE(*p == 42);
+
+    deallocate_one(p);
+}
+
+TEST_CASE("allocate_many allocates an array of n integers") {
+    int n = 5;
+    int* arr = allocate_many(n);
+
+    REQUIRE(arr != nullptr);
+
+    for (int i = 0; i < n; i++) {
+        arr[i] = i * 10;
+    }
+    for (int i = 0; i < n; i++) {
+        REQUIRE(arr[i] == i * 10);
+    }
+
+    deallocate_many(arr);
+}
+```
+2. Complete the TODOs in each function.
+3. Make sure the program compiles and runs without errors, and that all tests pass.
+
+> [!IMPORTANT]
+> You should submit `allocate.cpp` to Gradescope.
+
 # Classes
 
 ## Array
+
+### Exercise `array.cpp`
 
 In this exercise, you will implement a **fixed-size dynamic array** in C++. This data structure efficiently models 
 fixed-length sequences with two main operations:
@@ -565,6 +513,8 @@ TEST_CASE("Array size remains constant after set") {
 > You should submit `array.cpp` to Gradescope.
 
 ## Matrix
+
+### Exercise `matrix.cpp`
 
 In this exercise, you will implement a **fixed-size dynamic matrix** in C++. A matrix is a two-dimensional fixed-length 
 sequence that allows you to organize data in rows and columns. This data structure is widely used in scientific 
@@ -710,6 +660,8 @@ TEST_CASE("Matrix throws on get/set out-of-bounds") {
 > You should submit `matrix.cpp` to Gradescope.
 
 ## Tensor
+
+### Exercise `tensor.cpp`
 
 In this exercise, you will implement a **fixed-size dynamic tensor** in C++. A tensor is a multi-dimensional 
 fixed-length sequence that generalizes arrays and matrices to three or more dimensions. Tensors are widely used in 
