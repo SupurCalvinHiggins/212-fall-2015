@@ -157,7 +157,7 @@ class Network {
         // ADD any necessary private methods
 
     public:
-        // Constructor: (can't change the signature)
+        // Constructor: (you can't change the signature)
         //   - filename: the name of the file containing the dataset
         // TODO: implement the constructor to read the dataset from 
         // the file, update the number of users and connections,
@@ -165,17 +165,23 @@ class Network {
         // with the friendship connections
         Network(const std::string &filename);
 
-        // Destructor: (can't change the signature)
+        // Destructor: (you can't change the signature)
         // free any dynamically allocated memory
         ~Network();
 
-        // Method to check if two users are friends (can't change the signature)
+        // Method to check if two users are friends (you can't change the signature)
         //   - user_id1: the ID of the first user
         //   - user_id2: the ID of the second user
         // Returns true if the two users are friends, false otherwise
         // If either user ID is invalid (i.e., not in the range of 0 to num_users-1),
         // the method should throw an exception
         bool is_friend(int user_id1, int user_id2);
+
+        // Method to get the number of users (you can't change the signature)
+        int get_num_users() const;
+
+        // Method to get the number of connections (you can't change the signature)
+        int get_num_connections() const;
 
         // ADD any necessary public methods
 };
