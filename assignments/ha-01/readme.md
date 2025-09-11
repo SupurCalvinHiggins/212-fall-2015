@@ -30,7 +30,7 @@ allocation, classes and objects, and problem solving strategies.
 
 A social network can be defined as a network of individuals or 
 organizations connected by various social relationships, such as
-friendship, kinship, common interests, or professional connections.
+friendship, common interests, or professional connections.
 
 The dataset used in this assignment is a small subset of the 
 Facebook social network.  The dataset was collected from survey 
