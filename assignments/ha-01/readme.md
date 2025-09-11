@@ -188,17 +188,33 @@ class Network {
 ```
 
 All the implementation of the methods of the class should be in a
-separate file named `network.cpp`.  Design a test program in a file
-named `main.cpp` to test your class.  We recommend that you
-develop your `main.cpp` using the `catch2` testing framework, but it
-is not mandatory.  You can use any testing framework you prefer.
+separate file named `network.cpp`.  You should not put any implementation
+in the header file `network.h`.
 
-You can compile and link all source files and generate a binary
-with the command below:
+To work on this task you will develop your own test program. It can be
+a simple program that creates an instance of the `Network` class and
+calls the `is_friend` method with various user IDs to check if they are
+friends.  You can also print the number of users and connections to
+verify that the data was read correctly.  This program can be in a file 
+named `main.cpp`.  We recommend that you develop your `main.cpp` using the
+`catch2` testing framework, but it is not mandatory.  You can use any
+testing framework you prefer.
+
+To compile and link all source files into a binary, you can use `g++`
+as follows:
 
 ```bash
 $ g++ -std=c++11 main.cpp network.cpp -o prog
 ```
+
+You can then run your program as follows:
+
+```bash
+$ ./prog filename.txt
+```
+
+where `filename.txt` is the name of the file containing the dataset
+(e.g., `facebook-small.txt` or `facebook-combined.txt`).
 
 ## Task 2 (15 points)
 
