@@ -280,7 +280,7 @@ Use the exact filenames provided here:
 - `network.h`
 - `network.cpp`
 - `main.cpp`
-- `llm-disclaimer.txt`
+- `llm-usage.txt`
 
 The `llm-usage.txt` file should contain: the name of the LLM, 
 if you used one, and a copy of the prompts you entered and the 
