@@ -18,7 +18,7 @@ int* allocate_many(int n) {
 
 void deallocate_many(int* pointer) {
     // TODO: Deallocate an array of integers with the `delete[]` operator.
-    delete pointer;
+    delete[] pointer;
 }
 
 TEST_CASE("allocate_one allocates an integer") {
