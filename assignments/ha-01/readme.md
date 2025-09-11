@@ -268,6 +268,25 @@ int most_popular_user();
 If there are multiple users with the same highest number of friends,
 the method should return the user with the smallest user ID.
 
+## Submission and grading
+
+This assignment relies on automated evaluation.
+Once you are finished, you **must** submit 
+the files listed below via [Gradescope](https://www.gradescope.com/) 
+to record your grade.
+
+Use the exact filenames provided here:
+
+    - `network.h`
+    - `network.cpp`
+    - `main.cpp`
+    - `llm-disclaimer.txt`
+
+The `llm-usage.txt` file should contain: the name of the LLM, 
+if you used one, and a copy of the prompts you entered and the 
+responses you received.  If you did not use an LLM, 
+simply write "No LLM used".
+
 > [!CAUTION]
 > Remember, academic integrity is of utmost importance.  Any attempts at
 > cheating or plagiarism will result in a forfeiture of credit.  Potential
