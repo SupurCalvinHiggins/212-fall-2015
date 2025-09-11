@@ -35,7 +35,7 @@ friendship, common interests, or professional connections.
 The dataset used in this assignment is a small subset of the 
 Facebook social network.  The dataset was collected from survey 
 participants using a Facebook app.  All data has been anonymized
-to protect user privacy.  There are approximately 4,039 users in
+to protect user privacy.  There are 4,039 users in
 the dataset, and each user is represented by a unique integer ID.
 Users are connected by friendship links.  There are a total of 
 88,234 friendship links in the dataset.
