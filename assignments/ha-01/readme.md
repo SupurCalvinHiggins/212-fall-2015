@@ -1,6 +1,6 @@
 # Homework Assignment 1 (due Sep 19th 11:59pm)
 
-In this assignment, we will explore C++ dynamic memory allocation, classes 
+In this assignment, we will explore dynamic memory allocation, classes 
 and objects, and problem solving in general.  The assignment is worth a total 
 of 100 points.  If you have any questions or need assistance, please don't 
 hesitate to reach out to us during office hours or post your questions 
@@ -14,28 +14,26 @@ strongly recommended that you have access to a `bash` terminal
 to interact with the compiler and other tools.  If you are 
 using `Windows`, you can run `Linux` via `WSL` 
 (Windows Subsystem for Linux).
-
-The use of an integrated development environment (IDE),
-especially one that offers a good debugger, is highly recommended.
-Some popular IDEs include `Visual Studio Code` and `CLion`, please
-contact a TA if you have any questions about setting up your environment.
-Regardless of your choice of IDE, your code must compile and run
+Regardless of your choice, your code must compile and run
 correctly using the `g++` compiler from the command line.
+
+> [!TIP]
+> The use of an integrated development environment (IDE),
+> especially one that offers a good debugger, is highly recommended.
+> Some popular IDEs include `Visual Studio Code` and `CLion`, please
+> contact a TA if you have any questions about setting up your environment.
 
 ## Context
 
-This assignment will use a tiny `Social Network` application to 
-illustrate key concepts in C++ programming, including dynamic memory
-allocation, classes and objects, and problem solving strategies.
-
+In this assignment you will develop a small `Social Network` application.
 A social network can be defined as a network of individuals or 
 organizations connected by various social relationships, such as
 friendship, common interests, or professional connections.
 
 The dataset used in this assignment is a small subset of the 
-Facebook social network.  The dataset was collected from survey 
-participants using a Facebook app.  All data has been anonymized
-to protect user privacy.  There are 4,039 users in
+Facebook social network.  The [dataset](https://snap.stanford.edu/data/egonets-Facebook.html)
+was collected from survey participants using a Facebook app.  All data has 
+been anonymized to protect user privacy.  There are 4,039 users in
 the dataset, and each user is represented by a unique integer ID.
 Users are connected by friendship links.  There are a total of 
 88,234 friendship links in the dataset.
@@ -47,6 +45,7 @@ the following format:
 4039 88234
 0 1
 0 2
+0 3
 0 4
 ...
 ```
@@ -58,9 +57,11 @@ social network. Each of the following lines contains two
 integers separated by a space, representing a friendship connection
 between the two users.
 
-You are also provided with a smaller dataset `facebook-small.txt` that
-you can use for testing and debugging your code.  The smaller dataset
-contains only 10 users.
+You are also provided with a smaller dataset `facebook-small.txt`. We 
+strongly encourage you to use the smaller dataset first, as it is easier 
+to work with and debug.  Once your code is working correctly with the 
+smaller dataset, you can then test it with the larger dataset.  The smaller 
+dataset contains only 10 users.
 
 ## Sparse Matrices
 
@@ -84,12 +85,17 @@ then user B is also friends with user A.
 
 The problem with using an adjacency matrix is that it can be very
 large and sparse, especially for large social networks.  In our case,
-the adjacency matrix would be a 4039 x 4039 matrix, which would
+the adjacency matrix would be a 4039x4039 matrix, which would
 require over 16 million entries.  However, there are only 88,234
 friendship connections, meaning that the matrix would be mostly
 filled with zeros, leading to a waste of memory.
 
-Possibilities to represent sparse matrix include:
+More efficient representations for sparse matrices exist.  These
+representations only store the non-zero entries in the matrix,
+along with their row and column indices.  This can lead to significant
+savings in memory, especially for large sparse matrices.
+Three common representations for sparse matrices are:
+
 - COO (Coordinate format): uses three arrays to store row indices,
   column indices, and values of the non-zero entries in the matrix.
 
@@ -121,20 +127,30 @@ row_ind = [1, 3, 4, 0, 2, 3, 1, 4, 0, 1, 0, 2] # row indices
 col_ptr = [0, 3, 6, 8, 10, 12] # column pointer
 ```
 
+> [!TIP]
+> Note that the original adjacency matrix is symmetric, meaning that
+> if user A is friends with user B, then user B is also friends with 
+> user A. When implementing your solution, you can take advantage
+> of this property to optimize your code. You can choose to store
+> each friendship connection only once (e.g., only store the connection
+> from the user with the smaller ID to the user with the larger ID), or
+> you can store each connection twice (once for each direction).
+
 ## Task 1 (40 points)
 
 In this task, the goal is to develop a class `Network` that represents
-the social network.  The class should be able to read the dataset from
-a file and store the friendship connections in an appropriate data 
-structure.
+the social network.  The class' **constructor** should be able 
+to read the dataset from a text file and store the friendship connections 
+in an appropriate data structure.
 
 You are free to pick any of the three sparse matrix representations
 mentioned above (COO, CSR, CSC) to store the friendship connections.
 In fact, you can also choose to implement more than one representation
 and compare their performance.  The choice is yours.
 
-As the `data` array is always filled with 1s (indicating a friendship 
-connection), you can choose to omit it from your implementation.
+> [!TIP]
+> As the `data` array is always filled with 1s (indicating a friendship 
+> connection), you can choose to omit it from your implementation.
 
 The class **must** declare all data elements as `private` and provide
 `public` methods to access and manipulate the data.  
@@ -142,9 +158,16 @@ The class **must** declare all data elements as `private` and provide
 To implement your class, you will need to use dynamic memory allocation
 to allocate memory for the arrays that store the friendship connections.
 Their lengths will depend on the exact number of users and friendship
-connections in the dataset.
+connections existing in the dataset, which are only known at *runtime*
+when reading the dataset from the file, hence the need for dynamic memory
+allocation.
 
-Your class should use the following definition and saved as `network.h`:
+Your class should use the definition below, saved as `network.h`. Ensure
+you do not modify the signatures of the constructor, destructor, and
+methods provided.  You can add any additional private or public methods
+you deem necessary.  Following standard C++ practices, the header file
+should be protected against multiple inclusions via the use of include
+guards. 
 
 ```cpp
 class Network {
@@ -174,7 +197,7 @@ class Network {
         //   - user_id2: the ID of the second user
         // Returns true if the two users are friends, false otherwise
         // If either user ID is invalid (i.e., not in the range of 0 to num_users-1),
-        // the method should throw an exception
+        // the method should throw an std::out_of_range exception
         bool is_friend(int user_id1, int user_id2);
 
         // Method to get the number of users (you can't change the signature)
@@ -187,34 +210,24 @@ class Network {
 };
 ```
 
-All the implementation of the methods of the class should be in a
-separate file named `network.cpp`.  You should not put any implementation
-in the header file `network.h`.
+> [!IMPORTANT]
+> The implementation of all class methods should be in a separate file
+> named `network.cpp`.  You should not put any implementation in the
+> header file `network.h`.
 
-To work on this task you will develop your own test program. It can be
+To work on this task you may develop your own test program. It can be
 a simple program that creates an instance of the `Network` class and
 calls the `is_friend` method with various user IDs to check if they are
 friends.  You can also print the number of users and connections to
 verify that the data was read correctly.  This program can be in a file 
-named `main.cpp`.  We recommend that you develop your `main.cpp` using the
-`catch2` testing framework, but it is not mandatory.  You can use any
-testing framework you prefer.
+named `main.cpp`.  We strongly recommend that you develop your `main.cpp` 
+using a unit testing framework, such as `doctest` or `catch2`.
 
-To compile and link all source files into a binary, you can use `g++`
-as follows:
-
-```bash
-$ g++ -std=c++11 main.cpp network.cpp -o prog
-```
-
-You can then run your program as follows:
-
-```bash
-$ ./prog filename.txt
-```
-
-where `filename.txt` is the name of the file containing the dataset
-(e.g., `facebook-small.txt` or `facebook-combined.txt`).
+> [!NOTE]
+> From a previous lab experience, we have observed that including
+> `catch2` in the `main.cpp` file can lead to very slow compilation
+> times. We prepared a [short tutorial on using `doctest`](doctest.md)
+> for this assignment, reducing compilation times significantly. 
 
 ## Task 2 (15 points)
 
@@ -227,7 +240,7 @@ int num_friends(int user_id);
 ```
 
 If the user ID is invalid (i.e., not in the range of 0 to num_users-1),
-the method should throw an exception.
+the method should throw an `std::out_of_range` exception.
 
 ### Task 3 (15 points)
 
@@ -240,7 +253,7 @@ int num_friends_of_friends(int user_id);
 ```
 
 If the user ID is invalid (i.e., not in the range of 0 to num_users-1),
-the method should throw an exception.
+the method should throw an `std::out_of_range` exception.
 
 ## Task 4 (15 points)
 
@@ -252,7 +265,7 @@ int num_mutual_friends(int user_id1, int user_id2);
 ```
 
 If either user ID is invalid (i.e., not in the range of 0 to num_users-1),
-the method should throw an exception. If the two user IDs are the same,
+the method should throw an `std::out_of_range` exception. If the two user IDs are the same,
 the method should return the number of friends of that user.
 
 ## Task 5 (15 points)
