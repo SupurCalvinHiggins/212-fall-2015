@@ -64,7 +64,7 @@ class) to make sure each piece behaves as expected.
 The tests in this lab use **Catch2**, a C++ testing framework. To use it, download [catch.hpp](catch.hpp) from the lab 
 folder on GitHub and place it in the same directory as your program files.
 
-You can run the tests locally to check your p~rogress before submitting. Even after the Gradescope assignment has closed,
+You can run the tests locally to check your progress before submitting. Even after the Gradescope assignment has closed,
 you can continue to work on the lab and still receive feedback by running the tests.
 
 When you build and run the test executable, Catch2 will report which tests pass and which fail. If a test fails, it will
