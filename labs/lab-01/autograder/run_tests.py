@@ -1,6 +1,8 @@
 import unittest
-from gradescope_utils.autograder_utils.json_test_runner import JSONTestRunner
 from pathlib import Path
+
+from gradescope_utils.autograder_utils.json_test_runner import JSONTestRunner
+
 
 def main() -> None:
     suite = unittest.defaultTestLoader.discover("tests")
@@ -12,3 +14,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
