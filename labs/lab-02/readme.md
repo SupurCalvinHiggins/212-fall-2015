@@ -35,7 +35,7 @@ To achieve the lab objectives, you should:
 
 1. Complete all activities listed under **Core Content**.
 
-> [!INFO]
+> [!NOTE]
 > If you do not complete all activities listed under **Core Content** during the lab period, we recommend finishing them
 > on your own. Subsequent labs, assignments and lectures will assume you have completed this lab's **Core Content**
 > activities.
