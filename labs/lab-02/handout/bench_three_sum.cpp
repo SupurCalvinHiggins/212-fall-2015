@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
+#include <algorithm>
 #include "three_sum.h"
 #include "three_sum_fast.h"
 
@@ -22,21 +23,33 @@ int main(const int argc, const char *argv[]) {
     }
     const auto target = 3 * n;
 
-    const auto start1 = std::chrono::high_resolution_clock::now();
-    const auto result1 = three_sum(arr, target);
-    const auto end1 = std::chrono::high_resolution_clock::now();
-    const std::chrono::duration<double, std::milli> duration1 = end1 - start1;
+    const auto runs = std::max(1, 1000 / n);
 
+    // Benchmark three_sum
+    double total_time1 = 0.0;
+    bool result1 = false;
+    for (int i = 0; i < runs; ++i) {
+        const auto start = std::chrono::high_resolution_clock::now();
+        result1 = three_sum(arr, target);
+        const auto end = std::chrono::high_resolution_clock::now();
+        total_time1 += std::chrono::duration<double, std::milli>(end - start).count();
+    }
     std::cout << "three_sum result: " << result1
-            << ", time: " << duration1.count() << " ms\n";
+            << ", average time over " << runs << " runs: "
+            << (total_time1 / runs) << " ms\n";
 
-    const auto start2 = std::chrono::high_resolution_clock::now();
-    const auto result2 = three_sum_fast(arr, target);
-    const auto end2 = std::chrono::high_resolution_clock::now();
-    const std::chrono::duration<double, std::milli> duration2 = end2 - start2;
-
+    // Benchmark three_sum_fast
+    double total_time2 = 0.0;
+    bool result2 = false;
+    for (int i = 0; i < runs; ++i) {
+        const auto start = std::chrono::high_resolution_clock::now();
+        result2 = three_sum_fast(arr, target);
+        const auto end = std::chrono::high_resolution_clock::now();
+        total_time2 += std::chrono::duration<double, std::milli>(end - start).count();
+    }
     std::cout << "three_sum_fast result: " << result2
-            << ", time: " << duration2.count() << " ms\n";
+            << ", average time over " << runs << " runs: "
+            << (total_time2 / runs) << " ms\n";
 
     return 0;
 }

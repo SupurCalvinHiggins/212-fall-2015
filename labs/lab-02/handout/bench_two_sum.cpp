@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
+#include <algorithm>
 #include "two_sum.h"
 #include "two_sum_fast.h"
 
@@ -22,21 +23,31 @@ int main(const int argc, const char *argv[]) {
     }
     const auto target = 2 * n;
 
-    const auto start1 = std::chrono::high_resolution_clock::now();
-    const auto result1 = two_sum(arr, target);
-    const auto end1 = std::chrono::high_resolution_clock::now();
-    const std::chrono::duration<double, std::milli> duration1 = end1 - start1;
+    const auto runs = std::max(1, 10000 / n);
 
+    double total_time1 = 0.0;
+    bool result1 = false;
+    for (int i = 0; i < runs; ++i) {
+        const auto start = std::chrono::high_resolution_clock::now();
+        result1 = two_sum(arr, target);
+        const auto end = std::chrono::high_resolution_clock::now();
+        total_time1 += std::chrono::duration<double, std::milli>(end - start).count();
+    }
     std::cout << "two_sum result: " << result1
-            << ", time: " << duration1.count() << " ms\n";
+            << ", average time over " << runs << " runs: "
+            << (total_time1 / runs) << " ms\n";
 
-    const auto start2 = std::chrono::high_resolution_clock::now();
-    const auto result2 = two_sum_fast(arr, target);
-    const auto end2 = std::chrono::high_resolution_clock::now();
-    const std::chrono::duration<double, std::milli> duration2 = end2 - start2;
-
+    double total_time2 = 0.0;
+    bool result2 = false;
+    for (int i = 0; i < runs; ++i) {
+        const auto start = std::chrono::high_resolution_clock::now();
+        result2 = two_sum_fast(arr, target);
+        const auto end = std::chrono::high_resolution_clock::now();
+        total_time2 += std::chrono::duration<double, std::milli>(end - start).count();
+    }
     std::cout << "two_sum_fast result: " << result2
-            << ", time: " << duration2.count() << " ms\n";
+            << ", average time over " << runs << " runs: "
+            << (total_time2 / runs) << " ms\n";
 
     return 0;
 }
