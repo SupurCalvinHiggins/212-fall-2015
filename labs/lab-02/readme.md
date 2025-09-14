@@ -26,7 +26,8 @@ To receive full credit, you should:
 1. Attend, participate and collaborate.
 2. Make at least one submission to Gradescope.
 
-> [!IMPORTANT] Effort is enough to receive full credit. You do not need to successfully complete any activities.
+> [!IMPORTANT]
+> Effort is enough to receive full credit. You do not need to successfully complete any activities.
 
 ## Milestones
 
@@ -34,9 +35,10 @@ To achieve the lab objectives, you should:
 
 1. Complete all activities listed under **Core Content**.
 
-> [!INFO] If you do not complete all activities listed under **Core Content** during the lab period, we recommend
-> finishing them on your own. Subsequent labs, assignments and lectures will assume you have completed this lab's
-> **Core Content** activities.
+> [!INFO]
+> If you do not complete all activities listed under **Core Content** during the lab period, we recommend finishing them
+> on your own. Subsequent labs, assignments and lectures will assume you have completed this lab's **Core Content**
+> activities.
 
 To leave early, you should:
 
@@ -69,7 +71,8 @@ In this section, you will design and implement an algorithm to solve 2SUM.
 2. Build `test_two_sum` from `two_sum.cpp`, `two_sum_fast.cpp`, and `test_two_sum.cpp`.
 3. Run `test_two_sum`. All tests should pass.
 
-> [!IMPORTANT] Submit `two_sum.cpp` to Gradescope.
+> [!IMPORTANT]
+> Submit `two_sum.cpp` to Gradescope.
 
 ### Empirical Analysis
 
@@ -86,7 +89,8 @@ In this section, you will benchmark the performance of your 2SUM algorithm again
 5. Decide whether you should use `two_sum` or `two_sum_fast` for each input size. Record your reasoning in
    `two_sum_pred.md`.
 
-> [!IMPORTANT] Submit `two_sum_pred.md` to Gradescope.
+> [!IMPORTANT]
+> Submit `two_sum_pred.md` to Gradescope.
 
 # Extra Practice
 
@@ -103,7 +107,8 @@ In this section, you will design and implement an algorithm to solve 3SUM.
 2. Build `test_three_sum` from `three_sum.cpp`, `three_sum_fast.cpp`, and `test_three_sum.cpp`.
 3. Run `test_three_sum`. All tests should pass.
 
-> [!IMPORTANT] Submit `three_sum.cpp` to Gradescope.
+> [!IMPORTANT]
+> Submit `three_sum.cpp` to Gradescope.
 
 ### Empirical Analysis
 
@@ -121,7 +126,8 @@ In this section, you will benchmark the performance of your 3SUM algorithm again
 5. Decide whether you should use `three_sum` or `three_sum_fast` for each input size. Record your reasoning in
    `three_sum_pred.md`.
 
-> [!IMPORTANT] Submit `three_sum_pred.md` to Gradescope.
+> [!IMPORTANT]
+> Submit `three_sum_pred.md` to Gradescope.
 
 # Optional Advanced Topics
 
@@ -138,7 +144,8 @@ In this section, you will design and implement an algorithm to solve SSP.
 2. Build `test_subset_sum` from `subset_sum.cpp` and `test_subset_sum.cpp`.
 3. Run `test_subset_sum`. All tests should pass.
 
-> [!IMPORTANT] Submit `subset_sum.cpp` to Gradescope.
+> [!IMPORTANT]
+> Submit `subset_sum.cpp` to Gradescope.
 
 ### Empirical Analysis
 
@@ -157,4 +164,5 @@ In this section, you will benchmark the performance of your SSP algorithm and re
 6. Revise your `subset_sum` function so it can solve even larger input sizes in under one second. Try to design an
    asymptotically faster algorithm. Explain your new algorithm in `subset_sum_pred.md`.
 
-> [!IMPORTANT] Submit `subset_sum.cpp` and `subset_sum_pred.md` to Gradescope.
+> [!IMPORTANT]
+> Submit `subset_sum.cpp` and `subset_sum_pred.md` to Gradescope.
