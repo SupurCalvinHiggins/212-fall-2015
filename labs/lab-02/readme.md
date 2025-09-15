@@ -90,7 +90,7 @@ this section, look at the solution provided below and move on.
    where $0 \leq j < i < n$. For each pair of indices, the algorithm performs $2$ array accesses: one to read $A[i]$ and
    one to read $A[j]$. Therefore, the total number of array access is
 
-   $$T(n) = \sum\limits_{i=0}^{n-1} \sum\limits_{j=0}^{i - 1} 2 = 2 \sum\limits_{i=0}^{n-1} i = n(n-1)$$.
+   $$\begin{aligned} T(n) = \sum\limits_{i=0}^{n-1} \sum\limits_{j=0}^{i - 1} 2 = 2 \sum\limits_{i=0}^{n-1} i = n(n-1) \end{aligned}$$
 
    Depending on your implementation, the correct formula might vary.
 
