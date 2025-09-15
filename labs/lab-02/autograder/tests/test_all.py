@@ -141,7 +141,7 @@ class TestAll(unittest.TestCase):
 
     @weight(0)
     def test_two_sum_analysis(self):
-        self.assert_exists(["two_sum_pred.md"])
+        self.assert_exists(["two_sum.md"])
 
     @weight(0)
     def test_three_sum(self):
@@ -150,7 +150,7 @@ class TestAll(unittest.TestCase):
 
     @weight(0)
     def test_three_sum_analysis(self):
-        self.assert_exists(["three_sum_pred.md"])
+        self.assert_exists(["three_sum.md"])
 
     @weight(0)
     def test_subset_sum(self):
@@ -159,4 +159,4 @@ class TestAll(unittest.TestCase):
 
     @weight(0)
     def test_subset_sum_analysis(self):
-        self.assert_exists(["subset_sum_pred.md"])
+        self.assert_exists(["subset_sum.md"])
