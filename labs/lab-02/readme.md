@@ -161,6 +161,10 @@ T(n) &= \sum_{i=0}^{n-1} \sum_{j=0}^{i - 1} \sum_{k=0}^{j - 1} 3 \\
 &= 3 \sum\limits_{i=0}^{n-1} \left( 0 + \sum\limits_{j=1}^{i - 1} j \right) \\
 &= 3 \sum\limits_{i=0}^{n-1} \frac{i(i - 1)}{2} \\
 &= \frac{3}{2} \sum\limits_{i=0}^{n-1} (i^2 - i) \\
+&= \frac{3}{2} \left( \sum\limits_{i=0}^{n-1} i^2 - \sum\limits_{i=0}^{n-1} i \right) \\
+&= \frac{3}{2} \left( \left( 0^2 + \sum\limits_{i=1}^{n-1} i^2 \right) - \left( 0 + \sum\limits_{i=1}^{n-1} i \right) \right) \\
+&= \frac{3}{2} \left( \frac{n(n-1)(2n - 1)}{6} - \frac{n(n-1)}{2} \right) \\
+&= \frac{n(n-1)(n-2)}{2}
 \end{align*}
 $$
 
@@ -170,7 +174,7 @@ $$
 1. If the target value is not in the input vector, the algorithm will check all triples of indices $i, j, k$
    where $0 \leq k < j < i < n$. For each triplet of indices, the algorithm performs $3$ array accesses: one to
    read $A[i]$ one to read $A[j]$, and one to read $A[k]$. Therefore, the total number of array access is
-   $$ \begin{align*} &= \frac{3}{2} \left( \sum\limits_{i=0}^{n-1} i^2 - \sum\limits_{i=0}^{n-1} i \right) \\ &= \frac{3}{2} \left( \left( 0^2 + \sum\limits_{i=1}^{n-1} i^2 \right) - \left( 0 + \sum\limits_{i=1}^{n-1} i \right) \right) \\ &= \frac{3}{2} \left( \frac{n(n-1)(2n - 1)}{6} - \frac{n(n-1)}{2} \right) \\ &= \frac{n(n-1)(n-2)}{2} \end{align*} $$
+   $$ \begin{align*} \end{align*} $$
    Depending on your implementation, the correct formula might vary.
 
 </details>
