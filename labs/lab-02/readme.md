@@ -90,7 +90,7 @@ this section, look at the solution provided below and move on.
    where $0 \leq j < i < n$. For each pair of indices, the algorithm performs $2$ array accesses: one to read $A[i]$ and
    one to read $A[j]$. Therefore, the total number of array access is
 
-   $$T(n) = \sum\limits_{i=0}^{n-1} \sum\limits_{j=0}^{i - 1} 2 = 2 \sum\limits_{i=0}^{n-1} i = n\left(n-1\right)$$
+   $T(n) = \sum\limits_{i=0}^{n-1} \sum\limits_{j=0}^{i - 1} 2 = 2 \sum\limits_{i=0}^{n-1} i = n(n-1)$
 
    Depending on your implementation, the correct formula might vary.
 
@@ -148,7 +148,7 @@ this section, look at the solution provided below and move on.
    where $0 \leq k < j < i < n$. For each triplet of indices, the algorithm performs $3$ array accesses: one to
    read $A[i]$ one to read $A[j]$, and one to read $A[k]$. Therefore, the total number of array access is
 
-   $$T(n) = \sum\limits_{i=0}^{n-1} \sum\limits_{j=0}^{i - 1} \sum\limits_{k=0}^{j - 1} 3 = 3 \sum\limits_{i=0}^{n-1} \sum\limits_{j=0}^{i - 1} j = 3 \sum\limits_{i=0}^{n-1} \frac{i(i-1)}{2} = \frac{3}{2} \left( \frac{n(n-1)(2n - 1)}{6} - \frac{n(n-1)}{2} \right) = \frac{n(n-1)(n-2)}{2}$$
+   $T(n) = \sum\limits_{i=0}^{n-1} \sum\limits_{j=0}^{i - 1} \sum\limits_{k=0}^{j - 1} 3 = 3 \sum\limits_{i=0}^{n-1} \sum\limits_{j=0}^{i - 1} j = 3 \sum\limits_{i=0}^{n-1} \frac{i(i-1)}{2} = \frac{3}{2} \left( \frac{n(n-1)(2n - 1)}{6} - \frac{n(n-1)}{2} \right) = \frac{n(n-1)(n-2)}{2}$
 
    Depending on your implementation, the correct formula might vary.
 
