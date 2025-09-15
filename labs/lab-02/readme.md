@@ -151,7 +151,7 @@ this section, look at the solution provided below and move on.
 1. Give a formula for the number of vector accesses performed by your algorithm on an input of size $n$. Assume that the
    target value is not in the input vector. Record your answer in `three_sum.md`.
 
-$$\begin{align*} 2 &= 1 \\ &= 2 \end{align*}$$
+$$\begin{align*} T(n) &= \sum_{i=0}^{n-1} \sum_{j=0}^{i - 1} \sum_{k=0}^{j - 1} 3 \\ &= 3 \sum_{i=0}^{n-1} \sum_{j=0}^{i - 1} \left( 1 + \sum_{k=1}^{j - 1} 1 \right) \\ \end{align*}$$
 
 <details>
 <summary>Solution</summary>
