@@ -151,7 +151,7 @@ this section, look at the solution provided below and move on.
 1. Give a formula for the number of vector accesses performed by your algorithm on an input of size $n$. Assume that the
    target value is not in the input vector. Record your answer in `three_sum.md`.
 
-$$\begin{aligned} 2 &= 1 \\ &= 2 \end{aligned}$$
+$$\begin{align*} 2 &= 1 \\ &= 2 \end{align*}$$
 
 <details>
 <summary>Solution</summary>
