@@ -195,7 +195,7 @@ GCGGAU
 )(....
 ```
 
-is impossible since the parentheses are not correctly nested. The following two folds are possible:
+is impossible since the parentheses are not correctly nested. The following two folds
 
 ```
 GCGGAU

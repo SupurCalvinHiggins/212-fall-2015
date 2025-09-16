@@ -135,28 +135,38 @@ class TestAll(unittest.TestCase):
         pass
 
     @weight(0)
-    def test_two_sum(self):
-        self.assert_exists(["two_sum.cpp", "two_sum_fast.cpp", "test_two_sum.cpp"])
-        self.assert_cpp_tests(["two_sum.cpp", "two_sum_fast.cpp", "test_two_sum.cpp"], "two_sum")
+    def test_stack(self):
+        self.assert_exists(["stack.cpp", "test_stack.cpp"])
+        self.assert_cpp_tests(["stack.cpp", "test_stack.cpp"], "test_stack")
 
     @weight(0)
-    def test_two_sum_analysis(self):
-        self.assert_exists(["two_sum.md"])
+    def test_stack_analysis(self):
+        self.assert_exists(["stack.md"])
 
     @weight(0)
-    def test_three_sum(self):
-        self.assert_exists(["three_sum.cpp", "three_sum_fast.cpp", "test_three_sum.cpp"])
-        self.assert_cpp_tests(["three_sum.cpp", "three_sum_fast.cpp", "test_three_sum.cpp"], "three_sum")
+    def test_queue(self):
+        self.assert_exists(["queue.cpp", "test_queue.cpp"])
+        self.assert_cpp_tests(["queue.cpp", "test_queue.cpp"], "test_queue")
 
     @weight(0)
-    def test_three_sum_analysis(self):
-        self.assert_exists(["three_sum.md"])
+    def test_queue_analysis(self):
+        self.assert_exists(["queue.md"])
 
     @weight(0)
-    def test_subset_sum(self):
-        self.assert_exists(["subset_sum.cpp", "test_subset_sum.cpp"])
-        self.assert_cpp_tests(["subset_sum.cpp", "test_subset_sum.cpp"], "subset_sum")
+    def test_rna(self):
+        self.assert_exists(["rna.cpp", "test_rna.cpp"])
+        self.assert_cpp_tests(["rna.cpp", "test_rna.cpp"], "test_rna")
 
     @weight(0)
-    def test_subset_sum_analysis(self):
-        self.assert_exists(["subset_sum.md"])
+    def test_eval(self):
+        self.assert_exists(["eval.cpp", "test_eval.cpp"])
+        self.assert_cpp_tests(["eval.cpp", "test_eval.cpp"], "test_eval")
+
+    @weight(0)
+    def test_deque(self):
+        self.assert_exists(["deque.cpp", "test_deque.cpp"])
+        self.assert_cpp_tests(["deque.cpp", "test_deque.cpp"], "test_deque")
+
+    @weight(0)
+    def test_deque_analysis(self):
+        self.assert_exists(["deque.md"])
