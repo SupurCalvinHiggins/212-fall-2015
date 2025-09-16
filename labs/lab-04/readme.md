@@ -169,15 +169,43 @@ a pile, the magnets attract or repel each other, causing the rope to fold and tw
 together, forming a pair, while other magnets stay apart. RNA folds exactly like the rope: the magnets are the bases
 that pair with each other and stick together.
 
-The three pairs `A` and `U`, `G` and `C`, `G` and `U`, stick together. All other pairs of bases repel each other.
+The three pairs
 
-Dot-bracket notation is a way of describing which bases in an RNA base sequence are paired with each other. For example,
-given the RNA base sequence `GCGGAU`, the dot-bracket notation `((..))` says that the first `G` is paired with the last
+* `A` and `U`
+* `G` and `C`
+* `G` and `U`
+
+stick together. All other pairs of bases repel each other.
+
+Dot-bracket notation is a way of describing which bases in an RNA base sequence are paired with each other with a
+sequence of dots and nested parenthesis. Paired parenthesis represent paired bases, while dots represent unpaired
+bases. For example, the following RNA sequence and dot-bracket fold indicates that the first `G` is paired with the last
 `U` and that the first `C` is paired with the last `A`.
 
-Since `C` and `A` repel each other, the above RNA fold is physically improbable. However, the folds `(....)` and
-`.().()` _might_ be possible. In RNA secondary structure validation, you must determine whether an RNA fold
-in dot-bracket notation is physically possible or not.
+```
+GCGGAU
+((..))
+```
+
+Since `C` and `A` repel each other and the above fold pairs `C` and `A`, it is physically impossible. Parentheses must
+be correctly nested. For example,
+
+```
+GCGGAU
+)(....
+```
+
+is impossible since the parentheses are not correctly nested. The following two folds are possible:
+
+```
+GCGGAU
+.().()
+(....)
+```
+
+are possible since all the paired bases stick together and the parentheses are correctly nested. In RNA secondary
+structure validation, you must determine whether an RNA fold (secondary structure) represented dot-bracket notation is
+physically possible or not.
 
 ### Implementation
 
