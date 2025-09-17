@@ -65,6 +65,8 @@ class TestAll(unittest.TestCase):
         )
 
     def assert_cpp_tests(self, cpp_files: Sequence[str], executable_name: str) -> None:
+        self.assert_exists(cpp_files)
+
         cpp_paths = [self.submission_path / cpp_file for cpp_file in cpp_files]
         executable_path = self.submission_path / executable_name
 
@@ -124,6 +126,20 @@ class TestAll(unittest.TestCase):
                 )
             )
 
+    def assert_analysis_tests(self, file: str) -> None:
+        self.assert_exists([file])
+        path = self.submission_path / file
+        if "TODO" in path.read_text():
+            self.fail(
+                "\n".join(
+                    [
+                        "",
+                        "ERROR".center(80, "*"),
+                        f"\n Analysis {file} is not complete [contains TODO]",
+                    ]
+                )
+            )
+
     def assert_exists(self, files: Sequence[str]) -> None:
         for file in files:
             path = self.submission_path / file
@@ -142,35 +158,35 @@ class TestAll(unittest.TestCase):
     def test_submitted(self):
         pass
 
-    @weight(0)
+    @weight(1)
     def test_two_sum(self):
-        self.assert_exists(["two_sum.cpp", "two_sum_fast.cpp", "test_two_sum.cpp"])
         self.assert_cpp_tests(
             ["two_sum.cpp", "two_sum_fast.cpp", "test_two_sum.cpp"], "two_sum"
         )
 
-    @weight(0)
+    @weight(1)
     def test_two_sum_analysis(self):
-        self.assert_exists(["two_sum.md"])
+        self.assert_exists(["two_sum.cpp", "two_sum_fast.cpp", "test_two_sum.cpp"])
+        self.assert_analysis_tests("two_sum.md")
 
-    @weight(0)
+    @weight(1)
     def test_three_sum(self):
-        self.assert_exists(
-            ["three_sum.cpp", "three_sum_fast.cpp", "test_three_sum.cpp"]
-        )
         self.assert_cpp_tests(
             ["three_sum.cpp", "three_sum_fast.cpp", "test_three_sum.cpp"], "three_sum"
         )
 
-    @weight(0)
+    @weight(1)
     def test_three_sum_analysis(self):
-        self.assert_exists(["three_sum.md"])
+        self.assert_exists(
+            ["three_sum.cpp", "three_sum_fast.cpp", "test_three_sum.cpp"]
+        )
+        self.assert_analysis_tests("three_sum.md")
 
-    @weight(0)
+    @weight(1)
     def test_subset_sum(self):
-        self.assert_exists(["subset_sum.cpp", "test_subset_sum.cpp"])
         self.assert_cpp_tests(["subset_sum.cpp", "test_subset_sum.cpp"], "subset_sum")
 
-    @weight(0)
+    @weight(1)
     def test_subset_sum_analysis(self):
-        self.assert_exists(["subset_sum.md"])
+        self.assert_exists(["subset_sum.cpp", "test_subset_sum.cpp"])
+        self.assert_analysis_tests("subset_sum.md")
