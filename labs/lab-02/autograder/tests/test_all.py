@@ -59,7 +59,11 @@ class TestAll(unittest.TestCase):
     def setUp(self) -> None:
         self.autograder_path = Path("/autograder/source")
         self.submission_path = Path("/autograder/submission")
-        shutil.copytree(self.autograder_path / "link", self.submission_path)
+        shutil.copytree(
+            self.autograder_path / "submission",
+            self.submission_path,
+            dirs_exist_ok=True,
+        )
 
     def assert_cpp_tests(self, cpp_files: Sequence[str], executable_name: str) -> None:
         cpp_paths = [self.submission_path / cpp_file for cpp_file in cpp_files]

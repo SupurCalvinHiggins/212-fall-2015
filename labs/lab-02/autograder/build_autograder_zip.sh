@@ -1,7 +1,7 @@
 #!/bin/bash
 
-rm -rf link
-mkdir -p link
-cp ../handout/test_*.cpp ../handout/*.h ../handout/*_fast.cpp ./link/
+rm -rf submission
+mkdir -p submission
+cp ../handout/test_*.cpp ../handout/*.h ../handout/*_fast.cpp ./submission/
 zip -r autograder.zip .
-rm -rf link
+rm -rf submission
