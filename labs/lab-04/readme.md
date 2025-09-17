@@ -54,6 +54,10 @@ To maximize your learning, you should:
 1. Create a new project called `csc212-lab-04` in your IDE.
 2. Download all files from [the lab handout folder](handout) into the `csc212-lab-04` project.
 
+> [!NOTE]
+> To download all files from the repository, navigate to the root of the repository, click on the green **Code** button
+> and select **Download Zip**.`
+
 ## Stack
 
 Stacks provide three main operations:
@@ -157,6 +161,42 @@ on this section, look at the solution provided below and move on.
 > [!IMPORTANT]
 > Submit `queue.md` to Gradescope.
 
+## Fully Parenthesized Infix Expression Evaluation
+
+A fully parenthesized infix expression is an arithmetic expression in infix notation (operators are written between
+operands) where every single operation is explicitly enclosed in parentheses, so the order of evaluation is unambiguous
+without relying on operator precedence or associativity rules.
+
+For example, `(1 + (2 * -3))` is a fully parenthesized infix expression while `(1 - 2) / 3` is not.
+
+### Implementation
+
+In this section, you will implement a two-stack algorithm to evaluate fully parenthesized infix expressions.
+
+The two-stack algorithm consumes the input expression from left to right, maintaining a stack of operands and a stack of
+operators. For each character in the expression, the algorithm performs the following steps:
+
+* If the character is a left parenthesis or a whitespace, ignore it.
+* If the character is an operand, push it to the operand stack.
+* If the character is an operator, push it to the operator stack.
+* If the character is a right parenthesis, pop an operator from the operator stack, pop the required number of operands
+  from the operands stack, evaluate the operation, and push the result back onto the operand stack.
+
+After processing the entire expression, the result should be the only element left on the operand stack. All input
+expressions are valid and fully parenthesized, so there is no need to check for errors.
+
+The input operands will be integers (possibly negative), and the operators will be `+`, `-`, `*` and `/`. Treat `/` as
+C++ integer division.
+
+1. Complete `eval.cpp`.
+2. Build `test_eval` from `eval.cpp`, and `test_eval.cpp`.
+3. Run `test_eval`. All tests should pass.
+
+> [!IMPORTANT]
+> Submit `eval.cpp` to Gradescope.
+
+# Extra Practice
+
 ## RNA Secondary Structure Validation
 
 RNA is a molecule made up of a sequence of four bases: Adenine (`A`), Uracil (`U`), Guanine (`G`), and Cytosine (`C`).
@@ -218,42 +258,6 @@ In this section, you will design and implement an algorithm to perform RNA secon
 > [!IMPORTANT]
 > Submit `rna.cpp` to Gradescope.
 
-# Extra Practice
-
-## Fully Parenthesized Infix Expression Evaluation
-
-A fully parenthesized infix expression is an arithmetic expression in infix notation (operators are written between
-operands) where every single operation is explicitly enclosed in parentheses, so the order of evaluation is unambiguous
-without relying on operator precedence or associativity rules.
-
-For example, `(1 + (2 * -3))` is a fully parenthesized infix expression while `(1 - 2) / 3` is not.
-
-### Implementation
-
-In this section, you will implement a two-stack algorithm to evaluate fully parenthesized infix expressions.
-
-The two-stack algorithm consumes the input expression from left to right, maintaining a stack of operands and a stack of
-operators. For each character in the expression, the algorithm performs the following steps:
-
-* If the character is a left parenthesis or a whitespace, ignore it.
-* If the character is an operand, push it to the operand stack.
-* If the character is an operator, push it to the operator stack.
-* If the character is a right parenthesis, pop an operator from the operator stack, pop the required number of operands
-  from the operands stack, evaluate the operation, and push the result back onto the operand stack.
-
-After processing the entire expression, the result should be the only element left on the operand stack. All input
-expressions are valid and fully parenthesized, so there is no need to check for errors.
-
-The input operands will be integers (possibly negative), and the operators will be `+`, `-`, `*` and `/`. Treat `/` as
-C++ integer division.
-
-1. Complete `eval.cpp`.
-2. Build `test_eval` from `eval.cpp`, and `test_eval.cpp`.
-3. Run `test_eval`. All tests should pass.
-
-> [!IMPORTANT]
-> Submit `eval.cpp` to Gradescope.
-
 # Optional Advanced Topics
 
 ## Deque
@@ -271,13 +275,13 @@ Deques (double-ended queues) generalize stacks and queues. Deques provide six ma
 
 In this section, you will design and implement a deque.
 
-1. Complete `deque.cpp`. Your implementation should provide $\mathcal{O}(1)$ or $\mathcal{O}(1)$ amortized complexity
-   for every deque operation over any sequence of $n$ deque operations.
+1. Complete `deque.h` and `deque.cpp`. Your implementation should provide $\mathcal{O}(1)$ or $\mathcal{O}(1)$ amortized
+   complexity for every deque operation over any sequence of $n$ deque operations.
 2. Build `test_deque` from `deque.cpp`, and `test_deque.cpp`.
 3. Run `test_deque`. All tests should pass.
 
 > [!IMPORTANT]
-> Submit `deque.cpp` to Gradescope.
+> Submit `deque.h` and `deque.cpp` to Gradescope.
 
 ### Theoretical Analysis
 

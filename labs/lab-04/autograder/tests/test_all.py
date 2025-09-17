@@ -40,7 +40,6 @@ def build(cpp_paths: Sequence[Path], executable_path: Path) -> CommandOutput:
         "-Wall",
         "-Wextra",
         "-Wpedantic",
-        "-Werror",
         "-fsanitize=address,undefined",
         "-fstack-protector-strong",
         "-D_GLIBCXX_DEBUG",
@@ -54,9 +53,15 @@ class TestAll(unittest.TestCase):
     def setUp(self) -> None:
         self.autograder_path = Path("/autograder/source")
         self.submission_path = Path("/autograder/submission")
-        shutil.copytree(self.autograder_path / "submission", self.submission_path)
+        shutil.copytree(
+            self.autograder_path / "submission",
+            self.submission_path,
+            dirs_exist_ok=True,
+        )
 
     def assert_cpp_tests(self, cpp_files: Sequence[str], executable_name: str) -> None:
+        self.assert_exists(cpp_files)
+
         cpp_paths = [self.submission_path / cpp_file for cpp_file in cpp_files]
         executable_path = self.submission_path / executable_name
 
@@ -116,6 +121,20 @@ class TestAll(unittest.TestCase):
                 )
             )
 
+    def assert_analysis_tests(self, file: str) -> None:
+        self.assert_exists([file])
+        path = self.submission_path / file
+        if "TODO" in path.read_text():
+            self.fail(
+                "\n".join(
+                    [
+                        "",
+                        "ERROR".center(80, "*"),
+                        f"\n Analysis {file} is not complete [contains TODO]",
+                    ]
+                )
+            )
+
     def assert_exists(self, files: Sequence[str]) -> None:
         for file in files:
             path = self.submission_path / file
@@ -134,39 +153,38 @@ class TestAll(unittest.TestCase):
     def test_submitted(self):
         pass
 
-    @weight(0)
+    @weight(1)
     def test_stack(self):
-        self.assert_exists(["stack.cpp", "test_stack.cpp"])
         self.assert_cpp_tests(["stack.cpp", "test_stack.cpp"], "test_stack")
 
-    @weight(0)
+    @weight(1)
     def test_stack_analysis(self):
-        self.assert_exists(["stack.md"])
+        self.assert_exists(["stack.cpp", "test_stack.cpp"])
+        self.assert_analysis_tests("stack.md")
 
-    @weight(0)
+    @weight(1)
     def test_queue(self):
-        self.assert_exists(["queue.cpp", "test_queue.cpp"])
         self.assert_cpp_tests(["queue.cpp", "test_queue.cpp"], "test_queue")
 
-    @weight(0)
+    @weight(1)
     def test_queue_analysis(self):
-        self.assert_exists(["queue.md"])
+        self.assert_exists(["queue.cpp", "test_queue.cpp"])
+        self.assert_analysis_tests("queue.md")
 
-    @weight(0)
+    @weight(1)
     def test_rna(self):
-        self.assert_exists(["rna.cpp", "test_rna.cpp"])
         self.assert_cpp_tests(["rna.cpp", "test_rna.cpp"], "test_rna")
 
-    @weight(0)
+    @weight(1)
     def test_eval(self):
-        self.assert_exists(["eval.cpp", "test_eval.cpp"])
         self.assert_cpp_tests(["eval.cpp", "test_eval.cpp"], "test_eval")
 
-    @weight(0)
+    @weight(1)
     def test_deque(self):
-        self.assert_exists(["deque.cpp", "test_deque.cpp"])
+        self.assert_exists(["deque.h"])
         self.assert_cpp_tests(["deque.cpp", "test_deque.cpp"], "test_deque")
 
-    @weight(0)
+    @weight(1)
     def test_deque_analysis(self):
-        self.assert_exists(["deque.md"])
+        self.assert_exists(["deque.h", "deque.cpp", "test_deque.cpp"])
+        self.assert_analysis_tests("deque.md")
