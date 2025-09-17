@@ -40,7 +40,6 @@ def build(cpp_paths: Sequence[Path], executable_path: Path) -> CommandOutput:
         "-Wall",
         "-Wextra",
         "-Wpedantic",
-        "-Werror",
         "-fsanitize=address,undefined",
         "-fstack-protector-strong",
         "-D_GLIBCXX_DEBUG",
@@ -54,9 +53,15 @@ class TestAll(unittest.TestCase):
     def setUp(self) -> None:
         self.autograder_path = Path("/autograder/source")
         self.submission_path = Path("/autograder/submission")
-        shutil.copytree(self.autograder_path / "submission", self.submission_path)
+        shutil.copytree(
+            self.autograder_path / "submission",
+            self.submission_path,
+            dirs_exist_ok=True,
+        )
 
     def assert_cpp_tests(self, cpp_files: Sequence[str], executable_name: str) -> None:
+        self.assert_exists(cpp_files)
+
         cpp_paths = [self.submission_path / cpp_file for cpp_file in cpp_files]
         executable_path = self.submission_path / executable_name
 
@@ -116,6 +121,20 @@ class TestAll(unittest.TestCase):
                 )
             )
 
+    def assert_analysis_tests(self, file: str) -> None:
+        self.assert_exists([file])
+        path = self.submission_path / file
+        if "TODO" in path.read_text():
+            self.fail(
+                "\n".join(
+                    [
+                        "",
+                        "ERROR".center(80, "*"),
+                        f"\n Analysis {file} is not complete [contains TODO]",
+                    ]
+                )
+            )
+
     def assert_exists(self, files: Sequence[str]) -> None:
         for file in files:
             path = self.submission_path / file
@@ -134,38 +153,38 @@ class TestAll(unittest.TestCase):
     def test_submitted(self):
         pass
 
-    @weight(0)
+    @weight(1)
     def test_dynamic_array_gbo(self):
-        self.assert_exists(["dynamic_array_gbo.cpp", "test_dynamic_array_gbo.cpp"])
         self.assert_cpp_tests(["dynamic_array_gbo.cpp", "test_dynamic_array_gbo.cpp"], "dynamic_array_gbo")
 
-    @weight(0)
+    @weight(1)
     def test_dynamic_array_gbo_analysis(self):
-        self.assert_exists(["dynamic_array_gbo.md"])
+        self.assert_exists(["dynamic_array_gbo.cpp", "test_dynamic_array_gbo.cpp"])
+        self.assert_analysis_tests("dynamic_array_gbo.md")
 
-    @weight(0)
+    @weight(1)
     def test_dynamic_array_gbd(self):
-        self.assert_exists(["dynamic_array_gbd.cpp", "test_dynamic_array_gbd.cpp"])
         self.assert_cpp_tests(["dynamic_array_gbd.cpp", "test_dynamic_array_gbd.cpp"], "dynamic_array_gbd")
 
-    @weight(0)
+    @weight(1)
     def test_dynamic_array_gbd_analysis(self):
-        self.assert_exists(["dynamic_array_gbd.md"])
+        self.assert_exists(["dynamic_array_gbd.cpp", "test_dynamic_array_gbd.cpp"])
+        self.assert_analysis_tests("dynamic_array_gbd.md")
 
-    @weight(0)
+    @weight(1)
     def test_dynamic_array_gbf(self):
-        self.assert_exists(["dynamic_array_gbf.cpp", "test_dynamic_array_gbf.cpp"])
         self.assert_cpp_tests(["dynamic_array_gbf.cpp", "test_dynamic_array_gbf.cpp"], "dynamic_array_gbf")
 
-    @weight(0)
+    @weight(1)
     def test_dynamic_array_gbf_analysis(self):
-        self.assert_exists(["dynamic_array_gbf.md"])
+        self.assert_exists(["dynamic_array_gbf.cpp", "test_dynamic_array_gbf.cpp"])
+        self.assert_analysis_tests("dynamic_array_gbf.md")
 
-    @weight(0)
+    @weight(1)
     def test_dynamic_array_de(self):
-        self.assert_exists(["dynamic_array_de.cpp", "test_dynamic_array_de.cpp"])
         self.assert_cpp_tests(["dynamic_array_de.cpp", "test_dynamic_array_de.cpp"], "dynamic_array_de")
 
-    @weight(0)
+    @weight(1)
     def test_dynamic_array_de_analysis(self):
-        self.assert_exists(["dynamic_array_de.md"])
+        self.assert_exists(["dynamic_array_de.cpp", "test_dynamic_array_de.cpp"])
+        self.assert_analysis_tests("dynamic_array_de.md")

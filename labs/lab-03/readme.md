@@ -52,6 +52,10 @@ To maximize your learning, you should:
 1. Create a new project called `csc212-lab-03` in your IDE.
 2. Download all files from [the lab handout folder](handout) into the `csc212-lab-03` project.
 
+`> [!NOTE]
+> To download all files from the repository, navigate to the root of the repository, click on the green **Code** button
+> and select **Download Zip**.`
+
 # Core Content
 
 ## Dynamic Array: Grow By One
