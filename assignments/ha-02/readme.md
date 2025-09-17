@@ -53,8 +53,9 @@ Consider the following algorithm to compute the maximum element of an array.
 int max_element(int* A, int n) {
     int max = A[0];
     for (int i = 1; i < n; ++i) {
-        if (max < A[i]) {
-            max = A[i];
+        int ai = A[i];
+        if (max < ai) {
+            max = ai;
         }
     }
     return max;
@@ -63,10 +64,10 @@ int max_element(int* A, int n) {
 
 Which of the following functions counts the number of array accesses performed on an input of size $$n$$?
 
-( ) $$T(n) = \sum\limits_{i=1}^{n} 2$$
-( ) $$T(n) = \sum\limits_{i = 1}^{n - 1} 2$$
-( ) $$T(n) = 1 + \sum\limits_{i = 1}^{n} 2$$
-(X) $$T(n) = 1 + \sum\limits_{i = 1}^{n - 1} 2$$
+( ) $$T(n) = \sum\limits_{i=1}^{n} 1$$
+( ) $$T(n) = \sum\limits_{i = 1}^{n - 1} 1$$
+( ) $$T(n) = 1 + \sum\limits_{i = 1}^{n} 1$$
+(X) $$T(n) = 1 + \sum\limits_{i = 1}^{n - 1} 1$$
 
 ## Problem
 
@@ -99,7 +100,7 @@ int count_solutions(int* A, int n, int target) {
     for (int i = 0; i < n; ++i) {
         int ai = A[i];
         for (int j = 0; j < i; ++j) {
-            if (ai + A[j] == target) {
+            if ((ai + A[j]) == target) {
                 ++total;
             }
         }
@@ -201,7 +202,7 @@ Which of the following functions counts the number of array accesses performed o
 
 ## Problem
 
-Which of the following is the simplified form of $$\sum\limits_{i = 1}^{n} 2$$?
+Which of the following is the closed-form of $$\sum\limits_{i = 1}^{n} 2$$?
 
 ( ) $$n$$
 ( ) $$2n - 1$$
@@ -210,7 +211,7 @@ Which of the following is the simplified form of $$\sum\limits_{i = 1}^{n} 2$$?
 
 ## Problem
 
-Which of the following is the simplified form of $$\sum\limits_{i = 0}^{n^2} i$$?
+Which of the following is the closed-form of $$\sum\limits_{i = 0}^{n^2} i$$?
 
 ( ) $$\frac{n(n + 1)(2n + 1)}{6}$$
 ( ) $$\frac{n(n + 1)}{2}$$
@@ -219,7 +220,7 @@ Which of the following is the simplified form of $$\sum\limits_{i = 0}^{n^2} i$$
 
 ## Problem
 
-Which of the following is the simplified form of $$\sum\limits_{i = 2}^{n} i^2$$?
+Which of the following is the closed-form of $$\sum\limits_{i = 2}^{n} i^2$$?
 
 (X) $$\frac{n(n + 1)(2n + 1)}{6} - 1$$
 ( ) $$\frac{n(n + 1)(2n + 1)}{6}$$
@@ -228,16 +229,16 @@ Which of the following is the simplified form of $$\sum\limits_{i = 2}^{n} i^2$$
 
 ## Problem
 
-Which of the following is the simplified form of $$\sum\limits_{i=0}^{n - 1} \left( n + \sum\limits_{j=0}^{i} 1 \right)$$?
+Which of the following is the closed-form of $$\sum\limits_{i=0}^{n - 1} \left( n + \sum\limits_{j=0}^{i} 1 \right)$$?
 
 (X) $$n(n + 1) + \frac{n(n-1)}{2}$$
 ( ) $$n^2 + \frac{n(n-1)}{2}$$
-( ) $$n^2 + \frac{n(n+1)}{2}$$
+( ) $$n^2 + \frac{(n-1)(n-2)}{2}$$
 ( ) $$2n^2$$
 
 ## Problem
 
-Which of the following is the simplified form of $$\sum\limits_{i=0}^{\lg n - 1} 3 \cdot 2^i$$?
+Which of the following is the closed-form of $$\sum\limits_{i=0}^{\lg n - 1} 3 \cdot 2^i$$?
 
 ( ) $$3 (\lg n - 1)$$
 ( ) $$3n - 1$$
@@ -475,7 +476,7 @@ Which of the following functions counts the number of array accesses (reads and 
 (X) $$T(n) = 1 + \sum\limits_{i=0}^{n - 1} 2$$
 ( ) $$T(n) = \sum\limits_{i=0}^{n - 1} 2$$
 
-Which of the following is the correct simplification of $$T(n)$$?
+Which of the following is the correct closed-form for $$T(n)$$?
 
 (X) $$T(n) = 2n - 1$$
 ( ) $$T(n) = 2n$$
@@ -514,7 +515,7 @@ Which of the following functions counts the number of array accesses performed o
 ( ) $$T(n) = \sum\limits_{i=0}^{n}\sum\limits_{j=0}^{n} 2$$
 (X) $$T(n) = \sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{n-1} 2$$
 
-Which of the following is the correct simplification of $$T(n)$$?
+Which of the following is the correct closed-form for $$T(n)$$?
 
 ( ) $$T(n) = 2(n+1)^2$$
 ( ) $$T(n) = (n+1)^2$$
@@ -536,7 +537,7 @@ void cumsum1(int* A, int n) {
    int* B = new int[n];
    for (int i = 0; i < n; ++i) {
       int total = 0;
-      for (int j = 0; j < i; ++j) {
+      for (int j = 0; j <= i; ++j) {
          total += A[j];
       }
       B[i] = total;
@@ -550,17 +551,17 @@ void cumsum1(int* A, int n) {
 
 Which of the following functions counts the number of array accesses performed on an input of size $$n$$ by `cumsum1`?
 
-( ) $$T(n) = \sum\limits_{i = 0}^{n - 1}\sum\limits_{j = 0}^{i - 1} 1 + \sum\limits_{i=0}^{n - 1} 2$$
-(X) $$T(n) = \sum\limits_{i = 0}^{n - 1}\left(1 + \sum\limits_{j = 0}^{i - 1} 1\right) + \sum\limits_{i=0}^{n - 1} 2$$
-( ) $$T(n) = \sum\limits_{i = 0}^{n - 1}\sum\limits_{j = 0}^{i - 1} 2 + \sum\limits_{i=0}^{n - 1} 2$$
-( ) $$T(n) = \sum\limits_{i = 0}^{n - 1}\left(1 + \sum\limits_{j = 0}^{i - 1} 2\right) + \sum\limits_{i=0}^{n - 1} 2$$
+( ) $$T(n) = \sum\limits_{i = 0}^{n - 1}\sum\limits_{j = 0}^{i} 1 + \sum\limits_{i=0}^{n - 1} 2$$
+(X) $$T(n) = \sum\limits_{i = 0}^{n - 1}\left(1 + \sum\limits_{j = 0}^{i} 1\right) + \sum\limits_{i=0}^{n - 1} 2$$
+( ) $$T(n) = \sum\limits_{i = 0}^{n - 1}\sum\limits_{j = 0}^{i} 2 + \sum\limits_{i=0}^{n - 1} 2$$
+( ) $$T(n) = \sum\limits_{i = 0}^{n - 1}\left(1 + \sum\limits_{j = 0}^{i} 2\right) + \sum\limits_{i=0}^{n - 1} 2$$
 
-Which of the following is the correct simplification of $$T(n)$$ for `cumsum1`?
+Which of the following is the correct closed-form for $$T(n)$$ for `cumsum1`?
 
-( ) $$T(n) = n^2 + 2n$$
-(X) $$T(n) = n^2 + \frac{5}{2}n$$
-( ) $$T(n) = n^2 + \frac{3}{2}n$$
-( ) $$T(n) = n^2 + n$$
+( ) $$T(n) = \frac{3n(n-1)}{2} + 3n$$
+(X) $$T(n) = \frac{n(n-1)}{2} + 4n$$
+( ) $$T(n) = n(n-1) + 4n$$
+( ) $$T(n) = \frac{n(n-1)}{2} + 3n$$
 
 Which of the following is a tight asymptotic bound on the time complexity of `cumsum1`?
 
@@ -585,7 +586,7 @@ Which of the following functions counts the number of array accesses performed o
 (X) $$T(n) = \sum\limits_{i=1}^{n - 1} 2$$
 ( ) $$T(n) = \sum\limits_{i=0}^{n - 1} 1$$
 
-Which of the following is the correct simplification of $$T(n)$$ for `cumsum2`?
+Which of the following is the correct closed-form for $$T(n)$$ for `cumsum2`?
 
 ( ) $$T(n) = n - 1$$
 ( ) $$T(n) = 2n$$
@@ -628,7 +629,7 @@ Assume that the target is not in the array with probability $$\frac{1}{n + 1}$$.
 ( ) $$T(n) = \sum\limits_{i = 0}^{n} \frac{i}{n + 1}$$
 ( ) $$T(n) = \frac{1}{n + 1} + \sum\limits_{i = 0}^{n - 1} \frac{i}{n + 1}$$
 
-Which of the following is the correct simplification of $$T(n)$$?
+Which of the following is the correct closed-form for $$T(n)$$?
 
 ( ) $$T(n) = \frac{n^2 - n + 1}{2(n + 1)}$$
 ( ) $$T(n) = \frac{n}{2} + \frac{1}{n + 1}$$
@@ -700,7 +701,7 @@ of $$n$$ calls on an initially empty array with capacity $$k$$?
 ( ) $$\sum\limits_{i=0}^{n-1} 1 + \sum\limits_{i=1}^{\lceil (n - 1) / k \rceil} ki$$
 (X) $$\sum\limits_{i=0}^{n-1} 1 + \sum\limits_{i=1}^{\lfloor (n - 1) / k \rfloor} ki$$
 
-Which of the following is the correct simplification of $$T(n)$$?
+Which of the following is the correct closed-form for $$T(n)$$?
 
 ( ) $$\frac{k}{2} \lceil (n - 1) / k \rceil^2 + \frac{k + 2}{2} \lceil (n - 1) / k \rceil + 1$$
 (X) $$\frac{k}{2} \lfloor (n - 1) / k \rfloor^2 + \frac{k}{2} \lfloor (n - 1) / k \rfloor + n$$
