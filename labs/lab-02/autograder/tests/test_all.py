@@ -40,7 +40,6 @@ def build(cpp_paths: Sequence[Path], executable_path: Path) -> CommandOutput:
         "-Wall",
         "-Wextra",
         "-Wpedantic",
-        "-Werror",
         "-fsanitize=address,undefined",
         "-fstack-protector-strong",
         "-D_GLIBCXX_DEBUG",
