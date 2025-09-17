@@ -45,16 +45,25 @@ def build(cpp_paths: Sequence[Path], executable_path: Path) -> CommandOutput:
         "-fstack-protector-strong",
         "-D_GLIBCXX_DEBUG",
     ]
-    cmd = ["g++", *gcc_flags, "-o", executable_path.as_posix(), *(cpp_path.as_posix() for cpp_path in cpp_paths)]
+    cmd = [
+        "g++",
+        *gcc_flags,
+        "-o",
+        executable_path.as_posix(),
+        *(cpp_path.as_posix() for cpp_path in cpp_paths),
+    ]
     return run(cmd, timeout=None)
 
 
 class TestAll(unittest.TestCase):
-
     def setUp(self) -> None:
         self.autograder_path = Path("/autograder/source")
         self.submission_path = Path("/autograder/submission")
-        shutil.copytree(self.autograder_path / "submission", self.submission_path)
+        shutil.copytree(
+            self.autograder_path / "submission",
+            self.submission_path,
+            dirs_exist_ok=True,
+        )
 
     def assert_cpp_tests(self, cpp_files: Sequence[str], executable_name: str) -> None:
         cpp_paths = [self.submission_path / cpp_file for cpp_file in cpp_files]
@@ -137,7 +146,9 @@ class TestAll(unittest.TestCase):
     @weight(0)
     def test_two_sum(self):
         self.assert_exists(["two_sum.cpp", "two_sum_fast.cpp", "test_two_sum.cpp"])
-        self.assert_cpp_tests(["two_sum.cpp", "two_sum_fast.cpp", "test_two_sum.cpp"], "two_sum")
+        self.assert_cpp_tests(
+            ["two_sum.cpp", "two_sum_fast.cpp", "test_two_sum.cpp"], "two_sum"
+        )
 
     @weight(0)
     def test_two_sum_analysis(self):
@@ -145,8 +156,12 @@ class TestAll(unittest.TestCase):
 
     @weight(0)
     def test_three_sum(self):
-        self.assert_exists(["three_sum.cpp", "three_sum_fast.cpp", "test_three_sum.cpp"])
-        self.assert_cpp_tests(["three_sum.cpp", "three_sum_fast.cpp", "test_three_sum.cpp"], "three_sum")
+        self.assert_exists(
+            ["three_sum.cpp", "three_sum_fast.cpp", "test_three_sum.cpp"]
+        )
+        self.assert_cpp_tests(
+            ["three_sum.cpp", "three_sum_fast.cpp", "test_three_sum.cpp"], "three_sum"
+        )
 
     @weight(0)
     def test_three_sum_analysis(self):

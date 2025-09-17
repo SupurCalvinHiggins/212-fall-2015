@@ -2,6 +2,7 @@
 #include <vector>
 #include <chrono>
 #include <algorithm>
+#include <string>
 #include "two_sum.h"
 #include "two_sum_fast.h"
 

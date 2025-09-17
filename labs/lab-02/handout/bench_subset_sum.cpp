@@ -3,6 +3,7 @@
 #include <chrono>
 #include <random>
 #include <algorithm>
+#include <string>
 #include "subset_sum.h"
 
 int main(const int argc, const char *argv[]) {
