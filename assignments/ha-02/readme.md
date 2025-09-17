@@ -647,7 +647,7 @@ Which of the following is a tight asymptotic bound on the time complexity?
 
 Consider the following approach to resizing and shrinking a dynamic array.
 1. Whenever the underlying array is at capacity and `push_back` is called, the capacity is doubled.
-2. Whenever the underlying array is at half capacity and `pop_back` is called, the capacity is halved.
+2. Whenever the underlying array is at half capacity or less and `pop_back` is called, the capacity is halved.
 
 Assuming an efficient implementation, what is the amortized time complexity of `push_back` over a sequence of $$n$$
 calls to `push_back` on an initially empty array with capacity one?
