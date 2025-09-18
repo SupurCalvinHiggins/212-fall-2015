@@ -16,7 +16,7 @@ Follow the following steps to compile and run your program:
 
 2. Compile your program using `g++` with C++11 standard (or later):
 ```bash
-$ g++ -std=c++11 main.cpp network.cpp -o prog
+$ g++ -std=c++11 -Wall -Werr main.cpp network.cpp -o prog
 ```
 
 3. Ensure the dataset file (e.g., `facebook-small.txt`) is in the 
