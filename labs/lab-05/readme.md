@@ -204,6 +204,7 @@ In this section, you will implement an online algorithm to schedule tasks. You w
 each timestep, must decide which task to execute. Your objective is to minimize the **total weighted delay**. Let $p_i$ 
 be the priority of the $i$-th task and $d_i$ be the delay (time from arrival to completion) of the $i$-th task. Then, 
 the total weighted delay is 
+
 $$\sum\limits_{i = 1}^n p_i \cdot d_i$$
 
 1. Complete `scheduler.h` and `scheduler.cpp`. Ensure `push` and `pop_next` run in $\mathcal{O}(\lg n)$ time.
