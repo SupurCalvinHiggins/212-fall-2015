@@ -13,7 +13,7 @@ By the end of this lab, you should be able to:
 3. Evaluate the performance characteristics of priority queue implementations.
 4. Design efficient solutions to computational problems with priority queues.
 
-Certain problems can be solved by **greedy** algorithms, or algorithms that always select the "best" possible option
+Certain problems can be solved by **greedy algorithms**, or algorithms that always select the "best" possible option
 given some local information. A fantastic variety of real-world algorithms are greedy, including GPS routing, data
 compression, VLSI design, and genome assembly. Greedy algorithms often maintain all possible options in a priority
 queue, allowing efficient access to the "best" option. Binary heaps provide an efficient implementation of the priority
@@ -203,7 +203,8 @@ attain near-optimal resource allocation.
 In this section, you will implement an online algorithm to schedule tasks. You will receive tasks one-by-one, and at 
 each timestep, must decide which task to execute. Your objective is to minimize the **total weighted delay**. Let $p_i$ 
 be the priority of the $i$-th task and $d_i$ be the delay (time from arrival to completion) of the $i$-th task. Then, 
-the total weighted delay is $\sum\limits_{i = 1}^n p_i \cdot d_i$.
+the total weighted delay is 
+$$\sum\limits_{i = 1}^n p_i \cdot d_i$$
 
 1. Complete `scheduler.h` and `scheduler.cpp`. Ensure `push` and `pop_next` run in $\mathcal{O}(\lg n)$ time.
 
