@@ -180,3 +180,12 @@ class TestAll(unittest.TestCase):
     def test_heapsort_analysis(self):
         self.assert_exists(["heapsort.cpp", "test_heapsort.cpp"])
         self.assert_analysis_tests("heapsort.md")
+
+    @weight(1)
+    def test_scheduler(self):
+        self.assert_cpp_tests(["scheduler.cpp", "tracer.cpp", "bench_scheduler.cpp"], "bench_scheduler")
+
+    @weight(1)
+    def test_heapsort_analysis(self):
+        self.assert_exists(["scheduler.h", "scheduler.cpp"])
+        self.assert_analysis_tests("scheduler.md")

@@ -192,4 +192,33 @@ In this section, you will analyze the time complexity of your min-priority queue
 
 # Optional Advanced Topics
 
-TODO: maybe d-ary heap.
+## Online Task Scheduling
+
+Operating systems, cloud computing systems and high-performance compute clusters receive programs (tasks) to execute.
+**Schedulers** determine when and how many resources to allocate to each task. Schedulers balance multiple tradeoffs to 
+attain near-optimal resource allocation. 
+
+### Implementation
+
+In this section, you will implement an online algorithm to schedule tasks. You will receive tasks one-by-one, and at 
+each timestep, must decide which task to execute. Your objective is to minimize the **total weighted delay**. Let $p_i$ 
+be the priority of the $i$-th task and $d_i$ be the delay (time from arrival to completion) of the $i$-th task. Then, 
+the total weighted delay is $\sum\limits_{i = 1}^n p_i \cdot d_i$.
+
+1. Complete `scheduler.h` and `scheduler.cpp`. Ensure `push` and `pop_next` run in $\mathcal{O}(\lg n)$ time.
+
+> [!IMPORTANT]
+> Submit `scheduler.h` and `scheduler.cpp` to Gradescope.
+
+### Empirical Analysis
+
+In this section, you will empirically analyze the performance of your online scheduling algorithm. 
+
+1. Build `bench_scheduler` from `scheduler.cpp`, `tracer.cpp` and `bench_scheduler.cpp`.
+2. Run `bench_scheduler`. What is total weighted delay? Describe your algorithm and record the total weighted delay 
+   under **Initial Scheduler** in `scheduler.md`.
+3. Revise your algorithm to decrease the total weighted delay. Describe your new algorithm and record the new total 
+   weighted delay under **Final Scheduler** in `scheduler.md`.
+
+> [!IMPORTANT]
+> Submit `scheduler.h`, `scheduler.cpp` and `scheduler.md` to Gradescope.
