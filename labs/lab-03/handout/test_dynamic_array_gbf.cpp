@@ -43,8 +43,8 @@ TEST_CASE("DynamicArrayGBF: operator[] throws on out-of-range access") {
     DynamicArrayGBF arr(1.5);
     arr.push_back(1);
     arr.push_back(2);
-    CHECK_THROWS_AS(arr[2], std::out_of_range);
-    CHECK_THROWS_AS(arr[-1], std::out_of_range);
+    CHECK_THROWS_AS((void)arr[2], std::out_of_range);
+    CHECK_THROWS_AS((void)arr[-1], std::out_of_range);
 }
 
 TEST_CASE("DynamicArrayGBF: Capacity grows by factor") {

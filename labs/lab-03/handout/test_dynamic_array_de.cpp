@@ -64,8 +64,8 @@ TEST_CASE("DynamicArrayDE: operator[] throws on out-of-range access") {
     arr.push_back(1);
     arr.push_front(0);
 
-    CHECK_THROWS_AS(arr[2], std::out_of_range);
-    CHECK_THROWS_AS(arr[-1], std::out_of_range);
+    CHECK_THROWS_AS((void)arr[2], std::out_of_range);
+    CHECK_THROWS_AS((void)arr[-1], std::out_of_range);
 }
 
 
