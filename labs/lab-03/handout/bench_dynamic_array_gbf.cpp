@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 #include <chrono>
 #include <cstdlib>
 #include "dynamic_array_gbf.h"
