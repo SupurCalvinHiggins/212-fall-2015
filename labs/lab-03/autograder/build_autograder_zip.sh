@@ -2,6 +2,7 @@
 
 rm -rf submission
 mkdir -p submission
-cp ../handout/test_*.cpp ../handout/doctest.h ../handout/dynamic_array_gdb.h ../handout/dynamic_array_gbo.h ../handout/dynamic_array_gbf.h ./submission/
+cp ../handout/test_*.cpp ../handout/doctest.h ../handout/*.h ./submission/
+rm -f ./submission/dynamic_array_de.h
 zip -r autograder.zip .
 rm -rf submission
