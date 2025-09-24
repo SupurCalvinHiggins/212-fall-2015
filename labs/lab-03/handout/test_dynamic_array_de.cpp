@@ -86,7 +86,7 @@ TEST_CASE("DynamicArrayDE: stress test push_back") {
 
 TEST_CASE("DynamicArrayDE: stress test push_front") {
     DynamicArrayDE arr;
-    const int N = 100000;
+    const int N = 100001;
 
     for (int i = 0; i < N; ++i) {
         arr.push_front(i);
