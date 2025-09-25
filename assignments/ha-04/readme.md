@@ -363,6 +363,116 @@ What is `foo({1,1,2,3,7,0},3)`? Provide your answer as a comma-delimited list.
 
 ## Problem
 
+Consider a **grow-by-one dynamic array** where the capacity never decreases.
+
+What is the worst-case time complexity of `push_back`?
+
+( ) $\Theta(1)$
+( ) $\Theta(\lg n)$
+(X) $\Theta(n)$
+( ) $\Theta(n \lg n)$
+
+What is the worst-case time complexity of `push_front`?
+
+( ) $\Theta(1)$
+( ) $\Theta(\lg n)$
+(X) $\Theta(n)$
+( ) $\Theta(n \lg n)$
+
+What is the worst-case time complexity of `pop_back`?
+
+(X) $\Theta(1)$
+( ) $\Theta(\lg n)$
+( ) $\Theta(n)$
+( ) $\Theta(n \lg n)$
+
+What is the worst-case time complexity of `pop_front`?
+
+( ) $\Theta(1)$
+( ) $\Theta(\lg n)$
+(X) $\Theta(n)$
+( ) $\Theta(n \lg n)$
+
+What is the worst-case time complexity of indexing a grow-by-one dynamic array?
+
+(X) $\Theta(1)$
+( ) $\Theta(\lg n)$
+( ) $\Theta(n)$
+( ) $\Theta(n \lg n)$
+
+## Problem
+
+Consider a **grow-by-doubling dynamic array** where the capacity never decreases.
+
+What is the worst-case amortized time complexity of `push_back`?
+
+(X) $\Theta(1)$ amortized
+( ) $\Theta(\lg n)$ amortized
+( ) $\Theta(n)$ amortized
+( ) $\Theta(n \lg n)$ amortized
+
+What is the worst-case time complexity of `push_front`?
+
+( ) $\Theta(1)$
+( ) $\Theta(\lg n)$
+(X) $\Theta(n)$
+( ) $\Theta(n \lg n)$
+
+What is the worst-case time complexity of `pop_back`?
+
+(X) $\Theta(1)$
+( ) $\Theta(\lg n)$
+( ) $\Theta(n)$
+( ) $\Theta(n \lg n)$
+
+What is the worst-case time complexity of `pop_front`?
+
+( ) $\Theta(1)$
+( ) $\Theta(\lg n)$
+(X) $\Theta(n)$
+( ) $\Theta(n \lg n)$
+
+What is the worst-case time complexity of indexing a grow-by-one dynamic array?
+
+(X) $\Theta(1)$
+( ) $\Theta(\lg n)$
+( ) $\Theta(n)$
+( ) $\Theta(n \lg n)$
+
+# Problem
+
+Consider a **binary heap** with a fixed maximum capacity.
+
+What is the worst-case time complexity of `make_heap`?
+
+( ) $\Theta(1)$
+( ) $\Theta(\lg n)$
+(X) $\Theta(n)$
+( ) $\Theta(n \lg n)$
+
+What is the worst-case time complexity of `push`?
+
+( ) $\Theta(1)$
+(X) $\Theta(\lg n)$
+( ) $\Theta(n)$
+( ) $\Theta(n \lg n)$
+
+What is the worst-case time complexity of `pop`?
+
+( ) $\Theta(1)$
+(X) $\Theta(\lg n)$
+( ) $\Theta(n)$
+( ) $\Theta(n \lg n)$
+
+What is the worst-case time complexity of `top`?
+
+(X) $\Theta(1)$
+( ) $\Theta(\lg n)$
+( ) $\Theta(n)$
+( ) $\Theta(n \lg n)$
+
+## Problem
+
 Consider the following implementation of a stack:
 ```cpp
 class Stack {
@@ -472,17 +582,65 @@ the dynamic array, and `pop` appends.
 
 ## Problem
 
+Consider the following implementation of a min-priority queue:
+```cpp
+class MinPQ {
+    std::vector<int> data;
+
+public:
+    void push(int x) {
+        data.push_back(x);
+    }
+
+    void pop() {
+        if (data.empty()) return;
+        auto it = std::min_element(data.begin(), data.end());
+        data.erase(it);
+    }
+
+    int top() {
+        return *std::min_element(data.begin(), data.end());
+    }
+
+    bool empty() {
+        return data.empty();
+    }
+};
+```
+
+What is the worst-case amortized time complexity of `push`?
+
+(X) $\Theta(1)$ amortized
+( ) $\Theta(\lg n)$ amortized
+( ) $\Theta(n)$ amortized
+( ) $\Theta(n \lg n)$ amortized
+
+What is the worst-case time complexity of `pop`?
+
+( ) $\Theta(1)$
+( ) $\Theta(\lg n)$
+(X) $\Theta(n)$
+( ) $\Theta(n \lg n)$
+
+What is the worst-case time complexity of `top`?
+
+( ) $\Theta(1)$
+( ) $\Theta(\lg n)$
+(X) $\Theta(n)$
+( ) $\Theta(n \lg n)$
+
+Which methods perform worse than a min-priority queue implemented with binary heap? 
+
+[X] `pop`
+[X] `top`
+
 
 
 200 points
 
 120 in core content - 24 problems at 5 points each (currently 25, must cut 1)
 
-
-State complexity of push/pop-front/back, indexing for grow-by-one DA.
-State complexity of push/pop-front/back, indexing for doubling DA.
-State complexity of heapify, push, pop, top for heap.
-Analysis of min priority queue implemented as a dynamic array (could include speedup against heap)
+TODO: need to add amoritized/not response to some question. for example, stack with two queues and queue with two stacks.
 
 Analysis of paren matching using stacks.
 Analysis of buildup and pulse every k using queues.
