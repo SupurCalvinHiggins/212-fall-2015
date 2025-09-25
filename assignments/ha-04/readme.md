@@ -16,16 +16,28 @@ TODO: discuss answer formats here, require checking a i understand box
 integer
 comma-delimited list
 
+TODO: define classes, have to state everything required to know internal state and understand performance.
+`grow_by_one_vector`
+`grow_by_doubling_vector` or `vector`
+`min_priority_queue`
+`max_priority_queue`
+`make_min_heap`
+`make_max_heap`
+`pop_min_heap`
+`pop_max_heap`
+`top_min_heap`
+`top_max_heap`
+`queue`
+`stack`
+`deque`
+
 # Core Content (5 points)
 
 ## Problem
 
-Suppose `std::vector<int>` is implemented as a grow-by-one dynamic array with initial capacity $1$. Assume the 
-underlying array never shrinks.
-
 Consider the vector `v`'s state after the follow code executes:
 ```cpp
-std::vector<int> v;
+grow_by_one_vector<int> v;
 v.push_back(0);
 v.push_front(1);
 v.push_front(2);
@@ -50,12 +62,9 @@ list.
 
 ## Problem
 
-Suppose `std::vector<int>` is implemented as a grow-by-doubling dynamic array with initial capacity $1$. Assume the
-underlying array never shrinks.
-
 Consider the vector `v`'s state after the follow code executes:
 ```cpp
-std::vector<int> v;
+vector<int> v;
 v.push_back(0);
 v.push_back(1);
 v.push_back(2);
@@ -83,13 +92,10 @@ list.
 
 ## Problem
 
-Suppose `std::make_heap` is implemented as the $\Theta(n)$ **binary min-heap** construction algorithm discussed in 
-lecture.
-
 Consider the vector `v`'s state after the following code executes:
 ```cpp
-std::vector<int> v{3,6,4,5,0,2,1};
-std::make_heap(v.begin(), v.end());
+vector<int> v{3,6,4,5,0,2,1};
+make_min_heap(v.begin(), v.end());
 ```
 
 What are the contents of `v`, in order from the first element to the last? Provide your answer as a comma-delimited 
@@ -99,13 +105,10 @@ list.
 
 ## Problem
 
-Suppose `std::make_heap` is implemented as the $\Theta(n)$ **binary max-heap** construction algorithm discussed in 
-lecture.
-
 Consider the vector `v`'s state after the following code executes:
 ```cpp
-std::vector<int> v{2,6,3,5,0,1,4};
-std::make_heap(v.begin(), v.end());
+vector<int> v{2,6,3,5,0,1,4};
+make_max_heap(v.begin(), v.end());
 ```
 
 What are the contents of `v`, in order from the first element to the last? Provide your answer as a comma-delimited
@@ -115,20 +118,17 @@ list.
 
 ## Problem
 
-Suppose `std::push_heap` and `std::pop_heap` are implemented as the $\mathcal{O}(\lg n)$ **binary min-heap** operations 
-discussed in lecture.
-
 Consider the vector `v`'s state after the following code executes:
 ```cpp
-std::vector<int> v{0,2,1,4,3,5,6};
-std::pop_heap(v.begin(), v.end());
+vector<int> v{0,2,1,4,3,5,6};
+pop_min_heap(v.begin(), v.end());
 v.pop_back();
-std::pop_heap(v.begin(), v.end());
+pop_min_heap(v.begin(), v.end());
 v.pop_back();
-std::pop_heap(v.begin(), v.end());
+pop_min_heap(v.begin(), v.end());
 v.pop_back();
 v.push_back(0);
-std::push_heap(v.begin(), v.end());
+push_min_heap(v.begin(), v.end());
 ```
 
 What are the contents of `v`, in order from the first element to the last? Provide your answer as a comma-delimited
@@ -138,20 +138,17 @@ list.
 
 ## Problem
 
-Suppose `std::push_heap` and `std::pop_heap` are implemented as the $\mathcal{O}(\lg n)$ **binary max-heap** operations
-discussed in lecture.
-
 Consider the vector `v`'s state after the following code executes:
 ```cpp
-std::vector<int> v{6,4,5,0,3,1,2};
-std::pop_heap(v.begin(), v.end());
+vector<int> v{6,4,5,0,3,1,2};
+pop_max_heap(v.begin(), v.end());
 v.pop_back();
-std::pop_heap(v.begin(), v.end());
+pop_max_heap(v.begin(), v.end());
 v.pop_back();
-std::pop_heap(v.begin(), v.end());
+pop_max_heap(v.begin(), v.end());
 v.pop_back();
 v.push_back(6);
-std::push_heap(v.begin(), v.end());
+push_max_heap(v.begin(), v.end());
 ```
 
 What are the contents of `v`, in order from the first element to the last? Provide your answer as a comma-delimited
@@ -164,8 +161,8 @@ list.
 Consider the following class:
 ```cpp
 class Foo {
-    std::stack<int> s1;
-    std::stack<int> s2;
+    stack<int> s1;
+    stack<int> s2;
 
     void baz() {
         while (!s1.empty()) {
@@ -213,8 +210,8 @@ for (int i = 1; i < 4; ++i) {
 Consider the following class:
 ```cpp
 class Foo {
-    std::queue<int> q1;
-    std::queue<int> q2;
+    queue<int> q1;
+    queue<int> q2;
 
     void baz() {
         while (q1.size() > 1) {
@@ -264,10 +261,10 @@ for (int i = 1; i < 4; ++i) {
 
 ## Problem
 
-Assume that `std::priority_queue<int>` is a max-priority queue. Consider the following class:
+Consider the following class:
 ```cpp
 class Foo {
-    std::priority_queue<int> pq;
+    max_priority_queue<int> pq;
 
 public:
     void corge(int x) {
@@ -305,12 +302,10 @@ for (int i = 1; i < 4; ++i) {
 
 ## Problem
 
-Assume that `std::priority_queue<int>` is a max-priority queue. 
-
 Consider the following function:
 ```cpp
-int foo(const std::vector<int>& v) {
-    std::priority_queue<int> pq;
+int foo(const vector<int>& v) {
+    max_priority_queue<int> pq;
     for (auto f : v)
         pq.push(-f);
  
@@ -336,9 +331,9 @@ What is `foo({1,1,2,3,7,13})`? Provide your answer as a single integer.
 
 Consider the following function:
 ```cpp
-std::vector<int> foo(const std::vector<int>& v, int k) {
-    std::deque<int> dq;
-    std::vector<int> result;
+vector<int> foo(const vector<int>& v, int k) {
+    deque<int> dq;
+    vector<int> result;
 
     for (int i = 0; i < v.size(); ++i) {
         if (!dq.empty() && dq.front() <= i - k)
@@ -363,120 +358,127 @@ What is `foo({1,1,2,3,7,0},3)`? Provide your answer as a comma-delimited list.
 
 ## Problem
 
-Consider a **grow-by-one dynamic array** where the capacity never decreases.
+Consider `grow_by_one_vector`.
 
-What is the worst-case time complexity of `push_back`?
+For each operation below, give the worst-case time complexity per operation. If the best possible bound requires
+amortized analysis, choose that option instead.
 
-( ) $\Theta(1)$
-( ) $\Theta(\lg n)$
-(X) $\Theta(n)$
-( ) $\Theta(n \lg n)$
-
-What is the worst-case time complexity of `push_front`?
+What is the time complexity of `push_back`?
 
 ( ) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 ( ) $\Theta(\lg n)$
 (X) $\Theta(n)$
-( ) $\Theta(n \lg n)$
 
-What is the worst-case time complexity of `pop_back`?
+What is the time complexity of `push_front`?
+
+( ) $\Theta(1)$
+( ) $\Theta(1)$ amortized
+( ) $\Theta(\lg n)$
+(X) $\Theta(n)$
+
+What is the time complexity of `pop_back`?
 
 (X) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 ( ) $\Theta(\lg n)$
 ( ) $\Theta(n)$
-( ) $\Theta(n \lg n)$
 
-What is the worst-case time complexity of `pop_front`?
+What is the time complexity of `pop_front`?
 
 ( ) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 ( ) $\Theta(\lg n)$
 (X) $\Theta(n)$
-( ) $\Theta(n \lg n)$
 
-What is the worst-case time complexity of indexing a grow-by-one dynamic array?
+What is the time complexity of `operator[]` (indexing)?
 
 (X) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 ( ) $\Theta(\lg n)$
 ( ) $\Theta(n)$
-( ) $\Theta(n \lg n)$
 
 ## Problem
 
-Consider a **grow-by-doubling dynamic array** where the capacity never decreases.
+Consider `grow_by_doubling_vector`.
 
-What is the worst-case amortized time complexity of `push_back`?
+For each operation below, give the worst-case time complexity per operation. If the best possible bound requires
+amortized analysis, choose that option instead.
 
+What is the time complexity of `push_back`?
+
+( ) $\Theta(1)$
 (X) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$ amortized
-( ) $\Theta(n)$ amortized
-( ) $\Theta(n \lg n)$ amortized
-
-What is the worst-case time complexity of `push_front`?
-
-( ) $\Theta(1)$
-( ) $\Theta(\lg n)$
-(X) $\Theta(n)$
-( ) $\Theta(n \lg n)$
-
-What is the worst-case time complexity of `pop_back`?
-
-(X) $\Theta(1)$
 ( ) $\Theta(\lg n)$
 ( ) $\Theta(n)$
-( ) $\Theta(n \lg n)$
 
-What is the worst-case time complexity of `pop_front`?
+What is the time complexity of `push_front`?
 
 ( ) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 ( ) $\Theta(\lg n)$
 (X) $\Theta(n)$
-( ) $\Theta(n \lg n)$
 
-What is the worst-case time complexity of indexing a grow-by-one dynamic array?
+What is the time complexity of `pop_back`?
 
 (X) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 ( ) $\Theta(\lg n)$
 ( ) $\Theta(n)$
-( ) $\Theta(n \lg n)$
 
-# Problem
-
-Consider a **binary heap** with a fixed maximum capacity.
-
-What is the worst-case time complexity of `make_heap`?
+What is the time complexity of `pop_front`?
 
 ( ) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 ( ) $\Theta(\lg n)$
 (X) $\Theta(n)$
-( ) $\Theta(n \lg n)$
 
-What is the worst-case time complexity of `push`?
+What is the time complexity of `operator[]` (indexing)?
+
+(X) $\Theta(1)$
+( ) $\Theta(1)$ amortized
+( ) $\Theta(\lg n)$
+( ) $\Theta(n)$
+
+## Problem
+
+For each operation below, give the worst-case time complexity per operation. If the best possible bound requires
+amortized analysis, choose that option instead.
+
+What is the time complexity of `make_max_heap`?
 
 ( ) $\Theta(1)$
+( ) $\Theta(1)$ amortized
+( ) $\Theta(\lg n)$
+(X) $\Theta(n)$
+
+What is the time complexity of `push_max_heap`?
+
+( ) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 (X) $\Theta(\lg n)$
 ( ) $\Theta(n)$
-( ) $\Theta(n \lg n)$
 
-What is the worst-case time complexity of `pop`?
+What is the time complexity of `pop_max_heap`?
 
 ( ) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 (X) $\Theta(\lg n)$
 ( ) $\Theta(n)$
-( ) $\Theta(n \lg n)$
 
-What is the worst-case time complexity of `top`?
+What is the time complexity of `top_max_heap`?
 
 (X) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 ( ) $\Theta(\lg n)$
 ( ) $\Theta(n)$
-( ) $\Theta(n \lg n)$
 
 ## Problem
 
 Consider the following implementation of a stack:
 ```cpp
 class Stack {
-    std::priority_queue<std::pair<int,int>> pq;
+    max_priority_queue<std::pair<int,int>> pq;
     int counter = 0;
 
 public:
@@ -498,39 +500,36 @@ public:
 };
 ```
 
-What is the worst-case time complexity of `push`?
+For each operation below, give the worst-case time complexity per operation. If the best possible bound requires
+amortized analysis, choose that option instead.
+
+What is the time complexity of `push`?
 
 ( ) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 (X) $\Theta(\lg n)$
 ( ) $\Theta(n)$
-( ) $\Theta(n \lg n)$
 
-What is the worst-case time complexity of `pop`?
+What is the time complexity of `pop`?
 
 ( ) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 (X) $\Theta(\lg n)$
 ( ) $\Theta(n)$
-( ) $\Theta(n \lg n)$
 
-What is the worst-case time complexity of `top`?
+What is the time complexity of `top`?
 
 (X) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 ( ) $\Theta(\lg n)$
 ( ) $\Theta(n)$
-( ) $\Theta(n \lg n)$
-
-Which methods perform worse than a stack implemented with a grow-by-doubling dynamic array?
-
-[X] `push`
-[X] `pop`
-[ ] `top`
 
 ## Problem
 
 Consider the following implementation of a queue:
 ```cpp
 class Queue {
-    std::priority_queue<std::pair<int,int>> pq;
+    max_priority_queue<std::pair<int,int>> pq;
     int counter = 0;
 
 public:
@@ -552,40 +551,36 @@ public:
 };
 ```
 
-What is the worst-case time complexity of `push`?
+For each operation below, give the worst-case time complexity per operation. If the best possible bound requires
+amortized analysis, choose that option instead.
+
+What is the time complexity of `push`?
 
 ( ) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 (X) $\Theta(\lg n)$
 ( ) $\Theta(n)$
-( ) $\Theta(n \lg n)$
 
-What is the worst-case time complexity of `pop`?
+What is the time complexity of `pop`?
 
 ( ) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 (X) $\Theta(\lg n)$
 ( ) $\Theta(n)$
-( ) $\Theta(n \lg n)$
 
-What is the worst-case time complexity of `top`?
+What is the time complexity of `top`?
 
 (X) $\Theta(1)$
+( ) $\Theta(1)$ amortized
 ( ) $\Theta(\lg n)$
 ( ) $\Theta(n)$
-( ) $\Theta(n \lg n)$
-
-Which methods perform worse than a queue implemented with a grow-by-doubling dynamic array? Assume `push` prepends to
-the dynamic array, and `pop` appends.
-
-[ ] `push`
-[X] `pop`
-[ ] `top`
 
 ## Problem
 
 Consider the following implementation of a min-priority queue:
 ```cpp
 class MinPQ {
-    std::vector<int> data;
+    vector<int> data;
 
 public:
     void push(int x) {
@@ -608,51 +603,199 @@ public:
 };
 ```
 
-What is the worst-case amortized time complexity of `push`?
+For each operation below, give the worst-case time complexity per operation. If the best possible bound requires 
+amortized analysis, choose that option instead.
 
+What is the time complexity of `push`?
+
+( ) $\Theta(1)$
 (X) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$ amortized
-( ) $\Theta(n)$ amortized
-( ) $\Theta(n \lg n)$ amortized
+( ) $\Theta(\lg n)$
+( ) $\Theta(n)$
 
-What is the worst-case time complexity of `pop`?
+What is the time complexity of `pop`?
+
+( ) $\Theta(1)$
+( ) $\Theta(1)$ amortized
+( ) $\Theta(\lg n)$
+(X) $\Theta(n)$
+
+What is the time complexity of `top`?
+
+( ) $\Theta(1)$
+( ) $\Theta(1)$ amortized
+( ) $\Theta(\lg n)$
+(X) $\Theta(n)$
+
+## Problem
+
+
+Consider the following function:
+```cpp
+vector<int> next_greater_element(const vector<int>& v) {
+    int n = nums.size();
+    vector<int> result(n, -1);
+    stack<int> s;
+
+    for (int i = 0; i < n; ++i) {
+        while (!s.empty() && nums[i] > nums[s.top()]) {
+            int idx = s.top();
+            s.pop();
+            result[idx] = nums[i];
+        }
+        s.push(i);
+    }
+
+    return result;
+}
+```
+
+What is worst-case time complexity of `next_greater_element`?
 
 ( ) $\Theta(1)$
 ( ) $\Theta(\lg n)$
 (X) $\Theta(n)$
 ( ) $\Theta(n \lg n)$
 
-What is the worst-case time complexity of `top`?
+## Problem
+
+Consider the following function:
+```cpp
+void heapsort(vector<int>& v) {
+    min_priority_queue<int> pq(v.begin(), v.end());
+    for (size_t i = 0; i < v.size(); ++i) {
+        v[i] = pq.top();
+        pq.pop();
+    }
+}
+```
+
+What is worst-case time complexity of `heapsort`?
+
+( ) $\Theta(1)$
+( ) $\Theta(\lg n)$
+( ) $\Theta(n)$
+(X) $\Theta(n \lg n)$
+
+## Problem
+
+Consider the following function:
+```cpp
+int max3(const vector<int>& v) {
+    max_priority_queue<int> pq(v.begin(), v.end());
+    pq.pop();
+    pq.pop();
+    return pq.top();
+}
+```
+
+What is worst-case time complexity of `max3`? 
 
 ( ) $\Theta(1)$
 ( ) $\Theta(\lg n)$
 (X) $\Theta(n)$
 ( ) $\Theta(n \lg n)$
 
-Which methods perform worse than a min-priority queue implemented with binary heap? 
+## Problem
 
-[X] `pop`
-[X] `top`
+You are a software engineer working on a web browser. Web pages are written in a markup language called **HTML**, which 
+describes the structure and content of a page. Before rendering a page, the browser must validate the HTML document.
 
+In HTML, text is surrounded by **tags** that come in pairs.
+* An **opening tag** looks like `<tagname>` (for example, `<p>`).
+* A **closing tag** looks like `</tagname>` (for example, `</p>`).
+
+A HTML document is **valid** if:
+1. Every opening tag has a matching closing tag.
+2. Tags are **properly nested**: the last tag opened must be the first one closed.
+
+For example:
+* `<a><b></b></a>` is valid.
+* `<a><b></a></b>` is not valid (tags overlap incorrectly).
+* `<a><b></b>` is not valid (missing </a>).
+
+Which abstract data type best for checking whether a sequence of tags forms a valid HTML document? Here, best means an 
+abstract data type that efficiently solves the problem, and provides only the operations needed.
+
+(X) Stack
+( ) Queue
+( ) Priority Queue
+( ) Deque
+
+## Problem
+
+You work for a company that manufactures networked printers. Customers send **print jobs** to the system. A print job is
+a unit of work like printing one document. Jobs arrive in the order customers submit them. The system must send jobs to 
+printers in that same order.
+
+For example, suppose jobs are represented by letters and the system has two printers:
+1. Jobs `A`, `B`, `C`, `D` arrive.
+    - Printer 1 takes `A`.
+    - Printer 2 takes `B`.
+2. Both printers finish their first jobs.
+    - Printer 1 takes `C`.
+    - Printer 2 takes `D`.
+3. Two more jobs, `E` and `F`, arrive.
+    - Printer 1 takes `E`.
+    - Printer 2 takes `F`.
+4. Finally, job `G` arrives, and Printer 1 takes `G`.
+
+Which abstract data type best models the system’s waiting area for jobs before they are sent to a printer? Here, best 
+means an abstract data type that efficiently solves the problem, and provides only the operations needed.
+
+( ) Stack
+(X) Queue
+( ) Priority Queue
+( ) Deque
+
+## Problem
+
+You are a software engineer working on the cloud platform for a company that manufactures internet-connected 
+refrigerators. Each refrigerator periodically sends log messages to the cloud. A log message records an event (e.g., 
+“door opened,” “temperature adjusted,” or “power shut off”) along with a timestamp.
+
+Recently, a serious bug was reported: many refrigerators randomly shut off within the same hour. To diagnose the 
+problem, you need to merge the logs from thousands of refrigerators into a single stream that is sorted by timestamp, so
+you can see the exact sequence of events across all devices.
+
+Different refrigerators may experience network delays or temporarily go offline. This means log messages may arrive at 
+the cloud out of order relative to their timestamps, even if each refrigerator sent its logs in chronological order.
+
+Which abstract data type best allows you to select the next log entry in true chronological order? Here, best means an 
+abstract data type that efficiently solves the problem, and provides only the operations needed.
+
+( ) Stack
+( ) Queue
+(X) Priority Queue
+( ) Deque
+
+## Problem
+
+You are a software engineer building a system to monitor air quality in a smart city. Sensors placed throughout the city
+report PM2.5 levels (fine particulate matter) every minute. To detect dangerous spikes in pollution, your system must 
+continuously report the maximum PM2.5 reading over the last $k$ minutes for each sensor.
+
+For example, if the last 5 measurements from one sensor are `22,15,20,12,18`, the maximum in that 5-minute window is 
+`22`. If the next measurement is `9`, the new maximum is `20`.
+
+Which abstract data type best allows you to compute the maximum PM2.5 reading over the last $k$ minutes? Here, best 
+means an abstract data type that efficiently solves the problem, and provides only the operations needed.
+
+( ) Stack
+( ) Queue
+( ) Priority Queue
+(X) Deque
+
+## Extra Practice (10 points)
+
+## Optional Advanced Topics (15 points)
+
+## Optional Advanced Topics (20 points)
 
 
 200 points
 
 120 in core content - 24 problems at 5 points each (currently 25, must cut 1)
-
-TODO: need to add amoritized/not response to some question. for example, stack with two queues and queue with two stacks.
-
-Analysis of paren matching using stacks.
-Analysis of buildup and pulse every k using queues.
-Analysis of heapsort using min priority queues.
-Analysis of third largest using max priority queue.
-TODO analysis of program using deque
-
-Select ADT for HTML validation.
-Select ADT for queueing up requests to a webserver.
-Select ADT for merging logs in chronological order.
-Select ADT for maintaining median in a stream.
-TODO select ADT with deque
 
 30 in extra practice - 3 problems at 10 points each
 50 in advanced topics - 2 problems at 15, 1 at 20
