@@ -12,24 +12,78 @@ By the end of this assignment, you should be able to:
 4. Analyze the asymptotic time complexity of programs that use stacks, queues, and min/max-priority queues.
 5. Select between stacks, queues, or min/max-priority queues to efficiently solve computational problems.
 
-TODO: discuss answer formats here, require checking a i understand box
-integer
-comma-delimited list
+## Grading
 
-TODO: define classes, have to state everything required to know internal state and understand performance.
-`grow_by_one_vector`
-`grow_by_doubling_vector` or `vector`
-`min_priority_queue`
-`max_priority_queue`
-`make_min_heap`
-`make_max_heap`
-`pop_min_heap`
-`pop_max_heap`
-`top_min_heap`
-`top_max_heap`
-`queue`
-`stack`
-`deque`
+This assignment is graded out of $100$ points. However, we provide $200$ points' worth of problems:
+
+1. Only your first $100$ points count towards your grade.
+2. The extra problems give you flexibility to:
+    * Choose problems that best support your learning
+    * Earn more than $100$ points in case of mistakes (your grade will be capped at $100$).
+    * Practice additional problems in preparation for the midterm.
+
+**You are not expected to complete every problem!**
+
+## Milestones
+
+Problems are labeled as **Core Content**, **Extra Practice** or **Optional Advanced Topics**.
+
+To prepare for the midterm, you should:
+
+1. Complete at least one of each **Core Content** problem type
+
+## Recommendations
+
+The midterm will include many free response questions. To prepare effectively:
+
+* Avoid relying on multiple choice options to guide your answer. Instead, work out your solution first, then check
+  against the choices.
+* You can use any resources available (including AI), but always attempt each problem on your own for 5-10 minutes 
+  before seeking help.
+
+## Answer Formats
+
+**Short answer questions are autograded. You must follow the format specified below to receive credit.** 
+
+If the problem asks for a single integer, provide your answer as a single integer without whitespace. For example, `10`.
+
+If the problem asks for a comma-delimited list of integers, provide your answer as a comma-delimited list without 
+whitespace. For example, `3,1,4,0,12`.
+
+## Standard Library
+
+For some of the programming problems, we used special data structures in place of the standard library data structures.
+These data structures operate the same as the corresponding standard library data structure, but offer some additional
+information about their implementation:
+
+* `grow_by_one_vector` is a grow-by-one dynamic array with initial capacity $1$. The capacity never decreases. 
+   Otherwise, it works the same as `std::vector`.
+* `grow_by_doubling_vector` and `vector` are grow-by-doubling dynamic arrays with initial capacity $1$. The capacity 
+   never decrease. Otherwise, they work the same as `std::vector`.
+* `min_priority_queue` is a min-priority queue implemented with an implicit binary min-heap. The underlying array is 
+   fixed capacity and never grows or shrinks. Otherwise, it works the same as `std::priority_queue`.
+* `max_priority_queue` is a max-priority queue implemented with an implicit binary max-heap. The underlying array is
+   fixed capacity and never grows or shrinks. Otherwise, it works the same as `std::priority_queue`.
+* `make_min_heap` builds an implicit binary min-heap in $\Theta(n)$ time. Otherwise, it works the same as 
+  `std::make_heap`.
+* `make_max_heap` builds an implicit binary max-heap in $\Theta(n)$ time. Otherwise, it works the same as
+  `std::make_heap`.
+* `pop_min_heap` pops an implicit binary min-heap. Otherwise, it works the same as `std::pop_heap`.
+* `pop_max_heap` pops an implicit binary max-heap. Otherwise, it works the same as `std::pop_heap`.
+* `top_min_heap` returns the top element of an implicit binary min-heap.
+* `top_max_heap` returns the top element of an implicit binary max-heap.
+* `queue` is a queue implemented with a fixed size array, with prepend to the front and append to the back. Otherwise,
+   it works the same as `std::queue`.
+* `stack` is a stack implemented with a fixed size array. Otherwise, it works the same as `std::stack`.
+* `deque` is a deque implemented with fixed size array. Otherwise, it works the same as `std::deque`.
+
+**The performance of these data structures is defined by their description here, not the C++ documentation.**
+
+## Confirmation
+
+I have read and understand the above.
+(X) Yes
+( ) No
 
 # Core Content (5 points)
 
@@ -786,65 +840,159 @@ means an abstract data type that efficiently solves the problem, and provides on
 ( ) Priority Queue
 (X) Deque
 
-## Extra Practice (10 points)
-
-## Optional Advanced Topics (15 points)
-
-## Optional Advanced Topics (20 points)
-
-
-200 points
-
-120 in core content - 24 problems at 5 points each (currently 25, must cut 1)
-
-30 in extra practice - 3 problems at 10 points each
-50 in advanced topics - 2 problems at 15, 1 at 20
-
-Analysis of building min-heap via inserting increasing (or mostly increasing) sequence.
-Analysis of queue where the first n integers are inserted in order, cycled to front where only the integers that are 0 under mod k are retained.
-Analysis of heapsort with many duplicate elements.
-Analysis of reservoir sampling with bounded heap size.
-Analysis of d-ary heap with parameter optimization on d. Consider the case where each node is implemented with a heap.
-
-## Grading
-
-This assignment is graded out of $$100$$ points. However, we provide $$200$$ points' worth of problems:
-
-1. Only your first $$100$$ points count towards your grade.
-2. The extra problems give you flexibility to:
-    * Choose problems that best support your learning
-    * Earn more than $$100$$ points in case of mistakes (your grade will be capped at $$100$$).
-    * Practice additional problems in preparation for the midterm.
-
-**You are not expected to complete every problem!**
-
-## Milestones
-
-Problems are labeled as **Core Content**, **Extra Practice** or **Optional Advanced Topics**.
-
-To prepare for the midterm, you should:
-
-1. Complete at least one of each **Core Content** problem type
-
-## Recommendations
-
-The midterm will include many free response questions. To prepare effectively:
-
-* Avoid relying on multiple choice options to guide your answer. Instead, work out your solution first, then check
-  against the choices.
-* Use any resources available (including AI), but always attempt each problem on your own for 5-10 minutes before
-  seeking help.
-
-## Confirmation
-
-I have read and understand the above.
-(X) Yes
-( ) No
-
-# Core Content (5 points)
-
-# Extra Practice (10 points)
-
-# Optional Advanced Topics (15 points)
-
 # Optional Advanced Topics (20 points)
+
+## Problem
+
+Consider the following algorithm:
+1. Take, as input, a sorted vector `v` containing $n$ distinct elements.
+2. Randomly select and swap $k$ pairs of elements from `v`.
+3. Starting from index 0, insert the elements of `v` one-by-one into an empty min-heap.
+
+If there are a constant number of swaps, i.e. $k = \Theta(1)$, what is the worst-case time complexity of step 3?
+
+( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
+(X) $\Theta(n)$
+( ) $\Theta(n \lg \lg n)$
+( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
+( ) $\Theta(n \lg n)$
+
+If $k = \Theta(\lg \lg n)$, what is the worst-case time complexity of step 3?
+
+( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
+(X) $\Theta(n)$
+( ) $\Theta(n \lg \lg n)$
+( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
+( ) $\Theta(n \lg n)$
+
+If there are a logarithmic number of swaps, i.e. $k = \Theta(\lg n)$, what is the worst-case time complexity of step 3?
+
+( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
+(X) $\Theta(n)$
+( ) $\Theta(n \lg \lg n)$
+( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
+( ) $\Theta(n \lg n)$
+
+If there are a linear number of swaps, i.e. $k = \Theta(n)$, what is the worst-case time complexity of step 3?
+
+( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
+( ) $\Theta(n)$
+( ) $\Theta(n \lg \lg n)$
+( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
+(X) $\Theta(n \lg n)$
+
+## Problem
+
+Consider the standard in-place heapsort algorithm and suppose the input array of size $n$ contains $k$ non-zero 
+elements.
+
+If there are a linear number of non-zero elements, i.e. $k = \Theta(n)$, what is the worst-case time complexity of 
+heapsort?
+
+( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
+( ) $\Theta(n)$
+( ) $\Theta(n \lg \lg n)$
+( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
+(X) $\Theta(n \lg n)$
+
+If $k = \Theta\left( \frac{n \lg \lg n}{\lg n} \right)$, what is the worst-case time complexity of heapsort?
+
+( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
+( ) $\Theta(n)$
+(X) $\Theta(n \lg \lg n)$
+( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
+( ) $\Theta(n \lg n)$
+
+If $k = \Theta \left( \frac{n}{\lg n} \right)$, what is the worst-case time complexity of heapsort?
+
+( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
+(X) $\Theta(n)$
+( ) $\Theta(n \lg \lg n)$
+( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
+( ) $\Theta(n \lg n)$
+
+If $k = \mathcal{O}(n^{\epsilon})$ where $0 \leq \epsilon < 1$, what is the worst-case time complexity of heapsort?
+
+( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
+(X) $\Theta(n)$
+( ) $\Theta(n \lg \lg n)$
+( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
+( ) $\Theta(n \lg n)$
+
+## Problem
+
+Consider the following two-level min-heap data structure:
+1. Create an array of $b$ binary min-heaps called buckets.
+2. To push an element, randomly choose one of the $b$ buckets, and insert into it.
+3. To pop the minimum, check the minimum element in each of the $b$ buckets, and pop the bucket with the lowest minimum.
+   If there are multiple buckets with the lowest minimum, randomly choose one to pop. 
+
+It can be shown that each bucket contains $\frac{n}{b}$ elements on average, where $n$ is the total number of elements.
+
+What choices of $b$ allow `push` to run in $\mathcal{O}(\lg \lg n)$ on average?
+
+[ ] $b = \Theta(\lg \lg n)$
+[ ] $b = \Theta(\lg n)$
+[X] $b = \Theta \left( \frac{n}{\lg n} \right)$
+[X] $b = \Theta \left( \frac{n}{\lg \lg n} \right)$
+[X] $b = \Theta(n)$
+
+Suppose we want to perform $n$ calls to `push`, followed by $2$ calls to `pop`, and one call to `top` (e.g. to find the
+third-smallest element). What choices of $b$ provide better performance than a standard binary min-heap on average?
+
+[ ] $b = \Theta(\lg \lg n)$
+[ ] $b = \Theta(\lg n)$
+[X] $b = \Theta \left( \frac{n}{\lg n} \right)$
+[X] $b = \Theta \left( \frac{n}{\lg \lg n} \right)$
+[X] $b = \Theta(n)$
+
+Now, suppose we call `pop` $\Theta(\lg n)$ times instead of $2$ times. What choices of $b$ provide better performance 
+than a standard binary min-heap on average?
+
+[ ] $b = \Theta(\lg \lg n)$
+[ ] $b = \Theta(\lg n)$
+[X] $b = \Theta \left( \frac{n}{\lg n} \right)$
+[X] $b = \Theta \left( \frac{n}{\lg \lg n} \right)$
+[ ] $b = \Theta(n)$
+
+## Problem
+
+A $d$-ary heap is a variant of a binary heap where each node has $d$ children instead of $2$ children.
+
+What is the formula for the $i$-th child of node $j$ in an implicit $d$-ary heap?
+
+(X) $dj + i$
+( ) $dj + i + 1$
+( ) $d(j - 1) + i$
+( ) $d^j + i$
+( ) $d^j + i + 1$
+
+What is the worst-case time complexity of `push` and `pop` in a $d$-ary min-heap?
+
+( ) $\Theta(\lg d)$
+( ) $\Theta(n \log_n d)$
+(X) $\Theta(d \log_d n)$
+( ) $\Theta(\lg n)$
+( ) $\Theta(d)$
+
+What choices of $d$ provide better worst-case performance than a binary min-heap for `push` and `pop`?
+
+[ ] $d = \Theta(1)$
+[ ] $d = \Theta(\lg \lg n)$
+[ ] $d = \Theta(\lg n)$
+[ ] $d = \Theta(\sqrt{n})$
+[ ] $d = \Theta(n)$
+
+Suppose you could query the minimum child of any given node in $\Theta(\lg d)$ time. What choices of $d$ provide better 
+worst-case performance than a binary min-heap for `push` and `pop`?
+
+[ ] $d = \Theta(1)$
+[ ] $d = \Theta(\lg \lg n)$
+[ ] $d = \Theta(\lg n)$
+[ ] $d = \Theta(\sqrt{n})$
+[ ] $d = \Theta(n)$
+
+Do you expect real-world $d$-ary heap implementations to use low values of $d$ or very high values of $d$?
+
+(X) Low values of $d$.
+( ) Very high values of $d$.
