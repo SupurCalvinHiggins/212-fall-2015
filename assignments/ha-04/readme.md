@@ -1,25 +1,26 @@
 # Overview
 
-In this assignment, you will practice TODO.
+In this assignment, you will practice tracing, analyzing and selecting between stacks, queues, deques, min/max-priority 
+queues, dynamic arrays and binary min/max-heaps.
 
 ## Learning Objectives
 
 By the end of this assignment, you should be able to:
 
-1. Trace how common dynamic array and min/max-heaps operations change the data structure's internal state.
-2. Trace the execution of programs that use stacks, queues and min/max-priority queues.
-3. Analyze the asymptotic time complexity of common dynamic array and min/max-heap operations.
-4. Analyze the asymptotic time complexity of programs that use stacks, queues, and min/max-priority queues.
-5. Select between stacks, queues, or min/max-priority queues to efficiently solve computational problems.
+1. Trace how common dynamic array and binary min/max-heaps operations change the data structure's internal state.
+2. Trace the execution of programs that use stacks, queues, deques and min/max-priority queues.
+3. Analyze the asymptotic time complexity of common dynamic array and binary min/max-heap operations.
+4. Analyze the asymptotic time complexity of programs that use stacks, queues, deques, and min/max-priority queues.
+5. Select between stacks, queues, deques, or min/max-priority queues to efficiently solve computational problems.
 
 ## Grading
 
-This assignment is graded out of $100$ points. However, we provide $200$ points' worth of problems:
+This assignment is graded out of $$100$$ points. However, we provide $$200$$ points' worth of problems:
 
-1. Only your first $100$ points count towards your grade.
+1. Only your first $$100$$ points count towards your grade.
 2. The extra problems give you flexibility to:
     * Choose problems that best support your learning
-    * Earn more than $100$ points in case of mistakes (your grade will be capped at $100$).
+    * Earn more than $$100$$ points in case of mistakes (your grade will be capped at $$100$$).
     * Practice additional problems in preparation for the midterm.
 
 **You are not expected to complete every problem!**
@@ -56,17 +57,17 @@ For some of the programming problems, we used special data structures in place o
 These data structures operate the same as the corresponding standard library data structure, but offer some additional
 information about their implementation:
 
-* `grow_by_one_vector` is a grow-by-one dynamic array with initial capacity $1$. The capacity never decreases. 
+* `grow_by_one_vector` is a grow-by-one dynamic array with initial capacity $$1$$. The capacity never decreases. 
    Otherwise, it works the same as `std::vector`.
-* `grow_by_doubling_vector` and `vector` are grow-by-doubling dynamic arrays with initial capacity $1$. The capacity 
+* `grow_by_doubling_vector` and `vector` are grow-by-doubling dynamic arrays with initial capacity $$1$$. The capacity 
    never decrease. Otherwise, they work the same as `std::vector`.
 * `min_priority_queue` is a min-priority queue implemented with an implicit binary min-heap. The underlying array is 
    fixed capacity and never grows or shrinks. Otherwise, it works the same as `std::priority_queue`.
 * `max_priority_queue` is a max-priority queue implemented with an implicit binary max-heap. The underlying array is
    fixed capacity and never grows or shrinks. Otherwise, it works the same as `std::priority_queue`.
-* `make_min_heap` builds an implicit binary min-heap in $\Theta(n)$ time. Otherwise, it works the same as 
+* `make_min_heap` builds an implicit binary min-heap in $$\Theta(n)$$ time. Otherwise, it works the same as 
   `std::make_heap`.
-* `make_max_heap` builds an implicit binary max-heap in $\Theta(n)$ time. Otherwise, it works the same as
+* `make_max_heap` builds an implicit binary max-heap in $$\Theta(n)$$ time. Otherwise, it works the same as
   `std::make_heap`.
 * `pop_min_heap` pops an implicit binary min-heap. Otherwise, it works the same as `std::pop_heap`.
 * `pop_max_heap` pops an implicit binary max-heap. Otherwise, it works the same as `std::pop_heap`.
@@ -155,7 +156,7 @@ make_min_heap(v.begin(), v.end());
 What are the contents of `v`, in order from the first element to the last? Provide your answer as a comma-delimited 
 list.
 
-[____](`0,3,1,5,6,2,4`)
+[____](0,3,1,5,6,2,4)
 
 ## Problem
 
@@ -168,7 +169,7 @@ make_max_heap(v.begin(), v.end());
 What are the contents of `v`, in order from the first element to the last? Provide your answer as a comma-delimited
 list.
 
-[____](`6,5,4,2,0,1,3`)
+[____](6,5,4,2,0,1,3)
 
 ## Problem
 
@@ -419,38 +420,38 @@ amortized analysis, choose that option instead.
 
 What is the time complexity of `push_back`?
 
-( ) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-(X) $\Theta(n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+(X) $$\Theta(n)$$
 
 What is the time complexity of `push_front`?
 
-( ) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-(X) $\Theta(n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+(X) $$\Theta(n)$$
 
 What is the time complexity of `pop_back`?
 
-(X) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-( ) $\Theta(n)$
+(X) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
 
 What is the time complexity of `pop_front`?
 
-( ) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-(X) $\Theta(n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+(X) $$\Theta(n)$$
 
 What is the time complexity of `operator[]` (indexing)?
 
-(X) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-( ) $\Theta(n)$
+(X) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
 
 ## Problem
 
@@ -461,38 +462,38 @@ amortized analysis, choose that option instead.
 
 What is the time complexity of `push_back`?
 
-( ) $\Theta(1)$
-(X) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-( ) $\Theta(n)$
+( ) $$\Theta(1)$$
+(X) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
 
 What is the time complexity of `push_front`?
 
-( ) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-(X) $\Theta(n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+(X) $$\Theta(n)$$
 
 What is the time complexity of `pop_back`?
 
-(X) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-( ) $\Theta(n)$
+(X) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
 
 What is the time complexity of `pop_front`?
 
-( ) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-(X) $\Theta(n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+(X) $$\Theta(n)$$
 
 What is the time complexity of `operator[]` (indexing)?
 
-(X) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-( ) $\Theta(n)$
+(X) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
 
 ## Problem
 
@@ -501,31 +502,31 @@ amortized analysis, choose that option instead.
 
 What is the time complexity of `make_max_heap`?
 
-( ) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-(X) $\Theta(n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+(X) $$\Theta(n)$$
 
 What is the time complexity of `push_max_heap`?
 
-( ) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-(X) $\Theta(\lg n)$
-( ) $\Theta(n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+(X) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
 
 What is the time complexity of `pop_max_heap`?
 
-( ) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-(X) $\Theta(\lg n)$
-( ) $\Theta(n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+(X) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
 
 What is the time complexity of `top_max_heap`?
 
-(X) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-( ) $\Theta(n)$
+(X) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
 
 ## Problem
 
@@ -559,24 +560,24 @@ amortized analysis, choose that option instead.
 
 What is the time complexity of `push`?
 
-( ) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-(X) $\Theta(\lg n)$
-( ) $\Theta(n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+(X) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
 
 What is the time complexity of `pop`?
 
-( ) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-(X) $\Theta(\lg n)$
-( ) $\Theta(n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+(X) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
 
 What is the time complexity of `top`?
 
-(X) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-( ) $\Theta(n)$
+(X) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
 
 ## Problem
 
@@ -610,30 +611,30 @@ amortized analysis, choose that option instead.
 
 What is the time complexity of `push`?
 
-( ) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-(X) $\Theta(\lg n)$
-( ) $\Theta(n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+(X) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
 
 What is the time complexity of `pop`?
 
-( ) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-(X) $\Theta(\lg n)$
-( ) $\Theta(n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+(X) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
 
 What is the time complexity of `top`?
 
-(X) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-( ) $\Theta(n)$
+(X) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
 
 ## Problem
 
 Consider the following implementation of a min-priority queue:
 ```cpp
-class MinPQ {
+class MinPriorityQueue {
     vector<int> data;
 
 public:
@@ -662,24 +663,24 @@ amortized analysis, choose that option instead.
 
 What is the time complexity of `push`?
 
-( ) $\Theta(1)$
-(X) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-( ) $\Theta(n)$
+( ) $$\Theta(1)$$
+(X) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
 
 What is the time complexity of `pop`?
 
-( ) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-(X) $\Theta(n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+(X) $$\Theta(n)$$
 
 What is the time complexity of `top`?
 
-( ) $\Theta(1)$
-( ) $\Theta(1)$ amortized
-( ) $\Theta(\lg n)$
-(X) $\Theta(n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(1)$$ amortized
+( ) $$\Theta(\lg n)$$
+(X) $$\Theta(n)$$
 
 ## Problem
 
@@ -706,10 +707,10 @@ vector<int> next_greater_element(const vector<int>& v) {
 
 What is worst-case time complexity of `next_greater_element`?
 
-( ) $\Theta(1)$
-( ) $\Theta(\lg n)$
-(X) $\Theta(n)$
-( ) $\Theta(n \lg n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(\lg n)$$
+(X) $$\Theta(n)$$
+( ) $$\Theta(n \lg n)$$
 
 ## Problem
 
@@ -726,10 +727,10 @@ void heapsort(vector<int>& v) {
 
 What is worst-case time complexity of `heapsort`?
 
-( ) $\Theta(1)$
-( ) $\Theta(\lg n)$
-( ) $\Theta(n)$
-(X) $\Theta(n \lg n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(\lg n)$$
+( ) $$\Theta(n)$$
+(X) $$\Theta(n \lg n)$$
 
 ## Problem
 
@@ -745,10 +746,10 @@ int max3(const vector<int>& v) {
 
 What is worst-case time complexity of `max3`? 
 
-( ) $\Theta(1)$
-( ) $\Theta(\lg n)$
-(X) $\Theta(n)$
-( ) $\Theta(n \lg n)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(\lg n)$$
+(X) $$\Theta(n)$$
+( ) $$\Theta(n \lg n)$$
 
 ## Problem
 
@@ -827,12 +828,12 @@ abstract data type that efficiently solves the problem, and provides only the op
 
 You are a software engineer building a system to monitor air quality in a smart city. Sensors placed throughout the city
 report PM2.5 levels (fine particulate matter) every minute. To detect dangerous spikes in pollution, your system must 
-continuously report the maximum PM2.5 reading over the last $k$ minutes for each sensor.
+continuously report the maximum PM2.5 reading over the last $$k$$ minutes for each sensor.
 
 For example, if the last 5 measurements from one sensor are `22,15,20,12,18`, the maximum in that 5-minute window is 
 `22`. If the next measurement is `9`, the new maximum is `20`.
 
-Which abstract data type best allows you to compute the maximum PM2.5 reading over the last $k$ minutes? Here, best 
+Which abstract data type best allows you to compute the maximum PM2.5 reading over the last $$k$$ minutes? Here, best 
 means an abstract data type that efficiently solves the problem, and provides only the operations needed.
 
 ( ) Stack
@@ -845,154 +846,154 @@ means an abstract data type that efficiently solves the problem, and provides on
 ## Problem
 
 Consider the following algorithm:
-1. Take, as input, a sorted vector `v` containing $n$ distinct elements.
-2. Randomly select and swap $k$ pairs of elements from `v`.
+1. Take, as input, a sorted vector `v` containing $$n$$ distinct elements.
+2. Randomly select and swap $$k$$ pairs of elements from `v`.
 3. Starting from index 0, insert the elements of `v` one-by-one into an empty min-heap.
 
-If there are a constant number of swaps, i.e. $k = \Theta(1)$, what is the worst-case time complexity of step 3?
+If there are a constant number of swaps, i.e. $$k = \Theta(1)$$, what is the worst-case time complexity of step 3?
 
-( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
-(X) $\Theta(n)$
-( ) $\Theta(n \lg \lg n)$
-( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
-( ) $\Theta(n \lg n)$
+( ) $$\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$$
+(X) $$\Theta(n)$$
+( ) $$\Theta(n \lg \lg n)$$
+( ) $$\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$$
+( ) $$\Theta(n \lg n)$$
 
-If $k = \Theta(\lg \lg n)$, what is the worst-case time complexity of step 3?
+If $$k = \Theta(\lg \lg n)$$, what is the worst-case time complexity of step 3?
 
-( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
-(X) $\Theta(n)$
-( ) $\Theta(n \lg \lg n)$
-( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
-( ) $\Theta(n \lg n)$
+( ) $$\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$$
+(X) $$\Theta(n)$$
+( ) $$\Theta(n \lg \lg n)$$
+( ) $$\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$$
+( ) $$\Theta(n \lg n)$$
 
-If there are a logarithmic number of swaps, i.e. $k = \Theta(\lg n)$, what is the worst-case time complexity of step 3?
+If there are a logarithmic number of swaps, i.e. $$k = \Theta(\lg n)$$, what is the worst-case time complexity of step 3?
 
-( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
-(X) $\Theta(n)$
-( ) $\Theta(n \lg \lg n)$
-( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
-( ) $\Theta(n \lg n)$
+( ) $$\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$$
+(X) $$\Theta(n)$$
+( ) $$\Theta(n \lg \lg n)$$
+( ) $$\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$$
+( ) $$\Theta(n \lg n)$$
 
-If there are a linear number of swaps, i.e. $k = \Theta(n)$, what is the worst-case time complexity of step 3?
+If there are a linear number of swaps, i.e. $$k = \Theta(n)$$, what is the worst-case time complexity of step 3?
 
-( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
-( ) $\Theta(n)$
-( ) $\Theta(n \lg \lg n)$
-( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
-(X) $\Theta(n \lg n)$
+( ) $$\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$$
+( ) $$\Theta(n)$$
+( ) $$\Theta(n \lg \lg n)$$
+( ) $$\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$$
+(X) $$\Theta(n \lg n)$$
 
 ## Problem
 
-Consider the standard in-place heapsort algorithm and suppose the input array of size $n$ contains $k$ non-zero 
+Consider the standard in-place heapsort algorithm and suppose the input array of size $$n$$ contains $$k$$ non-zero 
 elements.
 
-If there are a linear number of non-zero elements, i.e. $k = \Theta(n)$, what is the worst-case time complexity of 
+If there are a linear number of non-zero elements, i.e. $$k = \Theta(n)$$, what is the worst-case time complexity of 
 heapsort?
 
-( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
-( ) $\Theta(n)$
-( ) $\Theta(n \lg \lg n)$
-( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
-(X) $\Theta(n \lg n)$
+( ) $$\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$$
+( ) $$\Theta(n)$$
+( ) $$\Theta(n \lg \lg n)$$
+( ) $$\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$$
+(X) $$\Theta(n \lg n)$$
 
-If $k = \Theta\left( \frac{n \lg \lg n}{\lg n} \right)$, what is the worst-case time complexity of heapsort?
+If $$k = \Theta\left( \frac{n \lg \lg n}{\lg n} \right)$$, what is the worst-case time complexity of heapsort?
 
-( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
-( ) $\Theta(n)$
-(X) $\Theta(n \lg \lg n)$
-( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
-( ) $\Theta(n \lg n)$
+( ) $$\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$$
+( ) $$\Theta(n)$$
+(X) $$\Theta(n \lg \lg n)$$
+( ) $$\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$$
+( ) $$\Theta(n \lg n)$$
 
-If $k = \Theta \left( \frac{n}{\lg n} \right)$, what is the worst-case time complexity of heapsort?
+If $$k = \Theta \left( \frac{n}{\lg n} \right)$$, what is the worst-case time complexity of heapsort?
 
-( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
-(X) $\Theta(n)$
-( ) $\Theta(n \lg \lg n)$
-( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
-( ) $\Theta(n \lg n)$
+( ) $$\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$$
+(X) $$\Theta(n)$$
+( ) $$\Theta(n \lg \lg n)$$
+( ) $$\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$$
+( ) $$\Theta(n \lg n)$$
 
-If $k = \mathcal{O}(n^{\epsilon})$ where $0 \leq \epsilon < 1$, what is the worst-case time complexity of heapsort?
+If $$k = \mathcal{O}(n^{\epsilon})$$ where $$0 \leq \epsilon < 1$$, what is the worst-case time complexity of heapsort?
 
-( ) $\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$
-(X) $\Theta(n)$
-( ) $\Theta(n \lg \lg n)$
-( ) $\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$
-( ) $\Theta(n \lg n)$
+( ) $$\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$$
+(X) $$\Theta(n)$$
+( ) $$\Theta(n \lg \lg n)$$
+( ) $$\Theta \left( \frac{n \lg n}{\lg \lg n} \right)$$
+( ) $$\Theta(n \lg n)$$
 
 ## Problem
 
 Consider the following two-level min-heap data structure:
-1. Create an array of $b$ binary min-heaps called buckets.
-2. To push an element, randomly choose one of the $b$ buckets, and insert into it.
-3. To pop the minimum, check the minimum element in each of the $b$ buckets, and pop the bucket with the lowest minimum.
+1. Create an array of $$b$$ binary min-heaps called buckets.
+2. To push an element, randomly choose one of the $$b$$ buckets, and insert into it.
+3. To pop the minimum, check the minimum element in each of the $$b$$ buckets, and pop the bucket with the lowest minimum.
    If there are multiple buckets with the lowest minimum, randomly choose one to pop. 
 
-It can be shown that each bucket contains $\frac{n}{b}$ elements on average, where $n$ is the total number of elements.
+It can be shown that each bucket contains $$\frac{n}{b}$$ elements on average, where $$n$$ is the total number of elements.
 
-What choices of $b$ allow `push` to run in $\mathcal{O}(\lg \lg n)$ on average?
+What choices of $$b$$ allow `push` to run in $$\mathcal{O}(\lg \lg n)$$ on average?
 
-[ ] $b = \Theta(\lg \lg n)$
-[ ] $b = \Theta(\lg n)$
-[X] $b = \Theta \left( \frac{n}{\lg n} \right)$
-[X] $b = \Theta \left( \frac{n}{\lg \lg n} \right)$
-[X] $b = \Theta(n)$
+[ ] $$b = \Theta(\lg \lg n)$$
+[ ] $$b = \Theta(\lg n)$$
+[X] $$b = \Theta \left( \frac{n}{\lg n} \right)$$
+[X] $$b = \Theta \left( \frac{n}{\lg \lg n} \right)$$
+[X] $$b = \Theta(n)$$
 
-Suppose we want to perform $n$ calls to `push`, followed by $2$ calls to `pop`, and one call to `top` (e.g. to find the
-third-smallest element). What choices of $b$ provide better performance than a standard binary min-heap on average?
+Suppose we want to perform $$n$$ calls to `push`, followed by $$2$$ calls to `pop`, and one call to `top` (e.g. to find the
+third-smallest element). What choices of $$b$$ provide asymptotically better performance than a standard binary min-heap on average?
 
-[ ] $b = \Theta(\lg \lg n)$
-[ ] $b = \Theta(\lg n)$
-[X] $b = \Theta \left( \frac{n}{\lg n} \right)$
-[X] $b = \Theta \left( \frac{n}{\lg \lg n} \right)$
-[X] $b = \Theta(n)$
+[ ] $$b = \Theta(\lg \lg n)$$
+[ ] $$b = \Theta(\lg n)$$
+[X] $$b = \Theta \left( \frac{n}{\lg n} \right)$$
+[X] $$b = \Theta \left( \frac{n}{\lg \lg n} \right)$$
+[X] $$b = \Theta(n)$$
 
-Now, suppose we call `pop` $\Theta(\lg n)$ times instead of $2$ times. What choices of $b$ provide better performance 
+Now, suppose we call `pop` $$\Theta(\lg n)$$ times instead of $$2$$ times. What choices of $$b$$ provide asymptotically better performance 
 than a standard binary min-heap on average?
 
-[ ] $b = \Theta(\lg \lg n)$
-[ ] $b = \Theta(\lg n)$
-[X] $b = \Theta \left( \frac{n}{\lg n} \right)$
-[X] $b = \Theta \left( \frac{n}{\lg \lg n} \right)$
-[ ] $b = \Theta(n)$
+[ ] $$b = \Theta(\lg \lg n)$$
+[ ] $$b = \Theta(\lg n)$$
+[X] $$b = \Theta \left( \frac{n}{\lg n} \right)$$
+[X] $$b = \Theta \left( \frac{n}{\lg \lg n} \right)$$
+[ ] $$b = \Theta(n)$$
 
 ## Problem
 
-A $d$-ary heap is a variant of a binary heap where each node has $d$ children instead of $2$ children.
+A $$d$$-ary heap is a variant of a binary heap where each node has $$d$$ children instead of $$2$$ children.
 
-What is the formula for the $i$-th child of node $j$ in an implicit $d$-ary heap?
+What is the formula for the $$i$$-th child of node $$j$$ in an implicit $$d$$-ary heap?
 
-(X) $dj + i$
-( ) $dj + i + 1$
-( ) $d(j - 1) + i$
-( ) $d^j + i$
-( ) $d^j + i + 1$
+(X) $$dj + i$$
+( ) $$dj + i + 1$$
+( ) $$d(j - 1) + i$$
+( ) $$d^j + i$$
+( ) $$d^j + i + 1$$
 
-What is the worst-case time complexity of `push` and `pop` in a $d$-ary min-heap?
+What is the worst-case time complexity of `push` and `pop` in a $$d$$-ary min-heap?
 
-( ) $\Theta(\lg d)$
-( ) $\Theta(n \log_n d)$
-(X) $\Theta(d \log_d n)$
-( ) $\Theta(\lg n)$
-( ) $\Theta(d)$
+( ) $$\Theta(\lg d)$$
+( ) $$\Theta(n \log_n d)$$
+(X) $$\Theta(d \log_d n)$$
+( ) $$\Theta(\lg n)$$
+( ) $$\Theta(d)$$
 
-What choices of $d$ provide better worst-case performance than a binary min-heap for `push` and `pop`?
+What choices of $$d$$ provide asymptotically better worst-case performance than a binary min-heap for `push` and `pop`?
 
-[ ] $d = \Theta(1)$
-[ ] $d = \Theta(\lg \lg n)$
-[ ] $d = \Theta(\lg n)$
-[ ] $d = \Theta(\sqrt{n})$
-[ ] $d = \Theta(n)$
+[ ] $$d = \Theta(1)$$
+[ ] $$d = \Theta(\lg \lg n)$$
+[ ] $$d = \Theta(\lg n)$$
+[ ] $$d = \Theta(\sqrt{n})$$
+[ ] $$d = \Theta(n)$$
 
-Suppose you could query the minimum child of any given node in $\Theta(\lg d)$ time. What choices of $d$ provide better 
+Suppose you could query the minimum child of any given node in $$\Theta(\lg d)$$ time. What choices of $$d$$ provide asymptotically better 
 worst-case performance than a binary min-heap for `push` and `pop`?
 
-[ ] $d = \Theta(1)$
-[ ] $d = \Theta(\lg \lg n)$
-[ ] $d = \Theta(\lg n)$
-[ ] $d = \Theta(\sqrt{n})$
-[ ] $d = \Theta(n)$
+[ ] $$d = \Theta(1)$$
+[ ] $$d = \Theta(\lg \lg n)$$
+[ ] $$d = \Theta(\lg n)$$
+[ ] $$d = \Theta(\sqrt{n})$$
+[ ] $$d = \Theta(n)$$
 
-Do you expect real-world $d$-ary heap implementations to use low values of $d$ or very high values of $d$?
+Do you expect real-world $$d$$-ary heap implementations to use low values of $$d$$ or very high values of $$d$$?
 
-(X) Low values of $d$.
-( ) Very high values of $d$.
+(X) Low values of $$d$$.
+( ) Very high values of $$d$$.
