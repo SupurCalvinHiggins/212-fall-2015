@@ -54,9 +54,10 @@ class CalcHandler(SimpleHTTPRequestHandler):
             result_line = cpp_process.stdout.readline().strip()
             if not result_line:
                 raise RuntimeError('No response from C++ process')
-            if not result_line.isdigit():
-                raise RuntimeError(result_line) 
-            result = int(result_line)
+            try:
+                result = int(result_line)
+            except ValueError:
+                raise RuntimeError(result_line)
             print(f'>> {result}')
             self._send_response(200, 'application/json', json.dumps({'result': result}).encode())
         except Exception as e:
