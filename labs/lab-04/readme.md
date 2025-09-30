@@ -149,9 +149,9 @@ on this section, look at the solution provided below and move on.
    costs $k - 1$ array accesses, where $k$ is the size of the queue. If we perform $n$ calls to `pop` on a queue of
    size $n$, we pop queues of size $1$, $2$, all the way up to $n$.
    Therefore,
-   
+
    $$T(n) = \frac{1}{n} \sum\limits_{k=1}^{n} (k - 1) = \frac{n-1}{2}$$
-   
+
    so $T(n) = \Theta(n)$. If you remove
    from the back of the underlying array, the analysis is the same as the stack's `pop`, so $T(n) = \Theta(0)$.
 3. The analysis depends on your implementation. If you add to the front of the underlying array, the analysis is similar
@@ -164,6 +164,8 @@ on this section, look at the solution provided below and move on.
 
 > [!IMPORTANT]
 > Submit `queue.md` to Gradescope.
+
+# Extra Practice
 
 ## Fully Parenthesized Infix Expression Evaluation
 
@@ -198,8 +200,6 @@ C++ integer division.
 
 > [!IMPORTANT]
 > Submit `eval.cpp` to Gradescope.
-
-# Extra Practice
 
 ## RNA Secondary Structure Validation
 
