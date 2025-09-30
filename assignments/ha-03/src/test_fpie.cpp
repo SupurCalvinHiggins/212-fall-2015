@@ -24,5 +24,6 @@ TEST_CASE("Exceptions") {
     CHECK_THROWS_AS(evalFullyParenthesized("(1+)"), std::runtime_error);
     CHECK_THROWS_AS(evalFullyParenthesized("((1+2)(3+4))"), std::runtime_error);
     CHECK_THROWS_AS(evalFullyParenthesized("(1)"), std::runtime_error);
+    CHECK_THROWS_AS(evalFullyParenthesized("(4/(3-3))"), std::runtime_error);
     CHECK_THROWS_AS(evalFullyParenthesized("(100000)"), std::runtime_error);
 }
