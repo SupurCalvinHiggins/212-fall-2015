@@ -145,6 +145,7 @@ The following rules should be followed:
 - Numbers in the expression can be multiple digits (e.g., `0`, `12`, `345`) but never negative (i.e., no unary minus operator)
 - The `/` operator should perform integer division (e.g., `5/2` should yield `2`)
 - Division by zero should throw an `std::runtime_error("Division by zero")` exception
+- A stack capacity of 1000 should be sufficient for all test cases
 
 To work on this task, you may develop your own test program. We are 
 providing a sample `test_fpie.cpp` that you can use as a starting point.
@@ -227,6 +228,7 @@ The following rules should be followed:
 - Numbers in the expression can be multiple digits (e.g., `0`, `12`, `345`) but never negative (i.e., no unary minus operator)
 - The `/` operator should perform integer division (e.g., `5/2` should yield `2`)
 - Division by zero should throw an `std::runtime_error("Division by zero");` exception
+- A stack capacity of 1000 should be sufficient for all test cases
 
 To work on this task, you may develop your own test program. We are 
 providing a sample `test_standard.cpp` that you can use as a starting point.
