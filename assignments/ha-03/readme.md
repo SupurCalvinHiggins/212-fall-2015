@@ -1,11 +1,12 @@
 # Homework Assignment 3 (due Oct 6th 11:59pm)
 
 In this assignment, we will explore the implementation of 
-stacks, as well as their application in solving parsing problems.
+stacks, as well as their application in evaluating arithmetic expressions.
 We will focus on using stacks to evaluate fully parenthesized
 arithmetic expressions, transforming infix expressions to postfix
-notation, and evaluating postfix expressions. The assignment is worth a total 
-of 100 points.  If you have any questions or need assistance, please don't 
+notation, and evaluating expressions in postfix notation. 
+The assignment is worth a total of 100 points.  If 
+you have any questions or need assistance, please don't 
 hesitate to reach out to us during office hours or post your questions 
 on the `Ed Discussion` forum.
 
@@ -18,15 +19,38 @@ to interact with the compiler and other tools. Regardless of your
 choice, your code must compile and run
 correctly using the `g++` compiler from the command line.
 
+## Code structure
+
+You are being provided with the following file structure. Ensure
+you maintain this structure while working on the assignment. 
+
+```
+src/
+  ├── stack.h
+  ├── stack.cpp
+  ├── eval.cpp
+  ├── doctest.h
+  ├── calculator.cpp
+  ├── test_stack.cpp
+  ├── test_fpie.cpp
+  └── test_standard.cpp
+web/
+  ├── server.py
+  ├── styles.css
+  ├── script.js
+  └── index.html
+```
+
 ## Task 1: The Stack class (30 points)
 
 In this task, the goal is to develop a class `Stack` to represent 
 a stack data structure using arrays. The internal array should 
 be fixed-length and dynamically allocated.
 
-You should use the class definition below, along with any other private
-methods you deem necessary.  The class definition should be saved in a file
-named `stack.h`.  Ensure you do not modify the signatures of the methods
+You should implement the methods shown in the class definition 
+below (`stack.h`), along with any other private
+methods you deem necessary.  Ensure you do not 
+modify the signatures of the methods
 provided.  Following standard C++ practices, the header file should be
 protected against multiple inclusions via the use of `#pragma once`.
 The implementation of all class methods should be in a separate file
@@ -58,19 +82,18 @@ class Stack {
 The following rules should be followed:
 
 - This task must be completed without using any C++ Standard Library (STL) containers, such as `std::vector` or `std::stack`
-- If the constructor is called with a capacity of zero, it should throw an `throw std::invalid_argument("Capacity must be greater than zero")` exception
+- If the constructor is called with a capacity of zero, it should throw an `std::invalid_argument("Capacity must be greater than zero")` exception
 - The `push` method should throw an `std::length_error("Exceeds stack capacity")` exception if the stack is full
 - The `pop` and `top` methods should throw an `std::out_of_range("Empty stack")` exception if the stack is empty
 
 To work on this task, you may develop your own test program. We are 
 providing a sample `test_stack.cpp` that you can use as a starting point.
 It uses the `doctest` unit testing framework, same as in the previous
-assignment. Ensure you have `doctest.h` [download](../ha-01/doctest.h) 
-in the same directory as your `test_stack.cpp` file.  
-The test program includes various test
+assignment. The test program includes various test
 cases to verify the functionality of the `Stack` class.  You can modify
 the test cases or add new ones as needed to thoroughly test your 
-implementation. To compile the test program, you can use the following command:
+implementation. To compile the test program, you can use the following 
+command within the `src/` directory:
 
 ```bash
 # compile the test program
@@ -87,16 +110,16 @@ operation is enclosed in parentheses. For example, the expression
 `3+5*2-1` is not. Note that in a fully parenthesized expression, every
 operator has exactly two operands and is enclosed in parentheses.
 
-To evaluate a fully parenthesized expression, we can use Two Stacks 
+To evaluate a fully parenthesized expression, we can use the Two Stacks 
 algorithm by E. Dijkstra. The algorithm uses two stacks: one 
-for `operands` (numbers) and one for `operators` (+, -, *, /). 
+for `operands` (numbers) and one for `operators`. 
 A basic algorithm to evaluate a fully parenthesized expression is 
 as follows:
 
 - For each token (number, operator, or parenthesis) in the expression from left to right:
   - if token is a number, push it onto the `operands` stack
   - if token is `'('`, ignore it
-  - if token is an operator (+, -, *, /), push it onto the `operators` stack
+  - if token is an operator, push it onto the `operators` stack
   - if token is `')'`, pop two `operands` and one `operator`, apply the operator to the operands, and push the result back onto the `operands` stack
 - At the end of the expression, the `operands` stack should contain a single element with the final result
 
@@ -118,15 +141,16 @@ The following rules should be followed:
 
 - This task must be completed without using any C++ Standard Library (STL) containers, such as `std::vector` or `std::stack`
 - The only valid characters in the expression are digits (0-9), parentheses `(` and `)`, and the operators `+`, `-`, `*`, and `/`
-- If the expression is empty, or it contains any invalid characters, or it contains mismatched parentheses, or it is malformed in any other way, the function should throw an `std::runtime_error("Invalid expression");` exception
+- If the expression is empty, or it contains any invalid characters, or it contains mismatched parentheses, or it is malformed in any other way, the function should throw an `std::runtime_error("Invalid expression")` exception
 - Numbers in the expression can be multiple digits (e.g., `0`, `12`, `345`) but never negative (i.e., no unary minus operator)
 - The `/` operator should perform integer division (e.g., `5/2` should yield `2`)
-- Division by zero should throw an `std::runtime_error("Division by zero");` exception
+- Division by zero should throw an `std::runtime_error("Division by zero")` exception
 
 To work on this task, you may develop your own test program. We are 
 providing a sample `test_fpie.cpp` that you can use as a starting point.
 You can modify the test cases or add new ones as needed to thoroughly test your 
-implementation. To compile the test program, you can use the following command:
+implementation. To compile the test program, you can use the following 
+command within the `src/` directory:
 
 ```bash
 # compile the test program
@@ -141,8 +165,8 @@ the `evalStandard` (task 3) functions.
 ## Task 3: Evaluating standard infix expressions (40 points)
 
 To evaluate standard infix expressions (e.g., `3+5*(2-1)`), we first need to 
-convert it to postfix notation (also known as Reverse Polish Notation or RPN).
-Then we can evaluate the postfix expression using a stack.
+convert it to postfix notation (also known as Reverse Polish Notation or RPN),
+and then we can evaluate the postfix expression using a stack.
 
 ### Converting infix to postfix
 
@@ -179,6 +203,10 @@ The algorithm is as follows:
   - if token is an operator, pop two operands from the stack, apply the operator, and push the result back onto the stack
 - At the end of the expression, the stack should contain a single element with the final result
 
+For example, after evaluating the postfix expression `3 50 2 1 - * +`, the
+result should be `53`.  You are encouraged to trace the algorithm step-by-step
+to see how it works (or ask an LLM to do it and explain the evaluation).
+
 ### Implementation
 
 Your task is to implement a function that evaluates a standard infix
@@ -193,6 +221,8 @@ The following rules should be followed:
 
 - This task must be completed using your `Stack` class for any stack operations, and the `std::queue` container from the STL to hold the output of the Shunting Yard algorithm
 - The only valid characters in the expression are digits (0-9), parentheses `(` and `)`, and the operators `+`, `-`, `*`, and `/`
+- Operator precedence is as follows (from highest to lowest): `*` and `/` have the highest precedence, followed by `+` and `-`
+- Operators are left associative, meaning that in an expression like `1 - 2 - 3`, the evaluation is done from left to right, i.e., `(1 - 2) - 3` (the algorithm above handles this automatically)
 - If the expression is empty, or it contains any invalid characters, or it contains mismatched parentheses, or it is malformed in any other way, the function should throw an `std::runtime_error("Invalid expression");` exception
 - Numbers in the expression can be multiple digits (e.g., `0`, `12`, `345`) but never negative (i.e., no unary minus operator)
 - The `/` operator should perform integer division (e.g., `5/2` should yield `2`)
@@ -201,7 +231,8 @@ The following rules should be followed:
 To work on this task, you may develop your own test program. We are 
 providing a sample `test_standard.cpp` that you can use as a starting point.
 You can modify the test cases or add new ones as needed to thoroughly test your 
-implementation. To compile the test program, you can use the following command:
+implementation. To compile the test program, you can use the following 
+command within the `src/` directory:
 
 ```bash
 # compile the test program
@@ -219,11 +250,9 @@ deem necessary, however the `evalStandard` function must be the entry point.
 ## Submission and grading
 
 This assignment relies on automated evaluation.
-Once you are finished, you **must** submit 
+Once you are finished, you **must** submit ONLY
 the files listed below via [Gradescope](https://www.gradescope.com/) 
 to record your grade.
-
-Use the exact filenames provided here:
 
 - `stack.h`
 - `stack.cpp`
@@ -254,11 +283,6 @@ expressions.  The small project is found under the `web` directory.
 The file structure is as follows:
 
 ```
-src/
-  ├── stack.h
-  ├── stack.cpp
-  ├── eval.cpp
-  └── calculator.cpp
 web/
   ├── server.py
   ├── styles.css
@@ -274,9 +298,10 @@ POST requests to evaluate expressions using your C++ program.
 We are providing a `calculator.cpp` file that contains a 
 `main` function to read an expression from standard input,
 evaluate it using your `evalFullyParenthesized` or `evalStandard`
-functions, and print the result to standard output.  If also
-prints error messages to standard output if the expression
-is invalid.  You can compile it using the following command:
+functions, and print the result to standard output.  It also
+sends error messages to standard error if the functions
+throw any exceptions. You can compile into `calc` using 
+the following command within the `src/` directory:
 
 ```bash
 # compile the calculator program
@@ -284,7 +309,8 @@ g++ -std=c++11 -Wall -Werror -o calc calculator.cpp stack.cpp eval.cpp
 ```
 
 After compiling, ensure the `calc` executable is in the `src`
-directory.  You can then run the web server using the following command:
+directory.  You can then run the web server using the 
+following command within the `web/` directory:
 
 ```bash
 # run the web server
