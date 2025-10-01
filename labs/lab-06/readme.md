@@ -1,4 +1,4 @@
-# Lab 4 - Stacks and Queues
+# Lab 6 - Linked Lists
 
 # Overview
 
@@ -47,8 +47,8 @@ To maximize your learning, you should:
 
 ## Project Setup
 
-1. Create a new project called `csc212-lab-07` in your IDE.
-2. Download all files from [the lab handout folder](handout) into the `csc212-lab-07` project.
+1. Create a new project called `csc212-lab-06` in your IDE.
+2. Download all files from [the lab handout folder](handout) into the `csc212-lab06` project.
 
 > [!NOTE]
 > To download all files from the repository, navigate to the root of the repository, click on the green **Code** button
