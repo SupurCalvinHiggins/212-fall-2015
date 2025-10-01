@@ -1,17 +1,17 @@
 # Overview
 
-In this assignment, you will practice tracing, analyzing and selecting between stacks, queues, deques, min/max-priority 
-queues, dynamic arrays and binary min/max-heaps.
+In this assignment, you will practice tracing, analyzing and selecting between dynamic arrays, stacks, queues, deques, 
+priority queues, and binary heaps.
 
 ## Learning Objectives
 
 By the end of this assignment, you should be able to:
 
-1. Trace how common dynamic array and binary min/max-heaps operations change the data structure's internal state.
-2. Trace the execution of programs that use stacks, queues, deques and min/max-priority queues.
-3. Analyze the asymptotic time complexity of common dynamic array and binary min/max-heap operations.
-4. Analyze the asymptotic time complexity of programs that use stacks, queues, deques, and min/max-priority queues.
-5. Select between stacks, queues, deques, or min/max-priority queues to efficiently solve computational problems.
+1. Trace how common dynamic array and binary heaps operations change the data structure's internal state.
+2. Trace the execution of programs that use stacks, queues, deques and priority queues.
+3. Analyze the asymptotic time complexity of common dynamic array and binary heap operations.
+4. Analyze the asymptotic time complexity of programs that use stacks, queues, deques, and priority queues.
+5. Select between stacks, queues, deques, or priority queues to efficiently solve computational problems.
 
 ## Grading
 
@@ -59,20 +59,18 @@ information about their implementation:
 
 * `grow_by_one_vector` is a grow-by-one dynamic array with initial capacity $$1$$. The capacity never decreases. 
    Otherwise, it works the same as `std::vector`.
-* `grow_by_doubling_vector` and `vector` are grow-by-doubling dynamic arrays with initial capacity $$1$$. The capacity 
-   never decrease. Otherwise, they work the same as `std::vector`.
-* `min_priority_queue` is a min-priority queue implemented with an implicit binary min-heap. The underlying array is 
-   fixed capacity and never grows or shrinks. Otherwise, it works the same as `std::priority_queue`.
-* `max_priority_queue` is a max-priority queue implemented with an implicit binary max-heap. The underlying array is
-   fixed capacity and never grows or shrinks. Otherwise, it works the same as `std::priority_queue`.
-* `make_min_heap` builds an implicit binary min-heap in $$\Theta(n)$$ time. Otherwise, it works the same as 
-  `std::make_heap`.
-* `make_max_heap` builds an implicit binary max-heap in $$\Theta(n)$$ time. Otherwise, it works the same as
-  `std::make_heap`.
-* `pop_min_heap` pops an implicit binary min-heap. Otherwise, it works the same as `std::pop_heap`.
-* `pop_max_heap` pops an implicit binary max-heap. Otherwise, it works the same as `std::pop_heap`.
-* `top_min_heap` returns the top element of an implicit binary min-heap.
-* `top_max_heap` returns the top element of an implicit binary max-heap.
+* `grow_by_doubling_vector` and `vector` are dynamic arrays with a growth factor of $$2$$ and initial capacity $$1$$. 
+   The capacity never decrease. Otherwise, they work the same as `std::vector`.
+* `min_priority_queue` is a min-priority queue implemented with a binary min-heap. The underlying array is fixed 
+   capacity and never grows or shrinks. Otherwise, it works the same as `std::priority_queue`.
+* `max_priority_queue` is a max-priority queue implemented with a binary max-heap. The underlying array is fixed 
+   capacity and never grows or shrinks. Otherwise, it works the same as `std::priority_queue`.
+* `make_min_heap` builds a binary min-heap in $$\Theta(n)$$ time. Otherwise, it works the same as `std::make_heap`.
+* `make_max_heap` builds a binary max-heap in $$\Theta(n)$$ time. Otherwise, it works the same as `std::make_heap`.
+* `pop_min_heap` pops the minimum element of a binary min-heap. Otherwise, it works the same as `std::pop_heap`.
+* `pop_max_heap` pops the maximum element of a binary max-heap. Otherwise, it works the same as `std::pop_heap`.
+* `top_min_heap` returns the top element of a binary min-heap.
+* `top_max_heap` returns the top element of a binary max-heap.
 * `queue` is a queue implemented with a fixed size array, with prepend to the front and append to the back. Otherwise,
    it works the same as `std::queue`.
 * `stack` is a stack implemented with a fixed size array. Otherwise, it works the same as `std::stack`.
@@ -175,13 +173,16 @@ list.
 
 Consider the vector `v`'s state after the following code executes:
 ```cpp
+// `v` is a valid min-heap.
 vector<int> v{0,2,1,4,3,5,6};
+// See the documentation for `std::pop_heap`.
 pop_min_heap(v.begin(), v.end());
 v.pop_back();
 pop_min_heap(v.begin(), v.end());
 v.pop_back();
 pop_min_heap(v.begin(), v.end());
 v.pop_back();
+// See the documentation for `std::push_heap`.
 v.push_back(0);
 push_min_heap(v.begin(), v.end());
 ```
@@ -195,13 +196,16 @@ list.
 
 Consider the vector `v`'s state after the following code executes:
 ```cpp
+// `v` is a valid max-heap.
 vector<int> v{6,4,5,0,3,1,2};
+// See the documentation for `std::pop_heap`. 
 pop_max_heap(v.begin(), v.end());
 v.pop_back();
 pop_max_heap(v.begin(), v.end());
 v.pop_back();
 pop_max_heap(v.begin(), v.end());
 v.pop_back();
+// See the documentation for `std::push_heap`.
 v.push_back(6);
 push_max_heap(v.begin(), v.end());
 ```
@@ -684,11 +688,10 @@ What is the time complexity of `top`?
 
 ## Problem
 
-
 Consider the following function:
 ```cpp
 vector<int> next_greater_element(const vector<int>& v) {
-    int n = nums.size();
+    int n = v.size();
     vector<int> result(n, -1);
     stack<int> s;
 
@@ -846,7 +849,7 @@ means an abstract data type that efficiently solves the problem, and provides on
 ## Problem
 
 Consider the following algorithm:
-1. Take, as input, a sorted vector `v` containing $$n$$ distinct elements.
+1. Take, as input, a vector `v` containing $$n$$ distinct elements sorted from smallest to largest.
 2. Randomly select and swap $$k$$ pairs of elements from `v`.
 3. Starting from index 0, insert the elements of `v` one-by-one into an empty min-heap.
 
@@ -884,10 +887,10 @@ If there are a linear number of swaps, i.e. $$k = \Theta(n)$$, what is the worst
 
 ## Problem
 
-Consider the standard in-place heapsort algorithm and suppose the input array of size $$n$$ contains $$k$$ non-zero 
-elements.
+Consider the standard in-place heapsort algorithm and suppose the input array of size $$n$$ contains $$k$$ positive
+elements, and $$n - k$$ zeroes.
 
-If there are a linear number of non-zero elements, i.e. $$k = \Theta(n)$$, what is the worst-case time complexity of 
+If there are a linear number of positive elements, i.e. $$k = \Theta(n)$$, what is the worst-case time complexity of 
 heapsort?
 
 ( ) $$\Theta \left( \frac{n \lg \lg n}{\lg n} \right)$$
