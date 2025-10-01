@@ -7,7 +7,7 @@ TEST_CASE("find_max_distance basic cases") {
     CHECK(find_max_distance({}) == 0);
     CHECK(find_max_distance({9}) == 0);
     CHECK(find_max_distance({-1, -1}) == 1);
-    CHECK(find_max_distance({4, 2, 0, 4, 4, 2}) == 3);
+    CHECK(find_max_distance({4, 2, 0, 4, 4, 2}) == 4);
 }
 
 TEST_CASE("find_max_distance all identical elements") {
@@ -21,7 +21,7 @@ TEST_CASE("find_max_distance only one max") {
 }
 
 TEST_CASE("find_max_distance multiple max scattered") {
-    CHECK(find_max_distance({1, 9, 3, 9, 5, 9}) == 5);
+    CHECK(find_max_distance({1, 9, 3, 9, 5, 9}) == 4);
     CHECK(find_max_distance({7, 1, 7, 2, 7, 3, 7}) == 6);
 }
 
@@ -38,12 +38,12 @@ TEST_CASE("find_max_distance strictly increasing/decreasing") {
 
 TEST_CASE("find_max_distance large values") {
     CHECK(find_max_distance({1000000, 1, 1000000}) == 2);
-    CHECK(find_max_distance({-1000000, -500000, -1000000}) == 2);
+    CHECK(find_max_distance({-1000000, -500000, -1000000}) == 0);
 }
 
 TEST_CASE("find_max_distance edge index distances") {
     CHECK(find_max_distance({9, 0, 0, 0, 9}) == 4);
-    CHECK(find_max_distance({1, 9, 0, 9, 1}) == 3);
+    CHECK(find_max_distance({1, 9, 0, 9, 1}) == 2);
     CHECK(find_max_distance({0, 0, 0, 0, 9}) == 0);
     CHECK(find_max_distance({9, 0, 0, 0, 0}) == 0);
 }
