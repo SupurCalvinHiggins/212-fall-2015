@@ -11,8 +11,6 @@ By the end of this lab, you should be able to:
 1. Implement abstract data types with binary search trees.
 2. Evaluate the performance characteristics of binary search trees.
 
-TODO.
-
 ## Grading
 
 To receive full credit, you should:
@@ -58,7 +56,11 @@ To maximize your learning, you should:
 
 ## Set
 
-TODO
+Sets provide three main operations:
+
+1. `insert` which adds a value into the set.
+2. `erase` which removes a value from the set.
+3. `contains` which checks if a value is in the set.
 
 ### Implementation
 
@@ -76,12 +78,20 @@ In this section, you will design and implement a set using a binary search tree.
 In this section, you will analyze the time complexity of your set implementation. If you spend more than 5-10 minutes on
 this section, look at the solution provided below and move on.
 
-1. TODO
+1. Give tight bounds on the asymptotic complexity of `insert`, `erase` and `contains` on a size $n$ set in the
+   best-case. Record your answer and your reasoning under **Best Case** in `set.md`.
+2. Give tight bounds on the asymptotic complexity of `insert`, `erase` and `contains` on a size $n$ set in the
+   worst-case. Record your answer and your reasoning under **Worst Case** in `set.md`.
 
 <details>
 <summary>Solution</summary>
 
-TODO
+1. In the best case, `insert`, `erase` and `contains` all take $\Theta(1)$ time. If the subtree to the left of the root
+   is empty, inserting a node into that subtree takes constant time. Likewise, erasing a node (which does not exist)
+   from that subtree also takes constant time. Calling `contains` with the value stored in the root takes constant time.
+2. In the worst case, `insert`, `erase` and `contains` all take $\Theta(n)$ time. If every left pointer in the tree is
+   `nullptr`, inserting, erasing and finding the deepest node takes linear time, since we must traverse a linear number
+   of nodes.
 
 </details>
 
@@ -92,7 +102,10 @@ TODO
 
 ## Map
 
-TODO
+Maps provide two main operations:
+
+1. `operator[]` which either (a) maps a key to a value or (b) returns the value associated with a given key.
+2. `erase` which removes a key (and the corresponding value) from the map.
 
 ### Implementation
 
@@ -110,12 +123,16 @@ In this section, you will design and implement a map using a binary search tree.
 In this section, you will analyze the time complexity of your map implementation. If you spend more than 5-10 minutes on
 this section, look at the solution provided below and move on.
 
-1. TODO
+1. Give tight bounds on the asymptotic complexity of `operator[]` and `erase` on a size $n$ map in the best-case. Record
+   your answer and your reasoning under **Best Case** in `map.md`.
+2. Give tight bounds on the asymptotic complexity of `operator[]` and `erase` on a size $n$ map in the worst-case.
+   Record your answer and your reasoning under **Worst Case** in `map.md`.
 
 <details>
 <summary>Solution</summary>
 
-TODO
+1. Both take $\Theta(1)$ time for the same reasons as the set.
+2. Both take $\Theta(n)$ time for the same reasons as the set.
 
 </details>
 
@@ -126,7 +143,11 @@ TODO
 
 ## Sequence
 
-TODO
+Sequences provide three main operations:
+
+1. `insert` which inserts a value at a given index in the sequence.
+2. `erase` which removes a value at a given index in the sequence.
+3. `operator[]` which returns the value at a given index in the sequence.
 
 ### Implementation
 
@@ -141,17 +162,12 @@ In this section, you will design and implement a sequence using a binary search 
 
 ### Theoretical Analysis
 
-In this section, you will analyze the time complexity of your sequence implementation. If you spend more than 5-10
-minutes on this section, look at the solution provided below and move on.
+In this section, you will analyze the time complexity of your sequence implementation.
 
-1. TODO
-
-<details>
-<summary>Solution</summary>
-
-TODO
-
-</details>
+1. Give tight bounds on the asymptotic complexity of `insert`, `erase` and `operator[]` on a size $n$ sequence in the
+   best-case. Record your answer and your reasoning under **Best Case** in `sequence.md`.
+2. Give tight bounds on the asymptotic complexity of `insert`, `erase` and `operator[]` on a size $n$ sequence in the
+   worst-case. Record your answer and your reasoning under **Worst Case** in `sequence.md`.
 
 > [!IMPORTANT]
 > Submit `sequence.md` to Gradescope.

@@ -17,7 +17,7 @@ public:
 
     void erase(size_t index);
 
-    [[nodiscard]] const int &operator[](size_t index) const;
+    [[nodiscard]] int &operator[](size_t index);
 
     [[nodiscard]] size_t size() const;
 };
