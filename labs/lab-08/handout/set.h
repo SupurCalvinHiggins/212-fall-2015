@@ -3,7 +3,15 @@
 
 class Set {
     struct Node {
-        // TODO: Define binary search tree node member variables.
+        int value;
+        Node *left;
+        Node *right;
+
+        explicit Node(const int value) : value(value), left(nullptr), right(nullptr) {
+        }
+
+        Node(const int value, Node *left, Node *right) : value(value), left(left), right(right) {
+        }
     };
 
     // TODO: Define binary search tree member variables.
@@ -12,7 +20,9 @@ class Set {
 
     [[nodiscard]] static Node *erase(Node *root, int value);
 
-    [[nodiscard]] static bool contains(const Node *root, int value);
+    [[nodiscard]] static const Node *find(const Node *root, int value);
+
+    static void destroy(Node *root);
 
 public:
     Set();
@@ -30,4 +40,6 @@ public:
     [[nodiscard]] bool contains(int value) const;
 
     [[nodiscard]] size_t size() const;
+
+    friend class SetTester;
 };
