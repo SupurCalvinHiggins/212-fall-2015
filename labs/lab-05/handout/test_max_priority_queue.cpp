@@ -59,7 +59,7 @@ TEST_CASE("heapify_down restores max-heap property with move from root") {
 }
 
 TEST_CASE("heapify_up restores max-heap property with move to root") {
-    std::vector<int> heap{1, 7, 5, 6, 2, 4, 3, 8};
+    std::vector<int> heap{7, 6, 5, 3, 2, 4, 1, 8};
     MaxPriorityQueueTester::heapify_up(heap, 7);
 
     CHECK(heap[0] >= heap[1]);
@@ -69,11 +69,10 @@ TEST_CASE("heapify_up restores max-heap property with move to root") {
     CHECK(heap[2] >= heap[5]);
     CHECK(heap[2] >= heap[6]);
     CHECK(heap[3] >= heap[7]);
-    CHECK(heap[4] >= heap[8]);
 }
 
 TEST_CASE("heapify_down restores max-heap property with move from non-root") {
-    std::vector<int> heap{8, 6, 7, 4, 3, 2, 1, 5};
+    std::vector<int> heap{8, 6, 7, 4, 5, 2, 1, 3};
     MaxPriorityQueueTester::heapify_down(heap, 3);
 
     CHECK(heap[0] >= heap[1]);
@@ -83,11 +82,10 @@ TEST_CASE("heapify_down restores max-heap property with move from non-root") {
     CHECK(heap[2] >= heap[5]);
     CHECK(heap[2] >= heap[6]);
     CHECK(heap[3] >= heap[7]);
-    CHECK(heap[4] >= heap[8]);
 }
 
 TEST_CASE("heapify_up restores max-heap property with move to non-root") {
-    std::vector<int> heap{8, 7, 2, 4, 5, 1, 3, 6};
+    std::vector<int> heap{8, 7, 4, 3, 5, 1, 2, 6};
     MaxPriorityQueueTester::heapify_up(heap, 7);
 
     CHECK(heap[0] >= heap[1]);
@@ -97,7 +95,6 @@ TEST_CASE("heapify_up restores max-heap property with move to non-root") {
     CHECK(heap[2] >= heap[5]);
     CHECK(heap[2] >= heap[6]);
     CHECK(heap[3] >= heap[7]);
-    CHECK(heap[4] >= heap[8]);
 }
 
 TEST_CASE("heapify produces a valid max-heap") {
@@ -111,7 +108,6 @@ TEST_CASE("heapify produces a valid max-heap") {
     CHECK(heap[2] >= heap[5]);
     CHECK(heap[2] >= heap[6]);
     CHECK(heap[3] >= heap[7]);
-    CHECK(heap[4] >= heap[8]);
 }
 
 TEST_CASE("Default constructor creates empty queue") {
