@@ -5,7 +5,7 @@ Map::Map() {
 }
 
 Map::~Map() {
-    // TODO: Deallocate dynamically allocated memory.
+    // TODO: Deallocate dynamically allocated memory. Use `destroy(Node*)`.
 }
 
 Map::Node *Map::insert(Node *root, int key, int value) {
@@ -22,6 +22,11 @@ Map::Node *Map::find(Node *root, int key) {
     // TODO: Find the key-value pair with key `key` in the binary search tree rooted by `root`. If the binary search
     // tree does not contain the key `key`, return `nullptr`.
 }
+
+void Map::destroy(Node *root) {
+    // TODO: Deallocate the binary search tree rooted by `root`.
+}
+
 
 void Map::insert(int key, int value) {
     // TODO: Insert the key-value pair (`key`, `value`) into the binary search tree. If the binary search tree already

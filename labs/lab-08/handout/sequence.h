@@ -1,13 +1,23 @@
-//
-// Created by calvin on 10/1/25.
-//
+#pragma once
+#include <cstddef>
 
-#ifndef CSC212_LAB_02_SEQUENCE_H
-#define CSC212_LAB_02_SEQUENCE_H
+class Sequence {
+    // TODO: Define binary search tree member variables.
 
+public:
+    Sequence();
 
-class sequence {
+    ~Sequence();
+
+    Sequence(const Sequence &other) = delete;
+
+    Sequence &operator=(const Sequence &other) = delete;
+
+    void insert(size_t index, int value);
+
+    void erase(size_t index);
+
+    [[nodiscard]] const int &operator[](size_t index) const;
+
+    [[nodiscard]] size_t size() const;
 };
-
-
-#endif //CSC212_LAB_02_SEQUENCE_H

@@ -2,6 +2,9 @@
 #include "doctest.h"
 #include "set.h"
 #include <set>
+#include <algorithm>
+#include <random>
+#include <numeric>
 
 class SetTester {
 public:
@@ -214,4 +217,178 @@ TEST_CASE("find in tree (does not exist)") {
 
     destroy(snapshot);
     destroy(root);
+}
+
+TEST_CASE("empty set") {
+    Set s;
+    std::set<int> ref;
+
+    CHECK_EQ(s.size(), ref.size());
+    for (int i = -10; i <= 10; ++i)
+        CHECK_EQ(s.contains(i), ref.count(i) != 0);
+}
+
+TEST_CASE("insert single element") {
+    Set s;
+    std::set<int> ref;
+
+    s.insert(42);
+    ref.insert(42);
+
+    CHECK_EQ(s.size(), ref.size());
+    CHECK_EQ(s.contains(42), ref.count(42) != 0);
+}
+
+TEST_CASE("insert multiple unique elements") {
+    Set s;
+    std::set<int> ref;
+
+    std::vector<int> values = {5, 2, 8, 1, 3, 7, 9};
+    for (int v: values) {
+        s.insert(v);
+        ref.insert(v);
+    }
+
+    CHECK_EQ(s.size(), ref.size());
+    for (int v: values)
+        CHECK_EQ(s.contains(v), ref.count(v) != 0);
+
+    for (int i = -2; i <= 10; ++i)
+        CHECK_EQ(s.contains(i), ref.count(i) != 0);
+}
+
+TEST_CASE("insert duplicates (no effect)") {
+    Set s;
+    std::set<int> ref;
+
+    std::vector<int> values = {1, 1, 1, 2, 2, 3};
+    for (int v: values) {
+        s.insert(v);
+        ref.insert(v);
+    }
+
+    CHECK_EQ(s.size(), ref.size());
+    for (int i = 0; i <= 4; ++i)
+        CHECK_EQ(s.contains(i), ref.count(i) != 0);
+}
+
+TEST_CASE("erase elements") {
+    Set s;
+    std::set<int> ref;
+
+    std::vector<int> values = {5, 2, 8, 1, 3, 7, 9};
+    for (int v: values) {
+        s.insert(v);
+        ref.insert(v);
+    }
+
+    std::vector<int> toErase = {3, 8, 1};
+    for (int v: toErase) {
+        s.erase(v);
+        ref.erase(v);
+    }
+
+    CHECK_EQ(s.size(), ref.size());
+    for (int i = 0; i <= 10; ++i)
+        CHECK_EQ(s.contains(i), ref.count(i) != 0);
+}
+
+TEST_CASE("erase non-existing elements (no effect)") {
+    Set s;
+    std::set<int> ref;
+
+    std::vector<int> values = {10, 20, 30};
+    for (int v: values) {
+        s.insert(v);
+        ref.insert(v);
+    }
+
+    std::vector<int> toErase = {5, 15, 25, 35};
+    for (int v: toErase) {
+        s.erase(v);
+        ref.erase(v);
+    }
+
+    CHECK_EQ(s.size(), ref.size());
+    for (int i = 0; i <= 40; i += 5)
+        CHECK_EQ(s.contains(i), ref.count(i) != 0);
+}
+
+TEST_CASE("randomized insert/erase consistency") {
+    Set s;
+    std::set<int> ref;
+    std::vector<int> values(100);
+    std::iota(values.begin(), values.end(), 0);
+
+    std::mt19937 rng(12345);
+    std::shuffle(values.begin(), values.end(), rng);
+
+    for (int v: values) {
+        s.insert(v);
+        ref.insert(v);
+    }
+
+    CHECK_EQ(s.size(), ref.size());
+    for (int v: values)
+        CHECK_EQ(s.contains(v), ref.count(v) != 0);
+
+    std::shuffle(values.begin(), values.end(), rng);
+    for (int i = 0; i < 50; ++i) {
+        s.erase(values[i]);
+        ref.erase(values[i]);
+    }
+
+    CHECK_EQ(s.size(), ref.size());
+    for (int v = 0; v < 100; ++v)
+        CHECK_EQ(s.contains(v), ref.count(v) != 0);
+}
+
+TEST_CASE("interleaved insert/erase operations") {
+    Set s;
+    std::set<int> ref;
+
+    for (int i = 0; i < 50; ++i) {
+        if (i % 3 == 0) {
+            s.insert(i);
+            ref.insert(i);
+        } else {
+            s.erase(i - 1);
+            ref.erase(i - 1);
+        }
+        CHECK_EQ(s.size(), ref.size());
+        for (int j = 0; j < 50; ++j)
+            CHECK_EQ(s.contains(j), ref.count(j) != 0);
+    }
+}
+
+TEST_CASE("erase all elements to size 0 and reinsert") {
+    Set s;
+    std::set<int> ref;
+
+    std::vector<int> values = {5, 3, 7, 2, 4, 6, 8};
+    for (int v: values) {
+        s.insert(v);
+        ref.insert(v);
+    }
+
+    CHECK_EQ(s.size(), ref.size());
+
+    for (int v: values) {
+        s.erase(v);
+        ref.erase(v);
+        CHECK_EQ(s.size(), ref.size());
+    }
+
+    CHECK_EQ(s.size(), 0);
+    CHECK_EQ(ref.size(), 0);
+
+    for (int i = -3; i <= 3; ++i) {
+        s.insert(i);
+        ref.insert(i);
+        CHECK_EQ(s.size(), ref.size());
+        for (int j = -3; j <= 3; ++j)
+            CHECK_EQ(s.contains(j), ref.count(j) != 0);
+    }
+
+    CHECK_EQ(s.size(), ref.size());
 }

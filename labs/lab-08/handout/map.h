@@ -14,6 +14,8 @@ class Map {
 
     [[nodiscard]] static Node *find(Node *root, int key);
 
+    static void destroy(Node *root);
+
 public:
     Map();
 
