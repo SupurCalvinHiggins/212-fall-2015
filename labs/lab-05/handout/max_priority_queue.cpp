@@ -6,27 +6,33 @@ MaxPriorityQueue::MaxPriorityQueue() {
 
 MaxPriorityQueue::MaxPriorityQueue(const std::vector<int> &data) {
     // TODO: Construct a max-priority queue containing the elements of `data` in O(n) time. The underlying data
-    // structure should be a max-heap. Use `heapify_down`.
+    // structure should be a max-heap. Use `heapify`.
 }
 
-size_t MaxPriorityQueue::parent(size_t index) const {
-    // TODO: Return the index of the parent of `index` in the max-heap.
+size_t MaxPriorityQueue::parent(size_t index) {
+    // TODO: Return the index of the parent of `index` in a max-heap.
 }
 
-size_t MaxPriorityQueue::left(size_t index) const {
-    // TODO: Return the index of the left child of `index` in the max-heap.
+size_t MaxPriorityQueue::left(size_t index) {
+    // TODO: Return the index of the left child of `index` in a max-heap.
 }
 
-size_t MaxPriorityQueue::right(size_t index) const {
-    // TODO: Return the index of the right child of `index` in the max-heap.
+size_t MaxPriorityQueue::right(size_t index) {
+    // TODO: Return the index of the right child of `index` in a max-heap.
 }
 
-void MaxPriorityQueue::heapify_down(size_t index) {
-    // TODO: Heapify down in the max-heap from `index`. Use `left` and `right`.
+void MaxPriorityQueue::heapify_down(std::vector<int> &heap, size_t index) {
+    // TODO: Assume `heap[index+1:]` is a valid max-heap. Move the element at index `index` down until `heap[index:]` is
+    // a valid max-heap. Use `left` and `right`.
 }
 
-void MaxPriorityQueue::heapify_up(size_t index) {
-    // TODO: Heapify up in the max-heap from `index`. Use `parent`.
+void MaxPriorityQueue::heapify_up(std::vector<int> &heap, size_t index) {
+    // TODO: Assume `heap[:index]` is a valid max-heap. Move the element at index `index` up until the `heap[:index+1]`
+    // is a valid max-heap. Use `parent`.
+}
+
+void MaxPriorityQueue::heapify(std::vector<int> &heap) {
+    // TODO: Convert `heap` into a valid max-heap in O(n) time. Use `heapify_down`.
 }
 
 void MaxPriorityQueue::push(int value) {

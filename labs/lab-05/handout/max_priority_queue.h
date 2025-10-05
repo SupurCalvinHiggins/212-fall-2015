@@ -3,22 +3,24 @@
 #include <vector>
 
 class MaxPriorityQueue {
-    std::vector<int> m_data;
+    std::vector<int> m_heap;
 
-    [[nodiscard]] size_t parent(size_t index) const;
+    [[nodiscard]] static size_t parent(size_t index);
 
-    [[nodiscard]] size_t left(size_t index) const;
+    [[nodiscard]] static size_t left(size_t index);
 
-    [[nodiscard]] size_t right(size_t index) const;
+    [[nodiscard]] static size_t right(size_t index);
 
-    void heapify_down(size_t index);
+    void static heapify_down(std::vector<int> &heap, size_t index);
 
-    void heapify_up(size_t index);
+    void static heapify_up(std::vector<int> &heap, size_t index);
+
+    void static heapify(std::vector<int> &heap);
 
 public:
     MaxPriorityQueue();
 
-    MaxPriorityQueue(const std::vector<int> &data);
+    explicit MaxPriorityQueue(const std::vector<int> &data);
 
     void push(int value);
 
@@ -26,5 +28,7 @@ public:
 
     [[nodiscard]] int top() const;
 
-    [[nodiscard]] size_t size() const { return m_data.size(); }
+    [[nodiscard]] size_t size() const { return m_heap.size(); }
+
+    friend class MaxPriorityQueueTester;
 };
