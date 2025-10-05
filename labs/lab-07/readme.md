@@ -1,15 +1,14 @@
-# Lab 4 - Stacks and Queues
+# Lab 4 - Recursion
 
 # Overview
 
-In this lab, you will implement and analyze linked lists.
+In this lab, you will implement and analyze recursive algorithms.
 
 ## Learning Objectives
 
 By the end of this lab, you should be able to:
 
-1. Implement linked list data structures (e.g. single, double, circular).
-2. Evaluate the performance characteristics of various linked list implementations.
+1. TODO
 
 ## Grading
 
@@ -53,6 +52,19 @@ To maximize your learning, you should:
 > [!NOTE]
 > To download all files from the repository, navigate to the root of the repository, click on the green **Code** button
 > and select **Download Zip**.`
+
+
+TODO
+
+# Extra Practice
+
+TODO
+
+# Optional Advanced Topics
+
+TODO
+
+
 
 ## Singly Linked List
 
