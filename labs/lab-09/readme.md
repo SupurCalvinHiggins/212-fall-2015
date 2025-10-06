@@ -1,4 +1,4 @@
-# Lab 8 - Balanced Binary Search Trees
+# Lab 9 - Balanced Binary Search Trees
 
 # Overview
 
