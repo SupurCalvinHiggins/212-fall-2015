@@ -4,7 +4,7 @@ from autograder_base import AutograderBase
 class TestAll(AutograderBase):
 	def test_set(self) -> None:
 		requirements = ['set.h', 'set.cpp']
-		dependencies = ['test_set.cpp']
+		dependencies = ['test_set.cpp', 'doctest.h']
 		executable_name = 'test_set'
 		cpp_files = ['set.cpp', 'test_set.cpp']
 		self.assert_exists(requirements)
@@ -18,7 +18,7 @@ class TestAll(AutograderBase):
 
 	def test_map(self) -> None:
 		requirements = ['map.h', 'map.cpp']
-		dependencies = ['test_map.cpp']
+		dependencies = ['test_map.cpp', 'doctest.h']
 		executable_name = 'test_map'
 		cpp_files = ['map.cpp', 'test_map.cpp']
 		self.assert_exists(requirements)
@@ -32,7 +32,7 @@ class TestAll(AutograderBase):
 
 	def test_sequence(self) -> None:
 		requirements = ['sequence.h', 'sequence.cpp']
-		dependencies = ['test_sequence.cpp']
+		dependencies = ['test_sequence.cpp', 'doctest.h']
 		executable_name = 'test_sequence'
 		cpp_files = ['sequence.cpp', 'test_sequence.cpp']
 		self.assert_exists(requirements)
