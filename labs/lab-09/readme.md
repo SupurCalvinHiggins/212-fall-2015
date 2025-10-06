@@ -56,10 +56,12 @@ To maximize your learning, you should:
 
 ## Pseudo-Set
 
-Pseudo-sets provide three main operations:
+Pseudo-sets provide two main operations:
 
 1. `insert` which adds a value into the set.
 2. `contains` which checks if a value is in the set.
+
+Unlike sets, pseudo-sets do not have an `erase` operation to remove values from the set.
 
 ### Implementation
 
@@ -83,11 +85,24 @@ minutes on this section, look at the solution provided below and move on.
 <details>
 <summary>Solution</summary>
 
-1. The pseudo-set is always represented by a valid red-black tree. Let $b$ be the black height of the tree. The
-   worst-case of `insert` and `contains` always involves traversing the longest path from the root to a leaf. Since red
-   nodes cannot have red children, and every path from root to leaf must contain exactly $b$ black nodes, there are at
-   most $2b$ nodes on the longest path. Thus, the length of the longest path is $\Omega(b)$ and $\mathcal{O}(2b)$, so it
-   is $\Theta(b)$. TODO
+1. The pseudo-set is implemented as a red-black tree. In the worst-case, `insert` and `contains` must traverse the
+   longest path from the root to a leaf. Since the height of a tree is defined as the length of the longest path from
+   the root to a leaf, the number of operations performed by `insert` and `contains` is proportional to the height of
+   the tree. Therefore, it suffices to analyze the height of a red-black tree on $n$ nodes. For simplicity, we assume
+   $n$ is one less than a power of two.
+
+   Let $h$ be the height and let $b$ be the black height of the tree. Since every path from the root to a leaf must
+   contain exactly $b$ black nodes, the height is at least the black height, i.e., $b \leq h$. Likewise, since red nodes
+   cannot have red children, any root to leaf path contains at most $b$ red nodes. Therefore, the height is at most
+   twice the black height, i.e. $h \leq 2b$, since the longest root to leaf path contains $b$ black nodes and at
+   most $b$ red nodes. Now, it suffices to analyze the black height $b$ of a red-black tree on $n$ nodes.
+
+   The black height of the tree is greatest when all nodes in the tree are black. Since there are $n$ nodes in the tree,
+   the black height of the tree is at most $\lg (n+1)$, since $n \leq 2^{\lg (n+1)} - 1$. The black height of the tree
+   is least when every other level contains only red nodes. For each black level, the red level below it has exactly
+   twice the number of nodes. So, for every black node, there are at most two red nodes. Thus, at least one third of the
+   nodes are black, so the black height is at least $\lg \left(\frac{n}{3} + 1\right) \approx \frac{1}{3} \lg n$. Hence,
+   $b = \Theta(\lg n)$, so $h = \Theta(\lg n)$, so `insert` and `contains` take $\Theta(\lg n)$ time.
 
 </details> 
 
@@ -120,12 +135,10 @@ In this section, you will design and implement a set using a binary search tree.
 In this section, you will analyze the time complexity of your set implementation. If you spend more than 5-10 minutes on
 this section, look at the solution provided below and move on.
 
-TODO
-
 <details>
 <summary>Solution</summary>
 
-TODO
+1. The analysis is the same as the pseudo-set. All methods take $\Theta(\lg n)$ time.
 
 </details>
 
