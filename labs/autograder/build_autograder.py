@@ -33,7 +33,7 @@ class Unit:
                     f"def test_{self.name}(self) -> None:",
                     f"\trequirements = {self.requirements}",
                     f"\tdependencies = {self.dependencies}",
-                    f"\texecutable_name = test_{self.name}"
+                    f"\texecutable_name = 'test_{self.name}'",
                     f"\tcpp_files = {cpp_requirements + cpp_dependencies}",
                     "\tself.assert_exists(requirements)",
                     "\tself.assert_exists(dependencies)",
@@ -43,12 +43,12 @@ class Unit:
 
         if has_analysis:
             buf = [
-                f"\tdef test_{self.name}_analysis(self) -> None:"
-                f"\tanalysis = {self.analysis}",
+                f"def test_{self.name}_analysis(self) -> None:",
+                f"\tanalysis = '{self.analysis}'",
             ]
             if has_executable:
                 buf.append(f"\tself.test_{self.name}()")
-            buf.append(f"\tself.assert_analysis({self.analysis})")
+            buf.append("\tself.assert_analysis_tests(analysis)")
             yield "\n".join(buf)
 
 
@@ -70,7 +70,7 @@ def generate_build_autograder_zip(units: Iterable[Unit]) -> str:
     buf = [
         "#!/bin/bash",
         "",
-        "rm -rf ./submission/",
+        "rm -rf ./submission/ ./autograder.zip",
         "mkdir -p ./submission/",
 
     ]
@@ -88,7 +88,7 @@ def generate_build_autograder_zip(units: Iterable[Unit]) -> str:
 
 def load_units(json_str: str) -> Iterable[Unit]:
     d = json.loads(json_str)
-    for k, v in d:
+    for v in d:
         yield Unit(**v)
 
 

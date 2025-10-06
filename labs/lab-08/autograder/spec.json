@@ -1,0 +1,35 @@
+[
+  {
+    "name": "set",
+    "requirements": [
+      "set.h",
+      "set.cpp"
+    ],
+    "dependencies": [
+      "test_set.cpp"
+    ],
+    "analysis": "set.md"
+  },
+  {
+    "name": "map",
+    "requirements": [
+      "map.h",
+      "map.cpp"
+    ],
+    "dependencies": [
+      "test_map.cpp"
+    ],
+    "analysis": "map.md"
+  },
+  {
+    "name": "sequence",
+    "requirements": [
+      "sequence.h",
+      "sequence.cpp"
+    ],
+    "dependencies": [
+      "test_sequence.cpp"
+    ],
+    "analysis": "sequence.md"
+  }
+]
