@@ -1,13 +1,23 @@
-//
-// Created by calvin on 10/5/25.
-//
+#pragma once
+#include <cstddef>
 
-#ifndef CSC212_LAB_08_SET_H
-#define CSC212_LAB_08_SET_H
+class Set {
+    // TODO: Define member variables.
 
+public:
+    Set();
 
-class set {
+    ~Set();
+
+    Set(const Set &other) = delete;
+
+    Set &operator=(Set &other) = delete;
+
+    void insert(int value);
+
+    void erase(int value);
+
+    [[nodiscard]] bool contains(int value) const;
+
+    [[nodiscard]] size_t size() const;
 };
-
-
-#endif //CSC212_LAB_08_SET_H
