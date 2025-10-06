@@ -66,7 +66,7 @@ TEST_CASE("erase elements one by one to empty") {
     std::mt19937 g(rd());
     std::shuffle(values.begin(), values.end(), g);
 
-    for (int val : values) {
+    for (int val: values) {
         s.erase(val);
         ref.erase(val);
         CHECK_EQ(s.size(), ref.size());
@@ -84,7 +84,7 @@ TEST_CASE("build back up after draining") {
     std::vector<int> values(20);
     std::iota(values.begin(), values.end(), 1);
 
-    for (int val : values) {
+    for (int val: values) {
         s.insert(val);
         ref.insert(val);
         CHECK_EQ(s.size(), ref.size());
@@ -95,7 +95,7 @@ TEST_CASE("build back up after draining") {
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(values.begin(), values.end(), g);
-    for (int val : values) {
+    for (int val: values) {
         s.erase(val);
         ref.erase(val);
         CHECK_EQ(s.size(), ref.size());
