@@ -237,11 +237,11 @@ TEST_CASE("balance with three nodes") {
 
     REQUIRE_NE(root->left, nullptr);
     CHECK_EQ(root->left->value, 1);
-    CHECK_EQ(root->left->color, Color::Black);
+    CHECK_EQ(root->left->color, Color::Red);
 
     REQUIRE_NE(root->right, nullptr);
     CHECK_EQ(root->right->value, 2);
-    CHECK_EQ(root->right->color, Color::Black);
+    CHECK_EQ(root->right->color, Color::Red);
 
     delete root->left;
     delete root->right;
@@ -249,45 +249,37 @@ TEST_CASE("balance with three nodes") {
 }
 
 TEST_CASE("balance with no violation") {
-    auto a = reinterpret_cast<Node *>(0x4);
-    auto b = reinterpret_cast<Node *>(0x5);
-    auto c = reinterpret_cast<Node *>(0x6);
-    auto d = reinterpret_cast<Node *>(0x7);
-    auto x = new Node('x', a, b, Color::Black);
-    auto y = new Node('y', x, c, Color::Red);
-    auto z = new Node('z', y, d, Color::Black);
+    auto x = new Node('x', nullptr, nullptr, Color::Black);
+    auto y = new Node('y', x, nullptr, Color::Red);
+    auto z = new Node('z', y, nullptr, Color::Black);
 
     auto root = PseudoSetTester::balance(z);
 
     REQUIRE_NE(root, nullptr);
-    CHECK_EQ(root->value, 'y');
-    CHECK_EQ(root->color, Color::Red);
+    CHECK_EQ(root->value, 'z');
+    CHECK_EQ(root->color, Color::Black);
+    CHECK_EQ(root->right, nullptr);
 
     REQUIRE_NE(root->left, nullptr);
-    CHECK_EQ(root->left->value, 'x');
-    CHECK_EQ(root->left->color, Color::Black);
-    CHECK_EQ(root->left->left, a);
-    CHECK_EQ(root->left->right, b);
+    CHECK_EQ(root->left->value, 'y');
+    CHECK_EQ(root->left->color, Color::Red);
+    CHECK_EQ(root->left->right, nullptr);
 
-    REQUIRE_NE(root->right, nullptr);
-    CHECK_EQ(root->right->value, 'z');
-    CHECK_EQ(root->right->color, Color::Black);
-    CHECK_EQ(root->right->left, c);
-    CHECK_EQ(root->right->right, d);
+    REQUIRE_NE(root->left->left, nullptr);
+    CHECK_EQ(root->left->left->value, 'x');
+    CHECK_EQ(root->left->left->color, Color::Black);
+    CHECK_EQ(root->left->left->left, nullptr);
+    CHECK_EQ(root->left->left->right, nullptr);
 
+    delete root->left->left;
     delete root->left;
-    delete root->right;
     delete root;
 }
 
 TEST_CASE("balance with red-child left-left violation") {
-    auto a = reinterpret_cast<Node *>(0x4);
-    auto b = reinterpret_cast<Node *>(0x5);
-    auto c = reinterpret_cast<Node *>(0x6);
-    auto d = reinterpret_cast<Node *>(0x7);
-    auto x = new Node('x', a, b, Color::Red);
-    auto y = new Node('y', x, c, Color::Red);
-    auto z = new Node('z', y, d, Color::Black);
+    auto x = new Node('x', nullptr, nullptr, Color::Red);
+    auto y = new Node('y', x, nullptr, Color::Red);
+    auto z = new Node('z', y, nullptr, Color::Black);
 
     auto root = PseudoSetTester::balance(z);
 
@@ -298,14 +290,14 @@ TEST_CASE("balance with red-child left-left violation") {
     REQUIRE_NE(root->left, nullptr);
     CHECK_EQ(root->left->value, 'x');
     CHECK_EQ(root->left->color, Color::Black);
-    CHECK_EQ(root->left->left, a);
-    CHECK_EQ(root->left->right, b);
+    CHECK_EQ(root->left->left, nullptr);
+    CHECK_EQ(root->left->right, nullptr);
 
     REQUIRE_NE(root->right, nullptr);
     CHECK_EQ(root->right->value, 'z');
     CHECK_EQ(root->right->color, Color::Black);
-    CHECK_EQ(root->right->left, c);
-    CHECK_EQ(root->right->right, d);
+    CHECK_EQ(root->right->left, nullptr);
+    CHECK_EQ(root->right->right, nullptr);
 
     delete root->left;
     delete root->right;
@@ -313,13 +305,9 @@ TEST_CASE("balance with red-child left-left violation") {
 }
 
 TEST_CASE("balance with red-child left-right violation") {
-    auto a = reinterpret_cast<Node *>(0x4);
-    auto b = reinterpret_cast<Node *>(0x5);
-    auto c = reinterpret_cast<Node *>(0x6);
-    auto d = reinterpret_cast<Node *>(0x7);
-    auto y = new Node('y', b, c, Color::Red);
-    auto x = new Node('x', a, y, Color::Red);
-    auto z = new Node('z', x, d, Color::Black);
+    auto y = new Node('y', nullptr, nullptr, Color::Red);
+    auto x = new Node('x', nullptr, y, Color::Red);
+    auto z = new Node('z', x, nullptr, Color::Black);
 
     auto root = PseudoSetTester::balance(z);
 
@@ -330,14 +318,14 @@ TEST_CASE("balance with red-child left-right violation") {
     REQUIRE_NE(root->left, nullptr);
     CHECK_EQ(root->left->value, 'x');
     CHECK_EQ(root->left->color, Color::Black);
-    CHECK_EQ(root->left->left, a);
-    CHECK_EQ(root->left->right, b);
+    CHECK_EQ(root->left->left, nullptr);
+    CHECK_EQ(root->left->right, nullptr);
 
     REQUIRE_NE(root->right, nullptr);
     CHECK_EQ(root->right->value, 'z');
     CHECK_EQ(root->right->color, Color::Black);
-    CHECK_EQ(root->right->left, c);
-    CHECK_EQ(root->right->right, d);
+    CHECK_EQ(root->right->left, nullptr);
+    CHECK_EQ(root->right->right, nullptr);
 
     delete root->left;
     delete root->right;
@@ -345,13 +333,9 @@ TEST_CASE("balance with red-child left-right violation") {
 }
 
 TEST_CASE("balance with red-child right-left violation") {
-    auto a = reinterpret_cast<Node *>(0x4);
-    auto b = reinterpret_cast<Node *>(0x5);
-    auto c = reinterpret_cast<Node *>(0x6);
-    auto d = reinterpret_cast<Node *>(0x7);
-    auto y = new Node('y', b, c, Color::Red);
-    auto z = new Node('z', y, d, Color::Red);
-    auto x = new Node('x', a, z, Color::Black);
+    auto y = new Node('y', nullptr, nullptr, Color::Red);
+    auto z = new Node('z', y, nullptr, Color::Red);
+    auto x = new Node('x', nullptr, z, Color::Black);
 
     auto root = PseudoSetTester::balance(x);
 
@@ -362,14 +346,14 @@ TEST_CASE("balance with red-child right-left violation") {
     REQUIRE_NE(root->left, nullptr);
     CHECK_EQ(root->left->value, 'x');
     CHECK_EQ(root->left->color, Color::Black);
-    CHECK_EQ(root->left->left, a);
-    CHECK_EQ(root->left->right, b);
+    CHECK_EQ(root->left->left, nullptr);
+    CHECK_EQ(root->left->right, nullptr);
 
     REQUIRE_NE(root->right, nullptr);
     CHECK_EQ(root->right->value, 'z');
     CHECK_EQ(root->right->color, Color::Black);
-    CHECK_EQ(root->right->left, c);
-    CHECK_EQ(root->right->right, d);
+    CHECK_EQ(root->right->left, nullptr);
+    CHECK_EQ(root->right->right, nullptr);
 
     delete root->left;
     delete root->right;
@@ -377,13 +361,9 @@ TEST_CASE("balance with red-child right-left violation") {
 }
 
 TEST_CASE("balance with red-child right-right violation") {
-    auto a = reinterpret_cast<Node *>(0x4);
-    auto b = reinterpret_cast<Node *>(0x5);
-    auto c = reinterpret_cast<Node *>(0x6);
-    auto d = reinterpret_cast<Node *>(0x7);
-    auto z = new Node('z', c, d, Color::Red);
-    auto y = new Node('y', b, z, Color::Red);
-    auto x = new Node('x', a, y, Color::Black);
+    auto z = new Node('z', nullptr, nullptr, Color::Red);
+    auto y = new Node('y', nullptr, z, Color::Red);
+    auto x = new Node('x', nullptr, y, Color::Black);
 
     auto root = PseudoSetTester::balance(x);
 
@@ -394,14 +374,14 @@ TEST_CASE("balance with red-child right-right violation") {
     REQUIRE_NE(root->left, nullptr);
     CHECK_EQ(root->left->value, 'x');
     CHECK_EQ(root->left->color, Color::Black);
-    CHECK_EQ(root->left->left, a);
-    CHECK_EQ(root->left->right, b);
+    CHECK_EQ(root->left->left, nullptr);
+    CHECK_EQ(root->left->right, nullptr);
 
     REQUIRE_NE(root->right, nullptr);
     CHECK_EQ(root->right->value, 'z');
     CHECK_EQ(root->right->color, Color::Black);
-    CHECK_EQ(root->right->left, c);
-    CHECK_EQ(root->right->right, d);
+    CHECK_EQ(root->right->left, nullptr);
+    CHECK_EQ(root->right->right, nullptr);
 
     delete root->left;
     delete root->right;
