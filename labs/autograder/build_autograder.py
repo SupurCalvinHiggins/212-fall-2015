@@ -11,13 +11,9 @@ from typing import Sequence, Iterable, Optional
 
 @dataclass
 class Unit:
-    # test name
     name: str
-    # files required to build program, must be submitted by user
     requirements: Sequence[str] = field(default_factory=list)
-    # files that must be copied into autograder for support
     dependencies: Sequence[str] = field(default_factory=list)
-    # files that are analysis only
     analysis: Optional[str] = None
 
     def tests(self: Unit) -> Iterable[str]:
