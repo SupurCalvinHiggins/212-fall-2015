@@ -1,14 +1,15 @@
-# Lab 4 - Recursion
+# Lab 7 - Recursive Sorting Algorithms
 
 # Overview
 
-In this lab, you will implement and analyze recursive algorithms.
+In this lab, you will implement and analyze recursive sorting algorithms.
 
 ## Learning Objectives
 
 By the end of this lab, you should be able to:
 
-1. TODO
+1. Implement mergesort and quicksort.
+2. Evaluate the performance characteristics and sort properties (i.e. in-place, stable) of mergesort and quicksort.
 
 ## Grading
 
@@ -53,194 +54,168 @@ To maximize your learning, you should:
 > To download all files from the repository, navigate to the root of the repository, click on the green **Code** button
 > and select **Download Zip**.`
 
+## Mergesort
 
-TODO
+### Implementation
+
+In this section, you will implement mergesort.
+
+1. Complete `mergesort.cpp`.
+2. Build `test_mergesort` from `mergesort.cpp`, and `test_mergesort.cpp`.
+3. Run `test_mergesort`. All tests should pass.
+
+> [!IMPORTANT]
+> Submit `mergesort.cpp` to Gradescope.
+
+### Theoretical Analysis
+
+In this section, you will analyze your mergesort implementation. If you spend more than 5-10 minutes on this section,
+look at the solution provided below and move on.
+
+1. State a recurrence relation $T(n)$ for the worst-case time complexity of mergesort. Record your answer under
+   **Theoretical Analysis** in `mergesort.md`.
+2. Solve the recurrence relation $T(n)$. What is the worst-case time complexity of mergesort? Record your answer under
+   **Theoretical Analysis** in `mergesort.md`.
+3. Determine if mergesort is (a) in-place and/or (b) stable. Record your answer under **Theoretical Analysis** in
+   `mergesort.md`.
+
+<details>
+<summary>Solution</summary>
+
+1. Let $T(n)$ be the time required for mergesort to sort an array of size $n$. On an input array of size $n$, mergesort
+   splits the array into two pieces, each of size $n/2$, and recursively calls mergesort on each piece. This
+   takes $T(n/2)$ time for each piece. Then, mergesort merges the two arrays of size $n/2$ in $\Theta(n)$ time. Thus,
+   $T(n) = 2T(n/2) + \Theta(n)$. Also, sorting an array of size $1$ takes constant time, so $T(1) = \Theta(1)$.
+2. After one iteration, we have that $T(n) = 2T(n/2) + \Theta(n)$. After two iterations, we have that
+   $T(n) = 2^2T(n/2^2) + 2\Theta(n)$. After three iterations, we have that
+   $T(n) = 2^3T(n/2^3) + 3\Theta(n)$. After $k$ iterations, we have that $T(n) = 2^kT(n/2^k) + k\Theta(n)$. To get to
+   the base-case $T(1)$, we take $n/2^k = 1$ so $k = \lg n$. Plugging in, we find that
+   $T(n) = 2^{\lg n}T(n/2^{\lg n}) + \Theta(n) \lg n = nT(1) + \Theta(n \lg n) = \Theta(n \lg n)$
+3. Mergesort takes $\Theta(n)$ extra memory so it is not in-place. Mergesort is stable since it never swaps non-adjacent
+   elements.
+
+</details>
+
+> [!IMPORTANT]
+> Submit `mergesort.md` to Gradescope.
+
+## Quicksort
+
+### Implementation
+
+In this section, you will implement quicksort.
+
+1. Complete `quicksort.cpp`.
+2. Build `test_quicksort` from `quicksort.cpp`, and `test_quicksort.cpp`.
+3. Run `test_quicksort`. All tests should pass.
+
+> [!IMPORTANT]
+> Submit `quicksort.cpp` to Gradescope.
+
+### Theoretical Analysis
+
+In this section, you will analyze your quicksort implementation. If you spend more than 5-10 minutes on this section,
+look at the solution provided below and move on.
+
+1. State a recurrence relation $T(n)$ for the worst-case time complexity of quicksort. Record your answer under
+   **Theoretical Analysis** in `quicksort.md`.
+2. Solve the recurrence relation $T(n)$. What is the worst-case time complexity of quicksort? Record your answer under
+   **Theoretical Analysis** in `quicksort.md`.
+3. Determine if quicksort is (a) in-place and/or (b) stable. Record your answer under **Theoretical Analysis** in
+   `quicksort.md`.
+
+<details>
+<summary>Solution</summary>
+
+1. Let $T(n)$ be the time required for quicksort to sort an array of size $n$. On an input array of size $n$, quicksort
+   selects a pivot and partitions the array into two pieces in $\Theta(n)$ time. In the worst-case, one piece has size
+   $1$ and the other piece has size $n - 1$. Each piece is recursively sorted with quicksort which takes $T(n-1) + T(1)$
+   time. Thus, $T(n) = T(n - 1) + T(1) + \Theta(n)$. Also, sorting an array of size $1$ takes constant time, so
+   $T(1) = \Theta(1)$.
+2. Since $T(1) = \Theta(1)$, $T(n) = T(n-1) + \Theta(n)$. After one iteration, we have that $T(n) = T(n-1) + \Theta(n)$.
+   After two iterations, we have that $T(n) = T(n-2) + 2\Theta(n)$. After three iterations, we have that
+   $T(n) = T(n-3) + 3\Theta(n)$. After $k$ iterations, we have that $T(n) = T(n-k) + k\Theta(n)$. To get to the
+   base-case $T(1)$, we take $n - k = 1$ so $k = n - 1$. Plugging in, we find that
+   $T(n) = T(n - (n - 1)) + (n-1)\Theta(n) = T(1) + \Theta(n^2) = \Theta(n^2)$.
+3. Quicksort is not stable since it swaps non-adjacent elements. Whether quicksort is in-place is debatable. In the
+   worst-case, it performs $\Theta(n)$ recursive calls which requires $\Theta(n)$ space on the stack. If stack space
+   counts, quicksort is not in-place. If stack space does not count, quicksort is in-place.
+
+</details>
+
+> [!IMPORTANT]
+> Submit `quicksort.md` to Gradescope.
 
 # Extra Practice
 
-TODO
+## Custom Sort
+
+Most real-world sort implementations are highly customized in order to improve performance. Sort designers employ many
+tricks including
+
+1. Increasing the base-case size, and switching from a recursive sort to an iterative sort.
+2. Tuning the partition function in quicksort.
+3. Increasing the number of recursive calls in quicksort and mergesort.
+4. Switching from quicksort to another sorting function when the recursion gets deep, or switching the partition
+   function.
+
+among many others.
+
+### Implementation
+
+In this section, you will design and implement your custom sort.
+
+1. Brainstorm at least five different ideas to improve the performance of mergesort or quicksort.
+2. Complete `customsort.cpp`. Implement at least two of your ideas.
+3. Build `test_customsort` from `customsort.cpp`, and `test_customsort.cpp`.
+4. Run `test_customsort`. All tests should pass.
+
+> [!IMPORTANT]
+> Submit `customsort.cpp` to Gradescope.
+
+### Empirical Analysis
+
+In this section, you will analyze the empirical performance of your custom sort.
+
+1. Read `bench_customsort.cpp`.
+2. Build `bench_customsort` from `customsort.cpp`, `mergesort.cpp`, `quicksort.cpp` and `bench_customsort.cpp`. This
+   program takes one command line argument, `n`, the size of the array to sort, and outputs the runtime of your custom
+   sorting algorithm, your mergesort, your quicksort and `std::sort`.
+3. Run `bench_customsort`. Experiment with different values of `n`. How well does your custom sort perform compared to
+   the other sorting algorithms? Record your experiments under **Empirical Analysis** in `customsort.md`.
+
+> [!IMPORTANT]
+> Submit `customsort.md` to Gradescope.
+
+### Theoretical Analysis
+
+In this section, you will analyze your custom sort implementation.
+
+1. State a recurrence relation $T(n)$ for the worst-case time complexity of your custom sort. Record your answer under
+   **Theoretical Analysis** in `customsort.md`.
+2. Solve the recurrence relation $T(n)$. What is the worst-case time complexity of your custom sort? Record your answer
+   under **Theoretical Analysis** in `customsort.md`.
+3. Determine if your custom sort is (a) in-place and/or (b) stable. Record your answer under **Theoretical Analysis** in
+   `customsort.md`.
+
+> [!IMPORTANT]
+> Submit `customsort.md` to Gradescope.
 
 # Optional Advanced Topics
 
-TODO
+## Quicksort with Median Pivot
 
-
-
-## Singly Linked List
-
-A singly linked list is a sequence of elements stored in nodes. The first node, known as the **head**, contains a
-pointer to the second node, which contains a pointer to the third node, and so on, until the final node, known as the
-**tail**.
+Quicksort runs in worst-case $\Theta(n^2)$ time because the partition function can choose a bad pivot. However, it's
+possible to compute the median of an array of $n$ elements in $\Theta(n)$ time with another recursive algorithm. Using
+this median as the pivot yields a worst-case runtime of $\Theta(n \lg n)$.
 
 ### Implementation
 
-In this section, you will design and implement a singly linked list.
+In this section, you will implement quicksort with a median pivot.
 
-1. Complete `singly_linked_list.h` and `singly_linked_list.cpp`.
-2. Build `test_singly_linked_list` from `singly_linked_list.cpp`, and `test_singly_linked_list.cpp`.
-3. Run `test_singly_linked_list`. All tests should pass.
-
-> [!IMPORTANT]
-> Submit `singly_linked_list.h` and `singly_linked_list.cpp` to Gradescope.
-
-### Time Complexity Analysis
-
-In this section, you will analyze the time complexity of your singly linked list implementation. If you spend more than
-5-10 minutes on this section, look at the solution provided below and move on.
-
-1. State the worst-case asymptotic time complexity of `push_front`, `pop_front`, `operator[]` and `size` in your
-   implementation. Justify your reasoning. Record your answer under **Time Complexity** in `singly_linked_list.md`.
-2. Build `bench_singly_linked_list` from `singly_linked_list.cpp` and `bench_singly_linked_list.cpp`. This program takes
-   one command line argument, `n`, the number of calls to `push_front`, and outputs the runtime of your linked list and
-   `std::vector`.
-3. Predict the minimum value of `n` where your linked list outperforms `std::vector`. Justify your reasoning. Find the
-   minimum value of `n` where your linked list is faster by running `bench_singly_linked_list` with different values of
-   `n`. Was your prediction close? Record your prediction and results under **Time Complexity** in
-   `singly_linked_list.md`.
-
-<details>
-<summary>Solution</summary>
-
-1. To compute the asymptotic time complexity of linked list operations, we can count the number of linked list node
-   accesses. In `push_front`, we access $1$ node, the new node, which takes $\Theta(1)$ time. In `pop_front`, we  
-   access $1$ node, the head node, to get a pointer to the new head, which takes $\Theta(1)$ time. In `operator[]`, we
-   might have to traverse all $n$ nodes of the linked list, which takes $\Theta(n)$ time. If `size` counts the number of
-   nodes by traversing the linked list, it takes $\Theta(n)$ time. However, if the size is tracked with a member
-   variable (e.g. `m_size`), `size` takes $\Theta(1)$ time.
-2. N/a.
-3. N/a.
-
-</details>
+1. Complete `quicksort_median_pivot.cpp`.
+2. Build `test_quicksort_median_pivot` from `quicksort_median_pivot.cpp`, and `test_quicksort_median_pivot.cpp`.
+3. Run `test_quicksort_median_pivot`. All tests should pass.
 
 > [!IMPORTANT]
-> Submit `singly_linked_list.md` to Gradescope.
-
-### Space Complexity Analysis
-
-In this section, you will analyze the space complexity of your singly linked list implementation. If you spend more than
-5-10 minutes on this section, look at the solution provided below and move on.
-
-1. Give a formula for the worst-case size in bytes of an instance of your linked list containing $n$ elements. Assume
-   each pointer takes $4$ bytes, and each integer takes $4$ bytes. Record your answer under **Space Complexity** in
-   `singly_linked_list.md`.
-2. Give a formula for the worst-case **percent memory overhead** of an instance of your linked list containing $n$
-   elements. The percent memory overhead is percentage of bytes used to store non-element data. For example, if a data
-   structure used $8$ bytes to store $4$ bytes of elements, it would have a percent memory overhead of
-   $\frac{8}{8 + 4} = \frac{2}{3}$ or approximately 66%. Record your answer under **Space Complexity** in
-   `singly_linked_list.md`.
-3. Compare the worst-case **percent memory overhead** of a grow-by-doubling dynamic array to your linked list. In the
-   worst-case, a grow-by-doubling dynamic array containing $n$ elements requires $4n$ bytes for the $n$ elements, $4n$
-   bytes for the excess capacity, and $3 \cdot 4 = 12$ bytes for the member variables `m_data`, `m_size` and
-   `m_capacity`, for a total of $8n + 12$ bytes. Therefore, the worst-case percent memory overhead is
-   $\frac{4n + 12}{8n + 12}$. Which data structure is more memory-efficient? Record your answer under
-   **Space Complexity** in `singly_linked_list.md`
-
-<details>
-<summary>Solution</summary>
-
-1. The exact formula depends on your linked list implementation. If the linked list stores a head pointer and the size,
-   and each node stores a pointer and an element, then the total number of bytes is $(4 + 4)n + (4 + 4) = 8n + 8$.
-2. The exact formula depends on your linked list implementation. Assuming the total number of bytes is $8n + 8$, the
-   percent memory overhead is $\frac{4n + 8}{8n + 8}$ since $4n$ bytes are used to store elements.
-3. As $n$ grows large, both the dynamic array and linked list percent memory overhead approach 50%. In the worst-case,
-   they are equally efficient. However, on average and in the best case, the dynamic array has lower memory overhead.
-
-</details>
-
-> [!IMPORTANT]
-> Submit `singly_linked_list.md` to Gradescope.
-
-# Extra Practice
-
-## Doubly Linked List
-
-Like a singly linked list, a doubly linked list is a sequence of elements stored in nodes where each node contains a
-pointer to the next node. Unlike a singly linked list, each node also contains a pointer to the previous node.
-
-### Implementation
-
-In this section, you will design and implement a doubly linked list.
-
-1. Complete `doubly_linked_list.h` and `doubly_linked_list.cpp`.
-2. Build `test_doubly_linked_list` from `doubly_linked_list.cpp`, and `test_doubly_linked_list.cpp`.
-3. Run `test_doubly_linked_list`. All tests should pass.
-
-> [!IMPORTANT]
-> Submit `doubly_linked_list.h` and `doubly_linked_list.cpp` to Gradescope.
-
-### Time Complexity Analysis
-
-In this section, you will analyze the time complexity of your doubly linked list implementation. If you spend more than
-5-10 minutes on this section, look at the solution provided below and move on.
-
-1. State the worst-case asymptotic time complexity of `push_front`, `pop_front`, `push_back`, `pop_back`, `operator[]`
-   and `size` in your implementation. Justify your reasoning. Record your answer under **Time Complexity** in
-   `doubly_linked_list.md`.
-
-<details>
-<summary>Solution</summary>
-
-1. To compute the asymptotic time complexity of linked list operations, we can count the number of linked list node
-   accesses. The analysis of `push_front`, `pop_front`, `operator[]`, and `size` are the same as in a singly linked
-   list. If there is a tail pointer (e.g. `m_tail`, or if circularly linked, `m_head->prev`), `push_back` and `pop_back`
-   take $\Theta(1)$ time. However, if there isn't a tail pointer, both `push_back` and `pop_back` take $\Theta(n)$
-   time to traverse the $n$ nodes of the list.
-
-</details>
-
-> [!IMPORTANT]
-> Submit `doubly_linked_list.md` to Gradescope.
-
-### Space Complexity Analysis
-
-In this section, you will analyze the space complexity of your doubly linked list implementation. If you spend more than
-5-10 minutes on this section, look at the solution provided below and move on.
-
-1. Give a formula for the worst-case size in bytes of an instance of your linked list containing $n$ elements. Assume
-   each pointer takes $4$ bytes, and each integer takes $4$ bytes. Record your answer under **Space Complexity** in
-   `doubly_linked_list.md`.
-2. Give a formula for the worst-case **percent memory overhead** of an instance of your linked list containing $n$
-   elements. Record your answer under **Space Complexity** in `doubly_linked_list.md`.
-3. Compare the worst-case **percent memory overhead** of a grow-by-doubling dynamic array to your linked list. Which
-   data structure is more memory-efficient? Record your answer under **Space Complexity** in `doubly_linked_list.md`
-
-<details>
-<summary>Solution</summary>
-
-1. The exact formula depends on your linked list implementation. If the linked list stores a head pointer, a tail
-   pointer, and the size, and each node stores two pointers and an element, then the total number of bytes is
-   $(4 + 4 + 4)n + (4 + 4 + 4) = 12n + 12$.
-2. The exact formula depends on your linked list implementation. Assuming the total number of bytes is $12n + 12$, the
-   percent memory overhead is $\frac{8n + 12}{12n + 12}$ since $4n$ bytes are used to store elements.
-3. As $n$ grows large, the dynamic array percent memory overhead approaches 50%, but the linked list percent memory
-   overhead approaches 66%. The dynamic array has lower memory overhead.
-
-</details>
-
-> [!IMPORTANT]
-> Submit `doubly_linked_list.md` to Gradescope.
-
-# Optional Advanced Topics
-
-## Skiplist
-
-A skiplist is a probabilistic data structure that extends linked lists with highly efficient search and update
-operations. They are used by several major companies to search and update sets of elements. For example, Discord, a
-social media platform that provides the ability to create large group chats (servers),
-[stores the set of users in each group chat in a skiplist](https://discord.com/blog/using-rust-to-scale-elixir-for-11-million-concurrent-users).
-
-There are several excellent explanations of skiplists available online,
-including [the original paper](https://dl.acm.org/doi/pdf/10.1145/78973.78977)
-and [a lecture from MIT's Design and Analysis of Algorithms course](https://www.youtube.com/watch?v=2g9OSRKJuzM) (their
-CSC 440 equivalent).
-
-### Implementation
-
-In this section, you will design and implement a skiplist.
-
-1. Complete `skiplist.h` and `skiplist.cpp`.
-2. Build `test_skiplist` from `skiplist.cpp`, and `test_skiplist.cpp`.
-3. Run `test_skiplist`. All tests should pass.
-
-> [!IMPORTANT]
-> Submit `skiplist.h` and `skiplist.cpp` to Gradescope.
+> Submit `quicksort_median_pivot.cpp` to Gradescope.
