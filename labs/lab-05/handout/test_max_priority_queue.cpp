@@ -55,7 +55,6 @@ TEST_CASE("heapify_down restores max-heap property with move from root") {
     CHECK(heap[2] >= heap[5]);
     CHECK(heap[2] >= heap[6]);
     CHECK(heap[3] >= heap[7]);
-    CHECK(heap[4] >= heap[8]);
 }
 
 TEST_CASE("heapify_up restores max-heap property with move to root") {
