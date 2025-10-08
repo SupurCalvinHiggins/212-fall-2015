@@ -164,12 +164,12 @@ class TestAll(unittest.TestCase):
 
     @weight(1)
     def test_min_priority_queue(self):
-        self.assert_cpp_tests(["min_priority_min_priority_queue.cpp", "test_min_priority_queue.cpp"],
+        self.assert_cpp_tests(["min_priority_queue.cpp", "test_min_priority_queue.cpp"],
                               "test_min_priority_queue")
 
     @weight(1)
     def test_min_priority_queue_analysis(self):
-        self.assert_exists(["min_priority_min_priority_queue.cpp", "test_min_priority_queue.cpp"])
+        self.assert_exists(["min_priority_queue.cpp", "test_min_priority_queue.cpp"])
         self.assert_analysis_tests("min_priority_queue.md")
 
     @weight(1)
