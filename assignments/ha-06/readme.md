@@ -251,7 +251,26 @@ Which linked list features best model the unused block list for the allocator? H
 
 ## Problem
 
-TODO
+You work for a company that develops an operating system’s page manager, which decides which pages to keep in memory. A **page** is a block of data that is either stored in memory or on disk. To track pages currently in memory, the system uses a clock algorithm.
+
+Each page in memory is represented as a node in a linked list. Each node stores:
+1. The page’s name
+2. A flag (0 or 1) showing whether the page was recently used
+
+A special pointer called the **clock hand** moves around the list, pointing to one page at a time. The system supports these operations:
+1. Add page. When a new page is loaded, add it to the list of pages. If this is the first page, the clock hand points to it.
+2. Access page. When a page is used, its flag is set to 1 (meaning “recently used”). 
+3. Replace page. When memory is full and a new page must replace an old one, check the page where the clock hand points. If the flag is 0, replace it with the new page. Otherwise, if the flag is 1, set it to 0 and move the clock hand to the next page until a page where the flag is 0 is found. Then, replace it with the new page.
+
+Which linked list features best model the page list for the page manager? Here, “best” means a **minimal** implementation that efficiently supports the required operations.
+
+[X] Singly linked
+[ ] Doubly linked
+[X] Circular
+[ ] Linear (not circular)
+[X] Clock hand
+[ ] Head pointer
+[ ] Tail pointer
 
 ## Problem
 
@@ -719,6 +738,19 @@ What is the closed form of $T(n)$?
 (X) $T(n) = \Theta(n^2)$
 
 ## Problem
+
+You are an embedded systems engineer designing a sensor fusion module in a drone's flight control system. The system continuously collects data from multiple sensors, such as an accelerometer, gyroscope, and magnetometer, each producing timestamped readings. 
+
+To fuse the data correctly, the software must:
+1. Merge readings from all sensors into a single vector.
+2. Sort the readings by their timestamp, ensuring the most recent readings are processed together. If two readings have the same timestamp, their relative order does not matter.
+
+Because stack space is limited, recursive calls can nest at most $20$ levels deep before causing a segmentation fault. 
+
+Which sorting algorithm is more suitable for this application?
+
+( ) Quicksort
+(X) Mergesort
 
 # Extra Practice (10 points)
 
