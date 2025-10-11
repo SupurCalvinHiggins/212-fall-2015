@@ -12,6 +12,22 @@ By the end of this assignment, you should be able to:
 4. Compare and classify the growth rate of logarithmic, polynomial and exponential functions.
 5. Select algorithms based on asymptotic descriptions of time and space complexity.
 
+
+Trace how common operations modify the internal state of linked lists
+Analyze the time complexity of common linked list operations
+Analyze the space consumption of linked lists
+Select between linked list implementations (maybe stronger, compare against other data structures)
+TODO: specify kinds of linked lists: double single circular head/tail
+Trace the execution of recursive algorithms
+Find appropriate recursive decompositions of problems? (Check slides)
+Model the work performed by a recursive algorithm with a recurrence relation
+Find the closed form of recurrence relations via the iteration method
+Analyze characteristics of sorting algorithms (reword, stable/inplace)
+Trace the execution of merge sort and quicksort
+Analyze the time complexity of mergesort and quicksort
+Select between sorting algorithms
+
+
 ## Grading
 
 This assignment is graded out of $$100$$ points. However, we provide $$200$$ points' worth of problems:
@@ -322,14 +338,14 @@ What is the return value of `baz(9)`? Give your answer as a single integer.
 
 Consider implementing `reverse(int* A, size_t n)` recursively. The function should reverse the array `A` of length `n`. 
 
-Which of the following base cases is correct?
+What is the correct base case?
 
 ( ) `if (n == 0) return;`
 ( ) `if (n == 1) return;`
 (X) `if (n <= 1) return;`
 ( ) `if (n <= 2) return;`
 
-Which of the following recursive steps is correct?
+What is the correct recursive step?
 
 (X) `swap(A[0], A[n-1]); reverse(A + 1, n - 2);`
 ( ) `swap(A[0], A[n]); reverse(A + 1, n - 2);`
@@ -341,14 +357,14 @@ Which of the following recursive steps is correct?
 Consider implementing `sum(Node* head)` recursively. The function should sum all the values stored in the singly linked 
 list with head `head`.
 
-Which of the following base cases is correct?
+What is the correct base case?
 
 (X) `if (head == nullptr) return 0;`
 ( ) `if (head != nullptr) return 0;`
 ( ) `if (head->next == nullptr) return 0;`
 ( ) `if (head->next != nullptr) return 0;`
 
-Which of the following recursive steps is correct?
+What is the correct recursive step?
 
 ( ) `return sum(head);`
 ( ) `return sum(head->next);`
@@ -370,14 +386,14 @@ bool is_palindrome(const char* s, size_t n) {
 }
 ```
 
-Which of the following recurrences models the number of array accesses performed by `is_palindrome` on an input of size $n$ in the worst-case?
+What recurrence models the number of array accesses performed by `is_palindrome` on an input of size $n$ in the worst-case?
 
 ( ) $T(n) = T(n - 1) + 2$
 (X) $T(n) = T(n - 2) + 2$
 ( ) $T(n) = T(n - 1) + 1$
 ( ) $T(n) = T(n - 2) + 1$
 
-Which of the following bases case(s) for the recurrence are correct?
+What is the correct base case for the recurrence?
 
 [X] $T(0) = 0$
 [X] $T(1) = 0$
@@ -410,14 +426,14 @@ size_t contains(const int* A, size_t left, size_t right, int target) {
 }
 ```
 
-Which of the following recurrences models the number of array accesses performed by `contains` on an input array of size $n$ in the worst-case? Assume $n$ is a power of $3$.
+What recurrence models the number of array accesses performed by `contains` on an input array of size $n$ in the worst-case? Assume $n$ is a power of $3$.
 
 ( ) $T(n) = T(n/3) + 2$
 (X) $T(n) = T(n/2) + 2$
 ( ) $T(n) = 2T(n/2) + 2$
 ( ) $T(n) = 3T(n/3) + 2$
 
-Which of the following bases case for the recurrence is correct?
+What is the correct base case for the recurrence?
 
 (X) $T(0) = 0$
 ( ) $T(1) = 0$
@@ -439,14 +455,14 @@ bool search(Node* head, int key) {
 }
 ```
 
-Which of the following recurrences models the number of comparisons performed by `contains` on an input list of size $n$ in the worst-case?
+What recurrence models the number of comparisons performed by `contains` on an input list of size $n$ in the worst-case?
 
 (X) $T(n) = T(n - 1) + 2$
 ( ) $T(n) = T(n - 1) + 1$
 ( ) $T(n) = 2T(n - 1) + 2$
 ( ) $T(n) = 2T(n - 1) + 1$
 
-Which of the following bases case for the recurrence is correct?
+What is the correct base case for the recurrence?
 
 ( ) $T(0) = 0$
 ( ) $T(1) = 0$
@@ -457,7 +473,7 @@ Which of the following bases case for the recurrence is correct?
 
 Let $T(n) = 3 T(n - 1)$ where $T(1) = 1$
 
-Which of the following is $T(n)$ after expanding $k$ times?
+Give a formula for $T(n)$ after expanding $k$ times.
 
 (X) $T(n) = 3^k T(n - k)$
 ( ) $T(n) = 3^{k - 1} T(n - k)$
@@ -482,7 +498,7 @@ What is the closed form of $T(n)$?
 
 Let $T(n) = T(n - 1) + n$ where $T(0) = 1$.
 
-Which of the following is $T(n)$ after expanding $k$ times?
+Give a formula for $T(n)$ after expanding $k$ times.
 
 (X) $T(n) = T(n - k) + \sum\limits_{i=n - k + 1}^{n} i$
 ( ) $T(n) = T(n - k) + n$
@@ -507,7 +523,7 @@ What is the closed form of $T(n)$?
 
 Let $T(n) = T(n/2) + 1$ where $T(1) = 3$. Assume $n$ is a power of $2$.
 
-Which of the following is $T(n)$ after expanding $k$ times?
+Give a formula for $T(n)$ after expanding $k$ times.
 
 (X) $T(n) = T(n/2^k) + \sum\limits_{i=1}^{k} 1$
 ( ) $T(n) = T(n/2^k)$
@@ -689,14 +705,14 @@ What are the contents of `A` after the call to `merge`? Give your answer as a co
 
 ## Problem
 
-Which of the following recurrence relations $T(n)$ represents the worst-case complexity of mergesort? Assume $n$, the size of the input array, is a power of two. If needed, refer to the implementation of mergesort given above.
+What recurrence $T(n)$ represents the worst-case complexity of mergesort? Assume $n$, the size of the input array, is a power of two. If needed, refer to the implementation of mergesort given above.
 
 ( ) $T(n) = T(n/2) + \Theta(n)$
 (X) $T(n) = 2T(n/2) + \Theta(n)$
 ( ) $T(n) = 2T(n - 1) + \Theta(n)$
 ( ) $T(n) = 2T(n/2)$
 
-Which of the following bases case for $T(n)$ is correct?
+What is the base case for $T(n)$?
 
 (X) $T(1) = \Theta(1)$
 ( ) $T(1) = \Theta(\lg n)$
@@ -714,14 +730,14 @@ What is the closed form of $T(n)$?
 
 ## Problem
 
-Which of the following recurrence relations $T(n)$ represents the worst-case complexity of quicksort? Assume $n$, the size of the input array, is a power of two. If needed, refer to the implementation of quicksort given above.
+What recurrence $T(n)$ represents the worst-case complexity of quicksort? Assume $n$, the size of the input array, is a power of two. If needed, refer to the implementation of quicksort given above.
 
 ( ) $T(n) = T(n - 1) + \Theta(n)$
 ( ) $T(n) = T(n - 1) + \Theta(n)$
 ( ) $T(n) = 2T(n - 1) + \Theta(n)$
 ( ) $T(n) = 2T(n - 1)$
 
-Which of the following bases case for $T(n)$ is correct?
+What is the base case for $T(n)$?
 
 (X) $T(1) = \Theta(1)$
 ( ) $T(1) = \Theta(\lg n)$
@@ -754,51 +770,92 @@ Which sorting algorithm is more suitable for this application?
 
 # Extra Practice (10 points)
 
-# Optional Advanced Topics (15 points)
+## Problem
 
+Assume a `size_t` is $8$ bytes, and a pointer is $8$ bytes. Let $k$ be the size of a `T` in bytes.
 
-Trace how common operations modify the internal state of linked lists
-Analyze the time complexity of common linked list operations
-Analyze the space consumption of linked lists
-Select between linked list implementations (maybe stronger, compare against other data structures)
-TODO: specify kinds of linked lists: double single circular head/tail
+Consider the following definition of a grow-by-doubling vector:
+```cpp
+template <typename T>
+class Vector {
+   T* m_data;
+   size_t m_size;
+};
+```
 
-1.5 of 4 lectures -> 8 problems
+What is the worst-case space complexity of a size $n$ vector in bytes? 
 
+( ) $16 + k(2n - 1)$
+(X) $16 + 2k(n - 1)$
+( ) $16 + 2kn$
+( ) $16 + k(2n + 1)$
 
-Trace the execution of recursive algorithms
-Find appropriate recursive decompositions of problems? (Check slides)
+Consider the following definition of a linked list:
+```cpp
+template <typename T>
+class List {
+   struct Node {
+      T data;
+      Node* next;
+   };
 
-0.5 of 4 lectures -> 4
+   Node* m_head;
+   size_t m_size;
+};
+```
 
-Model the work performed by a recursive algorithm with a recurrence relation
-Find the closed form of recurrence relations via the iteration method
-3 modeling
-2 parts to each modeling: base case and recursive definition
-At least one divide and conquer, one decrease and conquer
-3 solving
-2 parts to each: find kth expansion, find closed form
+What is the worst-case space complexity of a size $n$ list in bytes?
 
-1 of 4 lectures -> 6
+( ) $16 + k(n + 8)$
+( ) $16 + 8nk$
+( ) $16 + nk$
+(X) $16 + n(k + 8)$
 
-Analyze characteristics of sorting algorithms (reword, stable/inplace)
-Trace the execution of merge sort and quicksort
-Analyze the time complexity of mergesort and quicksort
-Select between sorting algorithms
+What is the lowest value of $k$ such that a size $n$ list is strictly more space efficient than a size $n$ vector? Assume $n$ is very large. Give your answer as a single integer.
 
-One on stable/inplace
-Two tracing quicksort/mergesort
-Two on analyzing quicksort/mergesort
-One on selecting between sorts
+[____](9)
 
-1 of 4 lectures -> 6
+## Problem
 
-Extra practice/
-Memory usage of LL vs vector, depends on size of elements
-Something on finding a recursive decomposition (maybe the find occurrences of max in heap) + analysis
-Tricky work modeling (divide and decrease calls) + analysis (maybe 2 of these)
+Consider implementing `size_t count_max(const int* heap, size_t t, size_t n)` recursively. The function should count the
+number of occurrences of the maximum element `heap[0]` in the subtree rooted by `heap[t]` in a valid max-heap `heap`.
+
+What is the correct base case?
+
+( ) `if (n == 0) return 0;`
+( ) `if (t < n && heap[0] == heap[t]) return 1;`
+( ) `if (t < n && heap[0] != heap[t]) return 0;`
+(X) `if (t >= n || heap[0] != heap[t]) return 0;`
+
+What is the correct recursive step?
+
+(X) `return 1 + count_max(heap, 2 * t + 1, n) + count_max(heap, 2 * t + 2, n);`
+( ) `return count_max(heap, 2 * t + 1, n) + count_max(heap, 2 * t + 2, n);`
+( ) `return 1 + count_max(heap, t + 1, n - 1)`
+( ) `return (heap[0] == heap[t]) + count_max(heap, t + 1, n - 1);`
+
+Assume the maximum element occurs $k$ times in the heap. What is the worst-case time complexity of `count_max(heap, 0, n);`? 
+
+( ) $\Theta(1)$
+( ) $\Theta(\lg n)$
+(X) $\Theta(k)$
+( ) $\Theta(k \lg n)$
+( ) $\Theta(n)$
+
+## Problem
+
+Tricky work modeling (divide and decrease calls) + analysis
+
+## Problem
+
 Analysis of quicksort with different partition functions (find worst case inputs?)
 
-advanced topics
+# Optional Advanced Topics (20 points)
+
+## Problem
+
 Master theorem via iteration
-Analysis of quicksort average case
+
+## Problem
+
+Quicksort average case analysis
