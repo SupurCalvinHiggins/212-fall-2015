@@ -6,36 +6,27 @@ In this assignment, you will practice analyzing algorithms and applying asymptot
 
 By the end of this assignment, you should be able to:
 
-1. Model the number of basic operations performed by an algorithm in the best, worst and average case, including amortized analysis.
-2. Simplify summations involving polynomials and exponential functions that arise in algorithm analysis.
-3. State asymptotic bounds on logarithmic, polynomial and exponential functions using $$\Theta$$, $$\Omega$$ and $$\mathcal{O}$$-notation.
-4. Compare and classify the growth rate of logarithmic, polynomial and exponential functions.
-5. Select algorithms based on asymptotic descriptions of time and space complexity.
-
-
-Trace how common operations modify the internal state of linked lists
-Analyze the time complexity of common linked list operations
-Analyze the space consumption of linked lists
-Select between linked list implementations (maybe stronger, compare against other data structures)
-TODO: specify kinds of linked lists: double single circular head/tail
-Trace the execution of recursive algorithms
-Find appropriate recursive decompositions of problems? (Check slides)
-Model the work performed by a recursive algorithm with a recurrence relation
-Find the closed form of recurrence relations via the iteration method
-Analyze characteristics of sorting algorithms (reword, stable/inplace)
-Trace the execution of merge sort and quicksort
-Analyze the time complexity of mergesort and quicksort
-Select between sorting algorithms
-
+1. Trace how common operations modify the internal state of linked lists.
+2. Analyze the time complexity of common linked list operations.
+3. Analyze the space complexity of linked list implementations.
+4. Select between linked list implementations to solve real-world problems.
+5. Trace the execution of recursive algorithms.
+6. Find appropriate recursive decompositions of problems.
+7. Model the work performed by recursive algorithms with recurrence relations.
+8. Compute the closed form of recurrence relations via the iteration method.
+9. Identify if sorting algorithms are stable, in-place, both or neither.
+10. Trace the execution of mergesort and quicksort.
+11. Analyze the time complexity of mergesort and quicksort.
+12. Select between sorting algorithms to solve real-world problems.
 
 ## Grading
 
-This assignment is graded out of $$100$$ points. However, we provide $$200$$ points' worth of problems:
+This assignment is graded out of $100$ points. However, we provide $200$ points' worth of problems:
 
-1. Only your first $$100$$ points count towards your grade.
+1. Only your first $100$ points count towards your grade.
 2. The extra problems give you flexibility to:
    * Choose problems that best support your learning
-   * Earn more than $$100$$ points in case of mistakes (your grade will be capped at $$100$$).
+   * Earn more than $100$ points in case of mistakes (your grade will be capped at $100$).
    * Practice additional problems in preparation for the midterm.
 
 **You are not expected to complete every problem!**
@@ -54,15 +45,23 @@ The midterm will include many free response questions. To prepare effectively:
 * Avoid relying on multiple choice options to guide your answer. Instead, work out your solution first, then check against the choices.
 * Use any resources available (including AI), but always attempt each problem on your own for 5-10 minutes before seeking help.
 
+## Answer Formats
+
+**Short answer questions are autograded. You must follow the format specified below to receive credit.**
+
+If the problem asks for a single integer, provide your answer as a single integer without whitespace. For example, `10`.
+
+If the problem asks for a comma-delimited list of integers, provide your answer as a comma-delimited list without whitespace. For example, `3,1,4,0,12`.
+
+If the problem asks for linked list format, provide your answer in the format `[a]->[b]->...`. For example, if the linked list contains `3,1,4,2`, the linked list format is `[3]->[1]->[4]->[2]`.
+
 ## Confirmation
 
 I have read and understand the above.
 (X) Yes
 ( ) No
 
-
-TODO: Update intro, define "linked list" answer format, define node class
-
+TODO: file upload for work
 
 # Core Content (5 points)
 
@@ -444,14 +443,14 @@ What is the correct base case for the recurrence?
 
 Consider the following function to search a singly linked list:
 ```cpp
-bool search(Node* head, int key) {
+bool contains(Node* head, int target) {
     if (head == nullptr)
         return false;
 
-    if (head->data == key)
+    if (head->data == target)
         return true;
 
-    return search(head->next, key);
+    return contains(head->next, target);
 }
 ```
 
@@ -844,18 +843,182 @@ Assume the maximum element occurs $k$ times in the heap. What is the worst-case 
 
 ## Problem
 
-Tricky work modeling (divide and decrease calls) + analysis
+If quicksort takes the first element as the pivot, which input(s) cause quicksort to run in $\Theta(n^2)$ time?
+
+[X] Sorted (least to greatest)
+[X] Reverse sorted (greatest to least)
+[X] Greatest, then least, then next greatest, then next least with odd length (e.g. `[5,1,4,2,3]`)
+[ ] Greatest, then least, then next greatest, then next least with even length (e.g. `[6,1,5,2,4,3]`)
+
+If quicksort takes the last element as the pivot, which input(s) cause quicksort to run in $\Theta(n^2)$ time?
+
+[X] Sorted (least to greatest)
+[X] Reverse sorted (greatest to least)
+[ ] Greatest, then least, then next greatest, then next least with odd length (e.g. `[5,1,4,2,3]`)
+[ ] Greatest, then least, then next greatest, then next least with even length (e.g. `[6,1,5,2,4,3]`)
+
+If quicksort takes the median of the first, middle (i.e. `A[n/2]`), and last element as the pivot, which input(s) cause quicksort to run in $\Theta(n^2)$ time?
+
+[ ] Sorted (least to greatest)
+[ ] Reverse sorted (greatest to least)
+[ ] Greatest, then least, then next greatest, then next least with odd length (e.g. `[5,1,4,2,3]`)
+[ ] Greatest, then least, then next greatest, then next least with even length (e.g. `[6,1,5,2,4,3]`)
+
 
 ## Problem
 
-Analysis of quicksort with different partition functions (find worst case inputs?)
+Consider the following sorting algorithm:
+```cpp
+void sort(vector<int>& A, size_t left, size_t right) {
+    if (left >= right - 1) 
+      return;
+
+    auto n = right - left;
+    auto m1 = 2 * n / 3 + left;
+    auto m2 = n / 3 + left;
+    auto m3 = n / 6 + left;
+    auto m4 = 5 * n / 6 + left;
+    
+    sort(A, left, m1);
+    sort(A, m2, right);
+    sort(A, m3, m4);
+}
+
+void sort(vector<int>& A) {
+    sort(A, 0, A.size());
+}
+```
+
+What recurrence models the number of operations performed by `sort` on an input array of size $n$ in the worst-case? 
+Assume $c$ is the amount of non-recursive work.
+
+( ) $T(n) = 2T(n/2) + c$
+( ) $T(n) = 3T(n/2) + c$
+(X) $T(n) = 3T(2n/3) + c$
+( ) $T(n) = 2T(n/3) + c$
+
+What is the correct base case for the recurrence?
+
+( ) $T(0) = \Theta(1)$
+(X) $T(1) = \Theta(1)$
+( ) $T(1) = \Theta(n)$
+( ) $T(0) = \Theta(n)$
+
+Give a formula for $T(n)$ after expanding $k$ times.
+
+(X) $T(n) = 3^k T(2^kn/3^k) + \sum\limits_{i=0}^{k-1} c 3^i$
+( ) $T(n) = 2^k T(n/2^k) + \sum\limits_{i=0}^{k-1} c 2^i $
+( ) $T(n) = 3^k T(n/2^k) + \sum\limits_{i=0}^{k-1} c 3^i$
+( ) $T(n) = 2^k T(n/3^k) + \sum\limits_{i=0}^{k-1} c 2^i$
+
+What value of $k$ yields the base case?
+
+( ) $\frac{\lg n}{\lg(3/2)}$
+( ) $\lg n$
+( ) $\log_3 n$
+(X) $\frac{\log_{3} n}{\log_{3}(3/2)}$
+
+What is the closed form of $T(n)$?
+
+( ) $T(n) = \Theta(n \lg n)$
+( ) $T(n) = \Theta(n^{1.709\ldots} \lg n)$
+(X) $T(n) = \Theta(n^{2.709\ldots})$
+( ) $T(n) = \Theta(n^{1.709\ldots})$
 
 # Optional Advanced Topics (20 points)
 
 ## Problem
 
-Master theorem via iteration
+In this problem, you will prove the second case of the famous **master theorem**, and analyze several recurrences.
+
+Let $a \geq 1$ and $b > 1$ be constants, let $f(n) = \Theta(n^c)$, and let $T(n) = aT(n / b) + f(n)$ where 
+$T(1) = \Theta(1)$.
+
+What is $T(n)$ after expanding $k$ times?
+
+( ) $T(n) = a^k T(n/b^k) + \sum\limits_{i=0}^{k - 1} a^i n^c / b^i$
+( ) $T(n) = a^k T(n/b^k) + \sum\limits_{i=0}^{k - 1} b^i (n / a)^{ci}$
+(X) $T(n) = a^k T(n/b^k) + \sum\limits_{i=0}^{k - 1} a^i (n / b^i)^c$
+( ) $T(n) = a^k T(n/b^k) + \sum\limits_{i=0}^{k - 1} n^c / b^i$
+( ) $T(n) = a^k T(n/b^k) + \sum\limits_{i=0}^{k - 1} b^i (n / a^i)^c$
+
+What value of $k$ yields the base case?
+
+( ) $k = \log_a n$
+( ) $k = \lg n$
+( ) $k = \log_b a$
+(X) $k = \log_b n$
+( ) $k = \log_a b$
+
+The second case of the master theorem provides an asymptotic bound on $T(n)$ when $c = \log_b a$. What is that bound?
+
+( ) $T(n) = \Theta(n \lg n)$
+( ) $T(n) = \Theta(n^{\log_b a})$
+( ) $T(n) = \Theta(n^{\log_a b} \lg n)$
+( ) $T(n) = \Theta(n^{\log_a b})$
+(X) $T(n) = \Theta(n^{\log_b a} \lg n)$
+
+Consider the recurrence for the time complexity of mergesort. 
+
+What is $a$? Give your answer as a single integer.
+
+[____](2)
+
+What is $b$? Give your answer as a single integer.
+
+[____](2)
+ 
+What is $c$? Give your answer as a single integer.
+
+[____](1)
+
+According to the second case of the master theorem, what is the time complexity of mergesort?
+
+( ) $\Theta(\lg n)$
+( ) $\Theta(n)$
+(X) $\Theta(n \lg n)$
+( ) $\Theta(n^2)$
+( ) $\Theta(n^2 \lg n$
+
+Which of the following recurrences can be analyzed with the second case of the master theorem (as stated above)?
+
+[ ] $T(n) = 3T(2n/3) + \Theta(1)$
+[ ] $T(n) = T(n/2) + T(n/4) + \Theta(1)$ 
+[X] $T(n) = 2T(n/3) + \Theta(n^{\lg 3})$
+[ ] $T(n) = T(n - 1) + n$
+[X] $T(n) = T(n/4) + 10$
+[x] $T(n) = 3T(2n/5) + \Theta(n^{\log_{2.5} 3}$
 
 ## Problem
 
-Quicksort average case analysis
+Consider the following implementation of quicksort:
+```cpp
+void quicksort(vector<int>& A, size_t left, size_t right) {
+    if (left >= right) return;
+
+    auto pivot = random_pivot(left, right);
+    auto i = left;
+    auto j = right;
+
+    while (i <= j) {
+        while (A[i] < pivot) i++;
+        while (A[j] > pivot) j--;
+        if (i <= j) {
+            swap(A[i], A[j]);
+            i++;
+            j--;
+        }
+    }
+
+    quicksort(A, left, j);
+    quicksort(A, i, right);
+}
+
+void quicksort(vector<int>& A) {
+    quicksort(A, 0, A.size() - 1);
+}
+```
+
+Assume `random_pivot` selects the pivot uniformly at random. What is the average number of recursive calls performed by quicksort on an array of one thousand unique elements? Give your answer as a single integer (round up).
+
+[____](1334)
