@@ -1,4 +1,4 @@
-# Lab 8 - Binary Search Trees
+# Lab 9 - Binary Search Trees
 
 # Overview
 
@@ -47,8 +47,8 @@ To maximize your learning, you should:
 
 ## Project Setup
 
-1. Create a new project called `csc212-lab-08` in your IDE.
-2. Download all files from [the lab handout folder](handout) into the `csc212-lab-08` project.
+1. Create a new project called `csc212-lab-09` in your IDE.
+2. Download all files from [the lab handout folder](handout) into the `csc212-lab-09` project.
 
 > [!NOTE]
 > To download all files from the repository, navigate to the root of the repository, click on the green **Code** button
