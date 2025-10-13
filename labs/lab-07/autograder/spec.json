@@ -1,49 +1,74 @@
 [
   {
-    "name": "mergesort",
+    "name": "playlist_period",
     "requirements": [
-      "mergesort.cpp"
+      "playlist_period.cpp"
     ],
     "dependencies": [
-      "mergesort.h",
-      "test_mergesort.cpp",
+      "playlist_period.h",
+      "test_playlist_period.cpp",
       "doctest.h"
     ],
-    "analysis": "mergesort.md"
+    "analysis": "playlist_period.md"
   },
   {
-    "name": "quicksort",
+    "name": "bug_bisect",
     "requirements": [
-      "quicksort.cpp"
+      "bug_bisect.cpp"
     ],
     "dependencies": [
-      "quicksort.h",
-      "test_quicksort.cpp",
+      "bug_bisect.h",
+      "test_bug_bisect.cpp",
       "doctest.h"
     ],
-    "analysis": "quicksort.md"
+    "analysis": "bug_bisect.md"
   },
   {
-    "name": "customsort",
+    "name": "perfect_plunder",
     "requirements": [
-      "customsort.cpp"
+      "perfect_plunder.cpp"
     ],
     "dependencies": [
-      "customsort.h",
-      "test_customsort.cpp",
+      "perfect_plunder.h",
+      "test_perfect_plunder.cpp",
       "doctest.h"
     ],
-    "analysis": "customsort.md"
+    "analysis": "perfect_plunder.md"
   },
   {
-    "name": "quicksort_median_pivot",
+    "name": "genetic_gap",
     "requirements": [
-      "quicksort_median_pivot.cpp"
+      "genetic_gap.cpp"
     ],
     "dependencies": [
-      "quicksort_median_pivot.h",
-      "test_quicksort_median_pivot.cpp",
+      "genetic_gap.h",
+      "test_genetic_gap.cpp",
       "doctest.h"
-    ]
+    ],
+    "analysis": "genetic_gap.md"
+  },
+  {
+    "name": "roaming_roomba",
+    "requirements": [
+      "roaming_roomba.cpp"
+    ],
+    "dependencies": [
+      "roaming_roomba.h",
+      "test_roaming_roomba.cpp",
+      "doctest.h"
+    ],
+    "analysis": "roaming_roomba.md"
+  },
+  {
+    "name": "strategic_silicon",
+    "requirements": [
+      "strategic_silicon.cpp"
+    ],
+    "dependencies": [
+      "strategic_silicon.h",
+      "test_strategic_silicon.cpp",
+      "doctest.h"
+    ],
+    "analysis": "strategic_silicon.md"
   }
 ]
