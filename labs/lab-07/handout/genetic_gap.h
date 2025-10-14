@@ -1,13 +1,9 @@
-//
-// Created by calvin on 10/13/25.
-//
+#pragma once
+#include <vector>
+#include <cstdint>
 
-#ifndef CSC212_LAB_07_GENETIC_GAP_H
-#define CSC212_LAB_07_GENETIC_GAP_H
-
-
-class genetic_gap {
+enum class Base {
+    Adenine, Cytosine, Guanine, Thymine
 };
 
-
-#endif //CSC212_LAB_07_GENETIC_GAP_H
+[[nodiscard]] uint32_t genetic_gap(const std::vector<Base> &dna1, const std::vector<Base> &dna2);

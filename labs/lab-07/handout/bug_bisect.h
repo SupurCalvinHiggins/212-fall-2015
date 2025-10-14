@@ -9,7 +9,7 @@ struct TestResult {
 
     TestResult(int expected_output, int actual_output) : expected_output(expected_output), actual_output(actual_output) { }
 
-    [[nodiscard]] bool is_ok() const { return expected_output == actual_output; }
+    [[nodiscard]] bool is_pass() const { return expected_output == actual_output; }
 };
 
 struct TestSuiteResult {
@@ -18,8 +18,8 @@ struct TestSuiteResult {
 
     TestSuiteResult(std::string&& commit_id, std::vector<TestResult>&& results) : commit_id(commit_id), results(results) { }
 
-    [[nodiscard]] bool is_ok() const {
-        return std::all_of(results.begin(), results.end(),[](const TestResult& result) -> bool { return result.is_ok(); });
+    [[nodiscard]] bool is_pass() const {
+        return std::all_of(results.begin(), results.end(),[](const TestResult& result) -> bool { return result.is_pass(); });
     }
 };
 
