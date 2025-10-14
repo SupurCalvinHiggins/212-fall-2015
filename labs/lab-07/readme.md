@@ -413,7 +413,8 @@ that capacity in the real device to ensure reliable performance.
 
 ### Design
 
-In this section, you will design a recursive algorithm to TODO using the SRBOT framework. If you spend more than 15-20
+In this section, you will design a recursive algorithm to compute the minimum battery capacity required for a Roomba to
+clean all dirty floors using the SRBOT framework. If you spend more than 15-20
 minutes on this section, look at the solution provided below and move on.
 
 1. Read `roaming_roomba.h`.
@@ -456,8 +457,9 @@ look at the solution provided below and move on.
 
 ## Strategic Silicon
 
-Modern electronic devices, from smartphones to single-board computers, rely on densely packed **printed circuit boards
-** (**PCBs**) to interconnect components such as processors, memory modules, and I/O interfaces. The physical placement
+Modern electronic devices, from smartphones to single-board computers, rely on densely packed
+**printed circuit boards** (**PCBs**) to interconnect components such as processors, memory modules, and I/O interfaces.
+The physical placement
 of these components can significantly impact performance, power consumption, and signal integrity. For example,
 components placed far apart may experience longer signal delays, timing mismatches, or increased susceptibility to
 electromagnetic interference.
@@ -479,7 +481,8 @@ optimize performance, reduce energy consumption, and mitigate interference befor
 
 ### Design
 
-In this section, you will design a recursive algorithm to TODO using the SRBOT framework. If you spend more than 15-20
+In this section, you will design a recursive algorithm to compute the minimum cost PCB layout of a device using the
+SRBOT framework. If you spend more than 15-20
 minutes on this section, look at the solution provided below and move on.
 
 1. Read `strategic_silicon.h`.
