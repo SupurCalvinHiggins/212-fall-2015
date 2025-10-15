@@ -113,7 +113,7 @@ In this section, you will analyze the space complexity of your singly linked lis
    `singly_linked_list.md`.
 2. Give a formula for the worst-case **percent memory overhead** of an instance of your linked list containing $n$
    elements. The percent memory overhead is percentage of bytes used to store non-element data. For example, if a data
-   structure used $8$ bytes to store $4$ bytes of elements, it would have a percent memory overhead of
+   structure used $8$ bytes of non-element data to store $4$ bytes of elements, it would have a percent memory overhead of
    $\frac{8}{8 + 4} = \frac{2}{3}$ or approximately 66%. Record your answer under **Space Complexity** in
    `singly_linked_list.md`.
 3. Compare the worst-case **percent memory overhead** of a grow-by-doubling dynamic array to your linked list. In the
