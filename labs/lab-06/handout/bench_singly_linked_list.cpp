@@ -22,8 +22,8 @@ int main(int argc, char *argv[]) {
         list.push_front(i);
     }
     const auto end1 = std::chrono::high_resolution_clock::now();
-    const auto duration1 = std::chrono::duration_cast<std::chrono::milliseconds>(end1 - start1).count();
-    std::cout << "SinglyLinkedList push_front time: " << duration1 << " ms\n";
+    const auto duration1 = std::chrono::duration_cast<std::chrono::nanoseconds>(end1 - start1).count();
+    std::cout << "SinglyLinkedList push_front time: " << duration1 << " ns\n";
 
     std::vector<int> vec;
     const auto start2 = std::chrono::high_resolution_clock::now();
@@ -31,8 +31,8 @@ int main(int argc, char *argv[]) {
         vec.insert(vec.begin(), i);
     }
     const auto end2 = std::chrono::high_resolution_clock::now();
-    const auto duration2 = std::chrono::duration_cast<std::chrono::milliseconds>(end2 - start2).count();
-    std::cout << "std::vector push_front time: " << duration2 << " ms\n";
+    const auto duration2 = std::chrono::duration_cast<std::chrono::nanoseconds>(end2 - start2).count();
+    std::cout << "std::vector push_front time: " << duration2 << " ns\n";
 
     return 0;
 }
