@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(csc212-lab-07)
+project(csc212-lab-06)
 
 set(CMAKE_CXX_STANDARD 17)
 
