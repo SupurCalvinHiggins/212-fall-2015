@@ -33,8 +33,8 @@ TestSuiteResult make_failing_suite(const int id, const int n_tests = 10) {
 TEST_CASE("bug_bisect - first suite fails") {
     std::vector<TestSuiteResult> suites;
     suites.push_back(make_failing_suite(0));
-    suites.push_back(make_passing_suite(1));
-    suites.push_back(make_passing_suite(2));
+    suites.push_back(make_failing_suite(1));
+    suites.push_back(make_failing_suite(2));
     CHECK(bug_bisect(suites) == to_hex(0));
 }
 
