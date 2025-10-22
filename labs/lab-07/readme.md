@@ -100,7 +100,7 @@ Again, don't worry if this doesn't make much sense now!
 Spotify allows users to create **playlists**, which are sequences of songs played in a fixed order. Once the last song
 finishes, playback continues by looping back to the first song. Thus, a playlist repeats indefinitely in cycles.
 
-The **period** of a playlist is defined as the total duration of time before a particular song is repeats. Spotify
+The **period** of a playlist is defined as the total duration of time before a particular song repeats. Spotify
 displays this period so that users can select playlists of appropriate duration. For example, a two-hour playlist for a
 two-hour drive.
 
