@@ -33,8 +33,8 @@ TestSuiteResult make_failing_suite(const int id, const int n_tests = 10) {
 TEST_CASE("bug_bisect - first suite fails") {
     std::vector<TestSuiteResult> suites;
     suites.push_back(make_failing_suite(0));
-    suites.push_back(make_passing_suite(1));
-    suites.push_back(make_passing_suite(2));
+    suites.push_back(make_failing_suite(1));
+    suites.push_back(make_failing_suite(2));
     CHECK(bug_bisect(suites) == to_hex(0));
 }
 
@@ -77,7 +77,7 @@ TEST_CASE("bug_bisect - large dataset") {
 }
 
 TEST_CASE("bug_bisect - deterministic random fail positions") {
-    constexpr int total_commits = 2000;
+    constexpr int total_commits = 1000000;
     std::mt19937 rng(42);
     std::uniform_int_distribution<int> dist(0, total_commits - 1);
     for (int run = 0; run < 1000; ++run) {
