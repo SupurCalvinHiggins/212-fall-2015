@@ -1,7 +1,13 @@
 from autograder_base import AutograderBase
 
+from gradescope_utils.autograder_utils.decorators import weight
+
 
 class TestAll(AutograderBase):
+	@weight(1)
+	def test_submission(self) -> None:
+		pass
+	@weight(1)
 	def test_playlist_period(self) -> None:
 		requirements = ['playlist_period.cpp']
 		dependencies = ['playlist_period.h', 'test_playlist_period.cpp', 'doctest.h']
@@ -16,6 +22,7 @@ class TestAll(AutograderBase):
 		self.test_playlist_period()
 		self.assert_analysis_tests(analysis)
 
+	@weight(1)
 	def test_bug_bisect(self) -> None:
 		requirements = ['bug_bisect.cpp']
 		dependencies = ['bug_bisect.h', 'test_bug_bisect.cpp', 'doctest.h']
@@ -30,6 +37,7 @@ class TestAll(AutograderBase):
 		self.test_bug_bisect()
 		self.assert_analysis_tests(analysis)
 
+	@weight(1)
 	def test_perfect_plunder(self) -> None:
 		requirements = ['perfect_plunder.cpp']
 		dependencies = ['perfect_plunder.h', 'test_perfect_plunder.cpp', 'doctest.h']
@@ -44,6 +52,7 @@ class TestAll(AutograderBase):
 		self.test_perfect_plunder()
 		self.assert_analysis_tests(analysis)
 
+	@weight(1)
 	def test_genetic_gap(self) -> None:
 		requirements = ['genetic_gap.cpp']
 		dependencies = ['genetic_gap.h', 'test_genetic_gap.cpp', 'doctest.h']
@@ -58,20 +67,7 @@ class TestAll(AutograderBase):
 		self.test_genetic_gap()
 		self.assert_analysis_tests(analysis)
 
-	def test_roaming_roomba(self) -> None:
-		requirements = ['roaming_roomba.cpp']
-		dependencies = ['roaming_roomba.h', 'test_roaming_roomba.cpp', 'doctest.h']
-		executable_name = 'test_roaming_roomba'
-		cpp_files = ['roaming_roomba.cpp', 'test_roaming_roomba.cpp']
-		self.assert_exists(requirements)
-		self.assert_exists(dependencies)
-		self.assert_cpp_tests(cpp_files, executable_name)
-
-	def test_roaming_roomba_analysis(self) -> None:
-		analysis = 'roaming_roomba.md'
-		self.test_roaming_roomba()
-		self.assert_analysis_tests(analysis)
-
+	@weight(1)
 	def test_strategic_silicon(self) -> None:
 		requirements = ['strategic_silicon.cpp']
 		dependencies = ['strategic_silicon.h', 'test_strategic_silicon.cpp', 'doctest.h']

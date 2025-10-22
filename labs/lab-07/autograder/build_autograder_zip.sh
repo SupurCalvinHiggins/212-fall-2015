@@ -14,9 +14,6 @@ cp ../handout/doctest.h ./submission/
 cp ../handout/genetic_gap.h ./submission/
 cp ../handout/test_genetic_gap.cpp ./submission/
 cp ../handout/doctest.h ./submission/
-cp ../handout/roaming_roomba.h ./submission/
-cp ../handout/test_roaming_roomba.cpp ./submission/
-cp ../handout/doctest.h ./submission/
 cp ../handout/strategic_silicon.h ./submission/
 cp ../handout/test_strategic_silicon.cpp ./submission/
 cp ../handout/doctest.h ./submission/
