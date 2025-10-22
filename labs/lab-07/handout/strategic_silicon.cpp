@@ -1,6 +1,6 @@
 #include "strategic_silicon.h"
 
-u32 strategic_silicon(const Device& device, size_t height, size_t width) {
+std::uint32_t strategic_silicon(const Device &device, std::size_t height, std::size_t width) {
     // TODO: Compute the minimum cost of laying out `device` on a PCB grid `height` cells high and `width` cells wide.
     //
     // The cost of a layout is the total Manhattan distance of all connections between components.

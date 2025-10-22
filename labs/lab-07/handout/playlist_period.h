@@ -3,19 +3,30 @@
 #include <cstdint>
 #include <cassert>
 
-struct Song {
-    uint32_t duration;
+class Song {
+    std::uint32_t m_duration;
 
-    explicit Song(uint32_t duration) : duration(duration) {
+public:
+    explicit Song(const std::uint32_t duration) : m_duration(duration) {
         assert(duration > 0);
     }
+
+    [[nodiscard]] std::uint32_t duration() const noexcept { return m_duration; }
 };
 
-struct Playlist {
-    std::vector<Song> songs;
+class Playlist {
+    std::vector<Song> m_songs;
 
-    explicit Playlist(std::vector<Song> &&songs) : songs(songs) {
+public:
+    explicit Playlist(std::vector<Song> songs) : m_songs(std::move(songs)) {
     }
+
+    [[nodiscard]] const Song &operator[](const std::size_t index) const noexcept {
+        assert(index < size());
+        return m_songs[index];
+    }
+
+    [[nodiscard]] std::size_t size() const noexcept { return m_songs.size(); }
 };
 
-[[nodiscard]] uint32_t playlist_period(const Playlist &playlist);
+[[nodiscard]] std::uint32_t playlist_period(const Playlist &playlist);

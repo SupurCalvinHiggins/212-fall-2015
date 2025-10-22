@@ -6,11 +6,11 @@
 #include <algorithm>
 #include <cstdint>
 
-inline std::vector<Base> make_dna(std::initializer_list<Base> bases) {
-    return std::vector<Base>(bases);
+inline DNA make_dna(const std::initializer_list<Base> bases) {
+    return DNA(std::vector<Base>(bases));
 }
 
-uint32_t genetic_gap_dp(const std::vector<Base> &dna1, const std::vector<Base> &dna2) {
+uint32_t genetic_gap_dp(const DNA &dna1, const DNA &dna2) {
     const size_t n = dna1.size();
     const size_t m = dna2.size();
     std::vector<std::vector<uint32_t> > dp(n + 1, std::vector<uint32_t>(m + 1, 0));
@@ -20,7 +20,7 @@ uint32_t genetic_gap_dp(const std::vector<Base> &dna1, const std::vector<Base> &
 
     for (size_t i = 1; i <= n; ++i) {
         for (size_t j = 1; j <= m; ++j) {
-            uint32_t cost = (dna1[i - 1] != dna2[j - 1]) ? 1u : 0u;
+            const uint32_t cost = (dna1[i - 1] != dna2[j - 1]) ? 1u : 0u;
             dp[i][j] = std::min({
                 dp[i - 1][j] + 1,
                 dp[i][j - 1] + 1,
@@ -31,16 +31,15 @@ uint32_t genetic_gap_dp(const std::vector<Base> &dna1, const std::vector<Base> &
     return dp[n][m];
 }
 
-
 Base random_base(std::mt19937 &rng) {
     std::uniform_int_distribution<int> dist(0, 3);
     return static_cast<Base>(dist(rng));
 }
 
-std::vector<Base> random_dna(size_t length, std::mt19937 &rng) {
+DNA random_dna(const size_t length, std::mt19937 &rng) {
     std::vector<Base> seq(length);
     for (auto &b: seq) b = random_base(rng);
-    return seq;
+    return DNA(std::move(seq));
 }
 
 TEST_CASE("genetic_gap - identical sequences") {
@@ -73,7 +72,7 @@ TEST_CASE("genetic_gap - empty sequences") {
 
 TEST_CASE("genetic_gap - random sequences verified with DP") {
     std::mt19937 rng(42);
-    const size_t num_tests = 1000;
+    constexpr size_t num_tests = 1000;
 
     for (size_t t = 0; t < num_tests; ++t) {
         auto dna1 = random_dna(5 + rng() % 10, rng);

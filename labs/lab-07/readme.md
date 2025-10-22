@@ -58,25 +58,24 @@ To maximize your learning, you should:
 
 ## SRBOT Framework
 
-TODO: too dense
-
-The SRBOT framework is a general method for designing recursive algorithms. It consists of five steps:
+The SRBOT framework is a general method for designing recursive algorithms. SRBOT consists of five steps:
 
 1. **Subproblem Definition.** Give a function declaration with parameters, and precisely state the meaning of the
    function's return value. Typically, subproblems are defined over prefixes `A[:i]`, suffixes `A[i:]` or subarrays
    `A[i:j]` of an input array `A`.
 2. **Recursive Relationship.** State a recursive relationship between subproblems, and one or more smaller subproblems.
    Justify the relationship in terms of the subproblem definition.
-3. **Base Cases.** State appropriate base case(s) for your recursive relationship. Justify the base cases in terms of
+3. **Base Case(s).** State appropriate base case(s) for your recursive relationship. Justify the base case(s) in terms
+   of
    the subproblem definition.
 4. **Original Problem.** State the solution to the original problem in terms of the subproblem definition. Usually, this
    step involves invoking the subproblem once with appropriate parameters.
 5. **Time Analysis.** Model the time required to solve the original problem with a recurrence relation. Solve the
    recurrence.
 
-### Reading
+Don't worry if SRBOT doesn't make much sense at first! It will take time and practice!
 
-TODO: 2 and 3 dont make sense
+### Reading
 
 In this section, you will read an exemplar that using the SRBOT framework to design a recursive algorithm.
 
@@ -84,14 +83,17 @@ We want to design a recursive algorithm to compute `product(A)` (i.e. the produc
 
 1. **Subproblem Definition.** We will use suffixes for the subproblem definition: `product(A, i)` is the product of all
    elements in `A[i:]`. Note that we could have used prefixes instead of suffixes.
-2. **Recursive Relationship.** The product of all elements in the subarray `A[i:]` is the product of `A[i]` with the
-   product of all elements in `A[i+1:]` (i.e. `product(A, i + 1`). Therefore,
+2. **Recursive Relationship.** The product of all elements in the subarray `A[i:]` (i.e. `product(A, i)`) is the product
+   of `A[i]` with the
+   product of all elements in `A[i+1:]` (i.e. `A[i] * product(A, i + 1)`). Therefore,
    `product(A, i) = A[i] * product(A, i + 1)`.
-3. **Base Cases.** The product of zero elements is one. Therefore, `product(A, n) = 1`, since `A[n:] = []`.
+3. **Base Case(s).** The product of zero elements is one. Therefore, `product(A, n) = 1`, since `A[n:] = []`.
 4. **Original Problem.** The product of all elements in `A` is `product(A, 0)`, since `A[0:] = A`.
 5. **Time Analysis.** We can model the time complexity of `product` with the recurrence $T(n) = T(n - 1) + \Theta(1)$
    where $T(0) = \Theta(1)$. After expanding $k$ times, $T(n) = T(n - k) + k\Theta(1)$.
    With $k = n$, $T(n) = T(0) + n\Theta(1) = \Theta(n)$.
+
+Again, don't worry if this doesn't make much sense now!
 
 ## Playlist Period
 
@@ -112,7 +114,8 @@ you spend more than 15-20 minutes on this section, look at the solution provided
    `playlist_period.md`.
 3. Find a recursive relationship between subproblems. Record your answer under **Recursive Relationship** in
    `playlist_period.md`.
-4. State base case(s) for your recursive relationship. Record your answer under **Base Cases** in `playlist_period.md`.
+4. State base case(s) for your recursive relationship. Record your answer under **Base Case(s)** in
+   `playlist_period.md`.
 5. State the solution to the original problem using your subproblem definition. Record your answer under **Original
    Problem** in `playlist_period.md`.
 
@@ -176,7 +179,7 @@ _fails_ otherwise. Ideally, developers detect bugs immediately, when a commit fi
 they can fix the problem before continuing development.
 
 In large-scale projects, however, this is rarely so simple, Many developers may commit code frequently, and each run of
-the test-suite can take tens of minutes. As a result, multiple new commits may be made before the previous test results
+the test-suite can take tens of minutes. As a result, multiple new commits might happen before the previous test results
 are known. Once a bug is introduced, all subsequent commits will also fail, since the faulty code persists.
 
 Consequently, developers may observe a long sequence of test results that look like:
@@ -185,8 +188,8 @@ Consequently, developers may observe a long sequence of test results that look l
 pass, pass,, ..., pass, fail, fail, ..., fail
 ```
 
-To efficiently locate the bug, GitHub provides a tool to search for the first failing commit (the earliest commit that
-causes the test-suite to fail). This identifies where the bug was first introduced.
+To efficiently locate bug(s), GitHub provides a tool to search for the first failing commit (the earliest commit that
+causes the test-suite to fail). This identifies where a bug was first introduced.
 
 ### Design
 
@@ -198,7 +201,7 @@ you spend more than 15-20 minutes on this section, look at the solution provided
    `bug_bisect.md`.
 3. Find a recursive relationship between subproblems. Record your answer under **Recursive Relationship** in
    `bug_bisect.md`.
-4. State base case(s) for your recursive relationship. Record your answer under **Base Cases** in `bug_bisect.md`.
+4. State base case(s) for your recursive relationship. Record your answer under **Base Case(s)** in `bug_bisect.md`.
 5. State the solution to the original problem using your subproblem definition. Record your answer under **Original
    Problem** in `bug_bisect.md`.
 
@@ -264,22 +267,24 @@ look at the solution provided below and move on.
 ## Perfect Plunder
 
 Burglars are risk-adverse: to avoid drawing attention a burglar will never rob two adjacent houses. Housebreaker Hal,
-an (in)famous burglar, is considering a job on a cul-de-save, a circular street of $n$ houses arranged so that house $1$
-is adjacent to houses $2$ and $n$. Each house $i$ contains $v_i$ dollars. Housebreaker Hal wants to maximize the total
-take while respecting the rule that no two adjacent houses are robbed.
+an (in)famous burglar, is considering a job on a cul-de-sac, a circular street of $n$ houses arranged so that every
+house is adjacent to two others (e.g. house $1$
+is adjacent to houses $2$ and $n$). Each house $i$ contains $v_i$ dollars. Housebreaker Hal must decide which houses to
+rob to maximize the total
+plunder while respecting the rule that no two adjacent houses are robbed.
 
 ### Design
 
 In this section, you will design a recursive algorithm to help Housebreaker Hal optimally rob houses on a cul-de-sac
-using the SRBOT framework. If you spend more than 15-20 minutes on this section, look at the solution provided below and
-move on.
+using the SRBOT framework.
 
 1. Read `perfect_plunder.h`.
 2. Define subproblems and precisely state their meaning in words. Record your answer under **Subproblem Definition** in
    `perfect_plunder.md`.
 3. Find a recursive relationship between subproblems. Record your answer under **Recursive Relationship** in
    `perfect_plunder.md`.
-4. State base case(s) for your recursive relationship. Record your answer under **Base Cases** in `perfect_plunder.md`.
+4. State base case(s) for your recursive relationship. Record your answer under **Base Case(s)** in
+   `perfect_plunder.md`.
 5. State the solution to the original problem using your subproblem definition. Record your answer under **Original
    Problem** in `perfect_plunder.md`.
 
@@ -299,8 +304,7 @@ In this section, you will implement your recursive algorithm.
 
 ### Theoretical Analysis
 
-In this section, you will analyze your recursive algorithm. If you spend more than 5-10 minutes on this section,
-look at the solution provided below and move on.
+In this section, you will analyze your recursive algorithm.
 
 1. State a recurrence relation $T(n)$ for the worst-case time complexity of your recursive algorithm. Record your answer
    under
@@ -317,8 +321,8 @@ look at the solution provided below and move on.
 Biologists study how species evolve through **genetic mutations**. The term _genetic_ refers to anything related to
 genes, the units of heredity that encode biological information within an organism and determine its traits.
 
-DNA (deoxyribonucleic acid) stores this genetic information as a sequence of **bases**. A **base** (also called a *
-*nucleotide base**) is a chemical subunit of DNA that carries genetic information. Each base is one of four possible
+DNA stores this genetic information as a sequence of **bases**. A **base** (also called a **nucleotide base**) is a
+chemical subunit of DNA that carries genetic information. Each base is one of four possible
 types:
 
 1. Adenine (A)
@@ -347,15 +351,14 @@ the other, a measure of their **genetic distance**.
 ### Design
 
 In this section, you will design a recursive algorithm to compute the genetic distance between two DNA sequences using
-the SRBOT framework. If you spend more than 15-20 minutes on this section, look at the solution provided below and move
-on.
+the SRBOT framework.
 
 1. Read `genetic_gap.h`.
 2. Define subproblems and precisely state their meaning in words. Record your answer under **Subproblem Definition** in
    `genetic_gap.md`.
 3. Find a recursive relationship between subproblems. Record your answer under **Recursive Relationship** in
    `genetic_gap.md`.
-4. State base case(s) for your recursive relationship. Record your answer under **Base Cases** in `genetic_gap.md`.
+4. State base case(s) for your recursive relationship. Record your answer under **Base Case(s)** in `genetic_gap.md`.
 5. State the solution to the original problem using your subproblem definition. Record your answer under **Original
    Problem** in `genetic_gap.md`.
 
@@ -375,8 +378,7 @@ In this section, you will implement your recursive algorithm.
 
 ### Theoretical Analysis
 
-In this section, you will analyze your recursive algorithm. If you spend more than 5-10 minutes on this section,
-look at the solution provided below and move on.
+In this section, you will analyze your recursive algorithm.
 
 1. State a recurrence relation $T(n)$ for the worst-case time complexity of your recursive algorithm. Record your answer
    under
@@ -390,71 +392,6 @@ look at the solution provided below and move on.
 
 # Optional Advanced Topics
 
-## Roaming Roomba
-
-Robotic vacuum cleaners, such as Roombas, are autonomous machines designed to navigate indoor environments and clean
-floors without human intervention. Designing efficient navigation strategies is a fundamental challenge for roboticists:
-a Roomba must decide how to move through a home to cover all areas while avoiding obstacles and minimizing energy use.
-
-A key limitation for these robots is their battery capacity. Each movement consumes energy, and if the battery runs out,
-the Roomba cannot continue cleaning. Many homes include a home base, where the Roomba can fully recharge, allowing it to
-resume operation. Planning routes that balance cleaning coverage and battery usage is therefore critical for reliable
-autonomous operation.
-
-To study this problem algorithmically, we model a home as a rectangular grid of tiles, where each tile is either clean,
-dirty, or the home base. The Roomba can move from one tile to an adjacent tile (up, down, left, or right), but it cannot
-leave the grid: walls surround the home, preventing the robot from exiting. Moving onto a clean tile consumes a small
-amount of energy, moving onto a dirty tile consumes more energy (to perform cleaning), and moving onto the home base
-fully recharges the battery.
-
-Designers need to determine a battery capacity that will allow the Roomba to clean nearly all homes. To do this, they
-can simulate the Roomba on representative home layouts to find the minimum battery capacity required, and then implement
-that capacity in the real device to ensure reliable performance.
-
-### Design
-
-In this section, you will design a recursive algorithm to compute the minimum battery capacity required for a Roomba to
-clean all dirty floors using the SRBOT framework. If you spend more than 15-20
-minutes on this section, look at the solution provided below and move on.
-
-1. Read `roaming_roomba.h`.
-2. Define subproblems and precisely state their meaning in words. Record your answer under **Subproblem Definition** in
-   `roaming_roomba.md`.
-3. Find a recursive relationship between subproblems. Record your answer under **Recursive Relationship** in
-   `roaming_roomba.md`.
-4. State base case(s) for your recursive relationship. Record your answer under **Base Cases** in `roaming_roomba.md`.
-5. State the solution to the original problem using your subproblem definition. Record your answer under **Original
-   Problem** in `roaming_roomba.md`.
-
-> [!IMPORTANT]
-> Submit `roaming_roomba.md` to Gradescope.
-
-### Implementation
-
-In this section, you will implement your recursive algorithm.
-
-1. Complete `roaming_roomba.cpp`.
-2. Build `test_roaming_roomba` from `roaming_roomba.cpp`, and `test_roaming_roomba.cpp`.
-3. Run `test_roaming_roomba`. All tests should pass.
-
-> [!IMPORTANT]
-> Submit `roaming_roomba.cpp` to Gradescope.
-
-### Theoretical Analysis
-
-In this section, you will analyze your recursive algorithm. If you spend more than 5-10 minutes on this section,
-look at the solution provided below and move on.
-
-1. State a recurrence relation $T(n)$ for the worst-case time complexity of your recursive algorithm. Record your answer
-   under
-   **Time Analysis** in `roaming_roomba.md`.
-2. Solve the recurrence relation $T(n)$. What is the worst-case time complexity of your recursive algorithm? Record your
-   answer under
-   **Time Analysis** in `roaming_roomba.md`.
-
-> [!IMPORTANT]
-> Submit `roaming_roomba.md` to Gradescope.
-
 ## Strategic Silicon
 
 Modern electronic devices, from smartphones to single-board computers, rely on densely packed
@@ -466,8 +403,8 @@ electromagnetic interference.
 
 Designers must carefully decide where to place each component on a PCB to ensure the system meets performance and
 reliability requirements. Each component occupies a discrete area on the board, and connections between components have
-costs associated with their lengths. Minimizing the total length of these connections reduces signal delay, power usage,
-and potential interference.
+costs associated with their lengths. Minimizing the total length of these connections reduces signal delay and power
+usage.
 
 To study this problem algorithmically, we can model a PCB as a rectangular grid of cells, where each cell can hold a
 single component. Components are connected via unidirectional wires, and the cost of a layout is measured as the sum of
@@ -476,21 +413,19 @@ horizontal and vertical steps needed to move from one cell to the other, ignorin
 assumed to be large enough to fit all components, and no two components may occupy the same cell.
 
 By simulating different component placements on this grid, engineers can determine a layout that minimizes total
-connection cost, providing guidance for real-world PCB design. Efficiently computing this layout allows designers to
-optimize performance, reduce energy consumption, and mitigate interference before committing to physical manufacturing.
+connection cost, and therefore the signal delay and power usage.
 
 ### Design
 
 In this section, you will design a recursive algorithm to compute the minimum cost PCB layout of a device using the
-SRBOT framework. If you spend more than 15-20
-minutes on this section, look at the solution provided below and move on.
+SRBOT framework.
 
 1. Read `strategic_silicon.h`.
 2. Define subproblems and precisely state their meaning in words. Record your answer under **Subproblem Definition** in
    `strategic_silicon.md`.
 3. Find a recursive relationship between subproblems. Record your answer under **Recursive Relationship** in
    `strategic_silicon.md`.
-4. State base case(s) for your recursive relationship. Record your answer under **Base Cases** in
+4. State base case(s) for your recursive relationship. Record your answer under **Base Case(s)** in
    `strategic_silicon.md`.
 5. State the solution to the original problem using your subproblem definition. Record your answer under **Original
    Problem** in `strategic_silicon.md`.
@@ -511,8 +446,7 @@ In this section, you will implement your recursive algorithm.
 
 ### Theoretical Analysis
 
-In this section, you will analyze your recursive algorithm. If you spend more than 5-10 minutes on this section,
-look at the solution provided below and move on.
+In this section, you will analyze your recursive algorithm.
 
 1. State a recurrence relation $T(n)$ for the worst-case time complexity of your recursive algorithm. Record your answer
    under

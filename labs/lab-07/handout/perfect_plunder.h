@@ -1,30 +1,25 @@
 #pragma once
-#include <vector>
-#include <cassert>
 #include <cstdint>
+#include <memory>
 
-struct House {
-    uint32_t money;
-    House *left;
-    House *right;
+class House {
+    std::uint32_t m_dollars;
+    std::shared_ptr<House> m_left;
+    std::shared_ptr<House> m_right;
 
-    explicit House(uint32_t money) : money(money), left(nullptr), right(nullptr) {
+public:
+    explicit House(const uint32_t dollars) : m_dollars(dollars), m_left(nullptr), m_right(nullptr) {
     }
+
+    [[nodiscard]] uint32_t dollars() const noexcept { return m_dollars; }
+
+    [[nodiscard]] std::shared_ptr<House> &left() noexcept { return m_left; }
+
+    [[nodiscard]] const std::shared_ptr<House> &left() const noexcept { return m_left; }
+
+    [[nodiscard]] std::shared_ptr<House> &right() noexcept { return m_right; }
+
+    [[nodiscard]] const std::shared_ptr<House> &right() const noexcept { return m_right; }
 };
 
-struct CulDeSac {
-    House *house;
-
-    explicit CulDeSac(const std::vector<House *> &houses) {
-        assert(!houses.empty());
-        for (size_t i = 0; i < houses.size() - 1; ++i)
-            houses[i]->right = houses[i + 1];
-        for (size_t i = 1; i < houses.size(); ++i)
-            houses[i]->left = houses[i - 1];
-        houses.front()->left = houses.back();
-        houses.back()->right = houses.front();
-        house = houses.front();
-    }
-};
-
-[[nodiscard]] uint32_t perfect_plunder(const CulDeSac &cul_de_sac);
+[[nodiscard]] uint32_t perfect_plunder(const std::shared_ptr<House> &cul_de_sac);

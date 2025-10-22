@@ -1,26 +1,49 @@
 #pragma once
+#include <utility>
+#include <memory>
 #include <vector>
 #include <algorithm>
 #include <string>
 
-struct TestResult {
-    int expected_output;
-    int actual_output;
 
-    TestResult(int expected_output, int actual_output) : expected_output(expected_output), actual_output(actual_output) { }
+class Result {
+public:
+    virtual ~Result() noexcept = default;
 
-    [[nodiscard]] bool is_pass() const { return expected_output == actual_output; }
+    [[nodiscard]] virtual bool is_pass() const noexcept = 0;
 };
 
-struct TestSuiteResult {
-    std::string commit_id;
-    std::vector<TestResult> results;
+template<typename T>
+class TestResult final : public Result {
+    T m_expected_output;
+    T m_actual_output;
 
-    TestSuiteResult(std::string&& commit_id, std::vector<TestResult>&& results) : commit_id(commit_id), results(results) { }
+public:
+    TestResult(T expected_output, T actual_output) : m_expected_output(std::move(expected_output)),
+                                                     m_actual_output(std::move(actual_output)) {
+    }
 
-    [[nodiscard]] bool is_pass() const {
-        return std::all_of(results.begin(), results.end(),[](const TestResult& result) -> bool { return result.is_pass(); });
+    [[nodiscard]] bool is_pass() const noexcept override { return m_expected_output == m_actual_output; }
+};
+
+class TestSuiteResult final : public Result {
+    std::string m_commit_id;
+    std::vector<std::unique_ptr<Result> > m_results;
+
+public:
+    TestSuiteResult(std::string commit_id,
+                    std::vector<std::unique_ptr<Result> > results) : m_commit_id(std::move(commit_id)),
+                                                                     m_results(std::move(results)) {
+    }
+
+    [[nodiscard]] bool is_pass() const noexcept override {
+        return std::all_of(m_results.begin(), m_results.end(),
+                           [](const std::unique_ptr<Result> &result) -> bool { return result->is_pass(); });
+    }
+
+    [[nodiscard]] const std::string &commit_id() const noexcept {
+        return m_commit_id;
     }
 };
 
-[[nodiscard]] std::string bug_bisect(const std::vector<TestSuiteResult>& suite_results);
+[[nodiscard]] std::string bug_bisect(const std::vector<TestSuiteResult> &suite_results);
