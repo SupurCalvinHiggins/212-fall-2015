@@ -119,7 +119,8 @@ ll = tmp;
 ```
 
 What are the contents of `ll`, in order from the head to the tail? Provide your answer in linked list format:
-[____]([2]->[1])
+
+[____]([3]->[1])
 
 ## Problem
 
@@ -250,10 +251,10 @@ class LinkedList {
 Assume integers and pointers take $$8$$ bytes of memory. How many bytes of memory does a linked list of size $$n$$
 require?
 
-( ) $$8n + 8$$
-( ) $$8n + 12$$
-(X) $$12n + 8$$
-( ) $$12n + 12$$
+( ) $$16n + 16$$
+( ) $$16n + 24$$
+(X) $$24n + 16$$
+( ) $$24n + 24$$
 
 ## Problem
 
@@ -367,14 +368,18 @@ int baz(int bar) {
    if (bar == 1)
       return 1;
    if (bar % 2 == 0)
-      return 1 + foo(bar - 1) + foo(bar - 2);
-   return 2 * foo(n / 2)
+      return 1 + baz(bar - 1) + baz(bar - 2);
+   return 2 * baz(bar / 2);
 }
 ```
 
 What is the return value of `baz(9)`? Give your answer as a single integer.
 
-[____](8)
+[____](10)
+
+How many recursive calls (including the initial call) are made by `baz(9)`? Give your answer as a single integer.
+
+[____](7)
 
 ## Problem
 
@@ -474,8 +479,8 @@ size_t contains(const int* A, size_t left, size_t right, int target) {
 What recurrence models the number of array accesses performed by `contains` on an input array of size $$n$$ in the
 worst-case? Assume $$n$$ is a power of $$3$$.
 
-( ) $$T(n) = T(n/3) + 2$$
-(X) $$T(n) = T(n/2) + 2$$
+(X) $$T(n) = T(n/3) + 2$$
+( ) $$T(n) = T(n/2) + 2$$
 ( ) $$T(n) = 2T(n/2) + 2$$
 ( ) $$T(n) = 3T(n/3) + 2$$
 
@@ -621,15 +626,15 @@ void merge(vector<int>& A, size_t left, size_t mid, size_t right, vector<int>& a
 }
 
 void sort(vector<int>& A, size_t left, size_t right, vector<int>& aux) {
-    if (left >= right - 1) 
-      return;
+    if (right - left <= 1) return;
 
-    auto m1 = (right - left) / 4 + left;
-    auto m2 = 3 * (right - left) / 4 + left;
+    size_t t = (right - left + 2) / 3;
+    size_t m1 = left + t;
+    size_t m2 = right - t;
 
-    sort(A, left, m1, aux);
-    sort(A, m1, m2, aux);
-    sort(A, m2, right, aux);
+    sort(A, left, m2, aux);
+    sort(A, m1, right, aux);
+    sort(A, left, m2, aux);
 
     merge(A, left, m1, m2, aux);
     merge(A, left, m2, right, aux);
@@ -673,6 +678,7 @@ void quicksort(vector<int>& A, size_t left, size_t right) {
 }
 
 void quicksort(vector<int>& A) {
+    if (A.empty()) return;
     quicksort(A, 0, A.size() - 1);
 }
 ```
@@ -683,18 +689,22 @@ What is the first pivot? Give your answer as a single integer
 
 [____](7)
 
-What are the contents of `A` after partitioning but before the recursive calls? Give your answer as a comma-seperated
+What are the contents of `A` after partitioning but before the recursive calls? Give your answer as a comma-separated
 list.
 
 [____](6,3,1,7,9)
 
-What are the contents of `A` after the first recursive call? Give your answer as a comma-seperated list.
+What are the contents of `A` after the first recursive call? Give your answer as a comma-separated list.
 
 [____](1,3,6,7,9)
 
-What are the contents of `A` after the second recursive call? Give your answer as a comma-seperated list.
+What are the contents of `A` after the second recursive call? Give your answer as a comma-separated list.
 
 [____](1,3,6,7,9)
+
+How many recursive calls to `quicksort` (including the initial call) are performed? Give your answer as a single integer.
+
+[____](7)
 
 ## Problem
 
@@ -736,6 +746,7 @@ void mergesort(vector<int>& A, size_t left, size_t right, vector<int>& aux) {
 }
 
 void mergesort(vector<int>& A) {
+    if (A.empty()) return;
     vector<int> aux(A.size());
     mergesort(A, 0, A.size() - 1, aux);
 }
@@ -754,6 +765,10 @@ What are the contents of `A` after the second recursive call? Give your answer a
 What are the contents of `A` after the call to `merge`? Give your answer as a comma-seperated list.
 
 [____](1,3,6,7,9)
+
+How many recursive calls to `mergesort` (including the initial call) are performed? Give your answer as a single integer.
+
+[____](9)
 
 ## Problem
 
@@ -934,22 +949,19 @@ Consider the following sorting algorithm:
 
 ```cpp
 void sort(vector<int>& A, size_t left, size_t right) {
-    if (left >= right - 1) 
-      return;
+    if (left >= right) return;
+    if (A[left] > A[right]) swap(A[left], A[right]);
+    if (right - left + 1 <= 2) return;
 
-    auto n = right - left;
-    auto m1 = 2 * n / 3 + left;
-    auto m2 = n / 3 + left;
-    auto m3 = n / 6 + left;
-    auto m4 = 5 * n / 6 + left;
-    
-    sort(A, left, m1);
-    sort(A, m2, right);
-    sort(A, m3, m4);
+    size_t t = (right - left + 1) / 3;
+    sort(A, left, right - t);
+    sort(A, left + t, right);
+    sort(A, left, right - t);
 }
 
 void sort(vector<int>& A) {
-    sort(A, 0, A.size());
+    if (A.empty()) return;
+    sort(A, 0, A.size() - 1);
 }
 ```
 
@@ -961,12 +973,12 @@ Assume $$c$$ is the amount of non-recursive work.
 (X) $$T(n) = 3T(2n/3) + c$$
 ( ) $$T(n) = 2T(n/3) + c$$
 
-What is the correct base case for the recurrence?
+Which of the following are the correct base case(s) for the recurrence?
 
-( ) $$T(0) = \Theta(1)$$
-(X) $$T(1) = \Theta(1)$$
-( ) $$T(1) = \Theta(n)$$
-( ) $$T(0) = \Theta(n)$$
+[X] $$T(0) = \Theta(1)$$
+[X] $$T(1) = \Theta(1)$$
+[X] $$T(2) = \Theta(1)$$
+[ ] $$T(3) = \Theta(1)$$
 
 Give a formula for $$T(n)$$ after expanding $$k$$ times.
 
@@ -1044,7 +1056,7 @@ According to the second case of the master theorem, what is the time complexity 
 ( ) $$\Theta(n)$$
 (X) $$\Theta(n \lg n)$$
 ( ) $$\Theta(n^2)$$
-( ) $$\Theta(n^2 \lg n$$
+( ) $$\Theta(n^2 \lg n)$$
 
 Which of the following recurrences can be analyzed with the second case of the master theorem (as stated above)?
 
@@ -1053,7 +1065,7 @@ Which of the following recurrences can be analyzed with the second case of the m
 [X] $$T(n) = 2T(n/3) + \Theta(n^{\lg 3})$$
 [ ] $$T(n) = T(n - 1) + n$$
 [X] $$T(n) = T(n/4) + 10$$
-[x] $$T(n) = 3T(2n/5) + \Theta(n^{\log_{2.5} 3}$$
+[x] $$T(n) = 3T(2n/5) + \Theta(n^{\log_{2.5} 3})$$
 
 ## Problem
 
@@ -1082,6 +1094,7 @@ void quicksort(vector<int>& A, size_t left, size_t right) {
 }
 
 void quicksort(vector<int>& A) {
+    if (A.empty()) return;
     quicksort(A, 0, A.size() - 1);
 }
 ```
