@@ -486,16 +486,16 @@ What is the maximum height of a B-tree with $65535$ keys if $b = 3$? Start by fi
 
 ## Problem
 
-In a perfect BST of height $16$, what is the expected number of visited nodes when searching for a key chosen uniformly at random? Assume the key is in the tree with 50% probability. Give your answer as a single integer. If needed, rounded up to the nearest integer. [____]()
+In a perfect BST of height $16$, what is the expected number of visited nodes when searching for a key chosen uniformly at random? Assume the key is in the tree with 50% probability. Give your answer as a single integer. If needed, round up to the nearest integer. [____](17)
 
 ## Problem
 
-What is the maximum number of right rotations required to transform a BST with $65535$ nodes into a chain? A chain is a sequence of nodes where nodes either only have left children, or only have right children. Give your answer as a single integer. [____]()
+What is the maximum number of right rotations required to transform a BST with $65535$ nodes into a right chain? A right chain is a tree where nodes have only a right child, or no children. Give your answer as a single integer. [____](65534)
 
 ## Problem
 A subtree property is a node property that is maintained under tree operations. For example, the binary search tree property is a subtree property. Every node in the tree obeys the binary search tree property, and this remains true after insertions, deletions and queries.
 
-What subtree properties can be maintained in a red-black tree while retaining $\Theta(\lg n)$ worst-case operations?
+What subtree properties can be maintained in a red-black tree while retaining $\Theta(\lg n)$ worst-case operations? Write a modified version of insert for each such subtree property.
 
 [X] Number of nodes in subtree
 [X] Number of red nodes in subtree
@@ -507,11 +507,11 @@ What subtree properties can be maintained in a red-black tree while retaining $\
 
 ## Problem
 
-How many different $32$ node binary trees are there? Two binary trees are different if and only if their shapes differ irrespective of the values stored in the trees. Start by finding a formula in terms of $n$. If you know generating functions, use them. Give your answer as a single integer. [____]()
+How many different $32$ node binary trees are there? Two binary trees are different if and only if their shapes differ irrespective of the values stored in the trees. Start by finding a formula in terms of $n$. If you know generating functions, use them. Give your answer as a single integer. [____](55534064877048198)
 
 ## Problem
 
-How many nodes are in a B-tree with $b = 4$ after inserting `0, 1, 2, ..., 65535`? Start by finding a formula in terms of $n$ and $b$. Give your answer as a single integer. [____]()
+How many nodes are in a B-tree with $b = 4$ after inserting `1,2,...,49163`? Start by finding a formula in terms of $n$ and $b$. Give your answer as a single integer. [____](49121)
 
 ## Problem
 
