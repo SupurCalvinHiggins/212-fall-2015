@@ -48,18 +48,6 @@
     "analysis": "genetic_gap.md"
   },
   {
-    "name": "roaming_roomba",
-    "requirements": [
-      "roaming_roomba.cpp"
-    ],
-    "dependencies": [
-      "roaming_roomba.h",
-      "test_roaming_roomba.cpp",
-      "doctest.h"
-    ],
-    "analysis": "roaming_roomba.md"
-  },
-  {
     "name": "strategic_silicon",
     "requirements": [
       "strategic_silicon.cpp"
