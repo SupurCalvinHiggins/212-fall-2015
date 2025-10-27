@@ -48,6 +48,7 @@ class Unit:
 
         if has_analysis:
             buf = [
+                "@weight(1)",
                 f"def test_{self.name}_analysis(self) -> None:",
                 f"\tanalysis = '{self.analysis}'",
             ]
@@ -68,6 +69,7 @@ def generate_test_all(units: Iterable[Unit]) -> str:
         "\t@weight(1)",
         "\tdef test_submission(self) -> None:",
         "\t\tpass",
+        "",
     ]
     for unit in units:
         for test in unit.tests():
