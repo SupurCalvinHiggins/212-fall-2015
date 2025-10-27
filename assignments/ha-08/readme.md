@@ -188,45 +188,57 @@ Does the tree obey the binary search tree property?
 
 Insert the following sequence of numbers into an empty binary search tree:
 ```txt
-
+7,5,2,1,8,0,3
 ```
 
-What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](7,5,2,1,0,3,8)
 
-What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](0,1,2,3,5,7,8)
 
-What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](0,1,3,2,5,8,7)
 
 ## Problem
 
 Consider the following binary search tree:
 ```txt
-
+   6
+  / \
+ 3   8
+/ \   \
+1  5   9
+ \
+  2
 ```
 
-What nodes are visited when searching for `` in the tree? Give your answer as a comma-seperated list of integers. [____]()
+What nodes are visited when searching for `6` in the tree? Give your answer as a comma-seperated list of integers. [____](6)
 
-What nodes are visited when searching for `` in the tree? Give your answer as a comma-seperated list of integers. [____]()
+What nodes are visited when searching for `4` in the tree? Give your answer as a comma-seperated list of integers. [____](6,3,5)
 
-What nodes are visited when searching for `` in the tree? Give your answer as a comma-seperated list of integers. [____]()
+What nodes are visited when searching for `7` in the tree? Give your answer as a comma-seperated list of integers. [____](6,8)
 
 ## Problem
 
 Consider the following binary search tree:
 ```txt
-
+   5
+ /   \
+2     7
+ \   / \
+  3 6   9
+       /
+      8
 ```
 
 Remove the following sequence of numbers from the tree using the inorder successor strategy:
 ```txt
-
+7,5,8,9
 ```
 
-What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](3,2,6)
 
-What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](2,3,6)
 
-What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](2,6,3) 
 
 ## Problem
 
@@ -245,67 +257,98 @@ What is the maximum height of a binary search tree with $65535$ keys? Start by f
 
 ## Problem
 
+Nodes marked with `R` are red and nodes marked with `B` are black.
+
 Consider the following tree:
 ```txt
+  B5
+ /  \
+R3  B8
+```
+
+What red-black tree properties does the tree obey?
+[X] Black root
+[X] Red nodes cannot have red children
+[X] Every root to leaf path contains the same number of black nodes
+[X] Binary search tree property
+
+Consider the following tree:
+```txt
+  B6
+ /  \
+R4  R8
+    /
+   R7
+```
+
+What red-black tree properties does the tree obey?
+[X] Black root
+[ ] Red nodes cannot have red children
+[X] Every root to leaf path contains the same number of black nodes
+[X] Binary search tree property
+
+Consider the following tree:
+```txt
+  R5
+ /  \
+B6  B8
+    /
+   B7
 ```
 
 What red-black tree properties does the tree obey?
 [ ] Black root
-[ ] Red nodes cannot have red children
-[ ] Every root to leaf path contains the same number of black nodes
-[ ] Binary search tree property
-
-Consider the following tree:
-```txt
-```
-
-What red-black tree properties does the tree obey?
-[ ] Black root
-[ ] Red nodes cannot have red children
-[ ] Every root to leaf path contains the same number of black nodes
-[ ] Binary search tree property
-
-Consider the following tree:
-```txt
-```
-
-What red-black tree properties does the tree obey?
-[ ] Black root
-[ ] Red nodes cannot have red children
+[X] Red nodes cannot have red children
 [ ] Every root to leaf path contains the same number of black nodes
 [ ] Binary search tree property
 
 ## Problem
 
-TODO: rotation
+Rotate the root of the following binary tree (1) right, (2) right, (3) left, (4) right:
+```txt
+      5
+     / \
+    3   8
+   / \   \
+  2   4   9
+ /
+1
+```
+
+What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](TODO)
+
+What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](TODO)
+
+What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](TODO)
 
 ## Problem
 
 Insert the following sequence of numbers into an empty red-black tree:
 ```txt
-
+3,7,1,9,0,5,8
 ```
 
-What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes iwith `B`. [____]()
+What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes iwith `B`. [____](B3,B1,R0,R7,B5,B9,R8)
 
-What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`. [____]()
+What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`. [____](R0,B1,B3,B5,R7,R8,B9)
 
-What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`. [____]()
+What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`. [____](R0,B1,B5,R8,B9,R7,B3)
 
 ## Problem
 
-What is the minimum height of a red-black tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____]()
+What is the minimum height of a red-black tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](16)
 
-What is the maximum height of a red-black tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____]()
+What is the maximum height of a red-black tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](30)
 
-What is the minimum black height of a red-black tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____]()
+What is the minimum black height of a red-black tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](9)
 
-What is the maximum black height of a red-black tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____]()
+What is the maximum black height of a red-black tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](16)
 
 ## Problem
 
 Consider the following tree:
 ```txt
+TODO
 ```
 
 What 2-3-4 tree properties does the tree obey?
@@ -315,6 +358,7 @@ What 2-3-4 tree properties does the tree obey?
 
 Consider the following tree:
 ```txt
+TODO
 ```
 
 What 2-3-4 tree properties does the tree obey?
@@ -324,6 +368,7 @@ What 2-3-4 tree properties does the tree obey?
 
 Consider the following tree:
 ```txt
+TODO
 ```
 
 What 2-3-4 tree properties does the tree obey?
@@ -335,26 +380,26 @@ What 2-3-4 tree properties does the tree obey?
 
 Insert the following sequence of numbers into an empty 2-3-4 tree:
 ```txt
-
+2,6,9,1,4,8,3
 ```
 
-What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](2,6,1,3,4,8,9)
 
-What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](1,2,3,4,6,8,9)
 
-What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](1,3,4,8,9,2,6)
 
 ## Problem
 
-What is the minimum height of a 2-3-4 tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____]()
+What is the minimum height of a 2-3-4 tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](8)
 
-What is the maximum height of a 2-3-4 tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____]()
+What is the maximum height of a 2-3-4 tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](16)
 
 ## Problem
 
 Convert the following 2-3-4 tree into the equivalent red-black tree:
 ```txt
-
+TODO
 ```
 
 What is the preorder traversal of the red-black tree? Give your answer as a comma-seperated list of integers. [____]()
@@ -371,7 +416,7 @@ How many black nodes are in the tree? Give your answer as a single integer. [___
 
 Convert the following red-black tree into the equivalent 2-3-4 tree:
 ```txt
-
+TODO
 ```
 
 What is the preorder traversal of the 2-3-4 tree? Give your answer as a comma-seperated list of integers. [____]()
@@ -390,6 +435,7 @@ How many 4-nodes are in the tree? Give your answer as a single integer. [____]()
 
 Consider the following tree:
 ```txt
+TODO
 ```
 
 What B-tree properties does the tree obey if $b = $?
@@ -399,6 +445,7 @@ What B-tree properties does the tree obey if $b = $?
 
 Consider the following tree:
 ```txt
+TODO
 ```
 
 What B-tree tree properties does the tree obey if $b = $?
@@ -408,6 +455,7 @@ What B-tree tree properties does the tree obey if $b = $?
 
 Consider the following tree:
 ```txt
+TODO
 ```
 
 What B-tree properties does the tree obey if $b = $?
@@ -417,22 +465,22 @@ What B-tree properties does the tree obey if $b = $?
 
 ## Problem
 
-Insert the following sequence of numbers into an empty B-tree tree where $b = $:
+Insert the following sequence of numbers into an empty B-tree tree where $b = 3$:
 ```txt
-
+0,5,2,7,1,9,4
 ```
 
-What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](2,7,0,1,4,5,9)
 
-What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](0,1,2,4,5,7,9)
 
-What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](0,1,4,5,9,2,7)
 
 ## Problem
 
-What is the minimum height of a B-tree with $65535$ keys if $b = $? Start by finding a formula in terms of $n$ and $b$. Give your answer as a single integer. [____]()
+What is the minimum height of a B-tree with $65535$ keys if $b = 3$? Start by finding a formula in terms of $n$ and $b$. Give your answer as a single integer. [____](10)
 
-What is the maximum height of a B-tree with $65535$ keys if $b = $? Start by finding a formula in terms of $n$ and $b$. Give your answer as a single integer. [____]()
+What is the maximum height of a B-tree with $65535$ keys if $b = 3$? Start by finding a formula in terms of $n$ and $b$. Give your answer as a single integer. [____](16)
 
 # Extra Practice
 
