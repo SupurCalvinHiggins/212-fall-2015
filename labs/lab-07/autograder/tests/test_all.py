@@ -7,6 +7,7 @@ class TestAll(AutograderBase):
 	@weight(1)
 	def test_submission(self) -> None:
 		pass
+
 	@weight(1)
 	def test_playlist_period(self) -> None:
 		requirements = ['playlist_period.cpp']
@@ -17,6 +18,7 @@ class TestAll(AutograderBase):
 		self.assert_exists(dependencies)
 		self.assert_cpp_tests(cpp_files, executable_name)
 
+	@weight(1)
 	def test_playlist_period_analysis(self) -> None:
 		analysis = 'playlist_period.md'
 		self.test_playlist_period()
@@ -32,6 +34,7 @@ class TestAll(AutograderBase):
 		self.assert_exists(dependencies)
 		self.assert_cpp_tests(cpp_files, executable_name)
 
+	@weight(1)
 	def test_bug_bisect_analysis(self) -> None:
 		analysis = 'bug_bisect.md'
 		self.test_bug_bisect()
@@ -47,6 +50,7 @@ class TestAll(AutograderBase):
 		self.assert_exists(dependencies)
 		self.assert_cpp_tests(cpp_files, executable_name)
 
+	@weight(1)
 	def test_perfect_plunder_analysis(self) -> None:
 		analysis = 'perfect_plunder.md'
 		self.test_perfect_plunder()
@@ -62,6 +66,7 @@ class TestAll(AutograderBase):
 		self.assert_exists(dependencies)
 		self.assert_cpp_tests(cpp_files, executable_name)
 
+	@weight(1)
 	def test_genetic_gap_analysis(self) -> None:
 		analysis = 'genetic_gap.md'
 		self.test_genetic_gap()
@@ -77,6 +82,7 @@ class TestAll(AutograderBase):
 		self.assert_exists(dependencies)
 		self.assert_cpp_tests(cpp_files, executable_name)
 
+	@weight(1)
 	def test_strategic_silicon_analysis(self) -> None:
 		analysis = 'strategic_silicon.md'
 		self.test_strategic_silicon()
