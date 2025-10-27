@@ -304,7 +304,7 @@ What red-black tree properties does the tree obey?
 
 ## Problem
 
-Rotate the root of the following binary tree (1) right, (2) right, (3) left, (4) right:
+Rotate at the root of the following binary tree (1) right, (2) left, (3) right:
 ```txt
       5
      / \
@@ -315,11 +315,11 @@ Rotate the root of the following binary tree (1) right, (2) right, (3) left, (4)
 1
 ```
 
-What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](TODO)
+What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](3,2,1,5,4,8,9)
 
-What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](TODO)
+What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](1,2,3,4,5,8,9)
 
-What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](TODO)
+What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. [____](1,2,4,9,8,5,3)
 
 ## Problem
 
@@ -348,32 +348,40 @@ What is the maximum black height of a red-black tree with $65535$ keys? Start by
 
 Consider the following tree:
 ```txt
-TODO
+     [5]
+    /   \
+  [1]  [7|9]
+  /
+[0]
 ```
 
 What 2-3-4 tree properties does the tree obey?
-[ ] Every node has 1, 2, or 3 keys except for possibly the root
+[X] Every node has 1, 2, or 3 keys except for possibly the root
 [ ] All leaves have the same depth
-[ ] Multi-way search tree property
+[X] Multi-way search tree property
 
 Consider the following tree:
 ```txt
-TODO
+      [4|7]
+     /  |  \
+[1|3] [5|6] [8|9]
 ```
 
 What 2-3-4 tree properties does the tree obey?
-[ ] Every node has 1, 2, or 3 keys except for possibly the root
-[ ] All leaves have the same depth
-[ ] Multi-way search tree property
+[X] Every node has 1, 2, or 3 keys except for possibly the root
+[X] All leaves have the same depth
+[X] Multi-way search tree property
 
 Consider the following tree:
 ```txt
-TODO
+      [5]
+    /     \
+[1|2|3|4] [4]
 ```
 
 What 2-3-4 tree properties does the tree obey?
 [ ] Every node has 1, 2, or 3 keys except for possibly the root
-[ ] All leaves have the same depth
+[X] All leaves have the same depth
 [ ] Multi-way search tree property
 
 ## Problem
@@ -397,71 +405,74 @@ What is the maximum height of a 2-3-4 tree with $65535$ keys? Start by finding a
 
 ## Problem
 
-Convert the following 2-3-4 tree into the equivalent red-black tree:
+Convert the following 2-3-4 tree into an equivalent red-black tree:
 ```txt
-TODO
+        [5|8]
+      /   |   \
+[2|3|4] [6|7] [9]
 ```
+For 3-nodes, use a red left child. For 4-nodes, use two red children.
 
-What is the preorder traversal of the red-black tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the preorder traversal of the red-black tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`. [____](B8,R5,B3,R2,R4,B7,R6,B9)
 
-What is the inorder traversal of the red-black tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the inorder traversal of the red-black tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`. [____](R2,B3,R4,R5,R6,B7,B8,B9)
 
-What is the postorder traversal of the red-black tree? Give your answer as a comma-seperated list of integers. [____]()
-
-How many red nodes are in the tree? Give your answer as a single integer. [____]()
-
-How many black nodes are in the tree? Give your answer as a single integer. [____]()
+What is the postorder traversal of the red-black tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`. [____](R2,R4,B3,R6,B7,R5,B9,B8)
 
 ## Problem
 
-Convert the following red-black tree into the equivalent 2-3-4 tree:
+Convert the following red-black tree into an equivalent 2-3-4 tree:
 ```txt
-TODO
+     B5
+   /    \
+  B3    B8
+ /  \     \
+R1  R4    R9
 ```
 
-What is the preorder traversal of the 2-3-4 tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the preorder traversal of the 2-3-4 tree? Give your answer as a comma-seperated list of integers. [____](5,1,3,4,8,9)
 
-What is the inorder traversal of the 2-3-4 tree? Give your answer as a comma-seperated list of integers. [____]()
+What is the inorder traversal of the 2-3-4 tree? Give your answer as a comma-seperated list of integers. [____](1,3,4,5,8,9)
 
-What is the postorder traversal of the 2-3-4 tree? Give your answer as a comma-seperated list of integers. [____]()
-
-How many 2-nodes are in the tree? Give your answer as a single integer. [____]()
-
-How many 3-nodes are in the tree? Give your answer as a single integer. [____]()
-
-How many 4-nodes are in the tree? Give your answer as a single integer. [____]()
+What is the postorder traversal of the 2-3-4 tree? Give your answer as a comma-seperated list of integers. [____](1,3,4,8,9,5)
 
 ## Problem
 
 Consider the following tree:
 ```txt
-TODO
+       [14|15]
+      /   |   \
+[5|10]  [16]   [20|25]
 ```
 
-What B-tree properties does the tree obey if $b = $?
-[ ] Every node has between $\lceil b / 2 \rceil - 1$ and $b - 1$ keys except for possibly the root
-[ ] All leaves have the same depth
+What B-tree properties does the tree obey if $b = 5$?
+[X] Every node has between $\lceil b / 2 \rceil - 1$ and $b - 1$ keys except for possibly the root
+[X] All leaves have the same depth
 [ ] Multi-way search tree property
 
 Consider the following tree:
 ```txt
-TODO
+      [15]
+     /    \
+[1|2|3]   [17|20]
 ```
 
-What B-tree tree properties does the tree obey if $b = $?
+What B-tree tree properties does the tree obey if $b = 3$?
 [ ] Every node has between $\lceil b / 2 \rceil - 1$ and $b - 1$ keys except for possibly the root
-[ ] All leaves have the same depth
-[ ] Multi-way search tree property
+[X] All leaves have the same depth
+[X] Multi-way search tree property
 
 Consider the following tree:
 ```txt
-TODO
+      [10|20]
+     /   |   \
+[5|7] [12|15] [22|25]
 ```
 
-What B-tree properties does the tree obey if $b = $?
-[ ] Every node has between $\lceil b / 2 \rceil - 1$ and $b - 1$ keys except for possibly the root
-[ ] All leaves have the same depth
-[ ] Multi-way search tree property
+What B-tree properties does the tree obey if $b = 4$?
+[X] Every node has between $\lceil b / 2 \rceil - 1$ and $b - 1$ keys except for possibly the root
+[X] All leaves have the same depth
+[X] Multi-way search tree property
 
 ## Problem
 
