@@ -6,19 +6,19 @@ In this assignment, you will practice with trees, search trees and balanced sear
 
 By the end of this assignment, you should be able to:
 
-1. Compute $k$-ary tree properties (e.g. height, depth, perfect, complete, full).
+1. Compute $$k$$-ary tree properties (e.g. height, depth, perfect, complete, full).
 2. Check binary search tree, red-black tree, 2-3-4 tree, and B-tree invariants.
 3. Apply operations (e.g. insertion, deletion, search, rotation) to binary search trees, red-black trees, 2-3-4 trees and B-trees.
 4. Convert between 2-3-4 trees and red-black trees.
 
 ## Grading
 
-This assignment is graded out of $100$ points. However, we provide $200$ points' worth of problems:
+This assignment is graded out of $$100$$ points. However, we provide $$200$$ points' worth of problems:
 
-1. Only your first $100$ points count towards your grade.
+1. Only your first $$100$$ points count towards your grade.
 2. The extra problems give you flexibility to:
     * Choose problems that best support your learning
-    * Earn more than $100$ points in case of mistakes (your grade will be capped at $100$).
+    * Earn more than $$100$$ points in case of mistakes (your grade will be capped at $$100$$).
     * Practice additional problems in preparation for the midterm.
 
 **You are not expected to complete every problem!**
@@ -69,7 +69,7 @@ I have read and understand the above.
 
 ## Problem
 
-Consider the following $4$-ary tree:
+Consider the following $$4$$-ary tree:
 ```txt
     5
  / | | 
@@ -91,7 +91,7 @@ Is the tree perfect, complete and/or full?
 
 ## Problem
 
-Consider the following $3$-ary tree:
+Consider the following $$3$$-ary tree:
 ```txt
     0
   / | \
@@ -115,7 +115,7 @@ Is the tree perfect, complete and/or full?
 
 ## Problem
 
-Consider the following $2$-ary tree:
+Consider the following $$2$$-ary tree:
 ```txt
      8
    /   \
@@ -139,21 +139,21 @@ Is the tree perfect, complete and/or full?
 
 ## Problem
 
-What is the minimum height of a perfect binary tree with $65535$ nodes? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](16)
+What is the minimum height of a perfect binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. [____](16)
 
-What is the maximum height of a perfect binary tree with $65535$ nodes? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](16)
-
-## Problem
-
-What is the minimum height of a complete binary tree with $65535$ nodes? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](16)
-
-What is the maximum height of a complete binary tree with $65535$ nodes? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](16)
+What is the maximum height of a perfect binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. [____](16)
 
 ## Problem
 
-What is the minimum height of a full binary tree with $65535$ nodes? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](16)
+What is the minimum height of a complete binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. [____](16)
 
-What is the maximum height of a full binary tree with $65535$ nodes? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](32767)
+What is the maximum height of a complete binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. [____](16)
+
+## Problem
+
+What is the minimum height of a full binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. [____](16)
+
+What is the maximum height of a full binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. [____](32767)
 
 ## Problem
 
@@ -248,7 +248,7 @@ What is the postorder traversal of the final tree? Give your answer as a comma-s
 
 ## Problem
 
-What binary search tree insertion orders always yield a tree with $\Theta(n)$ time search?
+What binary search tree insertion orders always yield a tree with $$\Theta(n)$$ time search?
 
 [X] Increasing order (e.g. `1,2,3,...`)
 [X] Decreasing order (e.g. `-1,-2,-3,...`)
@@ -257,9 +257,9 @@ What binary search tree insertion orders always yield a tree with $\Theta(n)$ ti
 
 ## Problem
 
-What is the minimum height of a binary search tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](16)
+What is the minimum height of a binary search tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. [____](16)
 
-What is the maximum height of a binary search tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](65534)
+What is the maximum height of a binary search tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. [____](65534)
 
 ## Problem
 
@@ -342,13 +342,13 @@ What is the postorder traversal of the final tree? Give your answer as a comma-s
 
 ## Problem
 
-What is the minimum height of a red-black tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](16)
+What is the minimum height of a red-black tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. [____](16)
 
-What is the maximum height of a red-black tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](30)
+What is the maximum height of a red-black tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. [____](30)
 
-What is the minimum black height of a red-black tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](9)
+What is the minimum black height of a red-black tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. [____](9)
 
-What is the maximum black height of a red-black tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](16)
+What is the maximum black height of a red-black tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. [____](16)
 
 ## Problem
 
@@ -405,9 +405,9 @@ What is the postorder traversal of the final tree? Give your answer as a comma-s
 
 ## Problem
 
-What is the minimum height of a 2-3-4 tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](8)
+What is the minimum height of a 2-3-4 tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. [____](8)
 
-What is the maximum height of a 2-3-4 tree with $65535$ keys? Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](16)
+What is the maximum height of a 2-3-4 tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. [____](16)
 
 ## Problem
 
@@ -451,8 +451,8 @@ Consider the following tree:
 [5|10]  [16]   [20|25]
 ```
 
-What B-tree properties does the tree obey if $b = 5$?
-[X] Every node has between $\lceil b / 2 \rceil - 1$ and $b - 1$ keys except for possibly the root
+What B-tree properties does the tree obey if $$b = 5$$?
+[X] Every node has between $$\lceil b / 2 \rceil - 1$$ and $$b - 1$$ keys except for possibly the root
 [X] All leaves have the same depth
 [ ] Multi-way search tree property
 
@@ -463,8 +463,8 @@ Consider the following tree:
 [1|2|3]   [17|20]
 ```
 
-What B-tree tree properties does the tree obey if $b = 3$?
-[ ] Every node has between $\lceil b / 2 \rceil - 1$ and $b - 1$ keys except for possibly the root
+What B-tree tree properties does the tree obey if $$b = 3$$?
+[ ] Every node has between $$\lceil b / 2 \rceil - 1$$ and $$b - 1$$ keys except for possibly the root
 [X] All leaves have the same depth
 [X] Multi-way search tree property
 
@@ -475,14 +475,14 @@ Consider the following tree:
 [5|7] [12|15] [22|25]
 ```
 
-What B-tree properties does the tree obey if $b = 4$?
-[X] Every node has between $\lceil b / 2 \rceil - 1$ and $b - 1$ keys except for possibly the root
+What B-tree properties does the tree obey if $$b = 4$$?
+[X] Every node has between $$\lceil b / 2 \rceil - 1$$ and $$b - 1$$ keys except for possibly the root
 [X] All leaves have the same depth
 [X] Multi-way search tree property
 
 ## Problem
 
-Insert the following sequence of numbers into an empty B-tree tree where $b = 3$:
+Insert the following sequence of numbers into an empty B-tree tree where $$b = 3$$:
 ```txt
 0,5,2,7,1,9,4
 ```
@@ -495,24 +495,24 @@ What is the postorder traversal of the final tree? Give your answer as a comma-s
 
 ## Problem
 
-What is the minimum height of a B-tree with $65535$ keys if $b = 3$? Start by finding a formula in terms of $n$ and $b$. Give your answer as a single integer. [____](10)
+What is the minimum height of a B-tree with $$65535$$ keys if $$b = 3$$? Start by finding a formula in terms of $$n$$ and $$b$$. Give your answer as a single integer. [____](10)
 
-What is the maximum height of a B-tree with $65535$ keys if $b = 3$? Start by finding a formula in terms of $n$ and $b$. Give your answer as a single integer. [____](16)
+What is the maximum height of a B-tree with $$65535$$ keys if $$b = 3$$? Start by finding a formula in terms of $$n$$ and $$b$$. Give your answer as a single integer. [____](16)
 
 # Extra Practice
 
 ## Problem
 
-In a perfect BST of height $16$, what is the expected number of visited nodes when searching for a key chosen uniformly at random? Assume the key is in the tree with 50% probability. Give your answer as a single integer. If needed, round up to the nearest integer. [____](17)
+In a perfect BST of height $$16$$, what is the expected number of visited nodes when searching for a key chosen uniformly at random? Assume the key is in the tree with 50% probability. Give your answer as a single integer. If needed, round up to the nearest integer. [____](17)
 
 ## Problem
 
-What is the maximum number of right rotations required to transform a BST with $65535$ nodes into a right chain? A right chain is a tree where nodes have only a right child, or no children. Give your answer as a single integer. [____](65534)
+What is the maximum number of right rotations required to transform a BST with $$65535$$ nodes into a right chain? A right chain is a tree where nodes have only a right child, or no children. Give your answer as a single integer. [____](65534)
 
 ## Problem
 A subtree property is a node property that is maintained under tree operations. For example, the binary search tree property is a subtree property. Every node in the tree obeys the binary search tree property, and this remains true after insertions, deletions and queries.
 
-What subtree properties can be maintained in a red-black tree while retaining $\Theta(\lg n)$ worst-case operations? Write a modified version of insert for each such subtree property.
+What subtree properties can be maintained in a red-black tree while retaining $$\Theta(\lg n)$$ worst-case operations? Write a modified version of insert for each such subtree property.
 
 [X] Number of nodes in subtree
 [X] Number of red nodes in subtree
@@ -524,28 +524,28 @@ What subtree properties can be maintained in a red-black tree while retaining $\
 
 ## Problem
 
-How many different $32$ node binary trees are there? Two binary trees are different if and only if their shapes differ irrespective of the values stored in the trees. Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](55534064877048198)
+How many different $$32$$ node binary trees are there? Two binary trees are different if and only if their shapes differ irrespective of the values stored in the trees. Start by finding a formula in terms of $$n$$. Give your answer as a single integer. [____](55534064877048198)
 
 ## Problem
 
-How many nodes are in a B-tree with $b = 4$ after inserting `1,2,...,49163`? Start by finding a formula in terms of $n$ and $b$. Give your answer as a single integer. [____](49121)
+How many nodes are in a B-tree with $$b = 4$$ after inserting `1,2,...,49163`? Start by finding a formula in terms of $$n$$ and $$b$$. Give your answer as a single integer. [____](49121)
 
 ## Problem
 
-Consider a B-tree with $n$ keys.
+Consider a B-tree with $$n$$ keys.
 
-What choices of $b$ yield an asymptotic slowdown of search relative to $b = \Theta(1)$?
-[ ] $b = \Theta(1)$
-[X] $b = \Theta(\lg \lg n)$
-[X] $b = \Theta(\lg n)$
-[X] $b = \Theta(\sqrt{n})$
-[X] $b = \Theta(n)$
+What choices of $$b$$ yield an asymptotic slowdown of search relative to $$b = \Theta(1)$$?
+[ ] $$b = \Theta(1)$$
+[X] $$b = \Theta(\lg \lg n)$$
+[X] $$b = \Theta(\lg n)$$
+[X] $$b = \Theta(\sqrt{n})$$
+[X] $$b = \Theta(n)$$
 
 Suppose we perform a binary search of the keys in a B-tree node instead of a linear search.
 
-What choices of $b$ yield an asymptotic slowdown of search relative to $b = \Theta(1)$?
-[ ] $b = \Theta(1)$
-[ ] $b = \Theta(\lg \lg n)$
-[ ] $b = \Theta(\lg n)$
-[ ] $b = \Theta(\sqrt{n})$
-[ ] $b = \Theta(n)$
+What choices of $$b$$ yield an asymptotic slowdown of search relative to $$b = \Theta(1)$$?
+[ ] $$b = \Theta(1)$$
+[ ] $$b = \Theta(\lg \lg n)$$
+[ ] $$b = \Theta(\lg n)$$
+[ ] $$b = \Theta(\sqrt{n})$$
+[ ] $$b = \Theta(n)$$
