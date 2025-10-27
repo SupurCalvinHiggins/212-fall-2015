@@ -1,64 +1,71 @@
-trees
-    binary trees, n-ary trees, perfect, complete, full, height, depth
-    inorder, postorder, preorder traversals
-binary search trees
-    tracing, analysis, invariants, best/worst case
-red-black trees
-    tracing, analysis, invariants, comparison to BSTs, rotations
-2-3-4 trees:
-    tracing, analysis, invariants, conversion back and forth between RB and 2-3-4 trees
-B trees:
-    tracing, analysis, invariants
-applications
-order operations
-set/map
+# Overview
 
-24 problems
+In this assignment, you will practice with trees, search trees and balanced search trees.
 
-one lecture;
-    definitions: path, path length, depth (node, tree), height (node, tree)
-    k-ary, perfect, complete, full
-    6 problems:
-        3x: height of tree, depth of tree, perfect, complete, full, arity
-            complete 4-ary, height 1
-            full 3-ary, height 2
-            perfect 2-ary, height 2
-        max/min height of perfect tree k-ary on n nodes
-        max/min height of complete tree k-ary on n nodes
-        max/min height of full tree k-ary on n nodes
+## Learning Objectives
 
-one lecture:
-    binary search trees
-    tracing, analysis, invariants, best/worst case
-    contains, insert, remove
-    traversals: pre, post, inorder, level order
-    6 problems:
-        1x valid-bst or not?
-        2x all traversals after insert
-        2x all traversals after remove (hit all three cases)
-            no children, one child, two children
-        which is a worst-case insert sequence? what is complexity?
-        which is a best-case insert sequence? what is complexity?
+By the end of this assignment, you should be able to:
 
-two lectures:
-    red-black trees
-    tracing, analysis, invariants, comparison to BSTs, rotations
-    2-3-4 trees:
-    tracing, analysis, invariants, conversion back and forth between RB and 2-3-4 trees
-    B trees:
-    tracing, analysis, invariants
-    12 problems:
-        valid rb or not
-        valid 2-3-4 tree or not
-        valid B-tree or not
-        2x traversals after rb insert
-        2x traversals after 2-3-4 insert
-        2x traversals after B-tree insert
-        conversion from rb to 2-3-4
-        conversion from 2-3-4 to rb
-        balanced or not
+1. Compute $k$-ary tree properties (e.g. height, depth, perfect, complete, full).
+2. Check binary search tree, red-black tree, 2-3-4 tree, and B-tree invariants.
+3. Apply operations (e.g. insertion, deletion, search, rotation) to binary search trees, red-black trees, 2-3-4 trees and B-trees.
+4. Convert between 2-3-4 trees and red-black trees.
 
+## Grading
 
+This assignment is graded out of $100$ points. However, we provide $200$ points' worth of problems:
+
+1. Only your first $100$ points count towards your grade.
+2. The extra problems give you flexibility to:
+    * Choose problems that best support your learning
+    * Earn more than $100$ points in case of mistakes (your grade will be capped at $100$).
+    * Practice additional problems in preparation for the midterm.
+
+**You are not expected to complete every problem!**
+
+## Milestones
+
+Problems are labeled as **Core Content**, **Extra Practice** or **Optional Advanced Topics**.
+
+To prepare for the midterm, you should:
+
+1. Complete at least one of each **Core Content** problem type
+
+## Recommendations
+
+The midterm will include many free response questions. To prepare effectively:
+
+* Avoid relying on multiple choice options to guide your answer. Instead, work out your solution first, then check against the choices.
+* Use any available  resources (including AI), but always attempt each problem on your own for 5-10 minutes before seeking help.
+
+## Answer Formats
+
+**Short answer questions are autograded. You must follow the format specified below to receive credit.**
+
+If the problem asks for a single integer, provide your answer as a single integer without whitespace. For example, `10`.
+
+If the problem asks for a comma-delimited list of integers, provide your answer as a comma-delimited list without whitespace. For example, `3,1,4,0,12`.
+
+If the problem asks for a comma-delimited list of integers with node colors, provide your answer as a comma-delimited list without whitespace, where red nodes are prefixed with `R` and black nodes are prefixed with `B`. For example, `R3,B1,B4,R0,B12`.
+
+## Submission
+
+**Before you submit, attach a PDF containing your work for every question you answered:**
+
+|files|
+
+It doesn't need to be neat, we just want to be able to understand your process.
+
+Note that you can submit as many times as you want before the due date!
+
+## Confirmation
+
+I have read and understand the above.
+
+(X) Yes
+( ) No
+
+# Core Content
 
 ## Problem
 
@@ -81,7 +88,6 @@ Is the tree perfect, complete and/or full?
 [ ] Perfect
 [X] Complete
 [ ] Full
-
 
 ## Problem
 
@@ -518,7 +524,7 @@ What subtree properties can be maintained in a red-black tree while retaining $\
 
 ## Problem
 
-How many different $32$ node binary trees are there? Two binary trees are different if and only if their shapes differ irrespective of the values stored in the trees. Start by finding a formula in terms of $n$. If you know generating functions, use them. Give your answer as a single integer. [____](55534064877048198)
+How many different $32$ node binary trees are there? Two binary trees are different if and only if their shapes differ irrespective of the values stored in the trees. Start by finding a formula in terms of $n$. Give your answer as a single integer. [____](55534064877048198)
 
 ## Problem
 
