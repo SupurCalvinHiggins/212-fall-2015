@@ -112,11 +112,10 @@ to another cell if it is immediately adjacent horizontally,
 vertically, or diagonally.
 A *region* is defined as a group of connected filled cells.
 Implement a function that counts the number of cells in a
-region, given the grid and the coordinates of a starting cell.  If
-the starting cell is empty, the function should return `0`.  You may assume that the starting cell
+region, given the grid and the coordinates of a starting cell.  
+If the starting cell is empty, the function should return `0`.  
+You may assume that the starting cell
 is always within the bounds of the grid.
-
-<img src="./files/blobs.png" style="width:300px;"/>
 
 ### Input
 The input to the function is a file name containing the grid
