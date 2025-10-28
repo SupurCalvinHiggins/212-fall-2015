@@ -4,14 +4,14 @@ In this assignment, we will explore and practice `recursive` algorithms.
 For each of the tasks below, you are required to formulate a **recursive
 solution**.  You may use helper functions as needed, but the main logic
 of each task must be implemented recursively, either directly within 
-the function signature provided or in helper functions called by these functions.
+the function provided or in helper functions called by these functions.
 Iterative solutions will not receive credit.
 
 > [!WARNING] 
-> We recommend you to abstain from using 
-> LLMs (Large Language Models) to generate code or solutions. 
-> The ability to think and solve problems using recursion
-> is crucial for your growth as a computer scientist.
+> We strongly discourage the use of Large Language Models 
+> (LLMs) to generate code or solutions for this assignment.
+> The ability to independently think through and solve problems
+> using recursion is crucial for your intellectual development.
 
 The assignment is worth a total of 100 points.  If 
 you have any questions or need assistance, please don't 
@@ -23,7 +23,7 @@ on the `Ed Discussion` forum.
 In this task, you will solve a number of small problems to 
 practice recursion.  Each problem is worth 10 points.
 For each problem you will create a function using the provided
-signatures below.  You may add helper functions as needed.
+signatures below.  You may add helper functions as needed to support the recursive implementation.
 
 All the functions should be implemented in a file named
 `functions.cpp` and all function signatures should be declared
@@ -48,7 +48,7 @@ g++ -std=c++11 -Wall -Werror -o test test_recursion.cpp functions.cpp
 
 ### `palindrome`
 Implement a function that checks if a given string `S` of length 
-`0 <= n < 10^3` is a palindrome.  Assume that the empty string 
+$$0 \leq n < 10^3$$ is a palindrome.  Assume that the empty string 
 is a palindrome and a string constituted only by a single 
 character is also a palindrome. For example, the strings `""`, `"a"`, 
 `"racecar"`, and `"madam"` are palindromes, while the strings 
@@ -62,7 +62,8 @@ bool palindrome(const std::string& S);
 Implement a function that reverses a given sequence of integers.
 The function takes a reference to a vector of integers and 
 modifies it **in-place** to reverse the order of its elements.
-Your program should not make more than $$O(n/2)$$ swaps, where 
+Your program should perform no more than $$\lfloor n/2 \rfloor$$
+swaps, where 
 $$n$$ is the length of the input array.
 For example, given the array `[1,2,3,4,5]`, the function
 should modify it to `[5,4,3,2,1]`.
@@ -81,7 +82,7 @@ The function should return `true`
 if the target is found and `false` otherwise.  For example, 
 given the array `[9,7,5,3,3]` and target `7`, the function 
 should return `true` and set the output `index` to `1`.  Assume 
-the input sequence is already sorted in non-increasing order.
+the input sequence is sorted in non-increasing order (from largest to smallest).
 
 ```cpp
 bool bin_search(const std::vector<int>& arr, int target, size_t& index);
@@ -106,12 +107,14 @@ int str2int(const std::string& s);
 ## Task 2: Counting cells (20 points)
 
 Consider a 2D grid of size `m x n` where each cell can be either
-`0` (empty) or `1` (filled).  Every cell can be connected to 8
-neighboring cells (horizontally, vertically, and diagonally).
+`0` (empty) or `1` (filled).  A cell is considered connected
+to another cell if it is immediately adjacent horizontally, 
+vertically, or diagonally.
 A *region* is defined as a group of connected filled cells.
 Implement a function that counts the number of cells in a
-region, given the grid and the coordinates of a starting cell
-that is guaranteed to be filled (`1`).
+region, given the grid and the coordinates of a starting cell.  If
+the starting cell is empty, the function should return `0`.  You may assume that the starting cell
+is always within the bounds of the grid.
 
 <img src="./files/blobs.png" style="width:300px;"/>
 
@@ -152,14 +155,14 @@ count_cells("grid.txt", 0, 1)  // returns 0
 
 ### Function signature
 ```cpp
-unsigned int count_cells(const std::string& fname, int x, int y);
+unsigned int count_cells(const std::string& fname, unsigned int x, unsigned int y);
 ```
 
 ## Task 3: Multi-level linked lists (40 points)
 
 A multi-level linked list is a data structure where each node
-contains an data value (a string in this case), a pointer to 
-the next node in the same level, and a pointer to a child node
+contains a data value (a string in this case), a pointer to 
+the next node in the list, and a pointer to a child node
 which represents the head of a sublist. The multi-level linked 
 list can be visualized as a hierarchy of linked lists, where each 
 node can potentially lead to another linked list.
@@ -185,11 +188,11 @@ containing nodes `O1` and `O2`.
 > multi-level linked list only contains string values and 
 > no repeated values are allowed.
 
-You are required to design an implement a class `MultiLevelLinkedList`
+You are required to design and implement a class `MultiLevelLinkedList`
 that supports at least the following `public methods`.  **You are 
 required to implement these methods using recursion**.  Note that
 the methods below are only the minimum required methods.  You may
-add any additional private methods or helper functions as needed.
+need to add constructor, destructor, and any additional private helper functions as needed.
 The recursive logic must be implemented either in the methods below
 or in helper functions called by these methods.  
 
@@ -250,8 +253,8 @@ g++ -std=c++11 -Wall -Werror -o test_mll test_mll.cpp multilevel_list.cpp
 ## Submission and grading
 
 This assignment relies on automated evaluation.
-Once you are finished, you **must** submit ONLY
-the files listed below via [Gradescope](https://www.gradescope.com/) 
+Once you are finished, you **must** submit ONLY the following
+source files via [Gradescope](https://www.gradescope.com/) 
 to record your grade.
 
 - `functions.h`
