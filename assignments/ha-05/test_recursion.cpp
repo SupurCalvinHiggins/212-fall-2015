@@ -40,3 +40,14 @@ TEST_CASE("str2int") {
     CHECK(str2int("0") == 0);
     CHECK(str2int("42") == 42);
 }
+
+TEST_CASE("Countcells") {
+    CHECK(count_cells("tiny-0.txt", 0, 0) == 0);
+    CHECK(count_cells("tiny-0.txt", 1, 1) == 0);
+    CHECK(count_cells("tiny-1.txt", 0, 0) == 4);
+    CHECK(count_cells("tiny-1.txt", 1, 1) == 4);
+    CHECK(count_cells("grid.txt", 1, 2) == 8);
+    CHECK(count_cells("grid.txt", 4, 1) == 2);
+    CHECK(count_cells("grid.txt", 3, 3) == 8);
+    CHECK(count_cells("grid.txt", 0, 1) == 0);
+}
