@@ -383,6 +383,8 @@ What is the minimum height of a red-black tree with $$65535$$ keys? Start by fin
 What is the maximum height of a red-black tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. 
 [____](30)
 
+## Problem
+
 What is the minimum black height of a red-black tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. 
 [____](9)
 
