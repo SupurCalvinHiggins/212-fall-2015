@@ -148,7 +148,7 @@ The output should be:
 D M M1 M2 M2A M2B N O1 O2
 ```
 
-A `test_mll.cpp` file is provided to help you test your implementation. You can compile and run the test program using the following commands:
+Your class should be implemented in two files: `multilevel_list.h` (for the class declaration) and `multilevel_list.cpp` (for the class implementation). A `test_mll.cpp` file is provided to help you test your implementation. You can compile and run the test program using the following commands:
 
 ```bash
 # compile the test program
