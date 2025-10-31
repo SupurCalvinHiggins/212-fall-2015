@@ -53,7 +53,7 @@ Implement a function that converts a string representation of a number into its 
 int str2int(const std::string& s);
 ```
 
-## Task 2: Counting cells (20 points)
+## Task 2: Counting cells (21 points)
 
 Consider a 2D grid of size `m x n` where each cell can be either `0` (empty) or `1` (filled).  A cell is considered connected to another cell if it is immediately adjacent horizontally, vertically, or diagonally. A *region* is defined as a group of connected filled cells. Implement a function that counts the number of cells in a region, given the grid and the coordinates of a starting cell.  If the starting cell is empty, the function should return `0`.  You may assume that the starting cell is always within the bounds of the grid.
 
@@ -66,7 +66,11 @@ The input to the function is a file name containing the grid of `0`s and `1`s, a
   separated by spaces, representing the grid.
 
 ### Output
-The function should return the number of cells in the region connected to the starting cell.
+The function should return the number of cells in the region connected to the starting cell `(x, y)`.
+
+> [!NOTE]
+> Assume that `x` is the row index and `y` is the column index, both starting from `0`.
+> The origin `(0,0)` is at the top-left corner of the grid.
 
 ### Example
 Given the following input file `grid.txt`:
@@ -96,7 +100,7 @@ This function should be implemented in `functions.cpp` and declared in `function
 unsigned int count_cells(const std::string& fname, unsigned int x, unsigned int y);
 ```
 
-## Task 3: Multi-level linked lists (40 points)
+## Task 3: Multi-level linked lists (39 points)
 
 A multi-level linked list is a data structure where each node contains a data value (a string in this case), a pointer to the next node in the list, and a pointer to a child node which represents the head of a sublist. The multi-level linked list can be visualized as a hierarchy of linked lists, where each node can potentially lead to another linked list. The following chart illustrates a multi-level linked list:
 
@@ -117,13 +121,13 @@ In this example, the top-level list contains nodes `D`, `M`, `N`, and `O`.  Node
 
 You are required to design and implement a class `MultiLevelLinkedList` that supports at least the following `public methods`.  **You are required to implement these methods using recursion**.  Note that the methods below are only the minimum required methods.  You may need to add constructor, destructor, and any additional private helper functions as needed. The recursive logic must be implemented either in the methods below or in helper functions called by these methods.  
 
-- `void insert_top_level(const std::string& key)`: Performs a sorted insertion of a new node with the given `key` into the top-level linked list.  If the `key` already exists anywhere in the multi-level linked list, the function should ignore the insertion.  
+- `void insert_top_level(const std::string& key)`: [13 points] Performs a sorted insertion of a new node with the given `key` into the top-level linked list.  If the `key` already exists anywhere in the multi-level linked list, the function should ignore the insertion.  
 
-- `void insert_child(const std::string& parent_key, const std::string& key)`: Performs a sorted insertion of a new node with the given `key` into the child list of the node identified by `parent_key`. If the `parent_key` does not exist, or if the `key` already exists anywhere in the multi-level linked list, the function should ignore the insertion.
+- `void insert_child(const std::string& parent_key, const std::string& key)`: [13 points] Performs a sorted insertion of a new node with the given `key` into the child list of the node identified by `parent_key`. If the `parent_key` does not exist, or if the `key` already exists anywhere in the multi-level linked list, the function should ignore the insertion.
 
-- `void destroy()`: Destroys the entire multi-level linked list, freeing all allocated memory.  This function should be called once in the destructor of the class to ensure proper cleanup. 
+- `void destroy()`: [13 points] Destroys the entire multi-level linked list, freeing all allocated memory.  This function should be called once in the destructor of the class to ensure proper cleanup. 
 
-- `void print() const`: Prints the multi-level linked list in a flattened format, in a way that all nodes are printed in lexicographical order.
+- `void print() const`: Prints the multi-level linked list in a flattened format.
 
 For example, consider the following sequence of operations:
 
