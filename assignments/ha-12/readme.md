@@ -149,69 +149,69 @@ When doing a breadth-first search starting at vertex 0, what order are the verti
 
 What is the time complexity of adding a new vertex to an adjacency list? 
 
-(X) $\Theta(1)$
-( ) $\Theta(V)$
-( ) $\Theta(E)$
-( ) $\Theta(V + E)$
-( ) $\Theta(VE)$
-( ) $\Theta(V^2)$
-( ) $\Theta(E^2)$
+(X) $$\Theta(1)$$
+( ) $$\Theta(V)$$
+( ) $$\Theta(E)$$
+( ) $$\Theta(V + E)$$
+( ) $$\Theta(VE)$$
+( ) $$\Theta(V^2)$$
+( ) $$\Theta(E^2)$$
 
 What is the time complexity of adding a new vertex to an adjacency matrix?
 
-( ) $\Theta(1)$
-(X) $\Theta(V)$
-( ) $\Theta(E)$
-( ) $\Theta(V + E)$
-( ) $\Theta(VE)$
-( ) $\Theta(V^2)$
-( ) $\Theta(E^2)$
+( ) $$\Theta(1)$$
+(X) $$\Theta(V)$$
+( ) $$\Theta(E)$$
+( ) $$\Theta(V + E)$$
+( ) $$\Theta(VE)$$
+( ) $$\Theta(V^2)$$
+( ) $$\Theta(E^2)$$
 
 ## Problem
 
 What is the time complexity of adding a new edge to an adjacency list? 
 
-(X) $\Theta(1)$
-( ) $\Theta(V)$
-( ) $\Theta(E)$
-( ) $\Theta(V + E)$
-( ) $\Theta(VE)$
-( ) $\Theta(V^2)$
-( ) $\Theta(E^2)$
+(X) $$\Theta(1)$$
+( ) $$\Theta(V)$$
+( ) $$\Theta(E)$$
+( ) $$\Theta(V + E)$$
+( ) $$\Theta(VE)$$
+( ) $$\Theta(V^2)$$
+( ) $$\Theta(E^2)$$
 
 What is the time complexity of adding a new edge to an adjacency matrix?
 
-(X) $\Theta(1)$
-( ) $\Theta(V)$
-( ) $\Theta(E)$
-( ) $\Theta(V + E)$
-( ) $\Theta(VE)$
-( ) $\Theta(V^2)$
-( ) $\Theta(E^2)$
+(X) $$\Theta(1)$$
+( ) $$\Theta(V)$$
+( ) $$\Theta(E)$$
+( ) $$\Theta(V + E)$$
+( ) $$\Theta(VE)$$
+( ) $$\Theta(V^2)$$
+( ) $$\Theta(E^2)$$
 
 ## Problem
 
 What is the time complexity of depth-first search? Assume the best possible graph representation.
 
-( ) $\Theta(1)$
-( ) $\Theta(V)$
-( ) $\Theta(E)$
-(X) $\Theta(V + E)$
-( ) $\Theta(VE)$
-( ) $\Theta(V^2)$
-( ) $\Theta(E^2)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(V)$$
+( ) $$\Theta(E)$$
+(X) $$\Theta(V + E)$$
+( ) $$\Theta(VE)$$
+( ) $$\Theta(V^2)$$
+( ) $$\Theta(E^2)$$
 
 ## Problem
 
 What is the time complexity of breadth-first search? Assume the best possible graph representation.
 
-( ) $\Theta(1)$
-( ) $\Theta(V)$
-( ) $\Theta(E)$
-(X) $\Theta(V + E)$
-( ) $\Theta(VE)$
-( ) $\Theta(V^2)$
-( ) $\Theta(E^2)$
+( ) $$\Theta(1)$$
+( ) $$\Theta(V)$$
+( ) $$\Theta(E)$$
+(X) $$\Theta(V + E)$$
+( ) $$\Theta(VE)$$
+( ) $$\Theta(V^2)$$
+( ) $$\Theta(E^2)$$
 
 ## Problem
 
@@ -243,7 +243,31 @@ Should you use depth-first or breadth-first search?
 
 ## Problem
 
+Suppose you wish to count the number of ways to solve a maze without ever returning to the same location. The maze is laid out on grid paper. You will model the problem as a graph.
 
+What are the vertices?
+
+( ) Grid lines
+( ) Pathways
+(X) Grid cells
+( ) Maze walls
+
+What are the edges?
+
+( ) Connections between adjacent grid lines
+(X) Connections between adjacent grid cells that are open (no wall)
+( ) Connections between grid cells
+( ) Connections between all grid lines
+
+Is the graph sparse?
+
+(X) Yes
+( ) No
+
+Should you use depth-first or breadth-first search?
+
+(X) Depth-first search
+( ) Breadth-first search
 
 # Extra Practice
 
@@ -257,7 +281,11 @@ std::vector<int> sssp(int source, const std::vector<std::vector<std::pair<int, i
     std::vector<int> dist(n, INF);
     dist[start] = 0;
 
-    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> pq;
+    std::priority_queue<
+        std::pair<int, int>, 
+        std::vector<std::pair<int, int>>, 
+        std::greater<std::pair<int, int>>
+    > pq;
     pq.push({0, start});
 
     while (!pq.empty()) {
@@ -278,30 +306,73 @@ std::vector<int> sssp(int source, const std::vector<std::vector<std::pair<int, i
 }
 ```
 
-when a vertex is added, it is never added again
-    each vertex is added once
-    for each addition, we add all adj 
+What is the worst-case time complexity for a connected graph?
 
-total things: V + E
-max size of pq: V + E
-
-What is the time complexity?
-
-( ) $\Theta(1)$
-( ) $\Theta(V)$
-( ) $\Theta(E)$
-(X) $\Theta(V + E)$
-( ) $\Theta(VE)$
-( ) $\Theta(V^2)$
-( ) $\Theta(E^2)$
-
+( ) $$\Theta(V)$$
+( ) $$\Theta(E)$$
+( ) $$\Theta(V + E)$$
+( ) $$\Theta(V \lg V)$$
+(X) $$\Theta(E \lg E)$$
+( ) $$\Theta(V^2)$$
+( ) $$\Theta(VE)$$
+( ) $$\Theta(E^2)$$
 
 ## Problem
 
-TODO prims analysis
+Consider the following graph algorithm:
+```cpp
+constexpr int INF = 1e9;
+
+int mst(int n, const std::vector<std::vector<std::pair<int, int>>>& adj, int start = 0) {
+    std::vector<bool> visited(n, false);
+
+    std::priority_queue<
+        std::pair<int, int>, 
+        std::vector<std::pair<int, int>>, 
+        std::greater<std::pair<int, int>>
+    > pq;
+
+    pq.push({0, start});
+    int total = 0;
+
+    while (!pq.empty()) {
+        auto [cost, u] = pq.top();
+        pq.pop();
+
+        if (visited[u]) continue;
+        visited[u] = true;
+        total += cost;
+
+        for (auto [v, w] : adj[u])
+            if (!visited[v])
+                pq.push({w, v});
+    }
+
+    return total;
+}
+```
+
+What is the worst-case time complexity for a connected graph?
+
+( ) $$\Theta(V)$$
+( ) $$\Theta(E)$$
+( ) $$\Theta(V + E)$$
+( ) $$\Theta(V \lg V)$$
+(X) $$\Theta(E \lg E)$$
+( ) $$\Theta(V^2)$$
+( ) $$\Theta(VE)$$
+( ) $$\Theta(E^2)$$
 
 # Optional Advanced Topics
 
 ## Problem
 
-TODO markov chain expected walk length
+A **Markov chain** is a weighted graph where the edge weights represent the probability of moving from one vertex to another. 
+
+Consider the following Markov chain:
+```txt
+[[0.1,0.3,0.5,0.1],[0,0.5,0.5,0],[0.8,0.1,0,0.1],[1,0,0,0]]
+```
+
+If you start at vertex 0 and move randomly according to the edge weights, what is the average number of steps to visit vertex 3 twice? Give your answer as a single integer (round down).
+[____](27)
