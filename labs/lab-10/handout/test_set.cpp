@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <random>
+#include <numeric>
 
 TEST_CASE("empty set") {
     Set s;
