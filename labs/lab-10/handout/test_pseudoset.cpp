@@ -5,6 +5,7 @@
 #include <random>
 #include <algorithm>
 #include <vector>
+#include <numeric>
 
 class PseudoSetTester {
 public:
