@@ -25,6 +25,8 @@ public:
     [[nodiscard]] static Node *insert(Node *root, int value) { return PseudoSet::insert(root, value); }
 
     [[nodiscard]] static Node *find(Node *root, int value) { return PseudoSet::find(root, value); }
+
+    void destroy(Node *root) { PseudoSet::destroy(root) }
 };
 
 using Node = PseudoSetTester::Node;
@@ -408,6 +410,8 @@ TEST_CASE("insert") {
         CHECK(validate(root));
         CHECK(tree_equals_set(root, expected));
     }
+
+    PseudoSetTester::destroy(root);
 }
 
 
