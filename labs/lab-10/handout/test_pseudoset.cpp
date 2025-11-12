@@ -1,40 +1,53 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <algorithm>
+#include <numeric>
+#include <random>
+#include <unordered_set>
+#include <vector>
+
 #include "doctest.h"
 #include "pseudoset.h"
-#include <unordered_set>
-#include <random>
-#include <algorithm>
-#include <vector>
-#include <numeric>
 
 class PseudoSetTester {
-public:
+   public:
     using Node = PseudoSet::Node;
     using Color = PseudoSet::Color;
 
-    [[nodiscard]] static Node *fix_red_left_left(Node *root) { return PseudoSet::fix_red_left_left(root); }
+    [[nodiscard]] static Node *fix_red_left_left(Node *root) {
+        return PseudoSet::fix_red_left_left(root);
+    }
 
-    [[nodiscard]] static Node *fix_red_left_right(Node *root) { return PseudoSet::fix_red_left_right(root); }
+    [[nodiscard]] static Node *fix_red_left_right(Node *root) {
+        return PseudoSet::fix_red_left_right(root);
+    }
 
-    [[nodiscard]] static Node *fix_red_right_left(Node *root) { return PseudoSet::fix_red_right_left(root); }
+    [[nodiscard]] static Node *fix_red_right_left(Node *root) {
+        return PseudoSet::fix_red_right_left(root);
+    }
 
-    [[nodiscard]] static Node *fix_red_right_right(Node *root) { return PseudoSet::fix_red_right_right(root); }
+    [[nodiscard]] static Node *fix_red_right_right(Node *root) {
+        return PseudoSet::fix_red_right_right(root);
+    }
 
-    [[nodiscard]] static Node *balance(Node *root) { return PseudoSet::balance(root); }
+    [[nodiscard]] static Node *balance(Node *root) {
+        return PseudoSet::balance(root);
+    }
 
-    [[nodiscard]] static Node *insert(Node *root, int value) { return PseudoSet::insert(root, value); }
+    [[nodiscard]] static Node *insert(Node *root, int value) {
+        return PseudoSet::insert(root, value);
+    }
 
-    [[nodiscard]] static Node *find(Node *root, int value) { return PseudoSet::find(root, value); }
+    [[nodiscard]] static Node *find(Node *root, int value) {
+        return PseudoSet::find(root, value);
+    }
 
-    void destroy(Node *root) { PseudoSet::destroy(root) }
+    static void destroy(Node *root) { PseudoSet::destroy(root); }
 };
 
 using Node = PseudoSetTester::Node;
 using Color = PseudoSetTester::Color;
 
-static bool is_red(const Node *n) {
-    return n && n->color == Color::Red;
-}
+static bool is_red(const Node *n) { return n && n->color == Color::Red; }
 
 static bool validate_black_height(const Node *node, int &black_height) {
     if (!node) {
@@ -55,8 +68,7 @@ static bool validate_subtree(const Node *node) {
     if (!node) return true;
 
     if (is_red(node)) {
-        if (is_red(node->left) || is_red(node->right))
-            return false;
+        if (is_red(node->left) || is_red(node->right)) return false;
     }
 
     return validate_subtree(node->left) && validate_subtree(node->right);
@@ -78,7 +90,8 @@ void collect_elements(const Node *node, std::unordered_set<int> &elems) {
     collect_elements(node->right, elems);
 }
 
-bool tree_equals_set(const Node *root, const std::unordered_set<int> &expected) {
+bool tree_equals_set(const Node *root,
+                     const std::unordered_set<int> &expected) {
     std::unordered_set<int> tree_elems;
     collect_elements(root, tree_elems);
     return tree_elems == expected;
@@ -402,7 +415,7 @@ TEST_CASE("insert") {
 
     std::unordered_set<int> expected;
 
-    for (auto val: elems) {
+    for (auto val : elems) {
         root = PseudoSetTester::insert(root, val);
         root->color = Color::Black;
         expected.insert(val);
@@ -413,7 +426,6 @@ TEST_CASE("insert") {
 
     PseudoSetTester::destroy(root);
 }
-
 
 TEST_CASE("find on empty tree") {
     Node *root = nullptr;
@@ -464,8 +476,7 @@ TEST_CASE("empty set") {
     std::set<int> ref;
 
     CHECK_EQ(s.size(), ref.size());
-    for (int i = -10; i <= 10; ++i)
-        CHECK_EQ(s.contains(i), ref.count(i) != 0);
+    for (int i = -10; i <= 10; ++i) CHECK_EQ(s.contains(i), ref.count(i) != 0);
 }
 
 TEST_CASE("insert single element") {
@@ -484,17 +495,15 @@ TEST_CASE("insert multiple unique elements") {
     std::set<int> ref;
 
     std::vector<int> values = {5, 2, 8, 1, 3, 7, 9};
-    for (int v: values) {
+    for (int v : values) {
         s.insert(v);
         ref.insert(v);
     }
 
     CHECK_EQ(s.size(), ref.size());
-    for (int v: values)
-        CHECK_EQ(s.contains(v), ref.count(v) != 0);
+    for (int v : values) CHECK_EQ(s.contains(v), ref.count(v) != 0);
 
-    for (int i = -2; i <= 10; ++i)
-        CHECK_EQ(s.contains(i), ref.count(i) != 0);
+    for (int i = -2; i <= 10; ++i) CHECK_EQ(s.contains(i), ref.count(i) != 0);
 }
 
 TEST_CASE("insert duplicates (no effect)") {
@@ -502,14 +511,13 @@ TEST_CASE("insert duplicates (no effect)") {
     std::set<int> ref;
 
     std::vector<int> values = {1, 1, 1, 2, 2, 3};
-    for (int v: values) {
+    for (int v : values) {
         s.insert(v);
         ref.insert(v);
     }
 
     CHECK_EQ(s.size(), ref.size());
-    for (int i = 0; i <= 4; ++i)
-        CHECK_EQ(s.contains(i), ref.count(i) != 0);
+    for (int i = 0; i <= 4; ++i) CHECK_EQ(s.contains(i), ref.count(i) != 0);
 }
 
 TEST_CASE("insert many elements and check containment") {
@@ -523,8 +531,7 @@ TEST_CASE("insert many elements and check containment") {
 
     CHECK_EQ(s.size(), ref.size());
 
-    for (int i = 0; i <= 20; ++i)
-        CHECK_EQ(s.contains(i), ref.count(i) != 0);
+    for (int i = 0; i <= 20; ++i) CHECK_EQ(s.contains(i), ref.count(i) != 0);
 }
 
 TEST_CASE("check non-inserted elements") {
@@ -561,14 +568,13 @@ TEST_CASE("stress test: randomized inserts with full verification") {
         CHECK_EQ(s.size(), ref.size());
 
         // Check all inserted values are present
-        for (int inserted: ref) {
+        for (int inserted : ref) {
             CHECK(s.contains(inserted));
         }
 
         // Check all non-inserted values are absent
         for (int j = 1; j <= 1000; ++j) {
-            if (ref.count(j) == 0)
-                CHECK(!s.contains(j));
+            if (ref.count(j) == 0) CHECK(!s.contains(j));
         }
     }
 }
