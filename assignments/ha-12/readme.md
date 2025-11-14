@@ -1,12 +1,16 @@
 # Overview
 
-In this assignment, you will practice TODO
+In this assignment, you will practice with graph representations and graph algorithms. 
 
 ## Learning Objectives
 
 By the end of this assignment, you should be able to:
 
-TODO
+1. Check basic graph properties (e.g. connected, directed, acyclic, sparsity).
+2. Convert between graph representations (e.g. adjacency list and matrix).
+3. Trace breadth-first and depth-first search.
+4. Analyze the time complexity of graph algorithms.
+5. Select between breadth-first and depth-first search.
 
 ## Grading
 
@@ -43,9 +47,11 @@ The midterm will include many free response questions. To prepare effectively:
 
 If the problem asks for a single integer, provide your answer as a single integer without whitespace. For example, `10`.
 
-If the problem asks for a comma-delimited list of integers, provide your answer as a comma-delimited list without whitespace. For example, `3,1,4,0,12`.
+If the problem asks for a list of integers, provide your answer as a comma-delimited list without whitespace. For example, `3,1,4,0,12`.
 
-TODO
+If the problem asks for adjacency list format, provide your answer as a nested list without whitespace. For example, `[[1],[],[0,2]]`.
+
+If the problem asks for adjacency matrix format, provide your answer as a nested list without whitespace. For example, `[[0,0,1],[0,0,0],[1,0,1]]`.
 
 ## Confirmation
 
