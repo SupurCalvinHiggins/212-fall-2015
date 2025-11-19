@@ -141,7 +141,11 @@ def main() -> None:
     build_autograder_zip_path = autograder_path / "build_autograder_zip.sh"
     build_autograder_zip_path.write_text(build_autograder_zip_str)
 
-    subprocess.run(["./build_autograder_zip.sh"], shell=True, cwd=autograder_path)
+    subprocess.run(
+        ["chmod +x ./build_autograder_zip.sh; ./build_autograder_zip.sh"],
+        shell=True,
+        cwd=autograder_path,
+    )
 
 
 if __name__ == "__main__":
