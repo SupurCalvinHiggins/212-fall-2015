@@ -1,0 +1,8 @@
+A 	Weak Vertices
+B 	Where's My Internet??
+C 	Reachable Roads
+D 	Erdős Numbers
+E 	Brýr
+F 	Fire!
+G 	Build Dependencies
+H 	King of the Waves 
