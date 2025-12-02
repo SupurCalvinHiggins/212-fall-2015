@@ -31,48 +31,14 @@ To achieve the lab objectives, you should:
 > on your own. Subsequent labs, assignments and lectures will assume you have completed this lab's **Core Content**
 > activities.
 
-To leave early, you should:
-
-1. Complete all activities listed under **Core Content**.
-2. Complete all activities listed under **Extra Practice** or **Optional Advanced Topics**.
-
-To maximize your learning, you should:
-
-1. Complete all activities listed under **Core Content**.
-2. Complete all activities listed under **Extra Practice**.
-3. Attempt some activities listed under **Optional Advanced Topics**.
-
-# Warmup
-
-## Kattis
-
-In this section, you will solve several programming problems on the Kattis platform.
-
-1. [Join the Kattis contest.](https://open.kattis.com/contests/cr7vza)
-2. Solve Problem A. Use the standard library.
-
-> [!IMPORTANT]
-> Submit your solutions to Gradescope.
-
 # Core Content
 
 ## Kattis
 
 In this section, you will solve several programming problems on the Kattis platform.
 
-1. Solve Problem B, C, D and G. Use the standard library. You do not need to solve the problems in order. If you get stuck, try the next problem.
+1. [Form a TEAM and join the Kattis contest.](https://open.kattis.com/contests/cr7vza)
+2. Work together to solve Problems A, B, C and D! Use the standard library. You do not need to solve the problems in order. If you get stuck, try the next problem.
 
 > [!IMPORTANT]
 > Submit your solutions to Gradescope.
-
-# Extra Practice
-
-## Kattis
-
-In this section, you will solve several programming problems on the Kattis platform.
-
-1. Solve Problem E, F and H. Use the standard library. You do not need to solve the problems in order. If you get stuck, try the next problem.
-
-> [!IMPORTANT]
-> Submit your solutions to Gradescope.
-
