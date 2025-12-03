@@ -37,7 +37,7 @@ To achieve the lab objectives, you should:
 
 In this section, you will solve several programming problems on the Kattis platform.
 
-1. [Form a TEAM and join the Kattis contest.](https://open.kattis.com/contests/cr7vza)
+1. [Form a TEAM and join the Kattis contest.](https://open.kattis.com/contests/bvuok5)
 2. Work together to solve Problems A, B, C and D! Use the standard library. You do not need to solve the problems in order. If you get stuck, try the next problem.
 
 > [!IMPORTANT]
