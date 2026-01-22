@@ -76,19 +76,24 @@ Consider the following $$4$$-ary tree:
 2  1 0  
 ```
 
-What is the height of the tree? Give your answer as a single integer. 
+What is the height of the tree? Give your answer as a single integer.
+
 [____](1)
 
-What is the total height of all subtrees in the tree? Give your answer as a single integer. 
+What is the total height of all subtrees in the tree? Give your answer as a single integer.
+
 [____](1)
 
-How many internal nodes does the tree have? Give your answer as a single integer. 
+How many internal nodes does the tree have? Give your answer as a single integer.
+
 [____](1)
 
-How many leaves does the tree have? Give your answer as a single integer. 
+How many leaves does the tree have? Give your answer as a single integer.
+
 [____](3)
 
 Is the tree perfect, complete and/or full?
+
 [ ] Perfect
 [X] Complete
 [ ] Full
@@ -104,19 +109,24 @@ Consider the following $$3$$-ary tree:
     5  6  7
 ```
 
-What is the height of the tree? Give your answer as a single integer. 
+What is the height of the tree? Give your answer as a single integer.
+
 [____](2)
 
-What is the total height of all subtrees in the tree? Give your answer as a single integer. 
+What is the total height of all subtrees in the tree? Give your answer as a single integer.
+
 [____](3)
 
-How many internal nodes does the tree have? Give your answer as a single integer. 
+How many internal nodes does the tree have? Give your answer as a single integer.
+
 [____](2)
 
-How many leaves does the tree have? Give your answer as a single integer. 
+How many leaves does the tree have? Give your answer as a single integer.
+
 [____](5)
 
 Is the tree perfect, complete and/or full?
+
 [ ] Perfect
 [ ] Complete
 [X] Full
@@ -132,45 +142,56 @@ Consider the following $$2$$-ary tree:
 7   2 3   6
 ```
 
-What is the height of the tree? Give your answer as a single integer. 
+What is the height of the tree? Give your answer as a single integer.
+
 [____](2)
 
-What is the total height of all subtrees in the tree? Give your answer as a single integer. 
+What is the total height of all subtrees in the tree? Give your answer as a single integer.
+
 [____](4)
 
-How many internal nodes does the tree have? Give your answer as a single integer. 
+How many internal nodes does the tree have? Give your answer as a single integer.
+
 [____](3)
 
-How many leaves does the tree have? Give your answer as a single integer. 
+How many leaves does the tree have? Give your answer as a single integer.
+
 [____](4)
 
 Is the tree perfect, complete and/or full?
+
 [X] Perfect
 [X] Complete
 [X] Full
 
 ## Problem
 
-What is the minimum height of a perfect binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. 
-[____](16)
+What is the minimum height of a perfect binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer.
 
-What is the maximum height of a perfect binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. 
-[____](16)
+[____](15)
 
-## Problem
+What is the maximum height of a perfect binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer.
 
-What is the minimum height of a complete binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. 
-[____](16)
-
-What is the maximum height of a complete binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. 
-[____](16)
+[____](15)
 
 ## Problem
 
-What is the minimum height of a full binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. 
-[____](16)
+What is the minimum height of a complete binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer.
 
-What is the maximum height of a full binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. 
+[____](15)
+
+What is the maximum height of a complete binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer.
+
+[____](15)
+
+## Problem
+
+What is the minimum height of a full binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer.
+
+[____](15)
+
+What is the maximum height of a full binary tree with $$65535$$ nodes? Start by finding a formula in terms of $$n$$. Give your answer as a single integer.
+
 [____](32767)
 
 ## Problem
@@ -183,6 +204,7 @@ Consider the following tree:
 ```
 
 Does the tree obey the binary search tree property?
+
 (X) Yes
 ( ) No
 
@@ -192,6 +214,7 @@ Consider the following tree:
 ```
 
 Does the tree obey the binary search tree property?
+
 (X) Yes
 ( ) No
 
@@ -205,6 +228,7 @@ Consider the following tree:
 ```
 
 Does the tree obey the binary search tree property?
+
 ( ) Yes
 (X) No
 
@@ -215,13 +239,16 @@ Insert the following sequence of numbers into an empty binary search tree:
 7,5,2,1,8,0,3
 ```
 
-What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. 
+What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers.
+
 [____](7,5,2,1,0,3,8)
 
-What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. 
+What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers.
+
 [____](0,1,2,3,5,7,8)
 
-What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. 
+What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers.
+
 [____](0,1,3,2,5,8,7)
 
 ## Problem
@@ -237,13 +264,16 @@ Consider the following binary search tree:
   2
 ```
 
-What nodes are visited when searching for `6` in the tree? Give your answer as a comma-seperated list of integers. 
+What nodes are visited when searching for `6` in the tree? Give your answer as a comma-seperated list of integers.
+
 [____](6)
 
-What nodes are visited when searching for `4` in the tree? Give your answer as a comma-seperated list of integers. 
+What nodes are visited when searching for `4` in the tree? Give your answer as a comma-seperated list of integers.
+
 [____](6,3,5)
 
-What nodes are visited when searching for `7` in the tree? Give your answer as a comma-seperated list of integers. 
+What nodes are visited when searching for `7` in the tree? Give your answer as a comma-seperated list of integers.
+
 [____](6,8)
 
 ## Problem
@@ -264,14 +294,17 @@ Remove the following sequence of numbers from the tree using the inorder success
 7,5,8,9
 ```
 
-What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. 
-[____](3,2,6)
+What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers.
 
-What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. 
+[____](6,2,3)
+
+What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers.
+
 [____](2,3,6)
 
-What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. 
-[____](2,6,3) 
+What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers.
+
+[____](3,2,6)
 
 ## Problem
 
@@ -284,10 +317,12 @@ What binary search tree insertion orders always yield a tree with $$\Theta(n)$$ 
 
 ## Problem
 
-What is the minimum height of a binary search tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. 
-[____](16)
+What is the minimum height of a binary search tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer.
 
-What is the maximum height of a binary search tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. 
+[____](15)
+
+What is the maximum height of a binary search tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer.
+
 [____](65534)
 
 ## Problem
@@ -302,9 +337,10 @@ R3  B8
 ```
 
 What red-black tree properties does the tree obey?
+
 [X] Black root
 [X] Red nodes cannot have red children
-[X] Every root to leaf path contains the same number of black nodes
+[ ] Every root to leaf path contains the same number of black nodes
 [X] Binary search tree property
 
 Consider the following tree:
@@ -317,6 +353,7 @@ R4  R8
 ```
 
 What red-black tree properties does the tree obey?
+
 [X] Black root
 [ ] Red nodes cannot have red children
 [X] Every root to leaf path contains the same number of black nodes
@@ -332,6 +369,7 @@ B6  B8
 ```
 
 What red-black tree properties does the tree obey?
+
 [ ] Black root
 [X] Red nodes cannot have red children
 [ ] Every root to leaf path contains the same number of black nodes
@@ -350,13 +388,16 @@ Rotate at the root of the following binary tree (1) right, (2) left, (3) right:
 1
 ```
 
-What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. 
+What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers.
+
 [____](3,2,1,5,4,8,9)
 
-What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. 
+What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers.
+
 [____](1,2,3,4,5,8,9)
 
-What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. 
+What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers.
+
 [____](1,2,4,9,8,5,3)
 
 ## Problem
@@ -366,29 +407,36 @@ Insert the following sequence of numbers into an empty red-black tree:
 3,7,1,9,0,5,8
 ```
 
-What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes iwith `B`. 
+What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes iwith `B`.
+
 [____](B3,B1,R0,R7,B5,B9,R8)
 
-What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`. 
+What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`.
+
 [____](R0,B1,B3,B5,R7,R8,B9)
 
-What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`. 
+What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`.
+
 [____](R0,B1,B5,R8,B9,R7,B3)
 
 ## Problem
 
-What is the minimum height of a red-black tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. 
-[____](16)
+What is the minimum height of a red-black tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer.
 
-What is the maximum height of a red-black tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. 
-[____](30)
+[____](15)
+
+What is the maximum height of a red-black tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer.
+
+[____](29)
 
 ## Problem
 
-What is the minimum black height of a red-black tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. 
-[____](9)
+What is the minimum black height of a red-black tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer.
 
-What is the maximum black height of a red-black tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer. 
+[____](8)
+
+What is the maximum black height of a red-black tree with $$65535$$ keys? Start by finding a formula in terms of $$n$$. Give your answer as a single integer.
+
 [____](16)
 
 ## Problem
@@ -403,6 +451,7 @@ Consider the following tree:
 ```
 
 What 2-3-4 tree properties does the tree obey?
+
 [X] Every node has 1, 2, or 3 keys except for possibly the root
 [ ] All leaves have the same depth
 [X] Multi-way search tree property
@@ -415,6 +464,7 @@ Consider the following tree:
 ```
 
 What 2-3-4 tree properties does the tree obey?
+
 [X] Every node has 1, 2, or 3 keys except for possibly the root
 [X] All leaves have the same depth
 [X] Multi-way search tree property
@@ -427,6 +477,7 @@ Consider the following tree:
 ```
 
 What 2-3-4 tree properties does the tree obey?
+
 [ ] Every node has 1, 2, or 3 keys except for possibly the root
 [X] All leaves have the same depth
 [ ] Multi-way search tree property
@@ -438,13 +489,16 @@ Insert the following sequence of numbers into an empty 2-3-4 tree:
 2,6,9,1,4,8,3
 ```
 
-What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. 
+What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers.
+
 [____](2,6,1,3,4,8,9)
 
-What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. 
+What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers.
+
 [____](1,2,3,4,6,8,9)
 
-What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. 
+What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers.
+
 [____](1,3,4,8,9,2,6)
 
 ## Problem
@@ -465,13 +519,16 @@ Convert the following 2-3-4 tree into an equivalent red-black tree:
 ```
 For 3-nodes, use a red left child. For 4-nodes, use two red children.
 
-What is the preorder traversal of the red-black tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`. 
+What is the preorder traversal of the red-black tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`.
+
 [____](B8,R5,B3,R2,R4,B7,R6,B9)
 
-What is the inorder traversal of the red-black tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`. 
+What is the inorder traversal of the red-black tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`.
+
 [____](R2,B3,R4,R5,R6,B7,B8,B9)
 
-What is the postorder traversal of the red-black tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`. 
+What is the postorder traversal of the red-black tree? Give your answer as a comma-seperated list of integers. Prefix integers stored in red nodes with `R`, and integers stored in black nodes with `B`.
+
 [____](R2,R4,B3,R6,B7,R5,B9,B8)
 
 ## Problem
@@ -485,13 +542,16 @@ Convert the following red-black tree into an equivalent 2-3-4 tree:
 R1  R4    R9
 ```
 
-What is the preorder traversal of the 2-3-4 tree? Give your answer as a comma-seperated list of integers. 
+What is the preorder traversal of the 2-3-4 tree? Give your answer as a comma-seperated list of integers.
+
 [____](5,1,3,4,8,9)
 
-What is the inorder traversal of the 2-3-4 tree? Give your answer as a comma-seperated list of integers. 
+What is the inorder traversal of the 2-3-4 tree? Give your answer as a comma-seperated list of integers.
+
 [____](1,3,4,5,8,9)
 
-What is the postorder traversal of the 2-3-4 tree? Give your answer as a comma-seperated list of integers. 
+What is the postorder traversal of the 2-3-4 tree? Give your answer as a comma-seperated list of integers.
+
 [____](1,3,4,8,9,5)
 
 ## Problem
@@ -504,7 +564,8 @@ Consider the following tree:
 ```
 
 What B-tree properties does the tree obey if $$b = 5$$?
-[X] Every node has between $$\lceil b / 2 \rceil - 1$$ and $$b - 1$$ keys except for possibly the root
+
+[ ] Every node has between $$\lceil b / 2 \rceil - 1$$ and $$b - 1$$ keys except for possibly the root
 [X] All leaves have the same depth
 [ ] Multi-way search tree property
 
@@ -516,6 +577,7 @@ Consider the following tree:
 ```
 
 What B-tree tree properties does the tree obey if $$b = 3$$?
+
 [ ] Every node has between $$\lceil b / 2 \rceil - 1$$ and $$b - 1$$ keys except for possibly the root
 [X] All leaves have the same depth
 [X] Multi-way search tree property
@@ -528,6 +590,7 @@ Consider the following tree:
 ```
 
 What B-tree properties does the tree obey if $$b = 4$$?
+
 [X] Every node has between $$\lceil b / 2 \rceil - 1$$ and $$b - 1$$ keys except for possibly the root
 [X] All leaves have the same depth
 [X] Multi-way search tree property
@@ -539,36 +602,44 @@ Insert the following sequence of numbers into an empty B-tree tree where $$b = 3
 0,5,2,7,1,9,4
 ```
 
-What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers. 
+What is the preorder traversal of the final tree? Give your answer as a comma-seperated list of integers.
+
 [____](2,7,0,1,4,5,9)
 
-What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers. 
+What is the inorder traversal of the final tree? Give your answer as a comma-seperated list of integers.
+
 [____](0,1,2,4,5,7,9)
 
-What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers. 
+What is the postorder traversal of the final tree? Give your answer as a comma-seperated list of integers.
+
 [____](0,1,4,5,9,2,7)
 
 ## Problem
 
-What is the minimum height of a B-tree with $$65535$$ keys if $$b = 3$$? Start by finding a formula in terms of $$n$$ and $$b$$. Give your answer as a single integer. 
+What is the minimum height of a B-tree with $$65535$$ keys if $$b = 3$$? Start by finding a formula in terms of $$n$$ and $$b$$. Give your answer as a single integer.
+
 [____](10)
 
-What is the maximum height of a B-tree with $$65535$$ keys if $$b = 3$$? Start by finding a formula in terms of $$n$$ and $$b$$. Give your answer as a single integer. 
-[____](16)
+What is the maximum height of a B-tree with $$65535$$ keys if $$b = 3$$? Start by finding a formula in terms of $$n$$ and $$b$$. Give your answer as a single integer.
+
+[____](15)
 
 # Extra Practice
 
 ## Problem
 
-In a perfect BST of height $$16$$, what is the expected number of visited nodes when searching for a key chosen uniformly at random? Assume the key is in the tree with 50% probability. Give your answer as a single integer. If needed, round up to the nearest integer. 
+In a perfect BST of height $$16$$, what is the expected number of visited nodes when searching for a key chosen uniformly at random? Assume the key is in the tree with 50% probability. Give your answer as a single integer. If needed, round up to the nearest integer.
+
 [____](17)
 
 ## Problem
 
-What is the maximum number of right rotations required to transform a BST with $$65535$$ nodes into a right chain? A right chain is a tree where nodes have only a right child, or no children. Give your answer as a single integer. 
+What is the maximum number of right rotations required to transform a BST with $$65535$$ nodes into a right chain? A right chain is a tree where nodes have only a right child, or no children. Give your answer as a single integer.
+
 [____](65534)
 
 ## Problem
+
 A subtree property is a node property that is maintained under tree operations. For example, the binary search tree property is a subtree property. Every node in the tree obeys the binary search tree property, and this remains true after insertions, deletions and queries.
 
 What subtree properties can be maintained in a red-black tree while retaining $$\Theta(\lg n)$$ worst-case operations? Write a modified version of insert for each such subtree property.
@@ -576,19 +647,21 @@ What subtree properties can be maintained in a red-black tree while retaining $$
 [X] Number of nodes in subtree
 [X] Number of red nodes in subtree
 [X] Maximum key in subtree
-[ ] Height of subtree
-[ ] Depth of node 
+[X] Height of subtree
+[ ] Depth of node
 
 # Optional Advanced Topics
 
 ## Problem
 
-How many different $$32$$ node binary trees are there? Two binary trees are different if and only if their shapes differ irrespective of the values stored in the trees. Start by finding a formula in terms of $$n$$. Give your answer as a single integer. 
+How many different $$32$$ node binary trees are there? Two binary trees are different if and only if their shapes differ irrespective of the values stored in the trees. Start by finding a formula in terms of $$n$$. Give your answer as a single integer.
+
 [____](55534064877048198)
 
 ## Problem
 
-How many nodes are in a B-tree with $$b = 4$$ after inserting `1,2,...,49163`? Start by finding a formula in terms of $$n$$ and $$b$$. Give your answer as a single integer. 
+How many nodes are in a B-tree with $$b = 4$$ after inserting `1,2,...,49163`? Start by finding a formula in terms of $$n$$ and $$b$$. Give your answer as a single integer.
+
 [____](49121)
 
 ## Problem
@@ -596,6 +669,7 @@ How many nodes are in a B-tree with $$b = 4$$ after inserting `1,2,...,49163`? S
 Consider a B-tree with $$n$$ keys.
 
 What choices of $$b$$ yield an asymptotic slowdown of search relative to $$b = \Theta(1)$$?
+
 [ ] $$b = \Theta(1)$$
 [X] $$b = \Theta(\lg \lg n)$$
 [X] $$b = \Theta(\lg n)$$
@@ -605,6 +679,7 @@ What choices of $$b$$ yield an asymptotic slowdown of search relative to $$b = \
 Suppose we perform a binary search of the keys in a B-tree node instead of a linear search.
 
 What choices of $$b$$ yield an asymptotic slowdown of search relative to $$b = \Theta(1)$$?
+
 [ ] $$b = \Theta(1)$$
 [ ] $$b = \Theta(\lg \lg n)$$
 [ ] $$b = \Theta(\lg n)$$
