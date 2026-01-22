@@ -13,12 +13,12 @@ By the end of this assignment, you should be able to:
 
 ## Grading
 
-This assignment is graded out of $$$$100$$$$ points. However, we provide $$$$200$$$$ points' worth of problems:
+This assignment is graded out of $$100$$ points. However, we provide $$200$$ points' worth of problems:
 
-1. Only your first $$$$100$$$$ points count towards your grade.
+1. Only your first $$100$$ points count towards your grade.
 2. The extra problems give you flexibility to:
     * Choose problems that best support your learning
-    * Earn more than $$$$100$$$$ points in case of mistakes (your grade will be capped at $$$$100$$$$).
+    * Earn more than $$100$$ points in case of mistakes (your grade will be capped at $$100$$).
     * Practice additional problems in preparation for the midterm.
 
 **You are not expected to complete every problem!**
@@ -76,16 +76,18 @@ Consider the following open addressing hash table:
 ```
 
 What is the table's load factor? Give your answer as a single real number.
+
 [____](0.7)
 
 ## Problem
 
 Consider the following closed addressing hash table:
 ```txt
-[[],[0,1,5],[4,2,7,8],[]]
+ [[],[0,1,5],[4,2,7,8],[]]
 ```
 
 What is the table's load factor? Give your answer as a single real number.
+
 [____](1.75)
 
 ## Problem
@@ -97,12 +99,15 @@ Insert the following sequence of numbers into an empty linear probing hash table
 The hash function is $$h(k) = k \bmod m$$ where $$m$$ is the capacity, the maximum load factor is $$0.5$$, the initial capacity is $$1$$, and the capacity doubles when resizing.
 
 What is the final table? Give your answer as an open addressing hash table.
+
 [____]([0,E,E,3,11,E,E,7])
 
 How many collisions occurred during the insertions? Give your answer as a single integer.
-[____](5)
+
+[____](2)
 
 When querying the final table, what is the worst-case number of probes? Give your answer as a single integer.
+
 [____](3)
 
 ## Problem
@@ -114,12 +119,15 @@ Insert the following sequence of numbers into an empty quadratic probing hash ta
 The hash function is $$h(k) = k \bmod m$$ where $$m$$ is the capacity, the maximum load factor is $$0.5$$, the initial capacity is $$1$$, and the capacity doubles when resizing.
 
 What is the final table? Give your answer as an open addressing hash table.
+
 [____]([0,8,E,3,12,E,E,E])
 
 How many collisions occurred during the insertions? Give your answer as a single integer.
-[____](4)
+
+[____](2)
 
 When querying the final table, what is the worst-case number of probes? Give your answer as a single integer.
+
 [____](3)
 
 ## Problem
@@ -131,13 +139,16 @@ Insert the following sequence of numbers into an empty double hashing hash table
 The hash functions are $$h_1(k) = k \bmod m$$ and $$h_2(k) = 1 + (k \bmod (m - 1))$$ where $$m$$ is the capacity, the maximum load factor is $$0.5$$, the initial capacity is $$1$$, and the capacity doubles when resizing.
 
 What is the final table? Give your answer as an open addressing hash table.
+
 [____]([E,1,2,E,9,5,E,E])
 
 How many collisions occurred during the insertions? Give your answer as a single integer.
+
 [____](1)
 
 When querying the final table, what is the worst-case number of probes? Give your answer as a single integer.
-[____](3)
+
+[____](4)
 
 ## Problem
 
@@ -148,28 +159,31 @@ Insert the following sequence of numbers into an empty separate chaining hash ta
 The hash function is $$h(k) = k \bmod m$$ where $$m$$ is the capacity, the maximum load factor is $$0.5$$, the initial capacity is $$1$$, the capacity doubles when resizing, and insertions occur at the back of the list.
 
 What is the final table? Give your answer as a closed addressing hash table.
+
 [____]([[],[1,9,17],[2],[],[],[],[],[]])
 
 How many collisions occurred during the insertions? Give your answer as a single integer.
+
 [____](4)
 
 When querying the final table, what is the worst-case number of comparisons? Give your answer as a single integer.
-[____](4)
+
+[____](3)
 
 ## Problem
 
 Consider the following separate chaining hash table:
 ```txt
-[[1,5,4,2], [3,6], [7], [8,9]]
+ [[1,5,4,2],[3,6],[7],[8,9]]
 ```
-The hash function is $$h(k) = k \bmod m$$ where $$m$$ is the capacity.
 
 What is the expected number of comparisons when $$1$$ and $$2$$ are each queried with probability $$1/2$$? Give your answer as a single real number.
+
 [____](2.5)
 
 ## Problem
 
-Suppose a hash table resizes to maintain a constant load factor of $$0.5$$ after every insertion:
+Suppose a hash table resizes to maintain a constant load factor of $$0.5$$ before every insertion:
 ```c++
 template <typename T>
 class HashTable {
@@ -183,10 +197,10 @@ class HashTable {
 
 public:
     void insert(T key) {
-        // ...
-        if (m_capacity != 2 * m_size) {
-            resize(2 * m_size);    
+        if (m_capacity != 2 * (m_size + 1)) {
+            resize(2 * (m_size + 1));    
         }
+        // ...
     }
 };
 ```
@@ -200,7 +214,7 @@ What is the time complexity of insert?
 
 ## Problem
 
-Suppose a hash table resizes to maintain a maximum load factor of $$0.5$$ after every insertion:
+Suppose a hash table resizes to maintain a maximum load factor of $$0.5$$ before every insertion:
 ```c++
 template <typename T>
 class HashTable {
@@ -214,10 +228,10 @@ class HashTable {
 
 public:
     void insert(T key) {
-        // ...
-        if (m_capacity < 2 * m_size) {
-            resize(2 * m_size);    
+        if (m_capacity < 2 * (m_size + 1)) {
+            resize(2 * (m_size + 1));    
         }
+        // ...
     }
 };
 ``` 
@@ -240,14 +254,17 @@ What is the lexicographically smallest worst-case insertion sequence of $$8$$ di
 Suppose we want build a capacity $$17$$ linear probing hash table.
 
 Is $$h(k) = 34k \bmod 17$$ a good hash function?
+
 ( ) Yes
 (X) No
 
 Is $$h(k) = k \bmod 4$$ a good hash function?
+
 ( ) Yes
 (X) No
 
 Is $$h(k) = (31k \bmod 101) \bmod 17$$ a good hash function?
+
 (X) Yes
 ( ) No
 
@@ -256,14 +273,17 @@ Is $$h(k) = (31k \bmod 101) \bmod 17$$ a good hash function?
 Suppose we want to build a capacity $$17$$ double hashing hash table.
 
 Are $$h_1(k) = k \bmod 17$$ and $$h_2(k) = 3k \bmod 17$$ good hash functions?
+
 ( ) Yes
 (X) No
 
 Are $$h_1(k) = k \bmod 17$$ and $$h_2(k) = 1 + ((31k \bmod 101) \bmod 16)$$ good hash functions?
+
 (X) Yes
 ( ) No
 
 Are $$h_1(k) = k \bmod 17$$ and $$h_2(k) = (31k \bmod 101) \bmod 17$$ good hash functions?
+
 ( ) Yes
 (X) No
 
@@ -273,12 +293,13 @@ Are $$h_1(k) = k \bmod 17$$ and $$h_2(k) = (31k \bmod 101) \bmod 17$$ good hash 
 
 Consider the following fixed capacity linear probing hash table:
 ```txt
-[27,0,9,11,3,5,13,22]
+[27,0,9,11,3,4,13,22]
 ```
 The hash function is $$h(k) = k \bmod m$$ where $$m$$ is the table capacity.
 
 What order were the keys inserted in? Give your answer as a comma-separated list of integers.
-[____](11,3,5,13,22,27,0,9)
+
+[____](11,3,4,13,22,27,0,9)
 
 ## Problem
 
@@ -289,7 +310,8 @@ Consider the following fixed capacity quadratic probing hash table:
 The hash function is $$h(k) = k \bmod m$$ where $$m$$ is the table capacity.
 
 How many different insertion orders yield the table? Give your answer as a single integer.
-[____](10)
+
+[____](25)
 
 # Optional Advanced Topics
 
@@ -298,4 +320,5 @@ How many different insertion orders yield the table? Give your answer as a singl
 Consider a separate chaining hash table with $$100$$ keys and load factor $$0.3$$. Assume **simple uniform hashing**, that is, $$P(h(k_1) = h(k_2)) = \frac{1}{m}$$ for $$k_1 \neq k_2$$. 
 
 What is the expected number of comparisons when querying a key stored in the table? Assume all keys are queried with equal probability. Give your answer as a single real number.
+
 [____](1.1485)
