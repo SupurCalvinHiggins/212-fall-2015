@@ -1,0 +1,199 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{wasysym}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\title[CSC 212 Lab 1]
+{C++ Review and The Debugger}
+
+\author
+{Calvin Higgins}
+
+\institute[]
+{
+  Department of Computer Science and Statistics\\
+  University of Rhode Island
+}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\frame{\titlepage}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Welcome to CSC 212 Lab!}
+
+    \textcolor{blue}{\textbf{When You Enter The Classroom:}}
+    \begin{itemize}
+        \item \textbf{Confirm your IDE is configured}
+        \begin{itemize}
+            \item Working \textcolor{blue}{compiler}, \textcolor{blue}{debugger} and \textcolor{blue}{formatter}
+            \item Checked later today
+        \end{itemize}
+    
+        \item \textbf{Create a \textcolor{red}{new project} in your IDE for Lab 1}
+        \begin{itemize}
+            \item If you aren't sure how to do this
+            \begin{itemize}
+                \item Ask a group member
+                \item Search for documentation
+                \item Chat with AI
+            \end{itemize}
+            \item If you are still stuck, call over a staff member
+        \end{itemize}
+
+        \item \textbf{Read the \textcolor{red}{lab handout}}
+        \begin{itemize}
+            \item Available on GitHub under \textcolor{blue}{labs/lab-01}
+            \item \textcolor{blue}{\texttt{https://github.com/URI-CSC/212-fall-2015}}
+            \begin{itemize}
+                \item Yes, it is 2015 not 2025
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+
+    \begin{center}
+        \textbf{\textcolor{red}{Don't worry if you don't get to everything, we will continue later!}}
+    \end{center}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Your Expectations for TAs}
+    \textcolor{blue}{\textbf{Key Expectations:}}
+    \begin{itemize}
+        \item \textbf{Be \textcolor{red}{available}, \textcolor{red}{responsive}, and \textcolor{red}{timely} ($> 50$\%)}
+        \begin{itemize}
+            \item Respond in less than 48 hours (call me out if we don't)
+            \item Give at least 48 hour notice for office hour changes
+            \begin{itemize}
+                \item Posted on \textcolor{blue}{EdStem}
+            \end{itemize}
+            \item \textcolor{blue}{50\% fewer TA hours allocated to CSC 212}
+            \begin{itemize}
+                \item Before: 6 TAs, 60 hours
+                \item Now: 3 TAs, 40 hours
+            \end{itemize}
+        \end{itemize}
+
+        \item \textbf{Provide \textcolor{red}{qualitative feedback} ($> 50$\%)}
+        \begin{itemize}
+            \item Just ask!
+            \item Office hours, during/after lab, review sessions, via EdStem, via email
+        \end{itemize}
+
+        \item \textbf{Have \textcolor{red}{good vibes} ($> 25$\%)}  
+
+        \item \textbf{Provide \textcolor{red}{resources} ($> 25$\%)}
+        \begin{itemize}
+            \item Weekly review sessions
+            \item Weekly Leetcode problems (check \textcolor{blue}{EdStem})
+            \item Career advising (check \textcolor{blue}{EdStem})
+            \item Need something? Please ask!
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Review Session and Office Hours}
+
+\textcolor{blue}{\textbf{Review Session:}}
+\begin{itemize}
+    \item \textbf{Algorithm Analysis Review:}
+    \begin{itemize}
+        \item Recitation style 
+        \begin{itemize}
+            \item 30\% TAs working examples
+            \item 70\% you solving problems
+        \end{itemize}
+        \item \textcolor{red}{\textbf{Practicing theory is the best way to do well on exams!}} 
+        \item 2:00-3:00PM in Engineering 040
+    \end{itemize}
+
+    \item \textbf{Assignment Party:}
+    \begin{itemize}
+        \item Office hours style
+        \begin{itemize}
+            \item 100\% you working the assignment
+        \end{itemize}
+        \item \textcolor{red}{\textbf{Qualitative feedback is critical for developing programming skills!}} 
+        \item 3:10-4:00PM in Engineering 040
+    \end{itemize}
+\end{itemize}
+
+\vspace{1em}
+
+\textcolor{blue}{\textbf{Office Hours:}}
+\begin{itemize}
+    \item \textbf{Time Changes:}
+    \begin{itemize}
+        \item Calvin's hours were moved to 10:00-12:00PM this week
+        \item Check \textcolor{blue}{EdStem} for times and locations
+    \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Lab Directions}
+
+    \textcolor{blue}{\textbf{Begin These Now:}}
+    \begin{itemize}
+        \item \textbf{Create a \textcolor{red}{new project} in your IDE for Lab 1}
+        \begin{itemize}
+            \item If you aren't sure how to do this
+            \begin{itemize}
+                \item Ask a group member
+                \item Search for documentation
+                \item Chat with AI
+            \end{itemize}
+            \item If you are still stuck, call over a staff member
+        \end{itemize}
+
+        \item \textbf{Work through the \textcolor{red}{lab}}
+        \begin{itemize}
+            \item Available on GitHub under \textcolor{blue}{labs/lab-01}
+            \item \textcolor{blue}{\texttt{https://github.com/URI-CSC/212-fall-2015}}
+            \begin{itemize}
+                \item Yes, it is 2015 not 2025
+            \end{itemize}
+            \item All directions available in the lab handout
+        \end{itemize}        
+    \end{itemize}
+
+    \begin{center}
+        \textbf{\textcolor{red}{We will check your IDEs in a few minutes!}}
+    \end{center}
+
+\end{frame}
+
+\end{document}

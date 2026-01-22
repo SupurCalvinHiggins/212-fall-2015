@@ -1,0 +1,115 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{listings}
+
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\title[CSC 212 Lab 6]
+{Linked Lists}
+
+\author
+{Calvin Higgins}
+
+\institute[]
+{
+  Department of Computer Science and Statistics\\
+  University of Rhode Island
+}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\frame{\titlepage}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Warmup Problem}
+    \textcolor{blue}{\textbf{When You Enter The Classroom:}}
+    \begin{itemize}
+        \item \textbf{\textcolor{blue}{Program} the following function:}
+
+        \begin{lstlisting}[language=C++, basicstyle=\ttfamily\small]
+struct Node {
+    int value;
+    Node* next;
+};
+int second(Node* head) {.
+    // TODO: Return the second element in the list.
+    // If there are less than 2 elements, return -1.
+}
+        \end{lstlisting}
+
+        \item \textbf{\textcolor{blue}{Analyze} the time complexity:}
+        \begin{itemize}
+            \item Assume an input of size $n$. 
+            \item Give an asymptotic bound on the time complexity of your algorithm.
+            \item What does your bound mean, in terms of your algorithm(s) runtime?
+        \end{itemize}
+    \end{itemize}
+
+    \vspace{1em}
+
+    \begin{center}
+        \Large
+        \textbf{\textcolor{red}{Write your group's work on the whiteboards!}}
+    \end{center}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Lab Directions}
+
+    \textcolor{blue}{\textbf{Begin These Now:}}
+    \begin{itemize}
+        \item \textbf{Consider attending the \textcolor{red}{review session}:}
+        \begin{itemize}
+            \item This Friday at 2:00-4:00PM in Engineering 040
+            \item Ask your group members if they are going!
+        \end{itemize}
+    
+        \item \textbf{Create a \textcolor{red}{new project} in your IDE for Lab 6}
+        \begin{itemize}
+            \item If you aren't sure how to do this
+            \begin{itemize}
+                \item Ask a group member
+                \item Search for documentation
+                \item Chat with AI
+            \end{itemize}
+            \item If you are still stuck, call over a staff member
+        \end{itemize}
+
+        \item \textbf{Work through the \textcolor{red}{lab handout}}
+        \begin{itemize}
+            \item Available on GitHub under \textcolor{blue}{labs/lab-06}
+            \item \textcolor{blue}{\texttt{https://github.com/URI-CSC/212-fall-2015}}
+            \begin{itemize}
+                \item Yes, it is 2015 not 2025
+            \end{itemize}
+            \item All directions available in the lab handout
+        \end{itemize}        
+    \end{itemize}
+
+\end{frame}
+
+\end{document}

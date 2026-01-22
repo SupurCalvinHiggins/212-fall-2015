@@ -1,0 +1,1163 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{listings}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\lstset{
+  basicstyle=\small,
+}
+
+\title[CSC 212 Review 1]
+{Mathematical Analysis of Algorithms}
+
+\author
+{Calvin Higgins}
+
+\institute[]
+{
+  Department of Computer Science and Statistics\\
+  University of Rhode Island
+}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\frame{\titlepage}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{The Big Picture}
+
+    \begin{center}
+        \Huge
+        \textcolor{red}{\textbf{What is algorithm analysis?}}
+    \end{center}
+
+    \vspace{1em}
+
+    \begin{center}
+        \Huge
+        \textcolor{red}{\textbf{Why do we analyze algorithms?}}
+    \end{center}
+
+\end{frame}
+
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{The Big Picture}
+    \begin{center}
+        \Large
+        \textcolor{blue}{\textbf{Algorithm analysis is the prediction and comparison of algorithm performance.}}
+    \end{center}
+
+    \vspace{1em}
+
+    \begin{center}
+        \Large
+        \textcolor{blue}{\textbf{Algorithm analysis lets us choose or design the best (or good enough) algorithm for a given problem.}}
+    \end{center}
+    
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Mathematical Algorithm Analysis}
+
+    \begin{center}
+        \Huge
+        \textcolor{red}{\textbf{How do we mathematically analyze algorithms?}}
+    \end{center}
+
+    \vspace{1em}
+
+    \begin{center}
+        \Huge
+        \textcolor{red}{\textbf{Give a step-by-step procedure.}}
+    \end{center}
+    
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Mathematical Algorithm Analysis}
+    \textcolor{blue}{\textbf{How to Analyze an Algorithm:}}
+    \begin{enumerate}
+        \item Define a reasonable \textbf{model of computation} (\textbf{cost model}).
+        \begin{enumerate}
+            \item What are the \textbf{basic operations}? 
+            \item How much does each basic operation cost?
+        \end{enumerate}
+        
+        % TODO: case analysis
+
+        \item Model the algorithm's cost with a function $T(n)$.
+        \begin{enumerate}
+            \item How many basic operations are performed for an input of size $n$?
+        \end{enumerate}
+
+        \item Simplify $T(n)$.
+
+        \item Classify $T(n)$'s growth rate.
+        \begin{enumerate}
+            \item How quickly does $T(n)$ grow?
+        \end{enumerate}
+
+        \item Interpret $T(n)$'s growth rate.
+        \begin{enumerate}
+            \item How suitable is the algorithm for my problem?
+        \end{enumerate}
+    \end{enumerate}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Defining a Model of Computation}
+
+        \begin{lstlisting}[language=C++]
+int foo(int n) {
+    int A = new int[n];
+    
+    A[0] = 1;
+    for (int i = 1; i < n; i++)
+        A[i] = A[i - 1] * (i + 1);
+
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < i; j++)
+            sum += A[j];
+
+    delete[] A;
+    return sum;
+}
+        \end{lstlisting}
+
+    \begin{center}
+        \Large
+        \textcolor{red}{\textbf{List as many basic operations as you can think of!}}
+    \end{center}
+
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Defining a Model of Computation}
+    \begin{columns}[T] 
+    
+        \begin{column}{0.65\textwidth}
+            \begin{lstlisting}[language=C++]
+int foo(int n) {
+    int* A = new int[n];
+    
+    A[0] = 1;
+    for (int i = 1; i < n; i++)
+        A[i] = A[i - 1] * (i + 1);
+
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < i; j++)
+            sum += A[j];
+
+    delete[] A;
+    return sum;
+}
+           \end{lstlisting}
+        \end{column}
+    
+        \begin{column}{0.35\textwidth}
+            \textcolor{blue}{\textbf{Basic Operations:}}
+            \begin{enumerate}
+                \item \textcolor{blue}{Additions}
+                \item \textcolor{blue}{Multiplications}
+                \item \textcolor{blue}{Comparisons}
+                \item \textcolor{blue}{Branches}
+                \item \textcolor{blue}{Local variables}
+                \item \textcolor{blue}{Memory allocations}
+                \item \textcolor{blue}{Allocated memory}
+                \item \textcolor{blue}{Loads}
+                \item \textcolor{blue}{Stores}
+                \item \textcolor{blue}{Assignments}
+                \item \textcolor{blue}{...}
+            \end{enumerate}
+        \end{column}
+    \end{columns}
+
+    \begin{center}
+        \Large
+        \textcolor{red}{\textbf{Which basic operations are most reasonable? Why?}}
+    \end{center}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Modeling the Algorithm's Cost}    
+    \begin{lstlisting}[language=C++, mathescape=true]
+int foo(int n) {
+    int* A = new int[n];
+    
+    A[0] = 1;
+    for (int i = 1; i < n; i++)     // $\textcolor{red}{\text{Additions?}}$
+        A[i] = A[i - 1] * (i + 1);  // $\textcolor{red}{\text{Additions?}}$
+
+    int sum = 0;
+    for (int i = 0; i < n; i++)     // $\textcolor{red}{\text{Additions?}}$
+        for (int j = 0; j < i; j++) // $\textcolor{red}{\text{Additions?}}$
+            sum += A[j];            // $\textcolor{red}{\text{Additions?}}$  
+
+    delete[] A;
+    return sum;
+}
+    \end{lstlisting}
+
+    \begin{center}
+        \Large
+        \textcolor{red}{\textbf{How many additions?} $T(n) = \; ?$}
+    \end{center}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Modeling the Algorithm's Cost}    
+    \begin{lstlisting}[language=C++, mathescape=true]
+int foo(int n) {
+    int* A = new int[n];
+    
+    A[0] = 1;
+    for (int i = 1; i < n; i++)     // $\textcolor{blue}{\sum_{i=1}^{n - 1} 1 \text{ additions}}$
+        A[i] = A[i - 1] * (i + 1);  // $\textcolor{blue}{\sum_{i=1}^{n - 1} 2 \text{ additions}}$
+
+    int sum = 0;
+    for (int i = 0; i < n; i++)     // $\textcolor{blue}{\sum_{i=0}^{n - 1} 1 \text{ additions}}$
+        for (int j = 0; j < i; j++) // $\textcolor{blue}{\sum_{i=0}^{n - 1} \sum_{j=0}^{i} 1 \text{ additions}}$
+            sum += A[j];            // $\textcolor{blue}{\sum_{i=0}^{n - 1} \sum_{j=0}^{i - 1} 1 \text{ additions}}$  
+
+    delete[] A;
+    return sum;
+}
+    \end{lstlisting}
+
+    \begin{center}
+        \textcolor{blue}{$T(n) = \sum_{i=1}^{n-1} 1 + \sum_{i=1}^{n - 1} 2 + \sum_{i=0}^{n-1} 1 + \sum_{i=0}^{n - 1} \sum_{j=0}^{i} 1 + \sum_{i=0}^{n - 1} \sum_{j=0}^{i - 1} 1$}
+    \end{center}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Modeling the Algorithm's Cost}
+    \begin{lstlisting}[language=C++, mathescape=true]
+int foo(int n) {
+    int* A = new int[n];
+    
+    A[0] = 1;
+    for (int i = 1; i < n; i++)    
+        A[i] = A[i - 1] * (i + 1); // $\textcolor{red}{\text{Multiplications?}}$
+
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < i; j++)
+            sum += A[j];              
+
+    delete[] A;
+    return sum;
+}
+   \end{lstlisting}
+
+    \begin{center}
+        \Large
+        \textcolor{red}{\textbf{How many multiplications?} $ T(n) =\;?$}
+    \end{center}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Modeling the Algorithm's Cost}
+    \begin{lstlisting}[language=C++, mathescape=true]
+int foo(int n) {
+    int* A = new int[n];
+    
+    A[0] = 1;
+    for (int i = 1; i < n; i++)    
+        A[i] = A[i - 1] * (i + 1); // $\textcolor{blue}{\sum_{i=1}^{n - 1} 1 \text{ multiplications}}$
+
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < i; j++)
+            sum += A[j];
+
+    delete[] A;
+    return sum;
+}
+   \end{lstlisting}
+
+    \begin{center}
+        \Large
+        \textcolor{blue}{\textbf{Multiplications:} $ T(n) = \sum_{i=1}^{n - 1} 1$}
+    \end{center}
+\end{frame}
+
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Modeling the Algorithm's Cost}
+    \begin{lstlisting}[language=C++, mathescape=true]
+int foo(int n) {
+    int* A = new int[n];
+    
+    A[0] = 1;
+    for (int i = 1; i < n; i++)     // $\textcolor{red}{\text{Comparisons?}}$
+        A[i] = A[i - 1] * (i + 1);
+
+    int sum = 0;
+    for (int i = 0; i < n; i++)     // $\textcolor{red}{\text{Comparisons?}}$
+        for (int j = 0; j < i; j++) // $\textcolor{red}{\text{Comparisons?}}$
+            sum += A[j];            
+
+    delete[] A;
+    return sum;
+}
+   \end{lstlisting}
+
+    \begin{center}
+        \Large
+        \textcolor{red}{\textbf{How many comparisons?} $ T(n) =\;?$}
+    \end{center}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Modeling the Algorithm's Cost}
+    \begin{lstlisting}[language=C++, mathescape=true]
+int foo(int n) {
+    int* A = new int[n];
+    
+    A[0] = 1;
+    for (int i = 1; i < n; i++)     // $\textcolor{blue}{\sum_{i=1}^{n} 1 \text{ comparisons}}$
+        A[i] = A[i - 1] * (i + 1);
+
+    int sum = 0;
+    for (int i = 0; i < n; i++)     // $\textcolor{blue}{\sum_{i=0}^{n} 1 \text{ comparisons}}$
+        for (int j = 0; j < i; j++) // $\textcolor{blue}{\sum_{i=0}^{n-1} \sum_{j=0}^{i} 1 \text{ comparisons}}$
+            sum += A[j];    
+
+    delete[] A;
+    return sum;
+}
+    \end{lstlisting}
+
+    \begin{center}
+        \Large
+        \textcolor{blue}{\textbf{Comparisons:} $ T(n) = \sum_{i=1}^{n} 1 + \sum_{i=0}^{n} 1 + \sum_{i=0}^{n-1} \sum_{j=0}^{i} 1$}
+    \end{center}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Modeling the Algorithm's Cost}
+    \begin{lstlisting}[language=C++, mathescape=true]
+int foo(int n) {
+    int* A = new int[n];
+    
+    A[0] = 1;                       // $\textcolor{red}{\text{Memory accesses?}}$
+    for (int i = 1; i < n; i++)    
+        A[i] = A[i - 1] * (i + 1);  // $\textcolor{red}{\text{Memory accesses?}}$
+
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < i; j++) 
+            sum += A[j];            // $\textcolor{red}{\text{Memory accesses?}}$    
+
+    delete[] A;
+    return sum;
+}
+    \end{lstlisting}
+
+    \begin{center}
+        \Large
+        \textcolor{red}{\textbf{How many memory accesses (indexing)?} $ T(n) =\;?$}
+    \end{center}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Modeling the Algorithm's Cost}
+    \begin{lstlisting}[language=C++, mathescape=true]
+int foo(int n) {
+    int* A = new int[n];
+    
+    A[0] = 1;                       // $\textcolor{blue}{1 \text{ memory accesses}}$
+    for (int i = 1; i < n; i++)    
+        A[i] = A[i - 1] * (i + 1);  // $\textcolor{blue}{\sum_{i=1}^{n-1} 2 \text{ memory accesses}}$
+
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < i; j++) 
+            sum += A[j];            // $\textcolor{blue}{\sum_{i=0}^{n-1} \sum_{j=0}^{i - 1} 1 \text{ memory accesses}}$ 
+
+    delete[] A;
+    return sum;
+}
+    \end{lstlisting}
+
+    \begin{center}
+        \Large
+        \textcolor{blue}{\textbf{Memory Accesses:} $T(n) = 1 + \sum_{i=1}^{n-1} 2 + \sum_{i=0}^{n-1} \sum_{j=0}^{i - 1} 1$}
+    \end{center}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Modeling the Algorithm's Cost}
+    \begin{lstlisting}[language=C++, mathescape=true]
+int foo(int n) {
+    int* A = new int[n];            // $\textcolor{red}{\text{Assignments?}}$
+    
+    A[0] = 1;                       // $\textcolor{red}{\text{Assignments?}}$
+    for (int i = 1; i < n; i++)     // $\textcolor{red}{\text{Assignments?}}$
+        A[i] = A[i - 1] * (i + 1);  // $\textcolor{red}{\text{Assignments?}}$
+
+    int sum = 0;                    // $\textcolor{red}{\text{Assignments?}}$
+    for (int i = 0; i < n; i++)     // $\textcolor{red}{\text{Assignments?}}$
+        for (int j = 0; j < i; j++) // $\textcolor{red}{\text{Assignments?}}$
+            sum += A[j];            // $\textcolor{red}{\text{Assignments?}}$ 
+
+    delete[] A;
+    return sum;
+}
+    \end{lstlisting}
+
+    \begin{center}
+        \Large
+        \textcolor{red}{\textbf{How many assignments?} $ T(n) =\;?$}
+    \end{center}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Modeling the Algorithm's Cost}
+    \begin{lstlisting}[language=C++, mathescape=true]
+int foo(int n) {
+    int* A = new int[n];            // $\textcolor{blue}{1 \text{ assignments}}$
+    
+    A[0] = 1;                       // $\textcolor{blue}{1 \text{ assignments}}$
+    for (int i = 1; i < n; i++)     // $\textcolor{blue}{\sum_{i=1}^{n-1} 1 \text{ assignments}}$
+        A[i] = A[i - 1] * (i + 1);  // $\textcolor{blue}{\sum_{i=1}^{n-1} 1 \text{ assignments}}$
+
+    int sum = 0;                    // $\textcolor{blue}{1 \text{ assignments}}$
+    for (int i = 0; i < n; i++)     // $\textcolor{blue}{\sum_{i=0}^{n-1} 1 \text{ assignments}}$
+        for (int j = 0; j < i; j++) // $\textcolor{blue}{\sum_{i=0}^{n-1} \sum_{j=0}^{i} 1 \text{ assignments}}$ 
+            sum += A[j];            // $\textcolor{blue}{\sum_{i=0}^{n-1} \sum_{j=0}^{i - 1} 1 \text{ assignments}}$ 
+
+    delete[] A;
+    return sum;
+}
+   \end{lstlisting}
+
+    \begin{center}
+        \textcolor{blue}{$T(n) = 3 + \sum_{i=1}^{n} 1 + \sum_{i=1}^{n-1} 1 + \sum_{i=0}^{n} 1 + \sum_{i=0}^{n-1} \sum_{j=0}^{i} 1 + \sum_{i=0}^{n-1} \sum_{j=0}^{i - 1} 1$}
+    \end{center}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Addition Cost Function}
+        $T(n) = \textcolor{red}{\sum\limits_{i=1}^{n-1} 1} + \sum\limits_{i=1}^{n - 1} 2 + \sum\limits_{i=0}^{n-1} 1 + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i} 1 + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i - 1} 1$
+    \end{block}
+
+    \begin{columns}[T] 
+        \begin{column}{0.4\textwidth}
+            \textbf{Simplification:}
+            
+            Apply \textcolor{blue}{(1)} with $m = n - 1$:
+            \begin{align*}
+                \textcolor{red}{\sum\limits_{i=1}^{n - 1} 1 = n-1}
+            \end{align*}
+        \end{column}
+    
+        \begin{column}{0.6\textwidth}
+            \textbf{Identities:}
+            \begin{enumerate}
+                \item \textcolor{blue}{$\sum\limits_{i=1}^m 1 = m$}
+                \item \textcolor{gray}{$\sum\limits_{i=1}^m i = \frac{m(m+1)}{2}$}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b c f(i) = c \sum\limits_{i=a}^b f(i)$ where $c$ is a \textbf{constant} and $f$ is a function}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b (f(i) + g(i)) = \sum\limits_{i=a}^b f(i) + \sum\limits_{i=a}^b g(i)$ where $f$ and $g$ are functions}
+            \end{enumerate}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Addition Cost Function}
+        $T(n) = (n - 1) + \textcolor{red}{\sum\limits_{i=1}^{n - 1} 2} + \sum\limits_{i=0}^{n-1} 1 + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i} 1 + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i - 1} 1$
+    \end{block}
+
+    \begin{columns}[T] 
+        \begin{column}{0.4\textwidth}
+            \textbf{Simplification:}
+            \begin{align*}
+                \textcolor{red}{\sum\limits_{i=1}^{n - 1} 2 = \; ?}
+            \end{align*}
+            \begin{center}
+                \Large
+                \textcolor{red}{\textbf{What identity should we use?}}
+            \end{center}
+        \end{column}
+    
+        \begin{column}{0.6\textwidth}
+            \textbf{Identities:}
+            \begin{enumerate}
+                \item \textcolor{black}{$\sum\limits_{i=1}^m 1 = m$}
+                \item \textcolor{black}{$\sum\limits_{i=1}^m i = \frac{m(m+1)}{2}$}
+                \item \textcolor{black}{$\sum\limits_{i=a}^b c f(i) = c \sum\limits_{i=a}^b f(i)$ where $c$ is a \textbf{constant} and $f$ is a function}
+                \item \textcolor{black}{$\sum\limits_{i=a}^b (f(i) + g(i)) = \sum\limits_{i=a}^b f(i) + \sum\limits_{i=a}^b g(i)$ where $f$ and $g$ are functions}
+            \end{enumerate}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Addition Cost Function}
+        $T(n) = (n-1) + \textcolor{red}{\sum\limits_{i=1}^{n - 1} 2} + \sum\limits_{i=0}^{n-1} 1 + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i} 1 + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i - 1} 1$
+    \end{block}
+
+    \begin{columns}[T] 
+        \begin{column}{0.4\textwidth}
+            \textbf{Simplification:}
+
+            Apply \textcolor{blue}{(3)} with $a = 1$, $b = n - 1$, $c = 2$ and $f(i) = 1$
+            \begin{align*}
+                \textcolor{red}{\sum\limits_{i=1}^{n - 1} 2 = \sum\limits_{i=1}^{n - 1} 2 \cdot 1 = 2\sum\limits_{i=1}^{n - 1} 1}
+            \end{align*}
+            \begin{center}
+                \Large
+                \textcolor{red}{\textbf{What identity should we use?}}
+            \end{center}
+        \end{column}
+    
+        \begin{column}{0.6\textwidth}
+            \textbf{Identities:}
+            \begin{enumerate}
+                \item \textcolor{gray}{$\sum\limits_{i=1}^m 1 = m$}
+                \item \textcolor{gray}{$\sum\limits_{i=1}^m i = \frac{m(m+1)}{2}$}
+                \item \textcolor{blue}{$\sum\limits_{i=a}^b c f(i) = c \sum\limits_{i=a}^b f(i)$ where $c$ is a \textbf{constant} and $f$ is a function}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b (f(i) + g(i)) = \sum\limits_{i=a}^b f(i) + \sum\limits_{i=a}^b g(i)$ where $f$ and $g$ are functions}
+            \end{enumerate}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Addition Cost Function}
+        $T(n) = (n -1) + \textcolor{red}{\sum\limits_{i=1}^{n - 1} 2} + \sum\limits_{i=0}^{n-1} 1 + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i} 1 + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i - 1} 1$
+    \end{block}
+
+    \begin{columns}[T] 
+        \begin{column}{0.4\textwidth}
+            \textbf{Simplification:}
+
+            Apply (3) with $a = 1$, $b = n - 1$, $c = 2$ and $f(i) = 1$
+            \begin{align*}
+                \sum\limits_{i=1}^{n - 1} 2 = \sum\limits_{i=1}^{n - 1} 2 \cdot 1 = 2\sum\limits_{i=1}^{n - 1} 1
+            \end{align*}
+
+            Apply \textcolor{blue}{(1)} with $m = n - 1$
+            \begin{align*}
+                \textcolor{red}{2\sum\limits_{i=1}^{n - 1} 1 = 2(n - 1)}
+            \end{align*}
+        \end{column}
+    
+        \begin{column}{0.6\textwidth}
+            \textbf{Identities:}
+            \begin{enumerate}
+                \item \textcolor{blue}{$\sum\limits_{i=1}^m 1 = m$}
+                \item \textcolor{gray}{$\sum\limits_{i=1}^m i = \frac{m(m+1)}{2}$}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b c f(i) = c \sum\limits_{i=a}^b f(i)$ where $c$ is a \textbf{constant} and $f$ is a function}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b (f(i) + g(i)) = \sum\limits_{i=a}^b f(i) + \sum\limits_{i=a}^b g(i)$ where $f$ and $g$ are functions}
+            \end{enumerate}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Addition Cost Function}
+        $T(n) = (n-1) + 2(n - 1) + \textcolor{red}{\sum\limits_{i=0}^{n-1} 1} + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i} 1 + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i - 1} 1$
+    \end{block}
+
+    \begin{columns}[T] 
+        \begin{column}{0.4\textwidth}
+            \textbf{Simplification:}
+            \begin{align*}
+                \textcolor{red}{\sum\limits_{i=0}^{n-1} 1 = \; ?}
+            \end{align*}
+            \begin{center}
+                \Large
+                \textcolor{red}{\textbf{What identity should we use?}}
+            \end{center}
+        \end{column}
+    
+        \begin{column}{0.6\textwidth}
+            \textbf{Identities:}
+            \begin{enumerate}
+                \item \textcolor{black}{$\sum\limits_{i=1}^m 1 = m$}
+                \item \textcolor{black}{$\sum\limits_{i=1}^m i = \frac{m(m+1)}{2}$}
+                \item \textcolor{black}{$\sum\limits_{i=a}^b c f(i) = c \sum\limits_{i=a}^b f(i)$ where $c$ is a \textbf{constant} and $f$ is a function}
+                \item \textcolor{black}{$\sum\limits_{i=a}^b (f(i) + g(i)) = \sum\limits_{i=a}^b f(i) + \sum\limits_{i=a}^b g(i)$ where $f$ and $g$ are functions}
+            \end{enumerate}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Addition Cost Function}
+        $T(n) = (n-1) + 2(n - 1) + \textcolor{red}{\sum\limits_{i=0}^{n-1} 1} + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i} 1 + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i - 1} 1$
+    \end{block}
+
+    \begin{columns}[T] 
+        \begin{column}{0.4\textwidth}
+            \textbf{Simplification:}
+
+            Apply \textcolor{blue}{(1)} with $m = n-1$
+            \begin{align*}
+                \textcolor{red}{\sum\limits_{i=0}^{n-1} 1 = 1 + \sum\limits_{i=1}^{n-1} 1 = (n-1) + 1 = n}
+            \end{align*}
+        \end{column}
+    
+        \begin{column}{0.6\textwidth}
+            \textbf{Identities:}
+            \begin{enumerate}
+                \item \textcolor{blue}{$\sum\limits_{i=1}^m 1 = m$}
+                \item \textcolor{gray}{$\sum\limits_{i=1}^m i = \frac{m(m+1)}{2}$}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b c f(i) = c \sum\limits_{i=a}^b f(i)$ where $c$ is a \textbf{constant} and $f$ is a function}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b (f(i) + g(i)) = \sum\limits_{i=a}^b f(i) + \sum\limits_{i=a}^b g(i)$ where $f$ and $g$ are functions}
+            \end{enumerate}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Addition Cost Function}
+        $T(n) = (n-1) + 2(n - 1) + n + \textcolor{red}{\sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i} 1} + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i - 1} 1$
+    \end{block}
+
+    \begin{columns}[T] 
+        \begin{column}{0.4\textwidth}
+            \textbf{Simplification:}
+            \begin{align*}
+                \textcolor{red}{\sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i} 1 = \; ?}
+            \end{align*}
+            \begin{center}
+                \Large
+                \textcolor{red}{\textbf{What identity should we use?}}
+            \end{center}
+        \end{column}
+    
+        \begin{column}{0.6\textwidth}
+            \textbf{Identities:}
+            \begin{enumerate}
+                \item \textcolor{black}{$\sum\limits_{i=1}^m 1 = m$}
+                \item \textcolor{black}{$\sum\limits_{i=1}^m i = \frac{m(m+1)}{2}$}
+                \item \textcolor{black}{$\sum\limits_{i=a}^b c f(i) = c \sum\limits_{i=a}^b f(i)$ where $c$ is a \textbf{constant} and $f$ is a function}
+                \item \textcolor{black}{$\sum\limits_{i=a}^b (f(i) + g(i)) = \sum\limits_{i=a}^b f(i) + \sum\limits_{i=a}^b g(i)$ where $f$ and $g$ are functions}
+            \end{enumerate}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Addition Cost Function}
+        $T(n) = (n-1) + 2(n - 1) + n + \textcolor{red}{\sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i} 1} + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i - 1} 1$
+    \end{block}
+
+    \begin{columns}[T] 
+        \begin{column}{0.4\textwidth}
+            \textbf{Simplification:}
+
+            Apply \textcolor{blue}{(1)} with $m = i$
+            \begin{align*}
+                \textcolor{red}{\sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i} 1} 
+                &\textcolor{red}{= \sum\limits_{i=0}^{n - 1} \left( 1 + \sum\limits_{j=1}^{i} 1 \right)} \\
+                &\textcolor{red}{= \sum\limits_{i=0}^{n - 1} \left( i + 1 \right)}
+            \end{align*}
+            \begin{center}
+                \Large
+                \textcolor{red}{\textbf{What identity should we use?}}
+            \end{center}
+        \end{column}
+    
+        \begin{column}{0.6\textwidth}
+            \textbf{Identities:}
+            \begin{enumerate}
+                \item \textcolor{blue}{$\sum\limits_{i=1}^m 1 = m$}
+                \item \textcolor{gray}{$\sum\limits_{i=1}^m i = \frac{m(m+1)}{2}$}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b c f(i) = c \sum\limits_{i=a}^b f(i)$ where $c$ is a \textbf{constant} and $f$ is a function}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b (f(i) + g(i)) = \sum\limits_{i=a}^b f(i) + \sum\limits_{i=a}^b g(i)$ where $f$ and $g$ are functions}
+            \end{enumerate}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Addition Cost Function}
+        $T(n) = (n-1) + 2(n - 1) + n + \textcolor{red}{\sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i} 1} + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i - 1} 1$
+    \end{block}
+
+    \begin{columns}[T] 
+        \begin{column}{0.4\textwidth}
+            \textbf{Simplification:}
+
+            Apply \textcolor{blue}{(4)} with $a=0$, $b=n-1$, $f(i) = i$ and $g(i) = 1$
+            \begin{align*}
+                \textcolor{red}{\sum\limits_{i=0}^{n - 1} \left( i + 1 \right) = \sum\limits_{i=0}^{n - 1} i + \sum\limits_{i=0}^{n - 1} 1}
+            \end{align*}
+            \begin{center}
+                \Large
+                \textcolor{red}{\textbf{What identities should we use?}}
+            \end{center}
+        \end{column}
+    
+        \begin{column}{0.6\textwidth}
+            \textbf{Identities:}
+            \begin{enumerate}
+                \item \textcolor{gray}{$\sum\limits_{i=1}^m 1 = m$}
+                \item \textcolor{gray}{$\sum\limits_{i=1}^m i = \frac{m(m+1)}{2}$}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b c f(i) = c \sum\limits_{i=a}^b f(i)$ where $c$ is a \textbf{constant} and $f$ is a function}
+                \item \textcolor{blue}{$\sum\limits_{i=a}^b (f(i) + g(i)) = \sum\limits_{i=a}^b f(i) + \sum\limits_{i=a}^b g(i)$ where $f$ and $g$ are functions}
+            \end{enumerate}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Addition Cost Function}
+        $T(n) = (n - 1) + 2(n - 1) + n + \textcolor{red}{\sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i} 1} + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i - 1} 1$
+    \end{block}
+
+    \begin{columns}[T] 
+        \begin{column}{0.4\textwidth}
+            \textbf{Simplification:}
+
+            Apply \textcolor{blue}{(1)} with $m = n - 1$
+            \begin{align*}
+                \textcolor{red}{\sum\limits_{i=0}^{n - 1} 1} 
+                &\textcolor{red}{= 1 + \sum\limits_{i=1}^{n - 1} 1} \\
+                &\textcolor{red}{= 1 + (n - 1) = n}
+            \end{align*}
+            so
+            \begin{align*}
+                \textcolor{red}{\sum\limits_{i=0}^{n - 1} i + \sum\limits_{i=0}^{n - 1} 1 = n + \sum\limits_{i=0}^{n - 1} i}
+            \end{align*}
+            
+        \end{column}
+    
+        \begin{column}{0.6\textwidth}
+            \textbf{Identities:}
+            \begin{enumerate}
+                \item \textcolor{blue}{$\sum\limits_{i=1}^m 1 = m$}
+                \item \textcolor{gray}{$\sum\limits_{i=1}^m i = \frac{m(m+1)}{2}$}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b c f(i) = c \sum\limits_{i=a}^b f(i)$ where $c$ is a \textbf{constant} and $f$ is a function}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b (f(i) + g(i)) = \sum\limits_{i=a}^b f(i) + \sum\limits_{i=a}^b g(i)$ where $f$ and $g$ are functions}
+            \end{enumerate}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Addition Cost Function}
+        $T(n) = (n -1) + 2(n - 1) + n + \textcolor{red}{\sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i} 1} + \sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i - 1} 1$
+    \end{block}
+
+    \begin{columns}[T] 
+        \begin{column}{0.4\textwidth}
+            \textbf{Simplification:}
+
+            Apply \textcolor{blue}{(2)} with $m = n - 1$
+            \begin{align*}
+                \textcolor{red}{\sum\limits_{i=0}^{n - 1} i} 
+                &\textcolor{red}{= 0 + \sum\limits_{i=1}^{n - 1} i} \\
+                &\textcolor{red}{= \frac{(n - 1)((n-1) + 1)}{2}}
+            \end{align*}
+            so
+            \begin{align*}
+                \textcolor{red}{n + \sum\limits_{i=0}^{n - 1} i = n + \frac{n(n - 1)}{2}}
+            \end{align*}
+            
+        \end{column}
+    
+        \begin{column}{0.6\textwidth}
+            \textbf{Identities:}
+            \begin{enumerate}
+                \item \textcolor{gray}{$\sum\limits_{i=1}^m 1 = m$}
+                \item \textcolor{blue}{$\sum\limits_{i=1}^m i = \frac{m(m+1)}{2}$}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b c f(i) = c \sum\limits_{i=a}^b f(i)$ where $c$ is a \textbf{constant} and $f$ is a function}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b (f(i) + g(i)) = \sum\limits_{i=a}^b f(i) + \sum\limits_{i=a}^b g(i)$ where $f$ and $g$ are functions}
+            \end{enumerate}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Addition Cost Function}
+        $T(n) = (n-1) + 2(n - 1) + n + \left(n + \frac{n(n - 1)}{2}\right) + \textcolor{red}{\sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i - 1} 1}$
+    \end{block}
+
+    \begin{columns}[T] 
+        \begin{column}{0.4\textwidth}
+            \textbf{Simplification:}
+
+            \begin{align*}
+                \textcolor{red}{\sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i - 1} 1 = \; ?}
+            \end{align*}
+            \begin{center}
+                \Large
+                \textcolor{red}{\textbf{What is the simplified form?}}
+            \end{center}
+            
+        \end{column}
+    
+        \begin{column}{0.6\textwidth}
+            \textbf{Identities:}
+            \begin{enumerate}
+                \item \textcolor{black}{$\sum\limits_{i=1}^m 1 = m$}
+                \item \textcolor{black}{$\sum\limits_{i=1}^m i = \frac{m(m+1)}{2}$}
+                \item \textcolor{black}{$\sum\limits_{i=a}^b c f(i) = c \sum\limits_{i=a}^b f(i)$ where $c$ is a \textbf{constant} and $f$ is a function}
+                \item \textcolor{black}{$\sum\limits_{i=a}^b (f(i) + g(i)) = \sum\limits_{i=a}^b f(i) + \sum\limits_{i=a}^b g(i)$ where $f$ and $g$ are functions}
+            \end{enumerate}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Addition Cost Function}
+        $T(n) = (n-1) + 2(n - 1) + n + \left(n + \frac{n(n - 1)}{2}\right) + \textcolor{red}{\sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i - 1} 1}$
+    \end{block}
+
+    \begin{columns}[T] 
+        \begin{column}{0.4\textwidth}
+            \textbf{Simplification:}
+
+            Apply \textcolor{blue}{(1)} then \textcolor{blue}{(2)}            
+            \begin{align*}
+                \textcolor{red}{\sum\limits_{i=0}^{n - 1} \sum\limits_{j=0}^{i - 1} 1 = \sum\limits_{i=0}^{n - 1} i = \frac{n(n - 1)}{2}}
+            \end{align*}
+
+        \end{column}
+    
+        \begin{column}{0.6\textwidth}
+            \textbf{Identities:}
+            \begin{enumerate}
+                \item \textcolor{blue}{$\sum\limits_{i=1}^m 1 = m$}
+                \item \textcolor{blue}{$\sum\limits_{i=1}^m i = \frac{m(m+1)}{2}$}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b c f(i) = c \sum\limits_{i=a}^b f(i)$ where $c$ is a \textbf{constant} and $f$ is a function}
+                \item \textcolor{gray}{$\sum\limits_{i=a}^b (f(i) + g(i)) = \sum\limits_{i=a}^b f(i) + \sum\limits_{i=a}^b g(i)$ where $f$ and $g$ are functions}
+            \end{enumerate}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+
+    \textbf{Simplification:}
+    
+    We have that
+    \begin{align*}
+        T(n) &= (n-1) + 2(n - 1) + n + \left(n + \frac{n(n - 1)}{2}\right) + \frac{n(n-1)}{2} \\
+        &= n - 1 + 2n - 2 + n + n + n(n-1) \\
+        &= n^2 + 4n - 3  \\
+    \end{align*}
+    so the final answer is
+    \begin{center}
+        \textbf{\textcolor{blue}{$T(n) = n^2 + 4n - 3$}}
+    \end{center}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Multiplication Cost Function}
+        $T(n) = \sum_{i=1}^{n - 1} 1$
+    \end{block}
+
+    \begin{block}{Comparisons Cost Function}
+        $T(n) = \sum_{i=1}^{n} 1 + \sum_{i=0}^{n} 1 + \sum_{i=0}^{n-1} \sum_{j=0}^{i} 1$
+    \end{block}
+
+    \begin{block}{Memory Accesses Cost Function}
+        $T(n) = 1 + \sum_{i=1}^{n-1} 2 + \sum_{i=0}^{n-1} \sum_{j=0}^{i - 1} 1$
+    \end{block}
+
+    \begin{block}{Assignments Cost Function}
+        $T(n) = 3 + \sum_{i=1}^{n-1} 1 + \sum_{i=1}^{n-1} 1 + \sum_{i=0}^{n-1} 1 + \sum_{i=0}^{n-1} \sum_{j=0}^{i} 1 + \sum_{i=0}^{n-1} \sum_{j=0}^{i - 1} 1$
+    \end{block}
+
+    \begin{center}
+        \Large
+        \textcolor{red}{\textbf{Try to simplify the other cost functions!}}
+    \end{center}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Multiplication Cost Function}
+        \begin{align*}
+            \textcolor{blue}{T(n)} 
+            &\textcolor{blue}{= \sum_{i=1}^{n - 1} 1} \\
+            &\textcolor{blue}{= n - 1}
+        \end{align*}
+    \end{block}
+\end{frame}
+
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Comparisons Cost Function}
+        \begin{align*}
+            \textcolor{blue}{T(n)} 
+            &= \textcolor{blue}{\sum_{i=1}^{n} 1 + \sum_{i=0}^{n} 1 + \sum_{i=0}^{n-1} \sum_{j=0}^{i} 1} \\
+            &= \textcolor{blue}{n + (n + 1) + \frac{n(n+1)}{2}} \\
+            &= \textcolor{blue}{\frac{1}{2} n^2 + \frac{5}{2} n + 1}
+        \end{align*}
+    \end{block}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Memory Accesses Cost Function}
+        \begin{align*}
+            \textcolor{blue}{T(n)} 
+            &= \textcolor{blue}{1 + \sum_{i=1}^{n-1} 2 + \sum_{i=0}^{n-1} \sum_{j=0}^{i - 1} 1} \\
+            &= \textcolor{blue}{1 + 2(n-1) + \frac{n(n-1)}{2}} \\
+            &= \textcolor{blue}{\frac{1}{2} n^2 + \frac{3}{2} n -1}
+        \end{align*}
+    \end{block}
+\end{frame}
+
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Simplifying the Cost Function}
+    \begin{block}{Assignments Cost Function}
+        \begin{align*}
+            \textcolor{blue}{T(n)} 
+            &= \textcolor{blue}{3 + \sum_{i=1}^{n-1} 1 + \sum_{i=1}^{n-1} 1 + \sum_{i=0}^{n-1} 1 + \sum_{i=0}^{n-1} \sum_{j=0}^{i} 1 + \sum_{i=0}^{n-1} \sum_{j=0}^{i - 1} 1} \\
+            &= \textcolor{blue}{3 + (n-1) + (n - 1) + n + \frac{n(n+1)}{2} + \frac{n(n-1)}{2}} \\
+            &= \textcolor{blue}{n^2 + 3n + 1}
+        \end{align*}
+    \end{block}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Simplifying the Cost Function}
+   \begin{center}
+        \Large
+        \textcolor{red}{\textbf{Pitfall: Cannot represent loops with non-one increments using standard summations!}}
+    \end{center}
+
+    \begin{lstlisting}[language=C++]
+int baz(int n) {
+    int total = 0;
+    for (int i = 0; i < n; i += 2)
+        total += i * i;
+    return total;
+}
+    \end{lstlisting}
+
+    
+    \begin{center}
+        \Large
+        \textcolor{blue}{\textbf{Solution: Compute number of operations for small values of $n$, then guess and check the formula OR learn Knuth's summation notation (advanced)!}}
+    \end{center}
+\end{frame}
+
+% ------------------------------------------------------------
+% Slide
+% ------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Extra Practice}
+    \begin{columns}[T] 
+    
+        \begin{column}{0.65\textwidth}
+            \begin{lstlisting}[language=C++]
+int bar(int n) {
+    int* A = new int[n];
+
+    for (int i = 0; i < n; i++)
+        A[i] = i + 1;
+
+    int result = 0;
+    for (int k = 0; k < n * n; k++)
+        for (int j = 0; j <= k; j++)
+            for (int i = j; i < n; i++)
+                result += A[i];
+
+    for (int t = 0; t < 7; t++)
+        result += A[0];
+
+    delete[] A;
+    return result;
+}
+           \end{lstlisting}
+        \end{column}
+    
+        \begin{column}{0.35\textwidth}
+            \begin{center}
+                 \textcolor{red}{\textbf{Choose a model of computation and analyze this algorithm!}}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\end{document}
