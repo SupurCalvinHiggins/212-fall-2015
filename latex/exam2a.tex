@@ -1,0 +1,396 @@
+\documentclass{exam}
+
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{forest}
+\usepackage{subcaption}
+\usepackage{hyperref}
+
+% \printanswers
+
+\begin{document}
+
+\begin{center}
+\fbox{\fbox{\parbox{5.5in}{\centering CSC 212 Practice Midterm Exam 2A \\ Problems marked with (*) are challenging and problems marked with (**) are hard}}}
+\end{center}
+
+\vspace{5mm}
+\makebox[0.95\textwidth]{Your Name:\enspace\hrulefill}
+
+\begin{questions}
+
+% --------------------------------------------------------------------------------
+
+\question[10] Implement the \texttt{size} functions. Assume \texttt{m\_head} is the head of a \textbf{sorted} linked list containing zero or more elements. Return the number of \textbf{unique} elements in the list. Your implementation must run in $\mathcal{O}(n)$ time.
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+class UnorderedSet {
+    struct Node {
+        Node* next;
+        int data;
+        // ...
+    };
+
+    // ...
+
+    Node* m_head;
+    
+    // ...
+
+    static size_t size(const Node* head) {
+        // TODO: Implement this function.
+    }
+    
+public:
+    size_t size() const {
+        // TODO: Implement this function.
+    }
+};
+
+
+
+\end{lstlisting}
+\end{center}
+
+\begin{solutionorbox}[3in]
+\begin{center}
+\begin{lstlisting}[language=C++]
+class UnorderedSet {
+    struct Node {
+        Node* next;
+        int data;
+        // ...
+    };
+
+    // ...
+
+    Node* m_head;
+    
+    // ...
+
+    // `size(head)` returns the number of unique elements in the sorted 
+    // sublist headed by `head`.
+    static size_t size(const Node* head) {
+        if (head == nullptr) return 0;
+        bool is_new = !head->next || head->data != head->next->data;
+        return is_new + size(head->next);
+    }
+    
+public:
+    // `size()` returns the number of unique elements in the set.
+    size_t size() const {
+        return size(m_head);
+    }
+};
+
+\end{lstlisting}
+\end{center}
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\clearpage
+
+\question[10] Consider the following queue declaration. Assume the member functions are implemented as efficiently as possible using only the declared member variables. Give a $\Theta$-bounds on the time complexity of \texttt{push}, \texttt{pop}, \texttt{front} and \texttt{size}. 
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+class Queue {
+    struct Node {
+        Node* next;
+        int data;
+        // ...
+    }
+
+    // ...
+
+    Node* m_head; 
+    
+    // ...
+
+public:
+    // ...
+    
+    void push(int data);
+    void pop();
+    
+    int front() const;
+    size_t size() const;
+}
+\end{lstlisting}
+\end{center}
+
+\begin{solutionorbox}[3.5in]
+Assume \texttt{m\_head} is the front of the queue: 
+\begin{itemize}
+    \item \texttt{push} takes $\Theta(n)$ time.
+    \item \texttt{pop} takes $\Theta(1)$ time.
+    \item \texttt{front} takes $\Theta(1)$ time.
+    \item \texttt{size} takes $\Theta(n)$ time.
+\end{itemize}
+This is better than having \texttt{m\_head} be the back of the queue since otherwise \texttt{front} takes $\Theta(n)$ time
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\clearpage
+
+\question[10] Implement the \texttt{is\_sorted} function \textbf{recursively}. Assume \texttt{v} contains zero or more elements. Return \texttt{true} if and only if \texttt{v} is sorted in non-decreasing order. Your implementation must run in $\mathcal{O}(n)$ time.
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+bool is_sorted(const std::vector<int>& v) {
+    // TODO: Implement this function.
+}
+\end{lstlisting}
+\end{center}
+
+\begin{solutionorbox}[3in]
+\begin{lstlisting}[language=C++]
+// `is_sorted(v, i)` returns `true` if and only if `v[i:]` is sorted.
+bool is_sorted(const std::vector<int>& v, size_t i) {
+    if (i >= v.size() - 1) return true;
+    return v[i] <= v[i + 1] && is_sorted(v, i + 1);
+}
+
+// `is_sorted(v)` returns `true` if and only if `v` is sorted.
+bool is_sorted(const std::vector<int>& v) {
+    return is_sorted(v, 0);
+}
+\end{lstlisting}
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\question[10] Draw the recursion tree generated when calling \texttt{T(5)}.
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+int T(int n) {
+    if (n == 1 || n == 2) return 1;
+    if (n == 3) return 2;
+    return T(n - 1) + T(n - 2) + T(n - 3);
+}
+\end{lstlisting}
+\end{center}
+
+\begin{solutionorbox}[2.5in]
+
+\begin{forest}
+for tree={draw,circle,minimum size=3em,inner sep=1pt,s sep=7mm,l sep=7mm,edge={->}},
+[{T(5)}
+    [{T(4)}
+        [{T(3)}]
+        [{T(2)}]
+        [{T(1)}]
+    ]
+    [{T(3)}]
+    [{T(2)}]
+]
+\end{forest}
+
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\question[10] Find a closed form for $T(n) = 2T(n - 1) + 1$ where $T(0) = 1$ and $n \geq 0$.
+
+\begin{solutionorbox}[3.5in]
+
+The first expansion is 
+\begin{align*}
+    T(n) = 2T(n-1) + 1
+\end{align*}
+
+The second expansion is 
+\begin{align*}
+    T(n) = 2^2T(n - 2) + 2 + 1
+\end{align*}
+
+The third expansion is 
+\begin{align*}
+    T(n) = 2^3 T(n-3) + 2^2 + 2 + 1
+\end{align*}
+
+So the $k$-th expansion is 
+\begin{align*}
+    T(n) = 2^k T(n-k) + \sum\limits_{i=0}^{k - 1} 2^i
+\end{align*}
+
+To reach the base case $T(0)$, take $n - k = 0$, so $k = n$. Then
+\begin{align*}
+    T(n) &= 2^n T(n-n) + \sum\limits_{i=0}^{n - 1} 2^i \\
+    &= 2^nT(0) + 2^{(n - 1) + 1} - 1 \\
+    &= 2^n + 2^n - 1 \\
+    &= 2^{n + 1} - 1
+\end{align*}
+
+\end{solutionorbox}
+)
+% --------------------------------------------------------------------------------
+
+\question[10] Give a recurrence relation and base case for $L(n)$, the number of leaves in \textbf{full} binary tree with $n$ nodes. Assume that $n \geq 1$ and $n$ is odd. 
+
+\begin{solutionorbox}[3.5in]
+If two leaves share a parent, call them a leaf pair. In a full binary tree with more than one node, there is always at least one leaf pair. Removing a leaf pair decreases the number of nodes by two (since two nodes are removed), and the number of leaves by one (since two leaves are removed, and their parent becomes a leaf). The resulting tree is still full. Therefore, $L(n) = L(n - 2) + 1$ for $n > 1$. When $n = 1$, there is exactly one leaf (the root), so $L(1) = 1$.
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\clearpage
+
+\question[10] (*) Implement the \texttt{mergesort} functions. Assume \texttt{v} contains zero or more elements. The \texttt{merge} function takes two sorted subarrays, \texttt{v[left:mid]} (the subarray starting at \texttt{v[left]} up to but \textbf{not} including \texttt{v[mid]}) and \texttt{v[mid:right]} (the subarray starting at \texttt{v[mid]} up to but \textbf{not} including \texttt{v[right]}), and merges them into a single sorted subarray \texttt{v[left:right]} in $\Theta(n)$ time. Your implementation must run in $\mathcal{O}(n \lg n)$ time.
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+void merge(std::vector<int>& v, size_t left, size_t mid, size_t right) {
+    // ...
+}
+
+void mergesort(std::vector<int>& v, size_t left, size_t right) {
+    // TODO: Implement this function.
+}
+
+void mergesort(std::vector<int>& v) {
+    // TODO: Implement this function.
+}
+\end{lstlisting}
+\end{center}
+
+\begin{solutionorbox}[5in]
+\begin{center}
+\begin{lstlisting}[language=C++]
+// `merge(v, left, mid, right)` merges the sorted subarrays `v[left:mid]` 
+// and `v[mid:right]` into a single sorted subarray `v[left:right]`.
+void merge(std::vector<int>& v, size_t left, size_t mid, size_t right) {
+    // ...
+}
+
+// `mergesort(v, left, right)` sorts the subarray `v[left:right]`.
+void mergesort(std::vector<int>& v, size_t left, size_t right) {
+    if (right <= left + 1) return;
+    size_t mid = left + (right - left) / 2;
+    mergesort(v, left, mid);
+    mergesort(v, mid, right);
+    merge(v, left, mid, right);
+}
+
+// `mergesort(v)` sorts the array `v`.
+void mergesort(std::vector<int>& v) {
+    mergesort(v, 0, v.size());
+}
+\end{lstlisting}
+\end{center}
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\clearpage
+
+\question[10] (*) An \textbf{LR-rotation} is the following transformation:
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{0.45\textwidth}
+    \centering
+    \begin{forest}
+    for tree={draw,circle,minimum size=1.2em,inner sep=1pt,s sep=7mm,l sep=7mm,edge={->}},
+    [{z}
+      [{y}
+        [{a}]
+        [{x}
+          [{b}]
+          [{c}]
+        ]
+      ]
+      [{d}]
+    ]
+    \end{forest}
+    \caption{Binary tree before LR-rotation at $z$.}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.45\textwidth}
+    \centering
+    \begin{forest}
+    for tree={draw,circle,minimum size=1.2em,inner sep=1pt,s sep=7mm,l sep=7mm,edge={->}},
+    [{x}
+      [{y}
+        [{a}]
+        [{b}]
+      ]
+      [{z}
+        [{c}]
+        [{d}]
+      ]
+    ]
+    \end{forest}
+    \caption{Binary tree after LR-rotation at $z$.}
+\end{subfigure}
+\end{figure}
+
+Implement the \texttt{lr\_rotate} function. Assume that in the subtree rooted by \texttt{root}, \texttt{z}, \texttt{y}, and \texttt{x} are not \texttt{nullptr}. Return the new root after rotation. Your implementation must run in $\mathcal{O}(1)$ time.
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+struct Node {
+    Node* left;
+    Node* right;
+    // ...
+};
+
+Node* lr_rotate(Node* root) {
+    // TODO: Implement this function.
+}
+\end{lstlisting}
+\end{center}
+
+\begin{solutionorbox}[4in]
+\begin{center}
+\begin{lstlisting}[language=C++]
+struct Node {
+    Node* left;
+    Node* right;
+    // ...
+};
+
+Node* lr_rotate(Node* root) {
+    Node* z = root;
+    Node* y = z->left;
+    Node* x = y->right;
+    Node* b = x->left;
+    Node* c = x->right;
+    x->left = y;
+    x->right = z;
+    y->right = b;
+    z->left = c;
+}
+\end{lstlisting}
+\end{center}
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\clearpage
+
+\question[10] Insert $4, 7, 1, 9, 0, 6, 3$ into an initially empty B-tree with $m=3$. Draw the resulting tree after each insertion.
+
+\begin{solutionorbox}[8in]
+Check with \url{https://www.cs.usfca.edu/~galles/visualization/RedBlack.html}.
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\clearpage
+
+\question[10] Insert $2, 8, 5, 0, 7, 1, 4$ into an initially empty red-black tree. Draw the resulting tree, including colors, after each insertion. 
+
+\begin{solutionorbox}[8in]
+Check with \url{https://www.cs.usfca.edu/~galles/visualization/BTree.html}.
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\end{questions}
+
+\end{document}

@@ -1,0 +1,192 @@
+\documentclass[addpoints,answers]{exam}
+
+\usepackage{listings}
+\usepackage{amsmath}
+
+\begin{document}
+
+\begin{center}
+\fbox{\fbox{\parbox{5.5in}{\centering CSC 212 Practice Midterm Exam 1A \\ Problems marked with (*) are challenging and problems marked with (**) are hard}}}
+\end{center}
+
+\vspace{5mm}
+\makebox[0.95\textwidth]{Your Name:\enspace\hrulefill}
+
+\begin{questions}
+    \question[10] Write a function $T(n)$ that counts the number of multiplications performed by the following function \texttt{foo} on an input of size $n \geq 1$. You do not need to find a closed form for $T(n)$.
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+int foo(int n) {
+    int result = 1;
+    for (int i = 1; i <= n; ++i)
+        for (int j = 1; j <= i; ++j)
+            result = result * i * j;
+    return result;
+}
+\end{lstlisting}
+\end{center}
+
+    \begin{solutionorbox}[2in]
+        $T(n) = \sum\limits_{i=1}^{n}\sum\limits_{j=1}^{i} 2$
+    \end{solutionorbox}
+
+    \vspace{\stretch{1}}
+
+    \question[10] Which of the following asymptotic descriptions of $n^2 + 3 n \lg n$ are correct?
+
+    \begin{checkboxes}
+      \CorrectChoice $\mathcal{O}(n^2)$
+      \choice $\mathcal{O}(n \lg n)$
+      \choice $\mathcal{O}(n)$
+      \CorrectChoice $\Omega(n^2)$
+      \CorrectChoice $\Omega(n \lg n)$
+      \CorrectChoice $\Omega(n)$
+      \CorrectChoice $\Theta(n^2)$
+      \choice $\Theta(n \lg n)$
+      \choice $\Theta(n)$
+    \end{checkboxes}
+
+    \clearpage
+
+    \question[10] What is the growth rate of the following function? 
+    \begin{align*}
+        2n + 3 \lg n + 5
+    \end{align*}
+
+    \begin{checkboxes}
+      \choice Constant
+      \choice Logarithmic
+      \CorrectChoice Linear
+      \choice Linearithmic
+      \choice Quadratic
+      \choice Cubic
+      \choice Exponential
+    \end{checkboxes}
+
+    \vspace{\stretch{1}}
+
+    \question[10] (*) Suppose algorithm $A$ always runs in $\Theta(n)$ time and algorithm $B$ always runs in $\Theta(\lg n)$ time. Which algorithm should you prefer for small values of $n$? Which algorithm should you prefer for large values of $n$? Justify your answer.
+
+    \begin{solutionorbox}[2in]
+    Asymptotic notation only applies for large values of $n$. For small values of $n$, there isn't enough information to determine which algorithm is faster. For large values $n$, prefer $B$ since $\Theta(\lg n)$ grows more slowly than $\Theta(n)$.
+    \end{solutionorbox}
+
+    \vspace{\stretch{1}}
+
+    \question[10] Suppose \texttt{v} is a grow-by-doubling dynamic array with size $0$ and capacity $1$. What is the capacity of $v$ after $5$ calls to \texttt{push\_back}?
+    
+    \begin{solutionorbox}[2in]
+    $8$. The capacity is doubled to $2$, then $4$, then $8$.
+    \end{solutionorbox}
+
+    \clearpage
+
+    \question[10] What is the output of the following program?
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+queue<int> q;
+q.push(0);
+q.push(1);
+q.push(2);
+q.pop();
+cout << q.front() << ' ';
+q.pop();
+cout << q.front();
+\end{lstlisting}
+\end{center}
+
+    \begin{solutionorbox}[2in]
+    1 2
+    \end{solutionorbox}
+
+    \clearpage
+
+    \question[10] (*) Give a $\Theta$-bound on the time complexity of the following program. Justify your answer.
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+int baz(const vector<int>& v) {
+    stack<int> s;
+    int result = 0;
+    for (int i = 0; i < v.size(); i++) {
+        while (!s.empty() && v[i] >= v[s.top()])
+            s.pop();
+        int x = i + 1;
+        if (!s.empty()) 
+            x = i - s.top();
+        result = max(result, x);
+        s.push(i);
+    }
+    return result;
+}
+\end{lstlisting}
+\end{center}
+
+    \begin{solutionorbox}[4in]
+    $\Theta(n)$. Since stack operations take $\Theta(1)$ time, its clear (with the exception of the nested \texttt{while} loop) that the \texttt{for} loop takes $\Theta(n)$ time. In fact, the nested \texttt{while} loop runs at most $n$ total times across all iterations of the \texttt{for} loop. There are $n$ possible values of \texttt{i}, and each value of \texttt{i} is pushed to the stack exactly once, and so can be popped at most once. Therefore, the stack is popped at most $n$ times, and so the \texttt{while} loop runs at most $n$ times despite being nested.
+    \end{solutionorbox}
+
+\clearpage
+
+    \question[10] What are the contents of \texttt{v} after this program executes?
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+vector<int> v{0, 1, 4, 2, 3}; // min-heap
+pop_heap(v.begin(), v.end());
+v.pop_back();
+v.push_back(1)
+push_heap(v.begin(), v.end())
+\end{lstlisting}
+\end{center}
+
+    \begin{solutionorbox}[2in]
+    1, 1, 4, 3, 2
+    \end{solutionorbox}
+
+    \vspace{\stretch{1}}
+
+    \question[10] (**) Give an input of size $n$ such that \texttt{heapsort} sorts it in linear time. Justify your answer.
+
+    \begin{solutionorbox}[4in]
+    There are many valid approaches. Consider an array of $n$ zeroes as input. First, \texttt{heapsort} runs \texttt{make\_heap} which always takes $\Theta(n)$ time. Then, \texttt{heapsort} calls \texttt{pop\_heap} $n$ times. For each call to \texttt{pop\_heap}, only one swap is performed between the first element and the last. The new root, which is zero, is never swapped downwards since it is greater than or equal to its children (also zero). Thus, the calls to \texttt{pop\_heap} take $\Theta(n)$ time. Hence, \texttt{heapsort} will sort the array in linear time.
+    \end{solutionorbox}
+
+    \clearpage
+
+    \question[10] (*) You are a software engineer working on a cloud computing platform. Users submit computational jobs to the system, and the system executes them on a server. A \textbf{job} is a unit of work, like running a simulation or processing a dataset. Jobs arrive in the order that customers submit them. Some jobs are marked as \textbf{urgent}, and should be executed as soon as possible. 
+
+    For example, suppose jobs are represented by letters, and the system has two servers:
+    \begin{enumerate}
+        \item Job A (not urgent) arrives, Job B (not urgent) and Job C (not urgent) arrive.
+        \begin{itemize}
+            \item Server 1 executes A.
+            \item Server 2 executes B.
+        \end{itemize}
+        \item Job D (urgent), Job E (not urgent) and Job F (urgent) arrive.
+        \begin{itemize}
+            \item Server 1 executes D.
+            \item Server 2 executes F.
+        \end{itemize}
+        \item No new jobs arrive.
+        \begin{itemize}
+            \item Server 1 executes C.
+            \item Server 2 executes E.
+        \end{itemize}
+    \end{enumerate}
+
+    What abstract data type best models the system's waiting area for jobs before they are sent to a server? Here, best means efficiently solves the problem. Justify your answer.
+
+    \begin{solutionorbox}[4in]
+    There are two valid approaches:
+    \begin{enumerate}
+        \item Priority queue. Assign urgent jobs a higher priority than not urgent jobs. Always take the highest priority job as the next job. This takes $\mathcal{O}(n \lg n)$ time.
+        \item Queue or deque. Maintain two queues, one of urgent jobs and one of not urgent jobs. If there is an urgent job available, always take it. Otherwise, take a not urgent job. This takes $\mathcal{O}(n)$ time.
+    \end{enumerate} 
+    \end{solutionorbox}
+    
+\end{questions}
+
+\end{document}

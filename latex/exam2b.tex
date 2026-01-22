@@ -1,0 +1,300 @@
+\documentclass{exam}
+
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{forest}
+\usepackage{subcaption}
+\usepackage{hyperref}
+
+% \printanswers
+
+\begin{document}
+
+\begin{center}
+\fbox{\fbox{\parbox{5.5in}{\centering CSC 212 Practice Midterm Exam 2B \\ Problems marked with (*) are challenging and problems marked with (**) are hard}}}
+\end{center}
+
+\vspace{5mm}
+\makebox[0.95\textwidth]{Your Name:\enspace\hrulefill}
+
+\begin{questions}
+
+% --------------------------------------------------------------------------------
+
+\question[10] Consider the following linked list declaration. Assume pointers are $4$ bytes, integers are $4$ bytes and characters are $1$ byte. Give a formula for the number of bytes used by a linked list of size $n$.
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+class LinkedList {
+    struct Node {
+        Node* next;
+        char data[20];
+        // ...
+    }
+
+    // ...
+
+    Node* m_head;
+    Node* m_tail;
+    size_t m_size;
+    
+    // ...
+}
+\end{lstlisting}
+\end{center}
+
+\begin{solutionorbox}[4in]
+The \texttt{LinkedList} class has three member variables, \texttt{m\_head}, \texttt{m\_tail} and \texttt{m\_size}, each requiring $4$ bytes for a total of $12$ bytes. Each node uses $4$ bytes for \texttt{next} and $20$ bytes for \texttt{data}, for a total of $24$ bytes. There are $n$ nodes, so the total number of bytes is $24n+12$.
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\clearpage
+
+\question[10] Implement the \texttt{max\_multiplicity} functions. Assume \texttt{m\_head} is the head of a \textbf{sorted} linked list containing zero or more elements. The \textbf{multiplicity} of an element is the number of times it occurs. Return the \textbf{maximum} multiplicity. Your implementation must run in $\mathcal{O}(n)$ time.
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+class Multiset {
+    struct Node {
+        Node* next;
+        int data;
+        // ...
+    };
+
+    // ...
+
+    Node* m_head;
+    
+    // ...
+
+    static size_t max_multiplicity(const Node* head) {
+        // TODO: Implement this function.
+    }
+    
+public:
+    size_t max_multiplicity() const {
+        // TODO: Implement this function.
+    }
+};
+\end{lstlisting}
+\end{center}
+
+\begin{solutionorbox}[4in]
+\begin{center}
+\begin{lstlisting}[language=C++]
+class Multiset {
+    struct Node {
+        Node* next;
+        int data;
+        // ...
+    };
+
+    // ...
+
+    Node* m_head;
+    
+    // ...
+
+    // `max_multiplicity(head)` is the maximum multiplicity in the 
+    // sublist headed by `head`. 
+    static size_t max_multiplicity(const Node* head) {
+        if (head == nullptr) return 0;
+        size_t multiplicity = 1;
+        int data = head->data;
+        while (head->next && head->next->data == data) {
+            head = head->next;
+            ++multiplicity;
+        }
+        return std::max(multiplicity, max_multiplicity(head->next));
+    }
+    
+public:
+    // `max_multiplicity()` is the maximum multiplicity. 
+    size_t max_multiplicity() const {
+        return max_multiplicity(m_head);
+    }
+};
+\end{lstlisting}
+\end{center}
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\clearpage
+
+\question[10] (*) Implement the \texttt{first\_one} function \textbf{recursively}. Assume \texttt{v} contains zero or more $0$'s followed by one or more $1$'s. Return the index of the first $1$. Your implementation must run in $\mathcal{O}(\lg n)$ time.
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+size_t first_one(const std::vector<int>& v) {
+    // TODO: Implement this function.
+}
+\end{lstlisting}
+\end{center}
+
+\begin{solutionorbox}[4in]
+\begin{lstlisting}[language=C++]
+// `first_one(v, left, right)` is the index of the first `1` in 
+// `v[left:right]` where `v[left:right]` contains zero or more `0`s 
+// followed by one or more `1`s.
+size_t first_one(const std::vector<int>& v, size_t left, size_t right) {
+    if (right == left + 1) return left;
+    size_t mid = left + (right - left - 1) / 2;
+    if (v[mid] == 0) {
+        return first_one(v, mid + 1, right); 
+    } else {
+        return first_one(v, left, mid);
+    }
+}
+
+// `first_one(v, left, right)` is the index of the first `1` in `v` where 
+// `v` contains zero or more `0`s followed by one or more `1`s.
+size_t first_one(const std::vector<int>& v) {
+    return first_one(v, 0, v.size());
+}
+\end{lstlisting}
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\question[10] What does \texttt{L(6)} return?
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+int L(int n) {
+    if (n == 0) return 2;
+    if (n == 1) return 1;
+    return L(n - 1) + L(n - 2);
+}
+\end{lstlisting}
+\end{center}
+
+\begin{solutionorbox}[1.5in]
+$L(6) = 18$.
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\clearpage
+
+\question[10] Give a recurrence relation and base case for $T(n)$, the time complexity of the \texttt{mergesort} implementation provided below. Assume \texttt{merge} runs in $\Theta(n)$ time.
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+void merge(std::vector<int>& v, size_t left, size_t mid, size_t right) {
+    // ...
+}
+
+void mergesort(std::vector<int>& v, size_t left, size_t right) {
+    if (right <= left + 1) return;
+    size_t mid = left + 2 * (right - left) / 3;
+    mergesort(v, left, mid);
+    mergesort(v, mid, right);
+    merge(v, left, mid, right);
+}
+
+void mergesort(std::vector<int>& v) {
+    return mergesort(v, 0, v.size());
+}
+\end{lstlisting}
+\end{center}
+
+\begin{solutionorbox}[2.5in]
+\texttt{mergesort} makes two recursive calls, one of size $n/3$ and one of size $2n/3$, and performs $\Theta(n)$ additional work during \texttt{merge}. The base case occurs when $n = 0$ or $n = 1$ and performs a constant amount of work. Therefore, $T(n) = T(n/3) + T(2n/3) + \Theta(n)$ where $n \geq 2$, $T(1)=\Theta(1)$ and $T(0) = \Theta(1)$. 
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\question[10] Give a formula $C(n)$ for the number of complete $3$-ary trees on $n$ nodes.
+
+\begin{solutionorbox}[2.5in]
+$C(n) = 1$.
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\clearpage
+
+\question[10] (*) Find a closed form for $T(n) = 3T(n/2) + 1$ where $n \geq 2$ and $T(1) = 1$. Assume $n$ is a power of $2$.
+
+\begin{solutionorbox}[3in]
+The first expansion is 
+\begin{align*}
+    T(n) = 3T(n/2) + 1
+\end{align*}
+
+The second expansion is 
+\begin{align*}
+    T(n) = 3^2T(n/2^2) + 1 + 3
+\end{align*}
+
+The third expansion is
+\begin{align*}
+    T(n) = 3^3T(n/2^3) + 1 + 3 + 3^2
+\end{align*}
+
+So the $k$-th expansion is
+\begin{align*}
+    T(n) = 3^k T(n/2^k) + \sum\limits_{i=0}^{k-1} 3^i
+\end{align*}
+
+To reach the base case, $n / 2^k = 1$, so $k = \lg n$. Then 
+\begin{align*}
+    T(n) &= 3^{\lg n} T(1) + \sum\limits_{i=0}^{\lg n - 1} 3^i \\
+    &= 3^{\lg n} + \frac{3^{\lg n} - 1}{3 - 1} \\
+    &= \frac{3}{2} 3^{\lg n} - \frac{1}{2} \\
+    &= \frac{3}{2} 3^{\log_3 n / \log_3 2} - \frac{1}{2} \\
+    &= \frac{3}{2} n^{1 / \log_3 2} - \frac{1}{2}
+\end{align*}
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\question[10] Delete $5, 7, 1$ from the following binary search tree. Use the \textbf{successor} replacement strategy. Draw the resulting tree after each deletion.
+
+\begin{center}
+\begin{forest}
+for tree={draw,circle,minimum size=1.2em,inner sep=1pt,s sep=7mm,l sep=7mm,edge={->}}
+[{5}
+  [{2}
+    [{1}]
+    [{3}]
+  ]
+  [{7}
+    [{6}]
+    [{9}]
+  ]
+]
+\end{forest} 
+\end{center}
+
+\begin{solutionorbox}[3in]
+Check with \url{https://www.cs.usfca.edu/~galles/visualization/BST.html}.
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\clearpage
+
+\question[10] Insert $4, 8, 1, 6, 0, 3, 9$ into an initially empty 2-3-4 tree. Draw the resulting tree after each insertion.
+
+\begin{solutionorbox}[8in]
+Check with \url{https://www.cs.usfca.edu/~galles/visualization/BTree.html}.
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\clearpage
+
+\question[10] Explain the correspondence between red-black trees and 2-3-4 trees. Draw a diagram to illustrate your explanation. 
+
+\begin{solutionorbox}[8in]
+Black nodes with no red children correspond to 2-nodes. Black nodes with one red child correspond to 3-nodes. Black nodes with two red children correspond to 4-nodes. Your answer should also include a drawing of a red-black tree and a equivalent 2-3-4 tree.
+\end{solutionorbox}
+
+% --------------------------------------------------------------------------------
+
+\end{questions}
+
+\end{document}

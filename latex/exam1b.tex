@@ -1,0 +1,178 @@
+\documentclass[addpoints,answers]{exam}
+
+\usepackage{listings}
+\usepackage{amsmath}
+
+\begin{document}
+
+\begin{center}
+\fbox{\fbox{\parbox{5.5in}{\centering CSC 212 Practice Midterm Exam 1B \\ Problems marked with (*) are challenging and problems marked with (**) are hard}}}
+\end{center}
+
+\vspace{5mm}
+\makebox[0.95\textwidth]{Your Name:\enspace\hrulefill}
+
+\begin{questions}
+    \question[10] (*) Write a formula $T(n)$ that counts the number of multiplications performed by the following function \texttt{bar} on an input of size $n \geq 1$. You do not need to find a closed form for $T(n)$.
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+int foo(int n) {
+    int result = 0;
+    for (int i = 1; i <= n; i *= 2)
+        result += i;
+    return result;
+}
+\end{lstlisting}
+\end{center}
+
+    \begin{solutionorbox}[3in]
+    $T(n) = \lfloor \log_2 n \rfloor + 1$
+    \end{solutionorbox}
+
+    \vspace{\stretch{1}}
+
+    \question[10] Find a closed form for $\sum\limits_{i=2}^n i$.
+
+    \begin{solutionorbox}[2in]
+    $\frac{n(n+1)}{2} - 1$
+    \end{solutionorbox}
+
+    \clearpage
+
+    \question[10] Rate the growth rate of the following functions from greatest to least:
+    \begin{align*}
+        3 n \lg n \quad\quad 2^{n-5} \quad\quad 3^{100} \quad\quad 8n^2 + 18n 
+    \end{align*}
+
+    \begin{solutionorbox}[2in]
+    $2^{n-5}, 8n^2 + 18n, 3n \lg n, 3^{100}$.
+    \end{solutionorbox}
+
+    \vspace{\stretch{1}}
+    
+    \question[10] Suppose \texttt{v} is a grow-by-one dynamic array with size $0$ and capacity $1$. Give a $\Theta$-bound on the time complexity of calling \texttt{push\_back} $n$ times.
+    
+    \begin{solutionorbox}[2in]
+    $\Theta(n^2)$. We must copy one element, then two, then three, and so on, up to $n$ elements. Summing up, we find that the total number of copies is $\Theta(n^2)$.
+    \end{solutionorbox}
+
+    \clearpage
+
+    \question[10] (**) Suppose \texttt{v} is a grow-by-factor dynamic array containing $n$ elements. If \texttt{push\_back} is called and there is no room for new elements, \texttt{v} will increase the capacity by 1\%. When resizing, the capacity is always increased by at least one. Give a $\Theta$-bound on the time complexity of calling \texttt{push\_back}. Indicate if your bound is amortized.
+    
+    \begin{solutionorbox}[4in]
+    $\Theta(1)$ amortized. The analysis is the same as grow-by-doubling. Any grow-by-factor dynamic array with a constant growth factor (not dependent on $n$) enables \texttt{push\_back} in $\Theta(1)$ amortized time.  
+    \end{solutionorbox}
+
+    \vspace{\stretch{1}}
+
+    \question[10] What is the output of the following program?
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+stack<int> s;
+s.push(0);
+s.push(1);
+s.push(2);
+s.pop();
+cout << s.top() << ' ';
+s.pop();
+cout << s.top();
+\end{lstlisting}
+\end{center}
+
+    \begin{solutionorbox}[2in]
+    1 0
+    \end{solutionorbox}
+
+    \clearpage
+
+    \question[10] (*) Give a $\Theta$-bound on the time complexity of the following program. Justify your answer.
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+int qux(const vector<int>& v) {
+    queue<int> q;
+    int result = 0;
+    for (int i = 0; i < v.size(); i++) {
+        if (v[i] < 0)
+            while (!q.empty()) 
+                q.pop();
+        q.push(i);
+        result = max(result, q.size());
+    }
+    return result;
+}
+\end{lstlisting}
+\end{center}
+
+    \begin{solutionorbox}[4in]
+    $\Theta(n)$. There are $n$ possible values of \texttt{i} and each is pushed to the queue once, and so can be popped at most once. Hence, although the \texttt{while} loop is nested, it runs at most a total of $n$ times.
+    \end{solutionorbox}
+
+    \clearpage
+
+    \question[10] What is the output of the following program?
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+priority_queue<int> q; // max-priority queue
+q.push(1);
+q.push(2);
+q.push(0);
+q.pop();
+cout << q.front() << ' ';
+q.pop();
+cout << q.front();
+\end{lstlisting}
+\end{center}
+
+    \begin{solutionorbox}[2in]
+    1 0
+    \end{solutionorbox}
+
+\vspace{\stretch{1}}
+
+    \question[10] What are the contents of \texttt{v} after this program executes?
+
+\begin{center}
+\begin{lstlisting}[language=C++]
+vector<int> v{3, 1, 2, 0, 4}; 
+make_heap(v.begin(), v.end()); // max-heap
+\end{lstlisting}
+\end{center}
+
+    \begin{solutionorbox}[2in]
+     4, 3, 1, 0, 2
+    \end{solutionorbox}
+
+    \clearpage
+
+    \question[10] (*) You are an operating systems engineer designing a file management system. Users can navigate to directories by specifying paths, which are strings that describe the sequence of directories to reach a file or folder. Before accessing a path, the system must simplify it to its canonical form. 
+
+    In a path,
+    \begin{itemize}
+        \item \texttt{/} separates directories.
+        \item \texttt{.} represents the current directory.
+        \item \texttt{..} represents moving up one directory.
+    \end{itemize}
+
+    The \textbf{top-level directory} is \texttt{/}. Moving up does not change this directory.
+
+    The \textbf{canonical form} of a path is an equivalent path without any \texttt{.} and \texttt{..} components. For example:
+    \begin{itemize}
+        \item \texttt{/home/usr/../share/./bin} has canonical form \texttt{/home/share/bin}
+        \item \texttt{/home/share/../../usr} has canonical form \texttt{/home/}
+        \item \texttt{/../} has canonical form \texttt{/}
+    \end{itemize}
+
+    What abstract data type is best for converting paths to canonical paths? Here, best means efficiently solves the problem. Justify your answer.
+
+    \begin{solutionorbox}[4in]
+    Stack or deque. Consider parsing the path directory by directory. If we encounter \texttt{..}, we pop the stack if it is not empty. If we encounter \texttt{.}, we do nothing. If we encounter a directory, we push it to the stack. After the input is parsed, we reverse the directories on the stack, and then merge them into a single string. This takes $\Theta(n)$ time.
+    \end{solutionorbox}
+    
+\end{questions}
+
+\end{document}
