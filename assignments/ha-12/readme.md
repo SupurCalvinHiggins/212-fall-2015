@@ -8,9 +8,8 @@ By the end of this assignment, you should be able to:
 
 1. Check basic graph properties (e.g. connected, directed, acyclic, sparsity).
 2. Convert between graph representations (e.g. adjacency list and matrix).
-3. Trace breadth-first and depth-first search.
+3. Trace depth-first search.
 4. Analyze the time complexity of graph algorithms.
-5. Select between breadth-first and depth-first search.
 
 ## Grading
 
@@ -56,6 +55,7 @@ If the problem asks for adjacency matrix format, provide your answer as a nested
 ## Confirmation
 
 I have read and understand the above.
+
 (X) Yes
 ( ) No
 
@@ -65,27 +65,34 @@ I have read and understand the above.
 
 Convert the following adjacency matrix into an adjacency list:
 ```txt
-[[0,1,1,0],[0,0,0,0],[1,0,0,1],[1,1,1,0]]
+
+ [[0,1,1,0],[0,0,0,0],[1,0,0,1],[1,1,1,0]]
+
 ```
 
-Give your answer in adjacency list format. 
+Give your answer in adjacency list format.
+
 [____]([[1,2],[],[0,3],[0,1,2]])
 
 ## Problem
 
 Convert the following adjacency list into an adjacency matrix:
 ```txt
-[[1,2],[],[0]]
+
+ [[1,2],[],[0]]
+
 ```
 
-Give your answer in adjacency matrix format. 
-[____]([[0,1,1],[0,0,0],[1,0,0]])
+Give your answer in adjacency matrix format.
 
+[____]([[0,1,1],[0,0,0],[1,0,0]])
 ## Problem
 
 Consider the graph represented by the following adjacency matrix:
 ```txt
-[[1,0,1],[0,1,0],[1,0,1]]
+
+ [[1,0,1],[0,1,0],[1,0,1]]
+
 ```
 
 Is the graph directed?
@@ -110,7 +117,9 @@ Is the graph acyclic?
 
 Consider the graph represented by the following adjacency list:
 ```txt
-[[(1,5),(2,10)],[(2,10)],[]]
+
+ [[(1,5),(2,10)],[(2,10)],[]]
+
 ```
 
 Is the graph directed?
@@ -135,11 +144,14 @@ Is the graph acyclic?
 
 Consider the following adjacency matrix:
 ```txt
-[[1,0,0,1],[0,0,0,1],[0,1,1,0],[1,1,0,0]]
+
+ [[1,0,0,1],[0,0,0,1],[0,1,1,0],[1,1,0,0]]
+
 ```
 
 When doing a depth-first search starting at vertex 3, what order are the vertices visited in? Give your answer as a list of integers.
-[____](3,0,1,2)
+
+[____](3,0,1)
 
 ## Problem
 
@@ -153,7 +165,7 @@ When doing a breadth-first search starting at vertex 0, what order are the verti
 
 ## Problem
 
-What is the time complexity of adding a new vertex to an adjacency list? 
+What is the time complexity of adding a new vertex to an adjacency list?
 
 (X) $$\Theta(1)$$
 ( ) $$\Theta(V)$$
@@ -175,7 +187,7 @@ What is the time complexity of adding a new vertex to an adjacency matrix?
 
 ## Problem
 
-What is the time complexity of adding a new edge to an adjacency list? 
+What is the time complexity of adding a new edge to an adjacency list?
 
 (X) $$\Theta(1)$$
 ( ) $$\Theta(V)$$
@@ -377,8 +389,11 @@ A **Markov chain** is a weighted graph where the edge weights represent the prob
 
 Consider the following Markov chain:
 ```txt
-[[0.1,0.3,0.5,0.1],[0,0.5,0.5,0],[0.8,0.1,0,0.1],[1,0,0,0]]
+
+ [[0.1,0.3,0.5,0.1],[0,0.5,0.5,0],[0.8,0.1,0,0.1],[1,0,0,0]]
+
 ```
 
 If you start at vertex 0 and move randomly according to the edge weights, what is the average number of steps to visit vertex 3 twice? Give your answer as a single integer (round down).
+
 [____](27)
